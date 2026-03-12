@@ -68,7 +68,7 @@ export interface ModuleOptions {
         resetPassword?: string;
     };
     /** Token storage strategy */
-    tokenStorage?: 'cookie' | 'localStorage';
+    tokenStorage?: "cookie" | "localStorage";
     /** Cookie name for token */
     tokenCookieName?: string;
     /** Redirect routes */

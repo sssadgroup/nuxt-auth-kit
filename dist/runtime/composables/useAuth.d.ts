@@ -1,4 +1,4 @@
-import type { LoginCredentials, RegisterData, UpdateProfileData, UpdatePasswordData, ForgotPasswordData, ResetPasswordData, ApiError } from '../types/index.js';
+import type { LoginCredentials, RegisterData, UpdateProfileData, UpdatePasswordData, ForgotPasswordData, ResetPasswordData, ApiError } from "../types/index.js";
 export declare function useAuth(): {
     user: any;
     token: any;

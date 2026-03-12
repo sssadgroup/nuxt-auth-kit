@@ -1,4 +1,4 @@
-import type { AuthUser } from '../types/index.js';
+import type { AuthUser } from "../types/index.js";
 export declare const useAuthStore: import("pinia").StoreDefinition<"nuxt-auth-kit", Pick<{
     user: import("vue").Ref<any, any>;
     token: import("vue").Ref<string | null, string | null>;

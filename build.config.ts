@@ -1,13 +1,15 @@
-import { defineBuildConfig } from 'unbuild'
+import { defineBuildConfig } from "unbuild";
 
 export default defineBuildConfig({
   externals: [
-    'nuxt',
-    'nuxt/schema',
-    '@nuxt/schema',
-    'vue',
-    '@vue/runtime-core',
-    'pinia',
-    '@pinia/nuxt'
-  ]
-})
+    "nuxt",
+    "nuxt/schema",
+    "@nuxt/schema",
+    "@nuxt/kit",
+    "vue",
+    "@vue/runtime-core",
+    "pinia",
+    "@pinia/nuxt",
+    "pathe",
+  ],
+});

@@ -1,6 +1,6 @@
 {
   "name": "nuxt-auth-kit",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Nuxt module for authentication with Laravel API — login, register, profile, password management, roles & permissions",
   "keywords": ["nuxt", "nuxt-module", "authentication", "laravel", "roles", "permissions"],
   "license": "MIT",
@@ -23,7 +23,7 @@
     "typecheck": "npx vue-tsc --noEmit"
   },
   "peerDependencies": {
-    "nuxt": "^3.0.0  || ^4.0.0"
+    "nuxt": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@nuxt/ui": { "optional": true }

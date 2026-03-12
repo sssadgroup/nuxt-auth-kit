@@ -1,11 +1,12 @@
-import { defineNuxtModule, createResolver, addPlugin, addImports, addRouteMiddleware, addComponent } from '@nuxt/kit';
+import { defineNuxtModule, createResolver, addPlugin, addImports, addComponent } from '@nuxt/kit';
+import { join } from 'pathe';
 
 const module = defineNuxtModule({
   meta: {
     name: "nuxt-auth-kit",
     configKey: "nuxtAuthKit",
     compatibility: {
-      nuxt: "^3.0.0"
+      nuxt: "^3.0.0 || ^4.0.0"
     }
   },
   defaults: {
@@ -57,31 +58,55 @@ const module = defineNuxtModule({
         from: resolver.resolve("./runtime/stores/auth")
       }
     ]);
-    addRouteMiddleware({
-      name: "auth",
-      path: resolver.resolve("./runtime/middleware/auth"),
-      global: false
-    });
-    addRouteMiddleware({
-      name: "guest",
-      path: resolver.resolve("./runtime/middleware/guest"),
-      global: false
-    });
-    addRouteMiddleware({
-      name: "role",
-      path: resolver.resolve("./runtime/middleware/role"),
-      global: false
+    nuxt.hook("app:resolve", (app) => {
+      const middlewareDir = resolver.resolve("./runtime/middleware");
+      for (const name of ["auth", "guest", "role"]) {
+        const path = join(middlewareDir, name);
+        const exists = app.middleware.find((m) => m.name === name);
+        if (!exists) {
+          app.middleware.push({ name, path, global: false });
+        }
+      }
     });
     const components = [
-      // Auth
-      { name: "AuthLayout", filePath: resolver.resolve("./runtime/components/auth/AuthLayout.vue") },
-      { name: "AuthLoginForm", filePath: resolver.resolve("./runtime/components/auth/LoginForm.vue") },
-      { name: "AuthRegisterForm", filePath: resolver.resolve("./runtime/components/auth/RegisterForm.vue") },
-      { name: "AuthForgotPasswordForm", filePath: resolver.resolve("./runtime/components/auth/ForgotPasswordForm.vue") },
-      { name: "AuthResetPasswordForm", filePath: resolver.resolve("./runtime/components/auth/ResetPasswordForm.vue") },
-      // Profile
-      { name: "ProfileUpdateForm", filePath: resolver.resolve("./runtime/components/profile/UpdateProfileForm.vue") },
-      { name: "ProfileUpdatePasswordForm", filePath: resolver.resolve("./runtime/components/profile/UpdatePasswordForm.vue") }
+      {
+        name: "AuthLayout",
+        filePath: resolver.resolve("./runtime/components/auth/AuthLayout.vue")
+      },
+      {
+        name: "AuthLoginForm",
+        filePath: resolver.resolve("./runtime/components/auth/LoginForm.vue")
+      },
+      {
+        name: "AuthRegisterForm",
+        filePath: resolver.resolve(
+          "./runtime/components/auth/RegisterForm.vue"
+        )
+      },
+      {
+        name: "AuthForgotPasswordForm",
+        filePath: resolver.resolve(
+          "./runtime/components/auth/ForgotPasswordForm.vue"
+        )
+      },
+      {
+        name: "AuthResetPasswordForm",
+        filePath: resolver.resolve(
+          "./runtime/components/auth/ResetPasswordForm.vue"
+        )
+      },
+      {
+        name: "ProfileUpdateForm",
+        filePath: resolver.resolve(
+          "./runtime/components/profile/UpdateProfileForm.vue"
+        )
+      },
+      {
+        name: "ProfileUpdatePasswordForm",
+        filePath: resolver.resolve(
+          "./runtime/components/profile/UpdatePasswordForm.vue"
+        )
+      }
     ];
     for (const component of components) {
       addComponent(component);

@@ -33,7 +33,7 @@ export function useAuth() {
   async function apiFetch(path, options = {}) {
     const headers = {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
       ...options.headers || {}
     };
     if (store.token) {
@@ -165,10 +165,13 @@ export function useAuth() {
   async function forgotPassword(data) {
     store.setLoading(true);
     try {
-      const response = await apiFetch(endpoints.forgotPassword, {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      const response = await apiFetch(
+        endpoints.forgotPassword,
+        {
+          method: "POST",
+          body: JSON.stringify(data)
+        }
+      );
       return { success: true, message: response.message };
     } catch (error) {
       return { success: false, error };
@@ -179,10 +182,13 @@ export function useAuth() {
   async function resetPassword(data) {
     store.setLoading(true);
     try {
-      const response = await apiFetch(endpoints.resetPassword, {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      const response = await apiFetch(
+        endpoints.resetPassword,
+        {
+          method: "POST",
+          body: JSON.stringify(data)
+        }
+      );
       return { success: true, message: response.message };
     } catch (error) {
       return { success: false, error };
