@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,32 +7,71 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #0d0f0e;
-      --bg2: #141714;
-      --bg3: #1a1e1b;
-      --border: #252a26;
-      --border2: #2e352f;
-      --green: #4ade80;
-      --green-dim: #22c55e;
-      --green-dark: #166534;
+    /* ─── Light theme (default) ─── */
+    :root, [data-theme="light"] {
+      --bg:         #f8f9f7;
+      --bg2:        #ffffff;
+      --bg3:        #f1f3f0;
+      --border:     #e4e8e3;
+      --border2:    #d4d9d2;
+      --green:      #16a34a;
+      --green-dim:  #15803d;
+      --green-glow: rgba(22, 163, 74, 0.08);
+      --accent:     #166534;
+      --text:       #1a2e1c;
+      --text-muted: #4a6550;
+      --text-dim:   #8aab8e;
+      --code-bg:    #f4f6f3;
+      --tag-green:  rgba(22, 163, 74, 0.08);
+      --tag-blue:   rgba(37, 99, 235, 0.08);
+      --tag-orange: rgba(234, 88, 12, 0.08);
+      --tag-purple: rgba(124, 58, 237, 0.08);
+      --blue:       #2563eb;
+      --orange:     #ea580c;
+      --purple:     #7c3aed;
+      /* Syntax — light */
+      --syn-keyword:  #7c3aed;
+      --syn-string:   #16a34a;
+      --syn-comment:  #94a3b8;
+      --syn-func:     #2563eb;
+      --syn-number:   #ea580c;
+      --syn-type:     #166534;
+      --syn-accent:   #0f766e;
+    }
+
+    /* ─── Dark theme ─── */
+    [data-theme="dark"] {
+      --bg:         #0d0f0e;
+      --bg2:        #141714;
+      --bg3:        #1a1e1b;
+      --border:     #252a26;
+      --border2:    #2e352f;
+      --green:      #4ade80;
+      --green-dim:  #22c55e;
       --green-glow: rgba(74, 222, 128, 0.12);
-      --accent: #d4ff6b;
-      --text: #e8ede9;
+      --accent:     #d4ff6b;
+      --text:       #e8ede9;
       --text-muted: #7a8f7d;
-      --text-dim: #4a5e4d;
-      --code-bg: #0a0d0b;
-      --tag-green: rgba(74, 222, 128, 0.1);
-      --tag-blue: rgba(96, 165, 250, 0.1);
+      --text-dim:   #4a5e4d;
+      --code-bg:    #0a0d0b;
+      --tag-green:  rgba(74, 222, 128, 0.1);
+      --tag-blue:   rgba(96, 165, 250, 0.1);
       --tag-orange: rgba(251, 146, 60, 0.1);
       --tag-purple: rgba(167, 139, 250, 0.1);
-      --blue: #60a5fa;
-      --orange: #fb923c;
-      --purple: #a78bfa;
+      --blue:       #60a5fa;
+      --orange:     #fb923c;
+      --purple:     #a78bfa;
+      /* Syntax — dark */
+      --syn-keyword:  #c792ea;
+      --syn-string:   #c3e88d;
+      --syn-comment:  #546e7a;
+      --syn-func:     #82aaff;
+      --syn-number:   #f78c6c;
+      --syn-type:     #d4ff6b;
+      --syn-accent:   #89ddff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -41,9 +80,32 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       line-height: 1.7;
+      transition: background 0.2s, color 0.2s;
     }
 
-    /* ── Sidebar ── */
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 100;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .theme-toggle:hover { border-color: var(--green); transform: scale(1.05); }
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun  { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    /* ── Layout ── */
     .layout { display: flex; min-height: 100vh; }
 
     .sidebar {
@@ -58,6 +120,7 @@
       padding: 0 0 40px;
       scrollbar-width: thin;
       scrollbar-color: var(--border2) transparent;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .sidebar-logo {
@@ -68,9 +131,8 @@
 
     .sidebar-logo .pkg-name {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
+      font-size: 14px; font-weight: 600;
+      color: var(--green);
       letter-spacing: -0.3px;
     }
 
@@ -81,54 +143,40 @@
       margin-top: 4px;
     }
 
-    .nav-section {
-      padding: 0 16px;
-      margin-bottom: 8px;
-    }
+    .nav-section { padding: 0 16px; margin-bottom: 8px; }
 
     .nav-label {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1.2px;
       color: var(--text-dim);
       padding: 12px 8px 6px;
     }
 
     .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 7px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 7px;
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 400;
+      font-size: 13.5px; font-weight: 400;
       transition: all 0.15s;
-      cursor: pointer;
     }
-
     .nav-item:hover { background: var(--bg3); color: var(--text); }
-    .nav-item.active { background: var(--green-glow); color: var(--green); }
+    .nav-item.active { background: var(--green-glow); color: var(--green); font-weight: 500; }
 
     .nav-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--border2);
-      flex-shrink: 0;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--border2); flex-shrink: 0;
     }
     .nav-item.active .nav-dot { background: var(--green); }
 
     /* ── Main ── */
     .main {
-      flex: 1;
-      max-width: 860px;
+      flex: 1; max-width: 860px;
       padding: 60px 56px 120px;
       overflow-x: hidden;
     }
 
-    /* ── Header ── */
+    /* ── Hero ── */
     .hero {
       margin-bottom: 64px;
       padding-bottom: 48px;
@@ -136,23 +184,23 @@
     }
 
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
       background: var(--tag-green);
-      border: 1px solid rgba(74,222,128,0.2);
+      border: 1px solid rgba(22,163,74,0.2);
       color: var(--green);
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 100px;
+      padding: 4px 12px; border-radius: 100px;
       margin-bottom: 24px;
+    }
+
+    [data-theme="dark"] .hero-badge {
+      border-color: rgba(74,222,128,0.2);
     }
 
     .hero-badge::before {
       content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
       background: var(--green);
       animation: pulse 2s infinite;
     }
@@ -164,107 +212,81 @@
 
     h1 {
       font-family: 'Syne', sans-serif;
-      font-size: 48px;
-      font-weight: 800;
-      line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 16px;
-      letter-spacing: -1.5px;
+      font-size: 48px; font-weight: 800;
+      line-height: 1.05; color: var(--text);
+      margin-bottom: 16px; letter-spacing: -1.5px;
     }
 
-    h1 span { color: var(--accent); }
+    h1 span { color: var(--green); }
 
     .hero-desc {
-      font-size: 17px;
-      color: var(--text-muted);
-      max-width: 560px;
-      line-height: 1.65;
-      margin-bottom: 32px;
+      font-size: 17px; color: var(--text-muted);
+      max-width: 560px; line-height: 1.65; margin-bottom: 32px;
     }
 
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .badge {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid;
+      font-size: 11px; padding: 4px 10px;
+      border-radius: 6px; border: 1px solid;
     }
+    .badge-green { background: var(--tag-green); border-color: rgba(22,163,74,0.25); color: var(--green); }
+    .badge-blue  { background: var(--tag-blue);  border-color: rgba(37,99,235,0.25);  color: var(--blue); }
+    .badge-orange{ background: var(--tag-orange); border-color: rgba(234,88,12,0.25); color: var(--orange); }
+    .badge-purple{ background: var(--tag-purple); border-color: rgba(124,58,237,0.25);color: var(--purple); }
 
-    .badge-green { background: var(--tag-green); border-color: rgba(74,222,128,0.2); color: var(--green); }
-    .badge-blue  { background: var(--tag-blue);  border-color: rgba(96,165,250,0.2);  color: var(--blue); }
-    .badge-orange{ background: var(--tag-orange); border-color: rgba(251,146,60,0.2); color: var(--orange); }
-    .badge-purple{ background: var(--tag-purple); border-color: rgba(167,139,250,0.2);color: var(--purple); }
+    [data-theme="dark"] .badge-green { border-color: rgba(74,222,128,0.2); }
+    [data-theme="dark"] .badge-blue  { border-color: rgba(96,165,250,0.2); }
+    [data-theme="dark"] .badge-orange{ border-color: rgba(251,146,60,0.2); }
+    [data-theme="dark"] .badge-purple{ border-color: rgba(167,139,250,0.2); }
 
-    /* ── Section titles ── */
+    /* ── Sections ── */
     .section { margin-bottom: 64px; }
 
     h2 {
       font-family: 'Syne', sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.6px;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size: 26px; font-weight: 700; color: var(--text);
+      letter-spacing: -0.6px; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 12px;
     }
 
     h2 .section-icon {
-      width: 32px; height: 32px;
-      border-radius: 8px;
+      width: 32px; height: 32px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
+      font-size: 15px; flex-shrink: 0;
     }
-
-    h2 .section-icon.green { background: var(--tag-green); }
-    h2 .section-icon.blue  { background: var(--tag-blue); }
-    h2 .section-icon.orange{ background: var(--tag-orange); }
-    h2 .section-icon.purple{ background: var(--tag-purple); }
+    h2 .section-icon.green  { background: var(--tag-green); }
+    h2 .section-icon.blue   { background: var(--tag-blue); }
+    h2 .section-icon.orange { background: var(--tag-orange); }
+    h2 .section-icon.purple { background: var(--tag-purple); }
 
     .section-subtitle {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 28px;
-      padding-left: 44px;
+      color: var(--text-muted); font-size: 14px;
+      margin-bottom: 28px; padding-left: 44px;
     }
 
     h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.2px;
-      margin: 28px 0 12px;
+      font-size: 16px; font-weight: 600; color: var(--text);
+      letter-spacing: -0.2px; margin: 28px 0 12px;
     }
 
     h3.file-title {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 13px; font-weight: 400;
       color: var(--text-muted);
       background: var(--bg3);
-      border: 1px solid var(--border2);
-      border-bottom: none;
+      border: 1px solid var(--border2); border-bottom: none;
       padding: 8px 16px;
       border-radius: 8px 8px 0 0;
       margin: 28px 0 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
     }
 
     h3.file-title::before {
       content: '';
-      width: 10px; height: 10px;
-      border-radius: 50%;
+      width: 10px; height: 10px; border-radius: 50%;
       background: var(--border2);
     }
 
@@ -284,402 +306,262 @@
       overflow-x: auto;
       position: relative;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      line-height: 1.75;
+      font-size: 13px; line-height: 1.75;
       scrollbar-width: thin;
       scrollbar-color: var(--border2) transparent;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .code-block .lang-tag {
-      position: absolute;
-      top: 10px; right: 14px;
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      position: absolute; top: 10px; right: 14px;
+      font-size: 10px; color: var(--text-dim);
+      letter-spacing: 0.5px; text-transform: uppercase;
     }
 
     .code-block pre { white-space: pre; }
 
-    /* Syntax colors */
-    .k  { color: #c792ea; }  /* keyword */
-    .s  { color: #c3e88d; }  /* string */
-    .c  { color: #546e7a; font-style: italic; } /* comment */
-    .f  { color: #82aaff; }  /* function/prop */
-    .n  { color: #f78c6c; }  /* number / special */
-    .t  { color: var(--accent); } /* type */
-    .p  { color: var(--text); }   /* punctuation */
-    .cm { color: var(--text-muted); } /* component */
+    /* Syntax colors — uses CSS vars for theme switching */
+    .k  { color: var(--syn-keyword); }
+    .s  { color: var(--syn-string); }
+    .c  { color: var(--syn-comment); font-style: italic; }
+    .f  { color: var(--syn-func); }
+    .n  { color: var(--syn-number); }
+    .t  { color: var(--syn-type); }
+    .p  { color: var(--text); }
+    .cm { color: var(--text-muted); }
 
     /* ── Feature grid ── */
     .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin: 20px 0 28px;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 12px; margin: 20px 0 28px;
     }
 
     .feature-card {
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 18px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      transition: border-color 0.2s;
+      border-radius: 10px; padding: 16px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
     }
+    .feature-card:hover { border-color: var(--green); }
 
-    .feature-card:hover { border-color: var(--border2); }
-
-    .feature-icon {
-      font-size: 18px;
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
-
-    .feature-card-title {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .feature-card-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
+    .feature-icon { font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+    .feature-card-title { font-size: 13.5px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+    .feature-card-desc  { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
 
     /* ── Install block ── */
     .install-block {
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin: 20px 0;
+      border-radius: 12px; overflow: hidden; margin: 20px 0;
     }
 
     .install-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      padding: 0 4px;
+      display: flex; border-bottom: 1px solid var(--border); padding: 0 4px;
     }
 
     .install-tab {
       padding: 10px 16px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: var(--text-muted);
+      font-size: 12px; color: var(--text-muted);
       cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
       transition: all 0.15s;
     }
-
     .install-tab.active { color: var(--green); border-bottom-color: var(--green); }
     .install-tab-content { display: none; }
     .install-tab-content.active { display: block; }
-
     .install-tab-content .code-block {
-      border: none;
-      border-radius: 0;
-      margin: 0;
+      border: none; border-radius: 0; margin: 0;
       background: var(--code-bg);
     }
 
-    /* ── Config table ── */
-    .config-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0 24px;
-      font-size: 13px;
+    /* ── Config / Route tables ── */
+    .config-table, .route-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0 24px; font-size: 13px;
     }
 
-    .config-table th {
-      text-align: left;
-      padding: 10px 14px;
-      background: var(--bg3);
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
+    .config-table th, .route-table th {
+      text-align: left; padding: 10px 14px;
+      background: var(--bg3); color: var(--text-muted);
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.8px;
       border-bottom: 1px solid var(--border2);
     }
 
-    .config-table th:first-child { border-radius: 8px 0 0 0; }
-    .config-table th:last-child  { border-radius: 0 8px 0 0; }
+    .config-table th:first-child, .route-table th:first-child { border-radius: 8px 0 0 0; }
+    .config-table th:last-child, .route-table th:last-child   { border-radius: 0 8px 0 0; }
 
-    .config-table td {
+    .config-table td, .route-table td {
       padding: 11px 14px;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
 
-    .config-table tr:last-child td { border-bottom: none; }
-    .config-table tr:hover td { background: rgba(255,255,255,0.01); }
+    .config-table tr:last-child td, .route-table tr:last-child td { border-bottom: none; }
+    .config-table tr:hover td, .route-table tr:hover td { background: rgba(0,0,0,0.015); }
+    [data-theme="dark"] .config-table tr:hover td,
+    [data-theme="dark"] .route-table tr:hover td { background: rgba(255,255,255,0.01); }
 
     .config-table code {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 12px;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      padding: 2px 7px;
-      border-radius: 4px;
-      color: var(--accent);
+      background: var(--bg3); border: 1px solid var(--border2);
+      padding: 2px 7px; border-radius: 4px; color: var(--green);
     }
 
-    /* ── API reference cards ── */
+    /* ── API cards ── */
     .api-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 22px;
-      margin-bottom: 12px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px; margin-bottom: 12px;
+      transition: background 0.2s, border-color 0.2s;
     }
 
     .api-card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
     }
 
     .api-method {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 5px;
-      flex-shrink: 0;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 8px; border-radius: 5px; flex-shrink: 0;
     }
 
-    .method-returns { background: rgba(74,222,128,0.15); color: var(--green); }
-    .method-action  { background: rgba(96,165,250,0.15);  color: var(--blue); }
-    .method-async   { background: rgba(251,146,60,0.15);  color: var(--orange); }
-    .method-rbac    { background: rgba(167,139,250,0.15); color: var(--purple); }
+    .method-returns { background: var(--tag-green); color: var(--green); }
+    .method-action  { background: var(--tag-blue);  color: var(--blue); }
+    .method-async   { background: var(--tag-orange); color: var(--orange); }
+    .method-rbac    { background: var(--tag-purple); color: var(--purple); }
 
     .api-card-name {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 600;
+      font-size: 14px; color: var(--text); font-weight: 600;
     }
 
     .api-card-desc { font-size: 13px; color: var(--text-muted); }
-
     .api-type {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: var(--purple);
-      margin-top: 6px;
+      font-size: 12px; color: var(--purple); margin-top: 6px;
     }
 
     /* ── Middleware cards ── */
     .middleware-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 16px 0 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin: 16px 0 24px;
     }
 
     .mw-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px;
       transition: border-color 0.2s;
     }
-
-    .mw-card:hover { border-color: var(--border2); }
+    .mw-card:hover { border-color: var(--green); }
 
     .mw-name {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 6px;
+      font-size: 13px; font-weight: 600;
+      color: var(--green); margin-bottom: 6px;
     }
-
     .mw-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
 
-    /* ── Route table ── */
-    .route-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 13px;
-    }
-
-    .route-table th {
-      text-align: left;
-      padding: 10px 14px;
-      background: var(--bg3);
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      border-bottom: 1px solid var(--border2);
-    }
-
-    .route-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
-    .route-table tr:last-child td { border-bottom: none; }
-    .route-table tr:hover td { background: rgba(255,255,255,0.01); }
+    /* ── Route table extras ── */
+    .route-table td { vertical-align: middle; }
 
     .http-badge {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 8px; border-radius: 5px;
     }
+    .get  { background: var(--tag-green); color: var(--green); }
+    .post { background: var(--tag-blue);  color: var(--blue); }
+    .put  { background: var(--tag-orange); color: var(--orange); }
 
-    .get  { background: rgba(74,222,128,0.12); color: var(--green); }
-    .post { background: rgba(96,165,250,0.12);  color: var(--blue); }
-    .put  { background: rgba(251,146,60,0.12);  color: var(--orange); }
-
-    .route-path {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12.5px;
-      color: var(--text);
-    }
-
+    .route-path { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--text); }
     .route-desc { color: var(--text-muted); }
     .route-returns { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--purple); }
 
     /* ── Tree ── */
     .tree {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 24px;
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 24px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12.5px;
-      line-height: 1.8;
-      margin: 16px 0;
+      font-size: 12.5px; line-height: 1.8; margin: 16px 0;
+      transition: background 0.2s;
     }
-
-    .tree .dir { color: var(--blue); }
-    .tree .file-ts { color: var(--orange); }
+    .tree .dir      { color: var(--blue); }
+    .tree .file-ts  { color: var(--orange); }
     .tree .file-vue { color: var(--green); }
-    .tree .comment { color: var(--text-dim); font-style: italic; }
-    .tree .root { color: var(--accent); font-weight: 600; }
+    .tree .comment  { color: var(--text-dim); font-style: italic; }
+    .tree .root     { color: var(--green); font-weight: 600; }
 
-    /* ── Alert ── */
+    /* ── Alerts ── */
     .alert {
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin: 16px 0;
-      display: flex;
-      gap: 12px;
-      font-size: 13.5px;
+      border-radius: 10px; padding: 16px 18px;
+      margin: 16px 0; display: flex; gap: 12px; font-size: 13.5px;
     }
-
     .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .alert-green { background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2); }
-    .alert-blue  { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
-    .alert p { color: var(--text-muted); line-height: 1.6; }
+    .alert-green { background: var(--tag-green); border: 1px solid rgba(22,163,74,0.25); }
+    .alert-blue  { background: var(--tag-blue);  border: 1px solid rgba(37,99,235,0.25); }
+    [data-theme="dark"] .alert-green { border-color: rgba(74,222,128,0.2); }
+    [data-theme="dark"] .alert-blue  { border-color: rgba(96,165,250,0.2); }
+    .alert p { color: var(--text-muted); line-height: 1.6; margin: 0; }
     .alert strong { color: var(--text); }
 
-    /* ── Step indicator ── */
+    /* ── Steps ── */
     .steps { margin: 20px 0; }
-
-    .step {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 32px;
-      position: relative;
-    }
-
+    .step { display: flex; gap: 16px; margin-bottom: 32px; position: relative; }
     .step:not(:last-child)::before {
       content: '';
-      position: absolute;
-      left: 15px;
-      top: 36px;
-      width: 1px;
-      height: calc(100% + 8px);
+      position: absolute; left: 15px; top: 36px;
+      width: 1px; height: calc(100% + 8px);
       background: var(--border);
     }
-
     .step-num {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg3); border: 1px solid var(--border2);
       display: flex; align-items: center; justify-content: center;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--green);
-      flex-shrink: 0;
+      font-size: 12px; font-weight: 600; color: var(--green); flex-shrink: 0;
     }
-
     .step-content { flex: 1; padding-top: 4px; }
-
     .step-title {
       font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
+      font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px;
     }
-
     .step-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 10px; }
 
     /* ── Inline code ── */
     p code, li code, td code {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 12.5px;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      padding: 1px 6px;
-      border-radius: 4px;
-      color: var(--accent);
+      background: var(--bg3); border: 1px solid var(--border2);
+      padding: 1px 6px; border-radius: 4px; color: var(--green);
     }
 
     p { margin-bottom: 12px; color: var(--text-muted); }
 
     ul { padding-left: 0; list-style: none; }
     ul li {
-      padding: 3px 0 3px 20px;
-      position: relative;
-      color: var(--text-muted);
-      font-size: 13.5px;
+      padding: 3px 0 3px 20px; position: relative;
+      color: var(--text-muted); font-size: 13.5px;
     }
     ul li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--text-dim);
-      font-size: 12px;
+      content: '→'; position: absolute; left: 0;
+      color: var(--text-dim); font-size: 12px;
     }
 
     /* ── Divider ── */
     .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 48px 0;
+      border: none; border-top: 1px solid var(--border); margin: 48px 0;
     }
 
     /* ── Footer ── */
     .footer {
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-dim);
-      font-size: 12px;
+      padding: 32px 0; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--text-dim); font-size: 12px;
       font-family: 'IBM Plex Mono', monospace;
     }
-
     .footer a { color: var(--text-muted); text-decoration: none; }
     .footer a:hover { color: var(--green); }
 
@@ -694,10 +576,17 @@
       h1 { font-size: 34px; }
       .feature-grid { grid-template-columns: 1fr; }
       .middleware-grid { grid-template-columns: 1fr; }
+      .theme-toggle { top: 14px; right: 14px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ── Theme toggle button ── -->
+<button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+  <span class="icon-moon">🌙</span>
+  <span class="icon-sun">☀️</span>
+</button>
 
 <div class="layout">
 
@@ -777,48 +666,12 @@
       <h2><span class="section-icon green">✦</span>Fonctionnalités</h2>
       <p class="section-subtitle">Tout ce dont vous avez besoin, sans rien configurer manuellement.</p>
       <div class="feature-grid">
-        <div class="feature-card">
-          <span class="feature-icon">🔐</span>
-          <div>
-            <div class="feature-card-title">Authentification complète</div>
-            <div class="feature-card-desc">Login, register, logout avec persistance de session via cookie sécurisé.</div>
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">👤</span>
-          <div>
-            <div class="feature-card-title">Gestion du profil</div>
-            <div class="feature-card-desc">Mise à jour des infos, avatar et changement de mot de passe.</div>
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🔑</span>
-          <div>
-            <div class="feature-card-title">Reset de mot de passe</div>
-            <div class="feature-card-desc">Flux complet : mot de passe oublié → email → réinitialisation.</div>
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🛡️</span>
-          <div>
-            <div class="feature-card-title">RBAC — Rôles & Permissions</div>
-            <div class="feature-card-desc"><code>hasRole()</code> et <code>hasPermission()</code> disponibles partout.</div>
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">⚡</span>
-          <div>
-            <div class="feature-card-title">Middlewares nommés</div>
-            <div class="feature-card-desc"><code>auth</code>, <code>guest</code>, <code>role</code> utilisables dans <code>definePageMeta</code>.</div>
-          </div>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🎨</span>
-          <div>
-            <div class="feature-card-title">Composants prêts</div>
-            <div class="feature-card-desc">7 composants Vue avec design split-screen, Tailwind CSS intégré.</div>
-          </div>
-        </div>
+        <div class="feature-card"><span class="feature-icon">🔐</span><div><div class="feature-card-title">Authentification complète</div><div class="feature-card-desc">Login, register, logout avec persistance de session via cookie sécurisé.</div></div></div>
+        <div class="feature-card"><span class="feature-icon">👤</span><div><div class="feature-card-title">Gestion du profil</div><div class="feature-card-desc">Mise à jour des infos, avatar et changement de mot de passe.</div></div></div>
+        <div class="feature-card"><span class="feature-icon">🔑</span><div><div class="feature-card-title">Reset de mot de passe</div><div class="feature-card-desc">Flux complet : mot de passe oublié → email → réinitialisation.</div></div></div>
+        <div class="feature-card"><span class="feature-icon">🛡️</span><div><div class="feature-card-title">RBAC — Rôles & Permissions</div><div class="feature-card-desc"><code>hasRole()</code> et <code>hasPermission()</code> disponibles partout.</div></div></div>
+        <div class="feature-card"><span class="feature-icon">⚡</span><div><div class="feature-card-title">Middlewares nommés</div><div class="feature-card-desc"><code>auth</code>, <code>guest</code>, <code>role</code> utilisables dans <code>definePageMeta</code>.</div></div></div>
+        <div class="feature-card"><span class="feature-icon">🎨</span><div><div class="feature-card-title">Composants prêts</div><div class="feature-card-desc">7 composants Vue avec design split-screen, Tailwind CSS intégré.</div></div></div>
       </div>
     </div>
 
@@ -828,22 +681,15 @@
     <div class="section" id="install">
       <h2><span class="section-icon blue">↓</span>Installation</h2>
       <p class="section-subtitle">Compatible Nuxt 3.x et 4.x. Requiert <code>@nuxt/ui</code> et <code>tailwindcss</code>.</p>
-
       <div class="install-block">
         <div class="install-tabs">
           <div class="install-tab active" onclick="switchTab(this, 'npm')">npm</div>
           <div class="install-tab" onclick="switchTab(this, 'pnpm')">pnpm</div>
           <div class="install-tab" onclick="switchTab(this, 'yarn')">yarn</div>
         </div>
-        <div id="tab-npm" class="install-tab-content active">
-          <div class="code-block"><pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre></div>
-        </div>
-        <div id="tab-pnpm" class="install-tab-content">
-          <div class="code-block"><pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre></div>
-        </div>
-        <div id="tab-yarn" class="install-tab-content">
-          <div class="code-block"><pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre></div>
-        </div>
+        <div id="tab-npm" class="install-tab-content active"><div class="code-block"><pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre></div></div>
+        <div id="tab-pnpm" class="install-tab-content"><div class="code-block"><pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre></div></div>
+        <div id="tab-yarn" class="install-tab-content"><div class="code-block"><pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre></div></div>
       </div>
     </div>
 
@@ -882,10 +728,8 @@
       afterLogout: <span class="s">'/auth/login'</span>
     },
 
-    <span class="c">// Nom du cookie de session</span>
     tokenCookieName: <span class="s">'auth_token'</span>,
 
-    <span class="c">// Contrôle d'accès par rôle</span>
     rbac: {
       superAdminRole:  <span class="s">'super-admin'</span>,
       defaultUserRole: <span class="s">'user'</span>
@@ -904,7 +748,7 @@
 
     <hr class="divider" />
 
-    <!-- ─── COMPOSANTS ─── -->
+    <!-- AuthLayout -->
     <div class="section" id="auth-layout">
       <h2><span class="section-icon green">▣</span>AuthLayout</h2>
       <p class="section-subtitle">Layout split-screen avec formulaire à gauche et témoignage + illustration à droite.</p>
@@ -913,21 +757,21 @@
         <thead><tr><th>Prop</th><th>Type</th><th>Défaut</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><code>app-name</code></td><td><code>string</code></td><td><code>'App'</code></td><td>Nom affiché dans le logo</td></tr>
-          <tr><td><code>quote</code></td><td><code>object</code></td><td>voir ci-dessous</td><td>Témoignage affiché à droite</td></tr>
+          <tr><td><code>quote</code></td><td><code>object</code></td><td>—</td><td>Témoignage : <code>{ text, author, location, avatar? }</code></td></tr>
         </tbody>
       </table>
 
-      <p>Objet <code>quote</code> : <code>{ text, author, location, avatar? }</code></p>
+      <p>Slots disponibles : <code>#logo</code> (remplace le logo), <code>#illustration</code> (remplace le SVG de droite).</p>
 
-      <h3 class="file-title">pages/auth/login.vue</h3>
+      <h3 class="file-title">Exemple d'utilisation</h3>
       <div class="code-block"><span class="lang-tag">vue</span><pre><span class="k">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
-    <span class="c">&lt;!-- contenu du formulaire --&gt;</span>
+    <span class="c">&lt;!-- formulaire ici --&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="k">&lt;/template&gt;</span>
 
 <span class="k">&lt;script setup lang="ts"&gt;</span>
-<span class="c">// Aucun import nécessaire — AuthLayout est auto-importé</span>
+<span class="c">// Aucun import — AuthLayout est auto-importé</span>
 <span class="k">const</span> quote = {
   text:     <span class="s">'Une expérience fluide et agréable.'</span>,
   author:   <span class="s">'Alex Mitchell'</span>,
@@ -935,8 +779,6 @@
   avatar:   <span class="s">'/img/alex.jpg'</span>  <span class="c">// optionnel</span>
 }
 <span class="k">&lt;/script&gt;</span></pre></div>
-
-      <p>Slots disponibles : <code>#logo</code> (remplace le logo par défaut), <code>#illustration</code> (remplace le SVG de droite).</p>
     </div>
 
     <!-- AuthLoginForm -->
@@ -948,9 +790,9 @@
         <thead><tr><th>Prop</th><th>Type</th><th>Défaut</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><code>title</code></td><td><code>string</code></td><td><code>'Connexion'</code></td><td>Titre du formulaire</td></tr>
-          <tr><td><code>subtitle</code></td><td><code>string</code></td><td>—</td><td>Sous-titre / description</td></tr>
-          <tr><td><code>show-social</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Affiche les boutons Google / Apple</td></tr>
-          <tr><td><code>roles</code></td><td><code>Array&lt;{value, label}&gt;</code></td><td><code>[]</code></td><td>Sélecteur de rôle (radio buttons)</td></tr>
+          <tr><td><code>subtitle</code></td><td><code>string</code></td><td>—</td><td>Sous-titre</td></tr>
+          <tr><td><code>show-social</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Affiche Google / Apple</td></tr>
+          <tr><td><code>roles</code></td><td><code>Array&lt;{value, label}&gt;</code></td><td><code>[]</code></td><td>Sélecteur de rôle (radio)</td></tr>
         </tbody>
       </table>
 
@@ -959,8 +801,8 @@
         <tbody>
           <tr><td><code>@forgot-password</code></td><td>Clic sur "Mot de passe oublié ?"</td></tr>
           <tr><td><code>@register</code></td><td>Clic sur "S'inscrire"</td></tr>
-          <tr><td><code>@google-login</code></td><td>Clic sur le bouton Google</td></tr>
-          <tr><td><code>@apple-login</code></td><td>Clic sur le bouton Apple</td></tr>
+          <tr><td><code>@google-login</code></td><td>Clic bouton Google</td></tr>
+          <tr><td><code>@apple-login</code></td><td>Clic bouton Apple</td></tr>
           <tr><td><code>@success</code></td><td>Connexion réussie</td></tr>
         </tbody>
       </table>
@@ -981,13 +823,12 @@
 <span class="k">&lt;/template&gt;</span>
 
 <span class="k">&lt;script setup lang="ts"&gt;</span>
-<span class="c">// Aucun import — AuthLayout, AuthLoginForm et navigateTo sont auto-importés</span>
+<span class="c">// Aucun import — tout est auto-importé</span>
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'guest'</span> })
 
 <span class="k">const</span> quote = {
-  text:     <span class="s">'Une expérience fluide et agréable.'</span>,
-  author:   <span class="s">'Alex Mitchell'</span>,
-  location: <span class="s">'Amsterdam'</span>
+  text: <span class="s">'Une expérience fluide et agréable.'</span>,
+  author: <span class="s">'Alex Mitchell'</span>, location: <span class="s">'Amsterdam'</span>
 }
 <span class="k">&lt;/script&gt;</span></pre></div>
     </div>
@@ -995,7 +836,7 @@
     <!-- AuthRegisterForm -->
     <div class="section" id="register">
       <h2><span class="section-icon green">▣</span>AuthRegisterForm</h2>
-      <p class="section-subtitle">Formulaire d'inscription avec nom, email, mot de passe et confirmation.</p>
+      <p class="section-subtitle">Inscription avec nom, email, mot de passe et confirmation.</p>
 
       <table class="config-table">
         <thead><tr><th>Prop</th><th>Type</th><th>Défaut</th></tr></thead>
@@ -1005,20 +846,10 @@
         </tbody>
       </table>
 
-      <table class="config-table">
-        <thead><tr><th>Événement</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>@login</code></td><td>Clic sur "Se connecter"</td></tr>
-          <tr><td><code>@success</code></td><td>Inscription réussie</td></tr>
-        </tbody>
-      </table>
-
       <h3 class="file-title">pages/auth/register.vue</h3>
       <div class="code-block"><span class="lang-tag">vue</span><pre><span class="k">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span><span class="cm">&gt;</span>
-    <span class="cm">&lt;AuthRegisterForm</span>
-      <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span>
-    <span class="cm">/&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span> <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span> <span class="cm">/&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="k">&lt;/template&gt;</span>
 
@@ -1027,7 +858,7 @@
 <span class="k">&lt;/script&gt;</span></pre></div>
     </div>
 
-    <!-- ForgotPasswordForm -->
+    <!-- ForgotPassword -->
     <div class="section" id="forgot">
       <h2><span class="section-icon green">▣</span>AuthForgotPasswordForm</h2>
       <p class="section-subtitle">Envoi d'un email de réinitialisation. Affiche un état de succès après envoi.</p>
@@ -1046,7 +877,7 @@
 <span class="k">&lt;/script&gt;</span></pre></div>
     </div>
 
-    <!-- ResetPasswordForm -->
+    <!-- ResetPassword -->
     <div class="section" id="reset">
       <h2><span class="section-icon green">▣</span>AuthResetPasswordForm</h2>
       <p class="section-subtitle">Réinitialisation du mot de passe. Lit automatiquement <code>?token=</code> et <code>?email=</code> depuis l'URL.</p>
@@ -1061,13 +892,13 @@
 <span class="k">&lt;/template&gt;</span>
 
 <span class="k">&lt;script setup lang="ts"&gt;</span>
-<span class="c">// Le composant lit ?token=xxx&email=xxx automatiquement depuis useRoute()</span>
+<span class="c">// Lit ?token=xxx&email=xxx automatiquement depuis useRoute()</span>
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'guest'</span> })
 <span class="k">&lt;/script&gt;</span></pre></div>
 
       <div class="alert alert-blue">
         <span class="alert-icon">ℹ️</span>
-        <p>L'email de réinitialisation Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez cela dans <code>config/auth.php</code> → <code>passwords.users.via</code>.</p>
+        <p>L'email Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez dans <code>config/auth.php</code> → <code>passwords.users.via</code>.</p>
       </div>
     </div>
 
@@ -1084,6 +915,8 @@
         </tbody>
       </table>
 
+      <p>Slot <code>#extra-fields</code> disponible pour ajouter des champs supplémentaires, avec accès à l'objet <code>form</code> via la prop de slot.</p>
+
       <h3 class="file-title">pages/profile/index.vue</h3>
       <div class="code-block"><span class="lang-tag">vue</span><pre><span class="k">&lt;template&gt;</span>
   <span class="p">&lt;div</span> <span class="f">class</span>=<span class="s">"max-w-2xl mx-auto py-10 px-4 space-y-10"</span><span class="p">&gt;</span>
@@ -1094,7 +927,7 @@
       <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
     <span class="cm">/&gt;</span>
 
-    <span class="p">&lt;hr</span> <span class="f">class</span>=<span class="s">"border-gray-200"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;hr /&gt;</span>
 
     <span class="cm">&lt;ProfileUpdatePasswordForm</span>
       <span class="f">title</span>=<span class="s">"Changer le mot de passe"</span>
@@ -1107,11 +940,9 @@
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'auth'</span> })
 
 <span class="k">function</span> <span class="f">onProfileSaved</span>() {
-  <span class="c">// ex: afficher une notification</span>
+  <span class="c">// ex: afficher une notification toast</span>
 }
 <span class="k">&lt;/script&gt;</span></pre></div>
-
-      <p>Slot disponible : <code>#extra-fields</code> pour ajouter des champs supplémentaires dans le formulaire, avec accès à l'objet <code>form</code> via la prop de slot.</p>
     </div>
 
     <!-- ProfileUpdatePasswordForm -->
@@ -1132,121 +963,25 @@
     <!-- useAuth -->
     <div class="section" id="useauth">
       <h2><span class="section-icon orange">◎</span>useAuth()</h2>
-      <p class="section-subtitle">Composable principal — <strong>auto-importé</strong>, aucun <code>import</code> nécessaire.</p>
+      <p class="section-subtitle">Composable principal — <strong>auto-importé</strong>, aucun <code>import</code> nécessaire dans vos fichiers.</p>
 
       <h3>État réactif</h3>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-returns">Ref</span>
-          <span class="api-card-name">user</span>
-        </div>
-        <div class="api-card-desc">L'utilisateur connecté, ou <code>null</code> si déconnecté.</div>
-        <div class="api-type">Ref&lt;AuthUser | null&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-returns">Computed</span>
-          <span class="api-card-name">isAuthenticated</span>
-        </div>
-        <div class="api-card-desc"><code>true</code> si un utilisateur est connecté avec un token valide.</div>
-        <div class="api-type">ComputedRef&lt;boolean&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-returns">Computed</span>
-          <span class="api-card-name">isGuest</span>
-        </div>
-        <div class="api-card-desc">Inverse de <code>isAuthenticated</code>.</div>
-        <div class="api-type">ComputedRef&lt;boolean&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-returns">Ref</span>
-          <span class="api-card-name">loading</span>
-        </div>
-        <div class="api-card-desc"><code>true</code> pendant une requête en cours.</div>
-        <div class="api-type">Ref&lt;boolean&gt;</div>
-      </div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-returns">Ref</span><span class="api-card-name">user</span></div><div class="api-card-desc">L'utilisateur connecté, ou <code>null</code> si déconnecté.</div><div class="api-type">Ref&lt;AuthUser | null&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-returns">Computed</span><span class="api-card-name">isAuthenticated</span></div><div class="api-card-desc"><code>true</code> si un utilisateur est connecté avec un token valide.</div><div class="api-type">ComputedRef&lt;boolean&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-returns">Computed</span><span class="api-card-name">isGuest</span></div><div class="api-card-desc">Inverse de <code>isAuthenticated</code>.</div><div class="api-type">ComputedRef&lt;boolean&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-returns">Ref</span><span class="api-card-name">loading</span></div><div class="api-card-desc"><code>true</code> pendant une requête en cours.</div><div class="api-type">Ref&lt;boolean&gt;</div></div>
 
       <h3>Actions</h3>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">login(credentials)</span></div><div class="api-card-desc">Connexion. Redirige automatiquement vers <code>redirects.home</code> en cas de succès.</div><div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">register(data)</span></div><div class="api-card-desc">Inscription et connexion automatique. Redirige vers home.</div><div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">logout()</span></div><div class="api-card-desc">Déconnexion, suppression du cookie et redirection vers <code>redirects.afterLogout</code>.</div><div class="api-type">Promise&lt;void&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">fetchUser()</span></div><div class="api-card-desc">Récupère l'utilisateur depuis <code>/api/auth/me</code>. Appelé automatiquement au boot via le plugin.</div><div class="api-type">Promise&lt;AuthUser | null&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">updateProfile(data)</span></div><div class="api-card-desc">Met à jour le profil. Supporte <code>File</code> pour l'avatar (envoi en <code>multipart/form-data</code> automatique).</div><div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">updatePassword(data)</span></div><div class="api-card-desc">Change le mot de passe. Requiert <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.</div><div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">forgotPassword({ email })</span></div><div class="api-card-desc">Envoie l'email de réinitialisation.</div><div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div></div>
+      <div class="api-card"><div class="api-card-header"><span class="api-method method-async">async</span><span class="api-card-name">resetPassword(data)</span></div><div class="api-card-desc">Réinitialise le mot de passe. Requiert <code>{ token, email, password, password_confirmation }</code>.</div><div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div></div>
 
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">login(credentials)</span>
-        </div>
-        <div class="api-card-desc">Connexion. Redirige automatiquement vers <code>redirects.home</code> en cas de succès.</div>
-        <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">register(data)</span>
-        </div>
-        <div class="api-card-desc">Inscription et connexion automatique. Redirige vers home.</div>
-        <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">logout()</span>
-        </div>
-        <div class="api-card-desc">Déconnexion, suppression du cookie et redirection vers <code>redirects.afterLogout</code>.</div>
-        <div class="api-type">Promise&lt;void&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">fetchUser()</span>
-        </div>
-        <div class="api-card-desc">Récupère l'utilisateur depuis <code>/api/auth/me</code>. Utilisé au boot via le plugin.</div>
-        <div class="api-type">Promise&lt;AuthUser | null&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">updateProfile(data)</span>
-        </div>
-        <div class="api-card-desc">Met à jour le profil. Supporte <code>File</code> pour l'avatar (envoi en <code>multipart/form-data</code>).</div>
-        <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">updatePassword(data)</span>
-        </div>
-        <div class="api-card-desc">Change le mot de passe. Requiert <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.</div>
-        <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">forgotPassword(data)</span>
-        </div>
-        <div class="api-card-desc">Envoie l'email de réinitialisation. Requiert <code>{ email }</code>.</div>
-        <div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div>
-      </div>
-
-      <div class="api-card">
-        <div class="api-card-header">
-          <span class="api-method method-async">async</span>
-          <span class="api-card-name">resetPassword(data)</span>
-        </div>
-        <div class="api-card-desc">Réinitialise le mot de passe. Requiert <code>{ token, email, password, password_confirmation }</code>.</div>
-        <div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div>
-      </div>
-
-      <h3>Exemple d'usage dans une page</h3>
+      <h3>Exemple dans une page</h3>
       <div class="code-block"><span class="lang-tag">vue</span><pre><span class="k">&lt;script setup lang="ts"&gt;</span>
 <span class="c">// useAuth est auto-importé — pas besoin d'import</span>
 <span class="k">const</span> { user, isAuthenticated, logout, loading } = <span class="f">useAuth</span>()
@@ -1268,28 +1003,24 @@
     <!-- RBAC -->
     <div class="section" id="rbac">
       <h2><span class="section-icon purple">◈</span>Rôles & Permissions</h2>
-      <p class="section-subtitle"><code>hasRole()</code> et <code>hasPermission()</code> sont accessibles partout via <code>useAuth()</code>.</p>
+      <p class="section-subtitle"><code>hasRole()</code> et <code>hasPermission()</code> sont accessibles via <code>useAuth()</code> — auto-importé.</p>
 
       <div class="code-block"><span class="lang-tag">ts</span><pre><span class="k">const</span> { hasRole, hasPermission } = <span class="f">useAuth</span>()
 
-<span class="c">// Vérifier un rôle unique</span>
+<span class="c">// Rôle unique</span>
 <span class="k">if</span> (<span class="f">hasRole</span>(<span class="s">'admin'</span>)) { <span class="c">/* ... */</span> }
 
-<span class="c">// Vérifier plusieurs rôles (au moins un)</span>
+<span class="c">// Plusieurs rôles (au moins un suffit)</span>
 <span class="k">if</span> (<span class="f">hasRole</span>([<span class="s">'admin'</span>, <span class="s">'manager'</span>])) { <span class="c">/* ... */</span> }
 
-<span class="c">// Vérifier une permission</span>
+<span class="c">// Permission unique</span>
 <span class="k">if</span> (<span class="f">hasPermission</span>(<span class="s">'edit-posts'</span>)) { <span class="c">/* ... */</span> }
 
-<span class="c">// Vérifier plusieurs permissions</span>
-<span class="k">if</span> (<span class="f">hasPermission</span>([<span class="s">'edit-posts'</span>, <span class="s">'delete-posts'</span>])) { <span class="c">/* ... */</span> }</pre></div>
+<span class="c">// Dans un template Vue</span></pre></div>
 
-      <h3>Dans les templates</h3>
       <div class="code-block"><span class="lang-tag">vue</span><pre><span class="k">&lt;template&gt;</span>
-  <span class="c">&lt;!-- Visible uniquement pour les admins --&gt;</span>
-  <span class="p">&lt;AdminPanel</span> <span class="k">v-if</span>=<span class="s">"hasRole('admin')"</span> <span class="p">/&gt;</span>
+  <span class="cm">&lt;AdminPanel</span> <span class="k">v-if</span>=<span class="s">"hasRole('admin')"</span> <span class="cm">/&gt;</span>
 
-  <span class="c">&lt;!-- Bouton conditionnel selon permission --&gt;</span>
   <span class="p">&lt;button</span> <span class="k">v-if</span>=<span class="s">"hasPermission('create-post')"</span><span class="p">&gt;</span>
     Créer un article
   <span class="p">&lt;/button&gt;</span>
@@ -1301,7 +1032,7 @@
 
       <div class="alert alert-green">
         <span class="alert-icon">✅</span>
-        <p>Le rôle <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasse toutes les vérifications de rôle dans le middleware <code>role</code>.</p>
+        <p>Le rôle <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasse toutes les vérifications dans le middleware <code>role</code>.</p>
       </div>
     </div>
 
@@ -1310,33 +1041,24 @@
     <!-- Middlewares -->
     <div class="section" id="middlewares">
       <h2><span class="section-icon orange">⟶</span>Middlewares</h2>
-      <p class="section-subtitle">Trois middlewares nommés disponibles dans <code>definePageMeta</code>.</p>
+      <p class="section-subtitle">Trois middlewares nommés, utilisables directement dans <code>definePageMeta</code> — aucun import.</p>
 
       <div class="middleware-grid">
-        <div class="mw-card">
-          <div class="mw-name">auth</div>
-          <div class="mw-desc">Redirige vers <code>/auth/login</code> si l'utilisateur n'est pas connecté. Conserve l'URL de retour dans <code>?redirect=</code>.</div>
-        </div>
-        <div class="mw-card">
-          <div class="mw-name">guest</div>
-          <div class="mw-desc">Redirige vers <code>/</code> si l'utilisateur est déjà connecté. À utiliser sur les pages login, register, etc.</div>
-        </div>
-        <div class="mw-card">
-          <div class="mw-name">role</div>
-          <div class="mw-desc">Vérifie que l'utilisateur possède au moins un des rôles définis dans <code>meta.roles</code>.</div>
-        </div>
+        <div class="mw-card"><div class="mw-name">auth</div><div class="mw-desc">Redirige vers <code>/auth/login</code> si l'utilisateur n'est pas connecté. Conserve l'URL dans <code>?redirect=</code>.</div></div>
+        <div class="mw-card"><div class="mw-name">guest</div><div class="mw-desc">Redirige vers <code>/</code> si l'utilisateur est déjà connecté. À utiliser sur login, register, etc.</div></div>
+        <div class="mw-card"><div class="mw-name">role</div><div class="mw-desc">Vérifie que l'utilisateur a au moins un des rôles définis dans <code>meta.roles</code>.</div></div>
       </div>
 
-      <div class="code-block"><span class="lang-tag">ts</span><pre><span class="c">// Page accessible uniquement aux utilisateurs connectés</span>
+      <div class="code-block"><span class="lang-tag">ts</span><pre><span class="c">// Page connectés uniquement</span>
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'auth'</span> })
 
-<span class="c">// Page accessible uniquement aux visiteurs non connectés</span>
+<span class="c">// Page visiteurs uniquement</span>
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'guest'</span> })
 
-<span class="c">// Page réservée à certains rôles</span>
+<span class="c">// Page avec rôle requis</span>
 <span class="f">definePageMeta</span>({
   middleware: <span class="s">'role'</span>,
-  roles: [<span class="s">'admin'</span>, <span class="s">'manager'</span>]  <span class="c">// au moins un des rôles requis</span>
+  roles: [<span class="s">'admin'</span>, <span class="s">'manager'</span>]
 })
 
 <span class="c">// Combinaison : connecté ET rôle requis</span>
@@ -1348,106 +1070,55 @@
 
     <hr class="divider" />
 
-    <!-- API Laravel -->
+    <!-- API Routes -->
     <div class="section" id="api-routes">
       <h2><span class="section-icon blue">⬡</span>API Laravel attendue</h2>
-      <p class="section-subtitle">Endpoints par défaut, personnalisables via <code>nuxtAuthKit.endpoints</code> dans <code>nuxt.config.ts</code>.</p>
+      <p class="section-subtitle">Endpoints par défaut, tous personnalisables via <code>nuxtAuthKit.endpoints</code>.</p>
 
       <table class="route-table">
-        <thead>
-          <tr><th>Méthode</th><th>Route</th><th>Auth ?</th><th>Réponse</th><th>Description</th></tr>
-        </thead>
+        <thead><tr><th>Méthode</th><th>Route</th><th>Auth</th><th>Réponse</th><th>Description</th></tr></thead>
         <tbody>
-          <tr>
-            <td><span class="http-badge post">POST</span></td>
-            <td class="route-path">/api/auth/login</td>
-            <td>—</td>
-            <td class="route-returns">{ user, token }</td>
-            <td class="route-desc">Connexion</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge post">POST</span></td>
-            <td class="route-path">/api/auth/register</td>
-            <td>—</td>
-            <td class="route-returns">{ user, token }</td>
-            <td class="route-desc">Inscription</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge post">POST</span></td>
-            <td class="route-path">/api/auth/logout</td>
-            <td>✅</td>
-            <td class="route-returns">{ message }</td>
-            <td class="route-desc">Déconnexion</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge get">GET</span></td>
-            <td class="route-path">/api/auth/me</td>
-            <td>✅</td>
-            <td class="route-returns">{ user }</td>
-            <td class="route-desc">Utilisateur connecté</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge put">PUT</span></td>
-            <td class="route-path">/api/auth/profile</td>
-            <td>✅</td>
-            <td class="route-returns">{ user }</td>
-            <td class="route-desc">Mise à jour profil</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge put">PUT</span></td>
-            <td class="route-path">/api/auth/password</td>
-            <td>✅</td>
-            <td class="route-returns">{ message }</td>
-            <td class="route-desc">Changement mot de passe</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge post">POST</span></td>
-            <td class="route-path">/api/auth/forgot-password</td>
-            <td>—</td>
-            <td class="route-returns">{ message }</td>
-            <td class="route-desc">Email de réinitialisation</td>
-          </tr>
-          <tr>
-            <td><span class="http-badge post">POST</span></td>
-            <td class="route-path">/api/auth/reset-password</td>
-            <td>—</td>
-            <td class="route-returns">{ message }</td>
-            <td class="route-desc">Réinitialisation avec token</td>
-          </tr>
+          <tr><td><span class="http-badge post">POST</span></td><td class="route-path">/api/auth/login</td><td>—</td><td class="route-returns">{ user, token }</td><td class="route-desc">Connexion</td></tr>
+          <tr><td><span class="http-badge post">POST</span></td><td class="route-path">/api/auth/register</td><td>—</td><td class="route-returns">{ user, token }</td><td class="route-desc">Inscription</td></tr>
+          <tr><td><span class="http-badge post">POST</span></td><td class="route-path">/api/auth/logout</td><td>✅</td><td class="route-returns">{ message }</td><td class="route-desc">Déconnexion</td></tr>
+          <tr><td><span class="http-badge get">GET</span></td><td class="route-path">/api/auth/me</td><td>✅</td><td class="route-returns">{ user }</td><td class="route-desc">Utilisateur connecté</td></tr>
+          <tr><td><span class="http-badge put">PUT</span></td><td class="route-path">/api/auth/profile</td><td>✅</td><td class="route-returns">{ user }</td><td class="route-desc">Mise à jour profil</td></tr>
+          <tr><td><span class="http-badge put">PUT</span></td><td class="route-path">/api/auth/password</td><td>✅</td><td class="route-returns">{ message }</td><td class="route-desc">Changement mot de passe</td></tr>
+          <tr><td><span class="http-badge post">POST</span></td><td class="route-path">/api/auth/forgot-password</td><td>—</td><td class="route-returns">{ message }</td><td class="route-desc">Email réinitialisation</td></tr>
+          <tr><td><span class="http-badge post">POST</span></td><td class="route-path">/api/auth/reset-password</td><td>—</td><td class="route-returns">{ message }</td><td class="route-desc">Reset avec token</td></tr>
         </tbody>
       </table>
 
       <div class="alert alert-blue">
         <span class="alert-icon">ℹ️</span>
-        <p>Le champ <code>user</code> dans les réponses doit contenir au minimum <code>id</code>, <code>name</code>, <code>email</code>. Les champs <code>roles</code> et <code>permissions</code> sont optionnels (tableaux de strings) pour activer le RBAC.</p>
+        <p>Le champ <code>user</code> doit contenir au minimum <code>id</code>, <code>name</code>, <code>email</code>. Les champs <code>roles</code> et <code>permissions</code> (tableaux de strings) sont optionnels pour activer le RBAC.</p>
       </div>
     </div>
 
     <!-- Laravel example -->
     <div class="section" id="laravel-example">
       <h2><span class="section-icon blue">⬡</span>Exemple avec Laravel Sanctum</h2>
-      <p class="section-subtitle">Implémentation de référence côté API Laravel.</p>
 
       <h3 class="file-title">routes/api.php</h3>
       <div class="code-block"><span class="lang-tag">php</span><pre><span class="k">use</span> App\Http\Controllers\AuthController;
 
 Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class="f">group</span>(<span class="k">function</span> () {
     <span class="c">// Routes publiques</span>
-    Route::<span class="f">post</span>(<span class="s">'login'</span>,          [AuthController::<span class="k">class</span>, <span class="s">'login'</span>]);
-    Route::<span class="f">post</span>(<span class="s">'register'</span>,       [AuthController::<span class="k">class</span>, <span class="s">'register'</span>]);
-    Route::<span class="f">post</span>(<span class="s">'forgot-password'</span>,[AuthController::<span class="k">class</span>, <span class="s">'forgotPassword'</span>]);
-    Route::<span class="f">post</span>(<span class="s">'reset-password'</span>, [AuthController::<span class="k">class</span>, <span class="s">'resetPassword'</span>]);
+    Route::<span class="f">post</span>(<span class="s">'login'</span>,           [AuthController::<span class="k">class</span>, <span class="s">'login'</span>]);
+    Route::<span class="f">post</span>(<span class="s">'register'</span>,        [AuthController::<span class="k">class</span>, <span class="s">'register'</span>]);
+    Route::<span class="f">post</span>(<span class="s">'forgot-password'</span>, [AuthController::<span class="k">class</span>, <span class="s">'forgotPassword'</span>]);
+    Route::<span class="f">post</span>(<span class="s">'reset-password'</span>,  [AuthController::<span class="k">class</span>, <span class="s">'resetPassword'</span>]);
 
     <span class="c">// Routes protégées (Sanctum)</span>
     Route::<span class="f">middleware</span>(<span class="s">'auth:sanctum'</span>)-><span class="f">group</span>(<span class="k">function</span> () {
         Route::<span class="f">post</span>(<span class="s">'logout'</span>,  [AuthController::<span class="k">class</span>, <span class="s">'logout'</span>]);
-        Route::<span class="f">get</span>(<span class="s">'me'</span>,      [AuthController::<span class="k">class</span>, <span class="s">'me'</span>]);
-        Route::<span class="f">put</span>(<span class="s">'profile'</span>, [AuthController::<span class="k">class</span>, <span class="s">'updateProfile'</span>]);
-        Route::<span class="f">put</span>(<span class="s">'password'</span>,[AuthController::<span class="k">class</span>, <span class="s">'updatePassword'</span>]);
+        Route::<span class="f">get</span>(<span class="s">'me'</span>,       [AuthController::<span class="k">class</span>, <span class="s">'me'</span>]);
+        Route::<span class="f">put</span>(<span class="s">'profile'</span>,  [AuthController::<span class="k">class</span>, <span class="s">'updateProfile'</span>]);
+        Route::<span class="f">put</span>(<span class="s">'password'</span>, [AuthController::<span class="k">class</span>, <span class="s">'updatePassword'</span>]);
     });
 });</pre></div>
 
-      <h3 class="file-title">app/Http/Controllers/AuthController.php — méthode me()</h3>
+      <h3 class="file-title">AuthController.php — méthode me()</h3>
       <div class="code-block"><span class="lang-tag">php</span><pre><span class="k">public function</span> <span class="f">me</span>(Request $request): JsonResponse
 {
     <span class="k">return</span> <span class="f">response</span>()-><span class="f">json</span>([
@@ -1461,54 +1132,47 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
     <!-- Types -->
     <div class="section" id="types">
       <h2><span class="section-icon purple">◇</span>Types TypeScript</h2>
-      <p class="section-subtitle">Tous les types sont exportés depuis <code>nuxt-auth-kit</code>.</p>
+      <p class="section-subtitle">Tous les types sont exportés depuis <code>nuxt-auth-kit</code>. À importer uniquement si besoin.</p>
 
       <div class="code-block"><span class="lang-tag">ts</span><pre><span class="k">import type</span> {
-  <span class="t">AuthUser</span>,
-  <span class="t">LoginCredentials</span>,
-  <span class="t">RegisterData</span>,
-  <span class="t">UpdateProfileData</span>,
-  <span class="t">UpdatePasswordData</span>,
-  <span class="t">ForgotPasswordData</span>,
-  <span class="t">ResetPasswordData</span>,
-  <span class="t">AuthResponse</span>,
-  <span class="t">ApiError</span>,
-  <span class="t">ModuleOptions</span>
+  <span class="t">AuthUser</span>,           <span class="c">// structure de l'utilisateur</span>
+  <span class="t">LoginCredentials</span>,   <span class="c">// { email, password, remember? }</span>
+  <span class="t">RegisterData</span>,       <span class="c">// { name, email, password, password_confirmation }</span>
+  <span class="t">UpdateProfileData</span>,  <span class="c">// { name?, email?, avatar? }</span>
+  <span class="t">UpdatePasswordData</span>, <span class="c">// { current_password, password, password_confirmation }</span>
+  <span class="t">ForgotPasswordData</span>, <span class="c">// { email }</span>
+  <span class="t">ResetPasswordData</span>,  <span class="c">// { token, email, password, password_confirmation }</span>
+  <span class="t">AuthResponse</span>,       <span class="c">// { user, token, ... }</span>
+  <span class="t">ApiError</span>,           <span class="c">// { message, errors? }</span>
+  <span class="t">ModuleOptions</span>       <span class="c">// config nuxtAuthKit</span>
 } <span class="k">from</span> <span class="s">'nuxt-auth-kit'</span>
 
-<span class="c">// AuthUser — structure minimale attendue depuis l'API</span>
+<span class="c">// Structure minimale de AuthUser</span>
 <span class="k">interface</span> <span class="t">AuthUser</span> {
-  id:          <span class="t">number</span> | <span class="t">string</span>
-  name:        <span class="t">string</span>
-  email:       <span class="t">string</span>
-  avatar?:     <span class="t">string</span>
-  roles?:      <span class="t">string</span>[]   <span class="c">// pour hasRole()</span>
+  id:           <span class="t">number</span> | <span class="t">string</span>
+  name:         <span class="t">string</span>
+  email:        <span class="t">string</span>
+  avatar?:      <span class="t">string</span>
+  roles?:       <span class="t">string</span>[]   <span class="c">// pour hasRole()</span>
   permissions?: <span class="t">string</span>[]  <span class="c">// pour hasPermission()</span>
-  [key: <span class="t">string</span>]: <span class="t">unknown</span> <span class="c">// champs supplémentaires libres</span>
+  [key: <span class="t">string</span>]: <span class="t">unknown</span> <span class="c">// champs libres</span>
 }</pre></div>
     </div>
 
     <!-- Architecture -->
     <div class="section" id="architecture">
       <h2><span class="section-icon green">⊞</span>Architecture du package</h2>
-      <p class="section-subtitle">Structure des sources avant le build.</p>
-
       <div class="tree">
 <span class="root">nuxt-auth-kit/</span>
-├── <span class="file-ts">build.config.ts</span>          <span class="comment"># config unbuild</span>
+├── <span class="file-ts">build.config.ts</span>          <span class="comment"># config unbuild (externals)</span>
 ├── <span class="file-ts">package.json</span>
-├── <span class="file-ts">README.md</span>
 └── <span class="dir">src/</span>
     ├── <span class="file-ts">module.ts</span>                <span class="comment"># point d'entrée du module Nuxt</span>
     └── <span class="dir">runtime/</span>
-        ├── <span class="dir">types/</span>
-        │   └── <span class="file-ts">index.ts</span>         <span class="comment"># tous les types TypeScript</span>
-        ├── <span class="dir">stores/</span>
-        │   └── <span class="file-ts">auth.ts</span>          <span class="comment"># Pinia store (user, token, RBAC)</span>
-        ├── <span class="dir">composables/</span>
-        │   └── <span class="file-ts">useAuth.ts</span>       <span class="comment"># composable principal</span>
-        ├── <span class="dir">plugins/</span>
-        │   └── <span class="file-ts">auth.ts</span>          <span class="comment"># restauration session au boot</span>
+        ├── <span class="dir">types/index.ts</span>           <span class="comment"># tous les types TypeScript</span>
+        ├── <span class="dir">stores/auth.ts</span>           <span class="comment"># Pinia store (user, token, RBAC)</span>
+        ├── <span class="dir">composables/useAuth.ts</span>   <span class="comment"># composable principal</span>
+        ├── <span class="dir">plugins/auth.ts</span>          <span class="comment"># restauration session au boot</span>
         ├── <span class="dir">middleware/</span>
         │   ├── <span class="file-ts">auth.ts</span>          <span class="comment"># routes protégées</span>
         │   ├── <span class="file-ts">guest.ts</span>         <span class="comment"># routes invités seulement</span>
@@ -1531,8 +1195,6 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
     <!-- Publication -->
     <div class="section" id="publish">
       <h2><span class="section-icon orange">↑</span>Publication npm</h2>
-      <p class="section-subtitle">Procédure complète pour publier et maintenir le package.</p>
-
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
@@ -1541,40 +1203,32 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             <div class="code-block"><pre><span class="f">npm</span> install</pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-content">
             <div class="step-title">Builder le package</div>
-            <div class="step-desc">Génère <code>dist/module.mjs</code>, <code>dist/module.cjs</code> et les types.</div>
+            <div class="step-desc">Génère <code>dist/module.mjs</code>, <code>dist/module.cjs</code> et les déclarations de types.</div>
             <div class="code-block"><pre><span class="f">npm</span> run build</pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-content">
             <div class="step-title">Tester localement (recommandé)</div>
-            <div class="code-block"><pre><span class="c"># Option A — npm link</span>
-<span class="f">npm</span> link                      <span class="c"># dans nuxt-auth-kit/</span>
-<span class="f">npm</span> link nuxt-auth-kit        <span class="c"># dans votre projet</span>
-
-<span class="c"># Option B — yalc (plus fiable)</span>
+            <div class="code-block"><pre><span class="c"># yalc — méthode recommandée</span>
 <span class="f">npm</span> install -g yalc
-<span class="f">yalc</span> publish                  <span class="c"># dans nuxt-auth-kit/</span>
-<span class="f">yalc</span> add nuxt-auth-kit        <span class="c"># dans votre projet</span></pre></div>
+<span class="f">yalc</span> publish              <span class="c"># dans nuxt-auth-kit/</span>
+<span class="f">yalc</span> add nuxt-auth-kit    <span class="c"># dans votre projet</span></pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-content">
             <div class="step-title">Se connecter à npm</div>
             <div class="code-block"><pre><span class="f">npm</span> login
-<span class="f">npm</span> whoami  <span class="c"># vérification</span></pre></div>
+<span class="f">npm</span> whoami   <span class="c"># vérification</span></pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">5</div>
           <div class="step-content">
@@ -1582,23 +1236,21 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             <div class="code-block"><pre><span class="f">npm</span> publish --access public</pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">6</div>
           <div class="step-content">
-            <div class="step-title">Mettre à jour (versioning)</div>
-            <div class="code-block"><pre><span class="f">npm</span> version patch   <span class="c"># bug fix  : 1.0.2 → 1.0.3</span>
-<span class="f">npm</span> version minor   <span class="c"># feature  : 1.0.2 → 1.1.0</span>
-<span class="f">npm</span> version major   <span class="c"># breaking : 1.0.2 → 2.0.0</span>
+            <div class="step-title">Mettre à jour</div>
+            <div class="code-block"><pre><span class="f">npm</span> version patch   <span class="c"># bug fix  : x.x.N+1</span>
+<span class="f">npm</span> version minor   <span class="c"># feature  : x.N+1.0</span>
+<span class="f">npm</span> version major   <span class="c"># breaking : N+1.0.0</span>
 <span class="f">npm</span> run build && <span class="f">npm</span> publish</pre></div>
           </div>
         </div>
-
         <div class="step">
           <div class="step-num">7</div>
           <div class="step-content">
-            <div class="step-title">CI/CD avec GitHub Actions</div>
-            <div class="step-desc">Crée <code>.github/workflows/publish.yml</code> pour publier automatiquement sur chaque tag <code>v*</code>.</div>
+            <div class="step-title">CI/CD — GitHub Actions</div>
+            <div class="step-desc">Publie automatiquement à chaque tag <code>v*</code>. Ajoutez <code>NPM_TOKEN</code> dans les secrets du repo GitHub.</div>
             <div class="code-block"><span class="lang-tag">yaml</span><pre><span class="f">name:</span> Publish to npm
 <span class="f">on:</span>
   push:
@@ -1617,12 +1269,82 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}</pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GitHub Pages ── -->
+    <div class="section" id="github-pages">
+      <h2><span class="section-icon blue">⬡</span>Mettre la doc en ligne — GitHub Pages</h2>
+      <p class="section-subtitle">Hébergez cette documentation gratuitement en quelques minutes.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Pousser le repo sur GitHub</div>
+            <div class="code-block"><pre><span class="f">git</span> init
+<span class="f">git</span> add .
+<span class="f">git</span> commit -m <span class="s">"feat: initial release"</span>
+<span class="f">git</span> remote add origin https://github.com/<span class="n">votre-user</span>/nuxt-auth-kit.git
+<span class="f">git</span> push -u origin main</pre></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Activer GitHub Pages</div>
+            <div class="step-desc">Allez dans votre repo GitHub → <strong>Settings → Pages</strong> → Source : <strong>Deploy from a branch</strong> → Branch : <code>main</code> → Folder : <code>/docs</code> → Cliquez <strong>Save</strong>.</div>
             <div class="alert alert-blue">
               <span class="alert-icon">ℹ️</span>
-              <p>Ajoutez <code>NPM_TOKEN</code> dans <strong>GitHub → Settings → Secrets → Actions</strong>. Générez-le sur <code>npmjs.com</code> → Account → Access Tokens → <strong>Automation</strong>.</p>
+              <p>Le fichier <code>docs/index.html</code> est déjà dans votre package. GitHub Pages servira automatiquement ce fichier à l'adresse <strong><code>https://votre-user.github.io/nuxt-auth-kit/</code></strong>.</p>
             </div>
           </div>
         </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Mettre à jour la doc automatiquement</div>
+            <div class="step-desc">Créez <code>.github/workflows/docs.yml</code> pour redéployer la doc à chaque push sur main :</div>
+            <div class="code-block"><span class="lang-tag">yaml</span><pre><span class="f">name:</span> Deploy Docs
+<span class="f">on:</span>
+  push:
+    branches: [<span class="s">'main'</span>]
+    paths: [<span class="s">'docs/**'</span>]
+<span class="f">jobs:</span>
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs</pre></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Ajouter l'URL dans package.json</div>
+            <div class="code-block"><span class="lang-tag">json</span><pre>{
+  <span class="f">"name"</span>: <span class="s">"nuxt-auth-kit"</span>,
+  <span class="f">"homepage"</span>: <span class="s">"https://votre-user.github.io/nuxt-auth-kit/"</span>,
+  <span class="f">"repository"</span>: {
+    <span class="f">"type"</span>: <span class="s">"git"</span>,
+    <span class="f">"url"</span>: <span class="s">"https://github.com/votre-user/nuxt-auth-kit"</span>
+  }
+}</pre></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-green">
+        <span class="alert-icon">🚀</span>
+        <p>Une fois configuré, la doc sera accessible à <strong><code>https://votre-user.github.io/nuxt-auth-kit/</code></strong> et se mettra à jour automatiquement à chaque modification du dossier <code>docs/</code>.</p>
       </div>
     </div>
 
@@ -1636,7 +1358,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 </div>
 
 <script>
-  // Tab switcher
+  // ── Theme toggle ──
+  function toggleTheme() {
+    const html = document.documentElement
+    const current = html.getAttribute('data-theme')
+    const next = current === 'light' ? 'dark' : 'light'
+    html.setAttribute('data-theme', next)
+    localStorage.setItem('theme', next)
+  }
+
+  // Restore saved theme
+  const saved = localStorage.getItem('theme')
+  if (saved) document.documentElement.setAttribute('data-theme', saved)
+
+  // ── Tab switcher ──
   function switchTab(el, id) {
     const block = el.closest('.install-block')
     block.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'))
@@ -1645,7 +1380,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
     block.querySelector('#tab-' + id).classList.add('active')
   }
 
-  // Active nav on scroll
+  // ── Active nav on scroll ──
   const sections = document.querySelectorAll('[id]')
   const navItems = document.querySelectorAll('.nav-item')
 
@@ -1662,6 +1397,5 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 
   sections.forEach(s => observer.observe(s))
 </script>
-
 </body>
 </html>

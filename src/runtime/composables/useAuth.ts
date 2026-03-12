@@ -12,7 +12,8 @@ import type {
 } from "../types";
 
 export function useAuth() {
-  const store = useAuthStore();
+  const nuxtApp = useNuxtApp();
+  const store = useAuthStore(nuxtApp.$pinia as any);
   const config = useRuntimeConfig();
   const opts = config.public.nuxtAuthKit as any;
 

@@ -1,8 +1,13 @@
 {
   "name": "nuxt-auth-kit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Nuxt module for authentication with Laravel API — login, register, profile, password management, roles & permissions",
   "keywords": ["nuxt", "nuxt-module", "authentication", "laravel", "roles", "permissions"],
+   "author": {
+    "name": "3S Tech Group",
+    "url": "https://github.com/sssadgroup/"
+  },
+  "homepage": "https://sssadgroup.github.io/nuxt-auth-kit",
   "license": "MIT",
   "type": "module",
   "exports": {
