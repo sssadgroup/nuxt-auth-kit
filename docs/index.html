@@ -1129,7 +1129,7 @@
               <div class="sb-pkg">nuxt-auth-kit</div>
             </div>
           </div>
-          <div class="sb-version">v1.0.3 · Nuxt 3 & 4 · Laravel</div>
+          <div class="sb-version">v1.0.43 · Nuxt 3 & 4 · Laravel</div>
         </div>
 
         <nav class="sb-nav">
@@ -1332,6 +1332,111 @@
 
         <hr class="div" />
 
+        <!-- INSTALLATION -->
+        <div class="section" id="install">
+          <div class="section-head">
+            <h2><span class="h2-icon hi-b">↓</span>Installation</h2>
+            <p class="section-sub">
+              Compatible Nuxt 3.x et Nuxt 4.x. Requiert
+              <code>@nuxt/ui</code> pour les styles.
+            </p>
+          </div>
+
+          <div class="install-box">
+            <div class="tab-bar">
+              <div class="tab on" onclick="tab(this, 'npm')">npm</div>
+              <div class="tab" onclick="tab(this, 'pnpm')">pnpm</div>
+              <div class="tab" onclick="tab(this, 'yarn')">yarn</div>
+            </div>
+            <div id="tab-npm" class="tab-panel on">
+              <div class="codeblock">
+                <pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre>
+              </div>
+            </div>
+            <div id="tab-pnpm" class="tab-panel">
+              <div class="codeblock">
+                <pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre>
+              </div>
+            </div>
+            <div id="tab-yarn" class="tab-panel">
+              <div class="codeblock">
+                <pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIGURATION -->
+        <div class="section" id="config">
+          <div class="section-head">
+            <h2><span class="h2-icon hi-a">⚙</span>Configuration</h2>
+            <p class="section-sub">
+              Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur
+              votre API Laravel.
+            </p>
+          </div>
+
+          <div class="file-header">
+            <span class="file-dot"></span>nuxt.config.ts
+          </div>
+          <div class="codeblock">
+            <span class="lang-label">ts</span
+            ><button class="copy-btn" onclick="copy(this)">Copier</button>
+            <pre><span class="k">export default</span> <span class="f">defineNuxtConfig</span>({
+  modules: [
+    <span class="s">'nuxt-auth-kit'</span>,
+    <span class="s">'@nuxt/ui'</span>       <span class="c">// requis pour les styles Tailwind</span>
+  ],
+
+  nuxtAuthKit: {
+    apiBase: <span class="f">process.env</span>.<span class="n">NUXT_PUBLIC_API_BASE</span> || <span class="s">'http://localhost:8000'</span>,
+
+    endpoints: {
+      login:          <span class="s">'/api/auth/login'</span>,
+      register:       <span class="s">'/api/auth/register'</span>,
+      logout:         <span class="s">'/api/auth/logout'</span>,
+      me:             <span class="s">'/api/auth/me'</span>,
+      updateProfile:  <span class="s">'/api/auth/profile'</span>,
+      updatePassword: <span class="s">'/api/auth/password'</span>,
+      forgotPassword: <span class="s">'/api/auth/forgot-password'</span>,
+      resetPassword:  <span class="s">'/api/auth/reset-password'</span>
+    },
+
+    redirects: {
+      login:       <span class="s">'/auth/login'</span>,
+      home:        <span class="s">'/'</span>,
+      afterLogout: <span class="s">'/auth/login'</span>
+    },
+
+    tokenCookieName: <span class="s">'auth_token'</span>,
+
+    rbac: {
+      superAdminRole:  <span class="s">'super-admin'</span>,
+      defaultUserRole: <span class="s">'user'</span>
+    }
+  }
+})</pre>
+          </div>
+
+          <div class="file-header"><span class="file-dot"></span>.env</div>
+          <div class="codeblock">
+            <span class="lang-label">env</span>
+            <pre>NUXT_PUBLIC_API_BASE=<span class="s">https://api.monprojet.com</span></pre>
+          </div>
+
+          <div class="alert al-info">
+            <span class="alert-icon">ℹ️</span>
+            <p>
+              <strong>Auto-import</strong> — <code>useAuth</code>,
+              <code>useAuthStore</code>, tous les composants et les middlewares
+              sont auto-importés. Aucun <code>import</code> nécessaire dans vos
+              fichiers.
+            </p>
+          </div>
+        </div>
+
+        <hr class="div" />
+
         <!-- CHANGELOG -->
         <div class="section" id="changelog">
           <div class="section-head">
@@ -1356,7 +1461,119 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.3</span>
+              <span class="chip chip-g">v1.0.43</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >refactor: update AuthLayout with image background and scoped
+                CSS styles</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  Panneau droit remplacé par une image de fond avec overlay
+                  sombre
+                </li>
+                <li>
+                  Nouveau slot <code>#brand</code> pour personnaliser le nom et
+                  tagline de l'app
+                </li>
+                <li>
+                  Props unifiées dans un objet <code>quote</code> :
+                  <code>appName</code>, <code>appTagline</code>,
+                  <code>image</code>, <code>text</code>, <code>author</code>,
+                  <code>location</code>, <code>avatar</code>
+                </li>
+                <li>
+                  Styles migrés en <code>scoped CSS</code> — suppression des
+                  classes Tailwind utilitaires
+                </li>
+                <li>Image par défaut via Pexels si aucune image fournie</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-b">v1.0.4</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >fix: import useToast from #imports in LoginForm to resolve
+                runtime error</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p style="margin: 0; font-size: 12.5px; color: var(--txt-2)">
+                L'erreur <code>useToast is not defined</code> apparaissait au
+                boot car les composables de <code>@nuxt/ui</code> ne sont pas
+                auto-importés dans le runtime d'un module. Ajout de
+                <code>import { useToast } from '#imports'</code> dans
+                <code>LoginForm.vue</code>.
+              </p>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-g">v1.0.43</span>
               <span
                 style="
                   font-size: 12px;
@@ -1488,111 +1705,6 @@
                 <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.
               </p>
             </div>
-          </div>
-        </div>
-
-        <hr class="div" />
-
-        <!-- INSTALLATION -->
-        <div class="section" id="install">
-          <div class="section-head">
-            <h2><span class="h2-icon hi-b">↓</span>Installation</h2>
-            <p class="section-sub">
-              Compatible Nuxt 3.x et Nuxt 4.x. Requiert
-              <code>@nuxt/ui</code> pour les styles.
-            </p>
-          </div>
-
-          <div class="install-box">
-            <div class="tab-bar">
-              <div class="tab on" onclick="tab(this, 'npm')">npm</div>
-              <div class="tab" onclick="tab(this, 'pnpm')">pnpm</div>
-              <div class="tab" onclick="tab(this, 'yarn')">yarn</div>
-            </div>
-            <div id="tab-npm" class="tab-panel on">
-              <div class="codeblock">
-                <pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre>
-              </div>
-            </div>
-            <div id="tab-pnpm" class="tab-panel">
-              <div class="codeblock">
-                <pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre>
-              </div>
-            </div>
-            <div id="tab-yarn" class="tab-panel">
-              <div class="codeblock">
-                <pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONFIGURATION -->
-        <div class="section" id="config">
-          <div class="section-head">
-            <h2><span class="h2-icon hi-a">⚙</span>Configuration</h2>
-            <p class="section-sub">
-              Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur
-              votre API Laravel.
-            </p>
-          </div>
-
-          <div class="file-header">
-            <span class="file-dot"></span>nuxt.config.ts
-          </div>
-          <div class="codeblock">
-            <span class="lang-label">ts</span
-            ><button class="copy-btn" onclick="copy(this)">Copier</button>
-            <pre><span class="k">export default</span> <span class="f">defineNuxtConfig</span>({
-  modules: [
-    <span class="s">'nuxt-auth-kit'</span>,
-    <span class="s">'@nuxt/ui'</span>       <span class="c">// requis pour les styles Tailwind</span>
-  ],
-
-  nuxtAuthKit: {
-    apiBase: <span class="f">process.env</span>.<span class="n">NUXT_PUBLIC_API_BASE</span> || <span class="s">'http://localhost:8000'</span>,
-
-    endpoints: {
-      login:          <span class="s">'/api/auth/login'</span>,
-      register:       <span class="s">'/api/auth/register'</span>,
-      logout:         <span class="s">'/api/auth/logout'</span>,
-      me:             <span class="s">'/api/auth/me'</span>,
-      updateProfile:  <span class="s">'/api/auth/profile'</span>,
-      updatePassword: <span class="s">'/api/auth/password'</span>,
-      forgotPassword: <span class="s">'/api/auth/forgot-password'</span>,
-      resetPassword:  <span class="s">'/api/auth/reset-password'</span>
-    },
-
-    redirects: {
-      login:       <span class="s">'/auth/login'</span>,
-      home:        <span class="s">'/'</span>,
-      afterLogout: <span class="s">'/auth/login'</span>
-    },
-
-    tokenCookieName: <span class="s">'auth_token'</span>,
-
-    rbac: {
-      superAdminRole:  <span class="s">'super-admin'</span>,
-      defaultUserRole: <span class="s">'user'</span>
-    }
-  }
-})</pre>
-          </div>
-
-          <div class="file-header"><span class="file-dot"></span>.env</div>
-          <div class="codeblock">
-            <span class="lang-label">env</span>
-            <pre>NUXT_PUBLIC_API_BASE=<span class="s">https://api.monprojet.com</span></pre>
-          </div>
-
-          <div class="alert al-info">
-            <span class="alert-icon">ℹ️</span>
-            <p>
-              <strong>Auto-import</strong> — <code>useAuth</code>,
-              <code>useAuthStore</code>, tous les composants et les middlewares
-              sont auto-importés. Aucun <code>import</code> nécessaire dans vos
-              fichiers.
-            </p>
           </div>
         </div>
 
@@ -2484,7 +2596,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           <div class="tree">
             <pre><span class="tr-root">nuxt-auth-kit/</span>
 ├── <span class="tr-ts">build.config.ts</span>          <span class="tr-cmt"># config unbuild</span>
-├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.3</span>
+├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.43</span>
 └── <span class="tr-dir">src/</span>
     ├── <span class="tr-ts">module.ts</span>                <span class="tr-cmt"># point d'entrée du module Nuxt</span>
     └── <span class="tr-dir">runtime/</span>
@@ -2511,7 +2623,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 
         <!-- FOOTER -->
         <div class="footer">
-          <span>nuxt-auth-kit v1.0.3</span>
+          <span>nuxt-auth-kit v1.0.43</span>
           <span
             >MIT · <a href="https://github.com">GitHub</a> ·
             <a href="https://npmjs.com">npm</a></span

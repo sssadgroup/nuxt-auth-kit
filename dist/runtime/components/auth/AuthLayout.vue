@@ -7,24 +7,35 @@
     </div>
 
     <div class="auth-layout__right">
-      <img :src="image || DEFAULT_IMAGE" :alt="appName" class="auth-layout__bg-image" />
+      <img
+        :src="quote.image || DEFAULT_IMAGE"
+        :alt="quote.appName"
+        class="auth-layout__bg-image"
+      />
       <div class="auth-layout__overlay" />
       <div class="auth-layout__content">
         <div>
           <slot name="brand">
-            <h1 class="auth-layout__app-name">{{ appName }}</h1>
-            <p class="auth-layout__app-tagline">{{ appTagline }}</p>
+            <h1 class="auth-layout__app-name">{{ quote.appName }}</h1>
+            <p class="auth-layout__app-tagline">{{ quote.appTagline }}</p>
           </slot>
         </div>
         <div class="auth-layout__quote-card">
           <div class="auth-layout__quote-mark">"</div>
-          <blockquote class="auth-layout__quote-text">{{ quote.text }}</blockquote>
-          <div class="auth-layout__quote-mark auth-layout__quote-mark--close">"</div>
-          <div class="auth-layout__quote-author">
+          <blockquote class="auth-layout__quote-text">
+            {{ quote.text }}
+          </blockquote>
+          <div class="auth-layout__quote-mark auth-layout__quote-mark--close">
+            "
+          </div>
+          <div v-if="quote.author" class="auth-layout__quote-author">
             <div v-if="quote.avatar" class="auth-layout__avatar">
               <img :src="quote.avatar" :alt="quote.author" />
             </div>
-            <div v-else class="auth-layout__avatar auth-layout__avatar--initial">
+            <div
+              v-else
+              class="auth-layout__avatar auth-layout__avatar--initial"
+            >
               <span>{{ quote.author.charAt(0) }}</span>
             </div>
             <div>
@@ -44,26 +55,26 @@ const DEFAULT_IMAGE =
 
 withDefaults(
   defineProps<{
-    appName?: string;
-    appTagline?: string;
-    image?: string;
     quote?: {
       text: string;
-      author: string;
-      location: string;
+      author?: string;
+      location?: string;
       avatar?: string;
+      appName?: string;
+      appTagline?: string;
+      image?: string;
     };
   }>(),
   {
-    appName: "MonApp",
-    appTagline: "La solution simple pour gérer votre activité.",
-    image: undefined,
     quote: () => ({
       text: "Une expérience fluide et agréable. La plateforme rend tout si simple.",
-      author: "Alex Mitchell",
-      location: "Paris, France",
+      author: "3S Tech Group",
+      location: "Dakar, Sénégal",
+      appName: "3S-Auth",
+      appTagline: "La solution simple pour gérer votre activité.",
+      image: undefined,
     }),
-  }
+  },
 );
 </script>
 
