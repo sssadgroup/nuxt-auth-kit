@@ -1,7 +1,8 @@
-import { useRuntimeConfig, navigateTo, useCookie } from "#app";
+import { useNuxtApp, useRuntimeConfig, navigateTo, useCookie } from "#app";
 import { useAuthStore } from "../stores/auth.js";
 export function useAuth() {
-  const store = useAuthStore();
+  const nuxtApp = useNuxtApp();
+  const store = useAuthStore(nuxtApp.$pinia);
   const config = useRuntimeConfig();
   const opts = config.public.nuxtAuthKit;
   const apiBase = opts?.apiBase || "";

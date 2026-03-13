@@ -3,7 +3,12 @@
     <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
     <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
 
-    <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-4">
+    <UForm
+      :schema="schema"
+      :state="form"
+      @submit="handleSubmit"
+      class="space-y-4"
+    >
       <UFormField label="Nom complet" name="name" required class="mt-6">
         <UInput
           v-model="form.name"
@@ -103,6 +108,7 @@
 import { ref, reactive } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
+import { useToast } from "#imports";
 
 withDefaults(defineProps<{ title?: string; subtitle?: string }>(), {
   title: "Créer un compte",
@@ -119,7 +125,9 @@ const schema = z
     name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
     email: z.string().email("Email invalide"),
     password: z.string().min(8, "Minimum 8 caractères"),
-    password_confirmation: z.string().min(1, "Veuillez confirmer le mot de passe"),
+    password_confirmation: z
+      .string()
+      .min(1, "Veuillez confirmer le mot de passe"),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "Les mots de passe ne correspondent pas",

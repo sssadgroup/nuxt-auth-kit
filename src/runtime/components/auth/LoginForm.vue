@@ -3,7 +3,12 @@
     <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
     <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
 
-    <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-4">
+    <UForm
+      :schema="schema"
+      :state="form"
+      @submit="handleSubmit"
+      class="space-y-4"
+    >
       <UFormField label="Email" name="email" required class="mt-6">
         <UInput
           v-model="form.email"
@@ -71,6 +76,7 @@
 import { ref, reactive } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
+import { useToast } from "#imports";
 
 const props = withDefaults(
   defineProps<{
@@ -80,7 +86,7 @@ const props = withDefaults(
   {
     title: "Connexion",
     subtitle: "Bienvenue ! Entrez vos informations pour continuer.",
-  }
+  },
 );
 
 const emit = defineEmits<{

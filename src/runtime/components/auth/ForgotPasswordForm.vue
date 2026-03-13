@@ -4,7 +4,12 @@
       <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
       <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
 
-      <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-4">
+      <UForm
+        :schema="schema"
+        :state="form"
+        @submit="handleSubmit"
+        class="space-y-4"
+      >
         <UFormField label="Email" name="email" required class="mt-6">
           <UInput
             v-model="form.email"
@@ -26,7 +31,11 @@
           trailing-icon="i-lucide-send"
           class="w-full font-semibold py-3.5 rounded-full mt-2 justify-center"
         >
-          {{ loading ? "Envoi en cours..." : "Envoyer le lien de réinitialisation" }}
+          {{
+            loading
+              ? "Envoi en cours..."
+              : "Envoyer le lien de réinitialisation"
+          }}
         </UButton>
       </UForm>
     </div>
@@ -35,7 +44,10 @@
       <div
         class="w-16 h-16 bg-[#1B4332]/10 rounded-full flex items-center justify-center mx-auto mb-6"
       >
-        <UIcon name="i-hugeicons-mail-account-02" class="w-8 h-8 text-[#1B4332]" />
+        <UIcon
+          name="i-hugeicons-mail-account-02"
+          class="w-8 h-8 text-[#1B4332]"
+        />
       </div>
       <h2 class="text-2xl font-bold text-[#1a2e1a] mb-3">Email envoyé !</h2>
       <p class="text-[#6b7c6b] mb-8">
@@ -74,6 +86,7 @@
 import { ref, reactive } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
+import { useToast } from "#imports";
 
 withDefaults(
   defineProps<{
@@ -82,8 +95,9 @@ withDefaults(
   }>(),
   {
     title: "Mot de passe oublié ?",
-    subtitle: "Saisissez votre email pour recevoir un lien de réinitialisation.",
-  }
+    subtitle:
+      "Saisissez votre email pour recevoir un lien de réinitialisation.",
+  },
 );
 
 defineEmits<{ "back-to-login": [] }>();
