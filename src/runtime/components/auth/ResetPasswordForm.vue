@@ -4,7 +4,12 @@
       <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
       <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
 
-      <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-4">
+      <UForm
+        :schema="schema"
+        :state="form"
+        @submit="handleSubmit"
+        class="space-y-4"
+      >
         <UFormField label="Email" name="email" required class="mt-6">
           <UInput
             v-model="form.email"
@@ -17,7 +22,12 @@
           />
         </UFormField>
 
-        <UFormField label="Nouveau mot de passe" name="password" required class="mt-6">
+        <UFormField
+          label="Nouveau mot de passe"
+          name="password"
+          required
+          class="mt-6"
+        >
           <UInput
             v-model="form.password"
             size="xl"
@@ -67,7 +77,9 @@
           trailing-icon="i-lucide-key-round"
           class="w-full font-semibold py-3.5 rounded-full mt-2 justify-center"
         >
-          {{ loading ? "Réinitialisation..." : "Réinitialiser le mot de passe" }}
+          {{
+            loading ? "Réinitialisation..." : "Réinitialiser le mot de passe"
+          }}
         </UButton>
       </UForm>
     </div>
@@ -78,8 +90,12 @@
       >
         <UIcon name="i-heroicons-check-circle" class="w-8 h-8 text-[#1B4332]" />
       </div>
-      <h2 class="text-2xl font-bold text-[#1a2e1a] mb-3">Mot de passe réinitialisé !</h2>
-      <p class="text-[#6b7c6b] mb-8">Votre mot de passe a été mis à jour avec succès.</p>
+      <h2 class="text-2xl font-bold text-[#1a2e1a] mb-3">
+        Mot de passe réinitialisé !
+      </h2>
+      <p class="text-[#6b7c6b] mb-8">
+        Votre mot de passe a été mis à jour avec succès.
+      </p>
       <UButton
         color="secondary"
         variant="subtle"
@@ -99,6 +115,7 @@ import { ref, reactive } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useRoute } from "#app";
+import { useToast } from "#imports";
 
 withDefaults(defineProps<{ title?: string; subtitle?: string }>(), {
   title: "Nouveau mot de passe",
@@ -111,7 +128,9 @@ const schema = z
   .object({
     email: z.string().email("Email invalide"),
     password: z.string().min(8, "Minimum 8 caractères"),
-    password_confirmation: z.string().min(1, "Veuillez confirmer le mot de passe"),
+    password_confirmation: z
+      .string()
+      .min(1, "Veuillez confirmer le mot de passe"),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "Les mots de passe ne correspondent pas",
