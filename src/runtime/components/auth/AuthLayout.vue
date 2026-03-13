@@ -22,13 +22,20 @@
         </div>
         <div class="auth-layout__quote-card">
           <div class="auth-layout__quote-mark">"</div>
-          <blockquote class="auth-layout__quote-text">{{ quote.text }}</blockquote>
-          <div class="auth-layout__quote-mark auth-layout__quote-mark--close">"</div>
+          <blockquote class="auth-layout__quote-text">
+            {{ quote.text }}
+          </blockquote>
+          <div class="auth-layout__quote-mark auth-layout__quote-mark--close">
+            "
+          </div>
           <div v-if="quote.author" class="auth-layout__quote-author">
             <div v-if="quote.avatar" class="auth-layout__avatar">
               <img :src="quote.avatar" :alt="quote.author" />
             </div>
-            <div v-else class="auth-layout__avatar auth-layout__avatar--initial">
+            <div
+              v-else
+              class="auth-layout__avatar auth-layout__avatar--initial"
+            >
               <span>{{ quote.author.charAt(0) }}</span>
             </div>
             <div>
@@ -61,13 +68,13 @@ withDefaults(
   {
     quote: () => ({
       text: "Une expérience fluide et agréable. La plateforme rend tout si simple.",
-      author: "Alex Mitchell",
-      location: "Paris, France",
-      appName: "MonApp",
+      author: "3S Tech Group",
+      location: "Dakar, Sénégal",
+      appName: "3S-Auth",
       appTagline: "La solution simple pour gérer votre activité.",
       image: undefined,
     }),
-  }
+  },
 );
 </script>
 

@@ -1129,7 +1129,7 @@
               <div class="sb-pkg">nuxt-auth-kit</div>
             </div>
           </div>
-          <div class="sb-version">v1.0.42 · Nuxt 3 & 4 · Laravel</div>
+          <div class="sb-version">v1.0.3 · Nuxt 3 & 4 · Laravel</div>
         </div>
 
         <nav class="sb-nav">
@@ -1203,12 +1203,6 @@
             >
             <a class="nav-link" href="#architecture"
               ><span class="nav-dot"></span>Architecture</a
-            >
-            <a class="nav-link" href="#deploy"
-              ><span class="nav-dot"></span>Mise en ligne</a
-            >
-            <a class="nav-link" href="#publish"
-              ><span class="nav-dot"></span>Publication npm</a
             >
           </div>
         </nav>
@@ -1362,7 +1356,7 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.42</span>
+              <span class="chip chip-g">v1.0.3</span>
               <span
                 style="
                   font-size: 12px;
@@ -1651,7 +1645,7 @@
             <span class="lang-label">vue</span
             ><button class="copy-btn" onclick="copy(this)">Copier</button>
             <pre><span class="tg">&lt;template&gt;</span>
-  <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
+  <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="c">&lt;!-- formulaire ici --&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
@@ -1659,10 +1653,10 @@
 <span class="tg">&lt;script setup lang="ts"&gt;</span>
 <span class="c">// Aucun import — AuthLayout est auto-importé</span>
 <span class="k">const</span> quote = {
-  text:     <span class="s">'Une expérience fluide et agréable.'</span>,
-  author:   <span class="s">'Alex Mitchell'</span>,
-  location: <span class="s">'Paris, France'</span>,
-  avatar:   <span class="s">'/img/alex.jpg'</span>  <span class="c">// optionnel</span>
+  text:     <span class="s">'Une expérience fluide et agréable. La plateforme rend tout si simple.'</span>,
+  author:   <span class="s">'3S Tech Group'</span>,
+  location: <span class="s">'Dakar, Sénégal'</span>,
+  appName: <span class="s">'3S-Auth'</span>,
 }
 <span class="tg">&lt;/script&gt;</span></pre>
           </div>
@@ -1753,7 +1747,7 @@
             <span class="lang-label">vue</span
             ><button class="copy-btn" onclick="copy(this)">Copier</button>
             <pre><span class="tg">&lt;template&gt;</span>
-  <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
+  <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthLoginForm</span>
       <span class="f">:roles</span>=<span class="s">"[
         { value: 'user',  label: 'En tant qu\'utilisateur' },
@@ -1772,7 +1766,8 @@
 
 <span class="k">const</span> quote = {
   text: <span class="s">'Une expérience fluide et agréable.'</span>,
-  author: <span class="s">'Alex Mitchell'</span>, location: <span class="s">'Amsterdam'</span>
+  author: <span class="s">'3S Tech Group'</span>,
+  location: <span class="s">'Dakar'</span>
 }
 <span class="tg">&lt;/script&gt;</span></pre>
           </div>
@@ -1816,7 +1811,7 @@
             <span class="lang-label">vue</span
             ><button class="copy-btn" onclick="copy(this)">Copier</button>
             <pre><span class="tg">&lt;template&gt;</span>
-  <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span><span class="cm">&gt;</span>
+  <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthRegisterForm</span> <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span> <span class="cm">/&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
@@ -1844,7 +1839,7 @@
             <span class="lang-label">vue</span
             ><button class="copy-btn" onclick="copy(this)">Copier</button>
             <pre><span class="tg">&lt;template&gt;</span>
-  <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span><span class="cm">&gt;</span>
+  <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthForgotPasswordForm</span>
       <span class="f">@back-to-login</span>=<span class="s">"navigateTo('/auth/login')"</span>
     <span class="cm">/&gt;</span>
@@ -1874,7 +1869,7 @@
             <span class="lang-label">vue</span
             ><button class="copy-btn" onclick="copy(this)">Copier</button>
             <pre><span class="tg">&lt;template&gt;</span>
-  <span class="cm">&lt;AuthLayout</span> <span class="f">app-name</span>=<span class="s">"MonApp"</span><span class="cm">&gt;</span>
+  <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthResetPasswordForm</span>
       <span class="f">@back-to-login</span>=<span class="s">"navigateTo('/auth/login')"</span>
     <span class="cm">/&gt;</span>
@@ -2487,237 +2482,36 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           </div>
 
           <div class="tree">
-            <span class="tr-root">nuxt-auth-kit/</span>
-            ├── <span class="tr-ts">build.config.ts</span>
-            <span class="tr-cmt"># config unbuild</span> ├──
-            <span class="tr-ts">package.json</span>
-            <span class="tr-cmt"># v1.0.42</span> └──
-            <span class="tr-dir">src/</span> ├──
-            <span class="tr-ts">module.ts</span>
-            <span class="tr-cmt"># point d'entrée du module Nuxt</span> └──
-            <span class="tr-dir">runtime/</span> ├──
-            <span class="tr-dir">types/index.ts</span>
-            <span class="tr-cmt"># types TypeScript</span> ├──
-            <span class="tr-dir">stores/auth.ts</span>
-            <span class="tr-cmt"># Pinia store</span> ├──
-            <span class="tr-dir">composables/useAuth.ts</span>
-            <span class="tr-cmt"># composable principal</span> ├──
-            <span class="tr-dir">plugins/auth.ts</span>
-            <span class="tr-cmt"># restauration session au boot</span> ├──
-            <span class="tr-dir">middleware/</span> │ ├──
-            <span class="tr-ts">auth.ts</span> │ ├──
-            <span class="tr-ts">guest.ts</span> │ └──
-            <span class="tr-ts">role.ts</span> └──
-            <span class="tr-dir">components/</span> ├──
-            <span class="tr-dir">auth/</span> │ ├──
-            <span class="tr-vue">AuthLayout.vue</span> │ ├──
-            <span class="tr-vue">LoginForm.vue</span> │ ├──
-            <span class="tr-vue">RegisterForm.vue</span> │ ├──
-            <span class="tr-vue">ForgotPasswordForm.vue</span> │ └──
-            <span class="tr-vue">ResetPasswordForm.vue</span> └──
-            <span class="tr-dir">profile/</span> ├──
-            <span class="tr-vue">UpdateProfileForm.vue</span> └──
-            <span class="tr-vue">UpdatePasswordForm.vue</span>
-          </div>
-        </div>
-
-        <hr class="div" />
-
-        <!-- MISE EN LIGNE -->
-        <div class="section" id="deploy">
-          <div class="section-head">
-            <h2>
-              <span class="h2-icon hi-b">🌐</span>Mise en ligne — GitHub Pages
-            </h2>
-            <p class="section-sub">
-              Hébergez la documentation gratuitement en quelques minutes.
-            </p>
-          </div>
-
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div class="step-body">
-                <div class="step-title">Pousser le repo sur GitHub</div>
-                <div class="codeblock">
-                  <span class="lang-label">bash</span
-                  ><button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">git</span> init
-<span class="f">git</span> add .
-<span class="f">git</span> commit -m <span class="s">"feat: initial release v1.0.42"</span>
-<span class="f">git</span> remote add origin https://github.com/<span class="n">votre-user</span>/nuxt-auth-kit.git
-<span class="f">git</span> push -u origin main</pre>
-                </div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step-num">2</div>
-              <div class="step-body">
-                <div class="step-title">Activer GitHub Pages</div>
-                <div class="step-desc">
-                  Dans votre repo GitHub → <strong>Settings → Pages</strong> →
-                  Source : <strong>Deploy from a branch</strong> → Branch :
-                  <code>main</code> → Folder : <code>/docs</code> →
-                  <strong>Save</strong>.
-                </div>
-                <div class="alert al-ok">
-                  <span class="alert-icon">🚀</span>
-                  <p>
-                    La doc sera disponible à
-                    <strong
-                      ><code
-                        >https://votre-user.github.io/nuxt-auth-kit/</code
-                      ></strong
-                    >
-                    en 1 à 2 minutes. Le fichier
-                    <code>docs/index.html</code> est déjà inclus dans le
-                    package.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step-num">3</div>
-              <div class="step-body">
-                <div class="step-title">
-                  Déploiement automatique (recommandé)
-                </div>
-                <div class="step-desc">
-                  Crée <code>.github/workflows/docs.yml</code> pour redéployer
-                  la doc à chaque push sur <code>main</code>.
-                </div>
-                <div class="file-header">
-                  <span class="file-dot"></span>.github/workflows/docs.yml
-                </div>
-                <div class="codeblock">
-                  <span class="lang-label">yaml</span
-                  ><button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">name:</span> Deploy Docs
-<span class="f">on:</span>
-  push:
-    branches: [<span class="s">'main'</span>]
-    paths: [<span class="s">'docs/**'</span>]
-<span class="f">jobs:</span>
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs</pre>
-                </div>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="step-num">4</div>
-              <div class="step-body">
-                <div class="step-title">Référencer dans package.json</div>
-                <div class="codeblock">
-                  <span class="lang-label">json</span
-                  ><button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre>{
-  <span class="f">"name"</span>: <span class="s">"nuxt-auth-kit"</span>,
-  <span class="f">"homepage"</span>: <span class="s">"https://votre-user.github.io/nuxt-auth-kit/"</span>,
-  <span class="f">"repository"</span>: {
-    <span class="f">"type"</span>: <span class="s">"git"</span>,
-    <span class="f">"url"</span>: <span class="s">"https://github.com/votre-user/nuxt-auth-kit"</span>
-  }
-}</pre>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PUBLICATION NPM -->
-        <div class="section" id="publish">
-          <div class="section-head">
-            <h2><span class="h2-icon hi-a">↑</span>Publication npm</h2>
-          </div>
-
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div class="step-body">
-                <div class="step-title">Installer & builder</div>
-                <div class="codeblock">
-                  <button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">npm</span> install
-<span class="f">npm</span> run build</pre>
-                </div>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">2</div>
-              <div class="step-body">
-                <div class="step-title">Se connecter & publier</div>
-                <div class="codeblock">
-                  <button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">npm</span> login
-<span class="f">npm</span> publish --access public</pre>
-                </div>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">3</div>
-              <div class="step-body">
-                <div class="step-title">Mettre à jour</div>
-                <div class="codeblock">
-                  <button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">npm</span> version patch   <span class="c"># bug fix  : x.x.N+1</span>
-<span class="f">npm</span> version minor   <span class="c"># feature  : x.N+1.0</span>
-<span class="f">npm</span> version major   <span class="c"># breaking : N+1.0.0</span>
-<span class="f">npm</span> run build && <span class="f">npm</span> publish</pre>
-                </div>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-num">4</div>
-              <div class="step-body">
-                <div class="step-title">CI/CD — GitHub Actions</div>
-                <div class="step-desc">
-                  Publie automatiquement à chaque tag <code>v*</code>. Ajoutez
-                  <code>NPM_TOKEN</code> dans les secrets du repo GitHub.
-                </div>
-                <div class="file-header">
-                  <span class="file-dot"></span>.github/workflows/publish.yml
-                </div>
-                <div class="codeblock">
-                  <span class="lang-label">yaml</span
-                  ><button class="copy-btn" onclick="copy(this)">Copier</button>
-                  <pre><span class="f">name:</span> Publish to npm
-<span class="f">on:</span>
-  push:
-    tags: [<span class="s">'v*'</span>]
-<span class="f">jobs:</span>
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: <span class="s">'20'</span>
-          registry-url: <span class="s">'https://registry.npmjs.org'</span>
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}</pre>
-                </div>
-              </div>
-            </div>
+            <pre><span class="tr-root">nuxt-auth-kit/</span>
+├── <span class="tr-ts">build.config.ts</span>          <span class="tr-cmt"># config unbuild</span>
+├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.3</span>
+└── <span class="tr-dir">src/</span>
+    ├── <span class="tr-ts">module.ts</span>                <span class="tr-cmt"># point d'entrée du module Nuxt</span>
+    └── <span class="tr-dir">runtime/</span>
+        ├── <span class="tr-dir">types/index.ts</span>           <span class="tr-cmt"># types TypeScript</span>
+        ├── <span class="tr-dir">stores/auth.ts</span>           <span class="tr-cmt"># Pinia store</span>
+        ├── <span class="tr-dir">composables/useAuth.ts</span>   <span class="tr-cmt"># composable principal</span>
+        ├── <span class="tr-dir">plugins/auth.ts</span>          <span class="tr-cmt"># restauration session au boot</span>
+        ├── <span class="tr-dir">middleware/</span>
+        │   ├── <span class="tr-ts">auth.ts</span>
+        │   ├── <span class="tr-ts">guest.ts</span>
+        │   └── <span class="tr-ts">role.ts</span>
+        └── <span class="tr-dir">components/</span>
+            ├── <span class="tr-dir">auth/</span>
+            │   ├── <span class="tr-vue">AuthLayout.vue</span>
+            │   ├── <span class="tr-vue">LoginForm.vue</span>
+            │   ├── <span class="tr-vue">RegisterForm.vue</span>
+            │   ├── <span class="tr-vue">ForgotPasswordForm.vue</span>
+            │   └── <span class="tr-vue">ResetPasswordForm.vue</span>
+            └── <span class="tr-dir">profile/</span>
+                ├── <span class="tr-vue">UpdateProfileForm.vue</span>
+                └── <span class="tr-vue">UpdatePasswordForm.vue</span></pre>
           </div>
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
-          <span>nuxt-auth-kit v1.0.42</span>
+          <span>nuxt-auth-kit v1.0.3</span>
           <span
             >MIT · <a href="https://github.com">GitHub</a> ·
             <a href="https://npmjs.com">npm</a></span
