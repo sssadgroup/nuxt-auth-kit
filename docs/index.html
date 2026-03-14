@@ -1129,7 +1129,7 @@
               <div class="sb-pkg">nuxt-auth-kit</div>
             </div>
           </div>
-          <div class="sb-version">v1.0.43 · Nuxt 3 & 4 · Laravel</div>
+          <div class="sb-version">v1.0.44 · Nuxt 3 & 4 · Laravel</div>
         </div>
 
         <nav class="sb-nav">
@@ -1396,8 +1396,8 @@
       register:       <span class="s">'/api/auth/register'</span>,
       logout:         <span class="s">'/api/auth/logout'</span>,
       me:             <span class="s">'/api/auth/me'</span>,
-      updateProfile:  <span class="s">'/api/auth/profile'</span>,
-      updatePassword: <span class="s">'/api/auth/password'</span>,
+      updateProfile:  <span class="s">'/api/profile'</span>,
+      updatePassword: <span class="s">'/api/profile/password'</span>,
       forgotPassword: <span class="s">'/api/auth/forgot-password'</span>,
       resetPassword:  <span class="s">'/api/auth/reset-password'</span>
     },
@@ -1461,7 +1461,67 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.43</span>
+              <span class="chip chip-g">v1.0.44</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >refactor: update profile endpoints and improve
+                UpdateProfileForm and UpdatePasswordForm components</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  Endpoints profil mis à jour : <code>updateProfile</code> →
+                  <code>/api/profile</code>, <code>updatePassword</code> →
+                  <code>/api/profile/password</code>
+                </li>
+                <li>Améliorations sur <code>UpdateProfileForm.vue</code></li>
+                <li>Améliorations sur <code>UpdatePasswordForm.vue</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-g">v1.0.44</span>
               <span
                 style="
                   font-size: 12px;
@@ -1573,7 +1633,7 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.43</span>
+              <span class="chip chip-g">v1.0.44</span>
               <span
                 style="
                   font-size: 12px;
@@ -2460,14 +2520,14 @@
               </tr>
               <tr>
                 <td><span class="hb hb-put">PUT</span></td>
-                <td class="route-path">/api/auth/profile</td>
+                <td class="route-path">/api/profile</td>
                 <td>✅</td>
                 <td class="route-ret">{ user }</td>
                 <td>Mise à jour profil</td>
               </tr>
               <tr>
                 <td><span class="hb hb-put">PUT</span></td>
-                <td class="route-path">/api/auth/password</td>
+                <td class="route-path">/api/profile/password</td>
                 <td>✅</td>
                 <td class="route-ret">{ message }</td>
                 <td>Changement mdp</td>
@@ -2596,7 +2656,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           <div class="tree">
             <pre><span class="tr-root">nuxt-auth-kit/</span>
 ├── <span class="tr-ts">build.config.ts</span>          <span class="tr-cmt"># config unbuild</span>
-├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.43</span>
+├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.44</span>
 └── <span class="tr-dir">src/</span>
     ├── <span class="tr-ts">module.ts</span>                <span class="tr-cmt"># point d'entrée du module Nuxt</span>
     └── <span class="tr-dir">runtime/</span>
@@ -2623,7 +2683,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 
         <!-- FOOTER -->
         <div class="footer">
-          <span>nuxt-auth-kit v1.0.43</span>
+          <span>nuxt-auth-kit v1.0.44</span>
           <span
             >MIT · <a href="https://github.com">GitHub</a> ·
             <a href="https://npmjs.com">npm</a></span
