@@ -2,156 +2,183 @@
   <div class="profile-update">
     <h2 class="text-2xl font-bold text-[#1a2e1a] mb-6">{{ title }}</h2>
 
-    <form @submit.prevent="handleSubmit" class="space-y-5">
-      <div v-if="successMsg" class="bg-green-50 border border-green-200 text-green-700 rounded-xl px-4 py-3 text-sm">
-        {{ successMsg }}
-      </div>
-      <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
-        {{ error }}
-      </div>
-
-      <!-- Avatar -->
-      <div v-if="showAvatar" class="flex items-center gap-5">
-        <div class="relative">
-          <div class="w-20 h-20 rounded-full overflow-hidden bg-[#1B4332]/10 flex items-center justify-center">
-            <img v-if="avatarPreview" :src="avatarPreview" class="w-full h-full object-cover" alt="avatar" />
-            <span v-else class="text-2xl font-bold text-[#1B4332]">{{ initials }}</span>
-          </div>
-          <label class="absolute -bottom-1 -right-1 w-7 h-7 bg-[#1B4332] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#163828] transition">
-            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <input type="file" accept="image/*" class="hidden" @change="handleAvatarChange" />
-          </label>
+    <div v-if="showAvatar" class="flex items-center gap-4 mb-8">
+      <div class="relative group">
+        <div
+          class="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br bg-[#1A3F7A] text-white font-semibold text-sm cursor-pointer shadow-sm"
+        >
+          {{ getInitials(user?.first_name, user?.last_name) }}
         </div>
-        <div>
-          <p class="font-medium text-[#1a2e1a]">{{ form.name || user?.name }}</p>
-          <p class="text-sm text-[#6b7c6b]">{{ user?.email }}</p>
-        </div>
-      </div>
 
-      <!-- Name -->
-      <div>
-        <label class="block text-sm font-medium text-[#1a2e1a] mb-1.5">Nom complet</label>
-        <div class="relative">
-          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#8a9a8a]">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </span>
+        <label
+          class="absolute bottom-0 right-0 flex items-center justify-center w-7 h-7 rounded-full bg-white border border-gray-200 shadow cursor-pointer transition hover:bg-gray-50 group-hover:scale-105"
+        >
+          <UIcon name="i-lucide-camera" class="w-3.5 h-3.5 text-gray-600" />
           <input
-            v-model="form.name"
-            type="text"
-            :placeholder="user?.name || 'Votre nom'"
-            class="w-full bg-white border border-[#e0e0d8] rounded-2xl py-3 pl-11 pr-4 text-[#1a2e1a] placeholder-[#aab4aa] focus:outline-none focus:border-[#1B4332] focus:ring-2 focus:ring-[#1B4332]/20 transition"
+            type="file"
+            accept="image/*"
+            class="hidden"
+            @change="handleAvatarChange"
           />
-        </div>
-        <p v-if="fieldErrors.name" class="text-red-500 text-xs mt-1">{{ fieldErrors.name }}</p>
+        </label>
       </div>
 
-      <!-- Email -->
-      <div>
-        <label class="block text-sm font-medium text-[#1a2e1a] mb-1.5">Email</label>
-        <div class="relative">
-          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#8a9a8a]">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </span>
-          <input
-            v-model="form.email"
-            type="email"
-            :placeholder="user?.email || 'votre@email.com'"
-            class="w-full bg-white border border-[#e0e0d8] rounded-2xl py-3 pl-11 pr-4 text-[#1a2e1a] placeholder-[#aab4aa] focus:outline-none focus:border-[#1B4332] focus:ring-2 focus:ring-[#1B4332]/20 transition"
+      <div class="flex flex-col leading-tight">
+        <p class="text-sm font-semibold text-gray-900">
+          {{ fullName }}
+        </p>
+        <p class="text-xs text-gray-500">
+          {{ user?.email }}
+        </p>
+      </div>
+    </div>
+
+    <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-5">
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <UFormField label="Prénom" name="first_name">
+          <UInput
+            v-model="form.first_name"
+            size="lg"
+            :placeholder="user?.first_name || 'Prénom'"
+            icon="i-lucide-user"
+            color="neutral"
+            class="w-full"
+            :ui="{ base: 'rounded-xl py-3 text-base' }"
           />
-        </div>
-        <p v-if="fieldErrors.email" class="text-red-500 text-xs mt-1">{{ fieldErrors.email }}</p>
+        </UFormField>
+
+        <UFormField label="Nom" name="last_name">
+          <UInput
+            v-model="form.last_name"
+            size="lg"
+            :placeholder="user?.last_name || 'Nom'"
+            icon="i-lucide-user"
+            color="neutral"
+            class="w-full"
+            :ui="{ base: 'rounded-xl py-3 text-base' }"
+          />
+        </UFormField>
       </div>
 
-      <!-- Extra slots for additional fields -->
+      <UFormField label="Email" name="email" class="mt-4">
+        <UInput
+          v-model="form.email"
+          size="lg"
+          type="email"
+          :placeholder="user?.email || 'votre@email.com'"
+          icon="i-hugeicons-mail-account-02"
+          color="neutral"
+          class="w-full"
+          :ui="{ base: 'rounded-xl py-3 text-base' }"
+        />
+      </UFormField>
+
       <slot name="extra-fields" :form="form" />
 
-      <button
+      <UButton
         type="submit"
+        :loading="loading"
         :disabled="loading"
-        class="bg-[#1B4332] hover:bg-[#163828] text-[#D4FF6B] font-semibold py-3 px-8 rounded-2xl transition-colors disabled:opacity-60"
+        color="neutral"
+        size="lg"
+        trailing-icon="i-lucide-save"
+        class="font-semiboldpy-3.5 rounded-xl mt-2 justify-center"
       >
-        <span v-if="!loading">Enregistrer les modifications</span>
-        <span v-else class="flex items-center gap-2">
-          <svg class="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-          </svg>
-          Enregistrement...
-        </span>
-      </button>
-    </form>
+        {{ loading ? "Enregistrement..." : "Enregistrer les modifications" }}
+      </UButton>
+    </UForm>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue'
-import { useAuth } from '../../composables/useAuth'
+import { ref, reactive, computed } from "vue";
+import { z } from "zod";
+import { useAuth } from "../../composables/useAuth";
+import { useToast } from "#imports";
 
-withDefaults(defineProps<{
-  title?: string
-  showAvatar?: boolean
-}>(), {
-  title: 'Informations du profil',
-  showAvatar: true
-})
+withDefaults(
+  defineProps<{
+    title?: string;
+    showAvatar?: boolean;
+  }>(),
+  {
+    title: "Informations du profil",
+    showAvatar: true,
+  }
+);
 
-const emit = defineEmits<{ success: [user: any] }>()
+const emit = defineEmits<{ success: [user: any] }>();
 
-const { user, updateProfile, loading } = useAuth()
+const { user, updateProfile, loading } = useAuth();
+const toast = useToast();
+
+const schema = z.object({
+  first_name: z.string().min(2, "Minimum 2 caractères").optional().or(z.literal("")),
+  last_name: z.string().min(2, "Minimum 2 caractères").optional().or(z.literal("")),
+  email: z.string().email("Email invalide").optional().or(z.literal("")),
+});
 
 const form = reactive({
-  name: user?.name || '',
-  email: user?.email || '',
-  avatar: null as File | null
-})
+  first_name: user?.first_name || "",
+  last_name: user?.last_name || "",
+  email: user?.email || "",
+  avatar: null as File | null,
+});
 
-const avatarPreview = ref<string | null>(user?.avatar as string || null)
-const error = ref<string | null>(null)
-const successMsg = ref<string | null>(null)
-const fieldErrors = reactive<Record<string, string>>({})
+const avatarPreview = ref<string | null>((user?.avatar as string) || null);
 
-const initials = computed(() => {
-  const name = form.name || user?.name || ''
-  return name.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2)
-})
+const fullName = computed(() => {
+  const first = form.first_name || user?.first_name || "";
+  const last = form.last_name || user?.last_name || "";
+  return `${first} ${last}`.trim() || "—";
+});
+
+const getInitials = (firstName?: string, lastName?: string) => {
+  const firstInitials =
+    firstName
+      ?.trim()
+      .split(" ")
+      .map((p) => p[0]?.toUpperCase())
+      .join("") ?? "";
+  const lastInitial = lastName?.[0]?.toUpperCase() ?? "";
+  return `${firstInitials}${lastInitial}`;
+};
 
 function handleAvatarChange(e: Event) {
-  const file = (e.target as HTMLInputElement).files?.[0]
-  if (!file) return
-  form.avatar = file
-  const reader = new FileReader()
-  reader.onload = (ev) => { avatarPreview.value = ev.target?.result as string }
-  reader.readAsDataURL(file)
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (!file) return;
+  form.avatar = file;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    avatarPreview.value = ev.target?.result as string;
+  };
+  reader.readAsDataURL(file);
 }
 
 async function handleSubmit() {
-  error.value = null
-  successMsg.value = null
-  Object.keys(fieldErrors).forEach(k => delete fieldErrors[k])
+  const data: any = {};
+  if (form.first_name) data.first_name = form.first_name;
+  if (form.last_name) data.last_name = form.last_name;
+  if (form.email) data.email = form.email;
+  if (form.avatar) data.avatar = form.avatar;
 
-  const data: any = {}
-  if (form.name) data.name = form.name
-  if (form.email) data.email = form.email
-  if (form.avatar) data.avatar = form.avatar
-
-  const result = await updateProfile(data)
+  const result = await updateProfile(data);
 
   if (result.success) {
-    successMsg.value = 'Profil mis à jour avec succès !'
-    emit('success', user)
-  } else if (result.error) {
-    if (result.error.errors) {
-      Object.entries(result.error.errors).forEach(([k, v]) => { fieldErrors[k] = v[0] })
-    } else {
-      error.value = result.error.message
-    }
+    toast.add({
+      title: "Profil mis à jour",
+      description: "Vos informations ont été enregistrées avec succès.",
+      icon: "i-heroicons-check-circle",
+      color: "success",
+    });
+    emit("success", user);
+  } else {
+    toast.add({
+      title: "Erreur",
+      description: result.error?.message ?? "Une erreur est survenue.",
+      icon: "i-heroicons-exclamation-triangle",
+      color: "error",
+    });
   }
 }
 </script>
