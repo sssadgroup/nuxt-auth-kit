@@ -34,45 +34,46 @@ Dans `nuxt.config.ts` :
 ```ts
 export default defineNuxtConfig({
   modules: [
-    'nuxt-auth-kit',
-    '@nuxt/ui'         // requis pour les styles
+    "nuxt-auth-kit",
+    "@nuxt/ui", // requis pour les styles
   ],
 
   nuxtAuthKit: {
-    apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000',
+    apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://localhost:8000",
 
     // Endpoints Laravel (personnalisables)
     endpoints: {
-      login: '/api/auth/login',
-      register: '/api/auth/register',
-      logout: '/api/auth/logout',
-      me: '/api/auth/me',
-      updateProfile: '/api/auth/profile',
-      updatePassword: '/api/auth/password',
-      forgotPassword: '/api/auth/forgot-password',
-      resetPassword: '/api/auth/reset-password'
+      login: "/api/auth/login",
+      register: "/api/auth/register",
+      logout: "/api/auth/logout",
+      me: "/api/auth/me",
+      updateProfile: "/api/auth/profile",
+      updatePassword: "/api/auth/password",
+      forgotPassword: "/api/auth/forgot-password",
+      resetPassword: "/api/auth/reset-password",
     },
 
     // Redirections
     redirects: {
-      login: '/auth/login',
-      home: '/',
-      afterLogout: '/auth/login'
+      login: "/auth/login",
+      home: "/",
+      afterLogout: "/auth/login",
     },
 
     // Cookie
-    tokenCookieName: 'auth_token',
+    tokenCookieName: "auth_token",
 
     // RBAC
     rbac: {
-      superAdminRole: 'super-admin',
-      defaultUserRole: 'user'
-    }
-  }
-})
+      superAdminRole: "super-admin",
+      defaultUserRole: "user",
+    },
+  },
+});
 ```
 
 Dans `.env` :
+
 ```env
 NUXT_PUBLIC_API_BASE=https://api.monprojet.com
 ```
@@ -84,13 +85,14 @@ NUXT_PUBLIC_API_BASE=https://api.monprojet.com
 ### Pages d'authentification
 
 #### `pages/auth/login.vue`
+
 ```vue
 <template>
-  <AuthLayout app-name="MonApp" :quote="quote">
+  <AuthLayout :quote="quote">
     <AuthLoginForm
       :roles="[
         { value: 'user', label: 'En tant qu\'utilisateur' },
-        { value: 'owner', label: 'En tant que propriétaire' }
+        { value: 'owner', label: 'En tant que propriétaire' },
       ]"
       :show-social="true"
       @forgot-password="navigateTo('/auth/forgot-password')"
@@ -100,52 +102,55 @@ NUXT_PUBLIC_API_BASE=https://api.monprojet.com
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 
 const quote = {
-  text: 'Une expérience fluide et agréable. La plateforme rend tout si simple.',
-  author: 'Alex Mitchell',
-  location: 'Amsterdam'
-}
+  text: "Une expérience fluide et agréable. La plateforme rend tout si simple.",
+  author: "Alex Mitchell",
+  location: "Amsterdam",
+};
 </script>
 ```
 
 #### `pages/auth/register.vue`
+
 ```vue
 <template>
-  <AuthLayout app-name="MonApp">
+  <AuthLayout>
     <AuthRegisterForm @login="navigateTo('/auth/login')" />
   </AuthLayout>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 </script>
 ```
 
 #### `pages/auth/forgot-password.vue`
+
 ```vue
 <template>
-  <AuthLayout app-name="MonApp">
+  <AuthLayout>
     <AuthForgotPasswordForm @back-to-login="navigateTo('/auth/login')" />
   </AuthLayout>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 </script>
 ```
 
 #### `pages/auth/reset-password.vue`
+
 ```vue
 <template>
-  <AuthLayout app-name="MonApp">
+  <AuthLayout>
     <AuthResetPasswordForm @back-to-login="navigateTo('/auth/login')" />
   </AuthLayout>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 </script>
 ```
 
@@ -154,6 +159,7 @@ definePageMeta({ middleware: 'guest' })
 ### Page profil
 
 #### `pages/profile/index.vue`
+
 ```vue
 <template>
   <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
@@ -164,7 +170,7 @@ definePageMeta({ middleware: 'guest' })
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: 'auth' })
+definePageMeta({ middleware: "auth" });
 </script>
 ```
 
@@ -174,10 +180,10 @@ definePageMeta({ middleware: 'auth' })
 
 ```ts
 const {
-  user,              // Ref<AuthUser | null>
-  isAuthenticated,   // ComputedRef<boolean>
-  isGuest,           // ComputedRef<boolean>
-  loading,           // Ref<boolean>
+  user, // Ref<AuthUser | null>
+  isAuthenticated, // ComputedRef<boolean>
+  isGuest, // ComputedRef<boolean>
+  loading, // Ref<boolean>
 
   // Actions
   login,
@@ -190,12 +196,13 @@ const {
   resetPassword,
 
   // RBAC
-  hasRole,           // (role: string | string[]) => boolean
-  hasPermission      // (perm: string | string[]) => boolean
-} = useAuth()
+  hasRole, // (role: string | string[]) => boolean
+  hasPermission, // (perm: string | string[]) => boolean
+} = useAuth();
 ```
 
 #### Exemples RBAC
+
 ```ts
 const { hasRole, hasPermission, user } = useAuth()
 
@@ -216,16 +223,16 @@ if (hasPermission('edit-posts')) { ... }
 
 ```ts
 // Page protégée (utilisateurs connectés uniquement)
-definePageMeta({ middleware: 'auth' })
+definePageMeta({ middleware: "auth" });
 
 // Page publique (invités uniquement, redirige si connecté)
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 
 // Page avec rôle requis
 definePageMeta({
-  middleware: 'role',
-  roles: ['admin', 'manager']  // au moins un des rôles
-})
+  middleware: "role",
+  roles: ["admin", "manager"], // au moins un des rôles
+});
 ```
 
 ---
@@ -234,16 +241,16 @@ definePageMeta({
 
 Le package attend les endpoints suivants (personnalisables) :
 
-| Méthode | Route | Description |
-|---------|-------|-------------|
-| `POST` | `/api/auth/login` | Connexion → `{ user, token }` |
-| `POST` | `/api/auth/register` | Inscription → `{ user, token }` |
-| `POST` | `/api/auth/logout` | Déconnexion |
-| `GET` | `/api/auth/me` | Utilisateur connecté → `{ user }` |
-| `PUT` | `/api/auth/profile` | Mise à jour profil → `{ user }` |
-| `PUT` | `/api/auth/password` | Changement mot de passe |
-| `POST` | `/api/auth/forgot-password` | Email de réinitialisation |
-| `POST` | `/api/auth/reset-password` | Réinitialisation avec token |
+| Méthode | Route                       | Description                       |
+| ------- | --------------------------- | --------------------------------- |
+| `POST`  | `/api/auth/login`           | Connexion → `{ user, token }`     |
+| `POST`  | `/api/auth/register`        | Inscription → `{ user, token }`   |
+| `POST`  | `/api/auth/logout`          | Déconnexion                       |
+| `GET`   | `/api/auth/me`              | Utilisateur connecté → `{ user }` |
+| `PUT`   | `/api/profile`              | Mise à jour profil → `{ user }`   |
+| `PUT`   | `/api/profile/password`     | Changement mot de passe           |
+| `POST`  | `/api/auth/forgot-password` | Email de réinitialisation         |
+| `POST`  | `/api/auth/reset-password`  | Réinitialisation avec token       |
 
 ### Exemple avec Laravel Sanctum
 
@@ -299,9 +306,3 @@ nuxt-auth-kit/
 ├── package.json
 └── README.md
 ```
-
----
-
-## Mise en ligne (publication npm)
-
-Voir le fichier `PUBLISH.md` pour la procédure complète.
