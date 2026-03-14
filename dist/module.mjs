@@ -18,8 +18,8 @@ const module = defineNuxtModule({
       register: "/api/auth/register",
       logout: "/api/auth/logout",
       me: "/api/auth/me",
-      updateProfile: "/api/auth/profile",
-      updatePassword: "/api/auth/password",
+      updateProfile: "/api/profile",
+      updatePassword: "/api/profile/password",
       forgotPassword: "/api/auth/forgot-password",
       resetPassword: "/api/auth/reset-password"
     },
