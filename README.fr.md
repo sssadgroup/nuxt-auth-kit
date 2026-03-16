@@ -2,8 +2,8 @@
 
 # nuxt-auth-kit
 
-**Plug-and-play Nuxt authentication module for Laravel APIs.**
-Install once — login, registration, profile, passwords, roles & permissions are ready.
+**Module Nuxt d'authentification clé-en-main pour API Laravel.**
+Installez-le une fois — connexion, inscription, profil, mots de passe, rôles et permissions sont prêts à l'emploi.
 
 [![npm version](https://img.shields.io/npm/v/nuxt-auth-kit?color=18794e&style=flat-square)](https://www.npmjs.com/package/nuxt-auth-kit)
 [![npm downloads](https://img.shields.io/npm/dm/nuxt-auth-kit?color=1d5fc4&style=flat-square)](https://www.npmjs.com/package/nuxt-auth-kit)
@@ -11,38 +11,38 @@ Install once — login, registration, profile, passwords, roles & permissions ar
 [![Nuxt 3 & 4](https://img.shields.io/badge/Nuxt-3%20%26%204-18794e?style=flat-square)](https://nuxt.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-b45309?style=flat-square)](https://www.typescriptlang.org)
 
-**Read this in another language:**
-🇫🇷 [Français](./README.fr.md) · 🇸🇦 [العربية](./README.ar.md) · 🇪🇸 [Español](./README.es.md) · 🇨🇳 [中文](./README.zh.md) · 🇩🇪 [Deutsch](./README.de.md)
+**Lire dans une autre langue :**
+🇬🇧 [English](./README.md) · 🇸🇦 [العربية](./README.ar.md) · 🇪🇸 [Español](./README.es.md) · 🇨🇳 [中文](./README.zh.md) · 🇩🇪 [Deutsch](./README.de.md)
 
 </div>
 
 ---
 
-## Features
+## Fonctionnalités
 
-- ✅ **Login / Logout** with persistent session via secure cookie
-- ✅ **Registration** with password confirmation
-- ✅ **Connected profile** (`useAuth().user`)
-- ✅ **Profile update** (name, email, avatar)
-- ✅ **Password change**
-- ✅ **Forgot password** (email sending)
-- ✅ **Password reset** (via token)
-- ✅ **Roles & permissions** (RBAC) — `hasRole()`, `hasPermission()`
-- ✅ **Named middlewares**: `auth`, `guest`, `role`
-- ✅ **7 split-screen Vue components** — auto-imported, Tailwind CSS
-- ✅ **Full TypeScript** support
+- ✅ **Connexion / Déconnexion** avec session persistée via cookie sécurisé
+- ✅ **Inscription** avec confirmation de mot de passe
+- ✅ **Profil connecté** (`useAuth().user`)
+- ✅ **Modification du profil** (nom, email, avatar)
+- ✅ **Changement de mot de passe**
+- ✅ **Mot de passe oublié** (envoi d'email)
+- ✅ **Réinitialisation de mot de passe** (via token)
+- ✅ **Rôles & permissions** (RBAC) — `hasRole()`, `hasPermission()`
+- ✅ **Middlewares nommés** : `auth`, `guest`, `role`
+- ✅ **7 composants Vue split-screen** — auto-importés, Tailwind CSS
+- ✅ **TypeScript** complet
 
 ## Installation
 
 ```bash
 npm install nuxt-auth-kit
-# or
+# ou
 yarn add nuxt-auth-kit
-# or
+# ou
 pnpm add nuxt-auth-kit
 ```
 
-> Requires `@nuxt/ui` for styles. Compatible with **Nuxt 3.x** and **Nuxt 4.x**.
+> Requiert `@nuxt/ui` pour les styles. Compatible **Nuxt 3.x** et **Nuxt 4.x**.
 
 ## Configuration
 
@@ -83,12 +83,12 @@ export default defineNuxtConfig({
 
 ```env
 # .env
-NUXT_PUBLIC_API_BASE=https://api.myproject.com
+NUXT_PUBLIC_API_BASE=https://api.monprojet.com
 ```
 
-## Usage
+## Utilisation
 
-### Authentication pages
+### Pages d'authentification
 
 ```vue
 <!-- pages/auth/login.vue -->
@@ -96,8 +96,8 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
   <AuthLayout :quote="quote">
     <AuthLoginForm
       :roles="[
-        { value: 'user',  label: 'As a user' },
-        { value: 'owner', label: 'As an owner' },
+        { value: 'user',  label: 'En tant qu\'utilisateur' },
+        { value: 'owner', label: 'En tant que propriétaire' },
       ]"
       :show-social="true"
       @forgot-password="navigateTo('/auth/forgot-password')"
@@ -108,7 +108,7 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
 
 <script setup lang="ts">
 definePageMeta({ middleware: 'guest' })
-const quote = { text: 'A smooth and enjoyable experience.', author: '3S Tech Group', location: 'Dakar' }
+const quote = { text: 'Une expérience fluide et agréable.', author: '3S Tech Group', location: 'Dakar' }
 </script>
 ```
 
@@ -142,7 +142,7 @@ definePageMeta({ middleware: 'guest' })
 <!-- pages/auth/reset-password.vue -->
 <template>
   <AuthLayout>
-    <!-- Automatically reads ?token= and ?email= from the URL -->
+    <!-- Lit automatiquement ?token= et ?email= depuis l'URL -->
     <AuthResetPasswordForm @back-to-login="navigateTo('/auth/login')" />
   </AuthLayout>
 </template>
@@ -152,27 +152,27 @@ definePageMeta({ middleware: 'guest' })
 </script>
 ```
 
-### Profile page
+### Page profil
 
 ```vue
 <!-- pages/profile/index.vue -->
 <template>
   <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
-    <ProfileUpdateForm title="My profile" :show-avatar="true" @success="onSaved" />
+    <ProfileUpdateForm title="Mon profil" :show-avatar="true" @success="onSaved" />
     <hr />
-    <ProfileUpdatePasswordForm title="Change password" />
+    <ProfileUpdatePasswordForm title="Changer le mot de passe" />
   </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({ middleware: 'auth' })
-function onSaved() { /* show toast */ }
+function onSaved() { /* afficher un toast */ }
 </script>
 ```
 
-### `useAuth` composable
+### Composable `useAuth`
 
-Everything is **auto-imported** — no `import` needed in your files.
+Tout est **auto-importé** — aucun `import` nécessaire dans vos fichiers.
 
 ```ts
 const {
@@ -192,7 +192,7 @@ const {
 } = useAuth()
 ```
 
-#### RBAC examples
+#### Exemples RBAC
 
 ```ts
 const { hasRole, hasPermission } = useAuth()
@@ -205,46 +205,46 @@ if (hasPermission('edit-posts')) { /* ... */ }
 ```vue
 <template>
   <AdminPanel v-if="hasRole('admin')" />
-  <button v-if="hasPermission('create-post')">Create post</button>
+  <button v-if="hasPermission('create-post')">Créer un article</button>
 </template>
 ```
 
-> The `super-admin` role (configurable via `rbac.superAdminRole`) bypasses all checks in the `role` middleware.
+> Le rôle `super-admin` (configurable via `rbac.superAdminRole`) bypasse toutes les vérifications dans le middleware `role`.
 
 ### Middlewares
 
 ```ts
-// Authenticated users only
+// Page connectés uniquement
 definePageMeta({ middleware: 'auth' })
 
-// Guests only — redirects to / if logged in
+// Page visiteurs uniquement — redirige vers / si connecté
 definePageMeta({ middleware: 'guest' })
 
-// Role-based access
+// Page avec rôle requis
 definePageMeta({ middleware: 'role', roles: ['admin', 'manager'] })
 
-// Auth + role combined
+// Auth + rôle combinés
 definePageMeta({ middleware: ['auth', 'role'], roles: ['admin'] })
 ```
 
-## Expected Laravel API
+## API Laravel attendue
 
-All endpoints are customizable via `nuxtAuthKit.endpoints`.
+Tous les endpoints sont personnalisables via `nuxtAuthKit.endpoints`.
 
-| Method | Route | Auth | Response | Description |
-|--------|-------|------|----------|-------------|
-| `POST` | `/api/auth/login` | — | `{ user, token }` | Login |
-| `POST` | `/api/auth/register` | — | `{ user, token }` | Register |
-| `POST` | `/api/auth/logout` | ✅ | `{ message }` | Logout |
-| `GET` | `/api/auth/me` | ✅ | `{ user }` | Current user |
-| `PUT` | `/api/profile` | ✅ | `{ user }` | Update profile |
-| `PUT` | `/api/profile/password` | ✅ | `{ message }` | Change password |
-| `POST` | `/api/auth/forgot-password` | — | `{ message }` | Send reset email |
-| `POST` | `/api/auth/reset-password` | — | `{ message }` | Reset with token |
+| Méthode | Route | Auth | Réponse | Description |
+|---------|-------|------|---------|-------------|
+| `POST` | `/api/auth/login` | — | `{ user, token }` | Connexion |
+| `POST` | `/api/auth/register` | — | `{ user, token }` | Inscription |
+| `POST` | `/api/auth/logout` | ✅ | `{ message }` | Déconnexion |
+| `GET` | `/api/auth/me` | ✅ | `{ user }` | Utilisateur connecté |
+| `PUT` | `/api/profile` | ✅ | `{ user }` | Mise à jour profil |
+| `PUT` | `/api/profile/password` | ✅ | `{ message }` | Changement mot de passe |
+| `POST` | `/api/auth/forgot-password` | — | `{ message }` | Email reset |
+| `POST` | `/api/auth/reset-password` | — | `{ message }` | Reset avec token |
 
-> The `user` field must contain at minimum `id`, `name`, `email`. The `roles` and `permissions` fields (string arrays) are optional for RBAC.
+> Le champ `user` doit contenir au minimum `id`, `name`, `email`. Les champs `roles` et `permissions` (tableaux de strings) sont optionnels pour activer le RBAC.
 
-### Laravel Sanctum example
+### Exemple avec Laravel Sanctum
 
 ```php
 // routes/api.php
@@ -263,21 +263,11 @@ Route::prefix('auth')->group(function () {
 });
 ```
 
-```php
-// AuthController.php
-public function me(Request $request): JsonResponse
-{
-    return response()->json([
-        'user' => $request->user()->load('roles', 'permissions'),
-    ]);
-}
-```
-
-## TypeScript Types
+## Types TypeScript
 
 ```ts
 import type {
-  AuthUser,           // user structure
+  AuthUser,           // structure de l'utilisateur
   LoginCredentials,   // { email, password, remember? }
   RegisterData,       // { name, email, password, password_confirmation }
   UpdateProfileData,  // { name?, email?, avatar? }
@@ -286,7 +276,7 @@ import type {
   ResetPasswordData,  // { token, email, password, password_confirmation }
   AuthResponse,       // { user, token }
   ApiError,           // { message, errors? }
-  ModuleOptions,      // nuxtAuthKit config
+  ModuleOptions,      // config nuxtAuthKit
 } from 'nuxt-auth-kit'
 ```
 
@@ -297,16 +287,16 @@ nuxt-auth-kit/
 ├── build.config.ts
 ├── package.json
 └── src/
-    ├── module.ts                        # Nuxt module entry point
+    ├── module.ts
     └── runtime/
-        ├── types/index.ts               # TypeScript types
-        ├── stores/auth.ts               # Pinia store
-        ├── composables/useAuth.ts       # Main composable
-        ├── plugins/auth.ts              # Session restore at boot
+        ├── types/index.ts
+        ├── stores/auth.ts
+        ├── composables/useAuth.ts
+        ├── plugins/auth.ts
         ├── middleware/
-        │   ├── auth.ts                  # Protected routes
-        │   ├── guest.ts                 # Guest-only routes
-        │   └── role.ts                  # Role-based access
+        │   ├── auth.ts
+        │   ├── guest.ts
+        │   └── role.ts
         └── components/
             ├── auth/
             │   ├── AuthLayout.vue
@@ -323,7 +313,7 @@ nuxt-auth-kit/
 
 <div align="center">
 
-MIT License · Made with ❤️ by [3S Tech Group](https://github.com/sssadgroup)
+Licence MIT · Fait avec ❤️ par [3S Tech Group](https://github.com/sssadgroup)
 [📦 npm](https://www.npmjs.com/package/nuxt-auth-kit) · [💻 GitHub](https://github.com/sssadgroup/nuxt-auth-kit) · [📖 Documentation](https://sssadgroup.github.io/nuxt-auth-kit)
 
 </div>
