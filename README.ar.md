@@ -12,7 +12,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-b45309?style=flat-square)](https://www.typescriptlang.org)
 
 **اقرأ بلغة أخرى:**
-🇬🇧 [English](./README.md) · 🇫🇷 [Français](./README.fr.md) · 🇪🇸 [Español](./README.es.md) · 🇨🇳 [中文](./README.zh.md) · 🇩🇪 [Deutsch](./README.de.md)
+🇬🇧 [English](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.md) · 🇫🇷 [Français](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.fr.md) · 🇪🇸 [Español](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.es.md) · 🇨🇳 [中文](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.zh.md) · 🇩🇪 [Deutsch](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.de.md)
 
 </div>
 
@@ -57,36 +57,36 @@ pnpm add nuxt-auth-kit
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['nuxt-auth-kit', '@nuxt/ui'],
+  modules: ["nuxt-auth-kit", "@nuxt/ui"],
 
   nuxtAuthKit: {
-    apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000',
+    apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://localhost:8000",
 
     endpoints: {
-      login:          '/api/auth/login',
-      register:       '/api/auth/register',
-      logout:         '/api/auth/logout',
-      me:             '/api/auth/me',
-      updateProfile:  '/api/profile',
-      updatePassword: '/api/profile/password',
-      forgotPassword: '/api/auth/forgot-password',
-      resetPassword:  '/api/auth/reset-password',
+      login: "/api/auth/login",
+      register: "/api/auth/register",
+      logout: "/api/auth/logout",
+      me: "/api/auth/me",
+      updateProfile: "/api/profile",
+      updatePassword: "/api/profile/password",
+      forgotPassword: "/api/auth/forgot-password",
+      resetPassword: "/api/auth/reset-password",
     },
 
     redirects: {
-      login:       '/auth/login',
-      home:        '/',
-      afterLogout: '/auth/login',
+      login: "/auth/login",
+      home: "/",
+      afterLogout: "/auth/login",
     },
 
-    tokenCookieName: 'auth_token',
+    tokenCookieName: "auth_token",
 
     rbac: {
-      superAdminRole:  'super-admin',
-      defaultUserRole: 'user',
+      superAdminRole: "super-admin",
+      defaultUserRole: "user",
     },
   },
-})
+});
 ```
 
 ```env
@@ -98,6 +98,106 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
 
 ## الاستخدام
 
+### صفحات المصادقة
+
+</div>
+
+```vue
+<!-- pages/auth/login.vue -->
+<template>
+  <AuthLayout :quote="quote">
+    <AuthLoginForm
+      :roles="[
+        { value: 'user', label: 'كمستخدم' },
+        { value: 'owner', label: 'كمالك' },
+      ]"
+      :show-social="true"
+      @forgot-password="navigateTo('/auth/forgot-password')"
+      @register="navigateTo('/auth/register')"
+    />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+const quote = {
+  text: "تجربة سلسة وممتعة.",
+  author: "3S Tech Group",
+  location: "داكار",
+};
+</script>
+```
+
+```vue
+<!-- pages/auth/register.vue -->
+<template>
+  <AuthLayout>
+    <AuthRegisterForm @login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+```vue
+<!-- pages/auth/forgot-password.vue -->
+<template>
+  <AuthLayout>
+    <AuthForgotPasswordForm @back-to-login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+```vue
+<!-- pages/auth/reset-password.vue -->
+<template>
+  <AuthLayout>
+    <!-- يقرأ تلقائياً ?token= و ?email= من الرابط -->
+    <AuthResetPasswordForm @back-to-login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+<div dir="rtl">
+
+### صفحة الملف الشخصي
+
+</div>
+
+```vue
+<!-- pages/profile/index.vue -->
+<template>
+  <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
+    <ProfileUpdateForm
+      title="ملفي الشخصي"
+      :show-avatar="true"
+      @success="onSaved"
+    />
+    <hr />
+    <ProfileUpdatePasswordForm title="تغيير كلمة المرور" />
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "auth" });
+function onSaved() {
+  /* عرض إشعار */
+}
+</script>
+```
+
+<div dir="rtl">
+
 ### الـ composable الرئيسي `useAuth`
 
 كل شيء **مستورد تلقائياً** — لا حاجة لـ `import` في ملفاتك.
@@ -106,30 +206,74 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
 
 ```ts
 const {
-  user,            // Ref<AuthUser | null>
+  user, // Ref<AuthUser | null>
   isAuthenticated, // ComputedRef<boolean>
-  isGuest,         // ComputedRef<boolean>
-  loading,         // Ref<boolean>
+  isGuest, // ComputedRef<boolean>
+  loading, // Ref<boolean>
 
-  login, register, logout, fetchUser,
-  updateProfile, updatePassword,
-  forgotPassword, resetPassword,
+  // الإجراءات
+  login,
+  register,
+  logout,
+  fetchUser,
+  updateProfile,
+  updatePassword,
+  forgotPassword,
+  resetPassword,
 
-  hasRole,         // (role: string | string[]) => boolean
-  hasPermission,   // (perm: string | string[]) => boolean
-} = useAuth()
+  // RBAC
+  hasRole, // (role: string | string[]) => boolean
+  hasPermission, // (perm: string | string[]) => boolean
+} = useAuth();
 ```
 
 <div dir="rtl">
+
+#### أمثلة RBAC
+
+</div>
+
+```ts
+const { hasRole, hasPermission } = useAuth();
+
+if (hasRole("admin")) {
+  /* ... */
+}
+if (hasRole(["admin", "manager"])) {
+  /* ... */
+}
+if (hasPermission("edit-posts")) {
+  /* ... */
+}
+```
+
+```vue
+<template>
+  <AdminPanel v-if="hasRole('admin')" />
+  <button v-if="hasPermission('create-post')">إنشاء مقال</button>
+</template>
+```
+
+<div dir="rtl">
+
+> دور `super-admin` (قابل للضبط عبر `rbac.superAdminRole`) يتجاوز جميع الفحوصات في الوسيط `role`.
 
 ### الوسيطات
 
 </div>
 
 ```ts
-definePageMeta({ middleware: 'auth' })   // للمستخدمين المسجلين فقط
-definePageMeta({ middleware: 'guest' })  // للزوار فقط
-definePageMeta({ middleware: 'role', roles: ['admin', 'manager'] })
+// للمستخدمين المسجلين فقط
+definePageMeta({ middleware: "auth" });
+
+// للزوار فقط — يعيد التوجيه إلى / إذا كنت مسجلاً
+definePageMeta({ middleware: "guest" });
+
+// وصول مبني على الدور
+definePageMeta({ middleware: "role", roles: ["admin", "manager"] });
+
+// مصادقة + دور مجتمعان
+definePageMeta({ middleware: ["auth", "role"], roles: ["admin"] });
 ```
 
 <div dir="rtl">
@@ -138,20 +282,103 @@ definePageMeta({ middleware: 'role', roles: ['admin', 'manager'] })
 
 جميع نقاط النهاية قابلة للتخصيص عبر `nuxtAuthKit.endpoints`.
 
-| الطريقة | المسار | Auth | الاستجابة | الوصف |
-|---------|--------|------|-----------|-------|
-| `POST` | `/api/auth/login` | — | `{ user, token }` | تسجيل الدخول |
-| `POST` | `/api/auth/register` | — | `{ user, token }` | التسجيل |
-| `POST` | `/api/auth/logout` | ✅ | `{ message }` | تسجيل الخروج |
-| `GET` | `/api/auth/me` | ✅ | `{ user }` | المستخدم الحالي |
-| `PUT` | `/api/profile` | ✅ | `{ user }` | تحديث الملف الشخصي |
-| `PUT` | `/api/profile/password` | ✅ | `{ message }` | تغيير كلمة المرور |
-| `POST` | `/api/auth/forgot-password` | — | `{ message }` | إرسال بريد الإعادة |
-| `POST` | `/api/auth/reset-password` | — | `{ message }` | إعادة التعيين بـ token |
+| الطريقة | المسار                      | Auth | الاستجابة         | الوصف                    |
+| ------- | --------------------------- | ---- | ----------------- | ------------------------ |
+| `POST`  | `/api/auth/login`           | —    | `{ user, token }` | تسجيل الدخول             |
+| `POST`  | `/api/auth/register`        | —    | `{ user, token }` | التسجيل                  |
+| `POST`  | `/api/auth/logout`          | ✅   | `{ message }`     | تسجيل الخروج             |
+| `GET`   | `/api/auth/me`              | ✅   | `{ user }`        | المستخدم الحالي          |
+| `PUT`   | `/api/profile`              | ✅   | `{ user }`        | تحديث الملف الشخصي       |
+| `PUT`   | `/api/profile/password`     | ✅   | `{ message }`     | تغيير كلمة المرور        |
+| `POST`  | `/api/auth/forgot-password` | —    | `{ message }`     | إرسال بريد إعادة التعيين |
+| `POST`  | `/api/auth/reset-password`  | —    | `{ message }`     | إعادة التعيين بـ token   |
 
 > يجب أن يحتوي حقل `user` على الحد الأدنى: `id` و`name` و`email`. حقلا `roles` و`permissions` (مصفوفات نصية) اختياريان لتفعيل RBAC.
 
+### مثال مع Laravel Sanctum
+
 </div>
+
+```php
+// routes/api.php
+Route::prefix('auth')->group(function () {
+    Route::post('login',           [AuthController::class, 'login']);
+    Route::post('register',        [AuthController::class, 'register']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password',  [AuthController::class, 'resetPassword']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout',  [AuthController::class, 'logout']);
+        Route::get('me',       [AuthController::class, 'me']);
+        Route::put('profile',  [AuthController::class, 'updateProfile']);
+        Route::put('password', [AuthController::class, 'updatePassword']);
+    });
+});
+```
+
+```php
+// AuthController.php
+public function me(Request $request): JsonResponse
+{
+    return response()->json([
+        'user' => $request->user()->load('roles', 'permissions'),
+    ]);
+}
+```
+
+<div dir="rtl">
+
+## أنواع TypeScript
+
+</div>
+
+```ts
+import type {
+  AuthUser, // بنية المستخدم
+  LoginCredentials, // { email, password, remember? }
+  RegisterData, // { name, email, password, password_confirmation }
+  UpdateProfileData, // { name?, email?, avatar? }
+  UpdatePasswordData, // { current_password, new_password, new_password_confirmation }
+  ForgotPasswordData, // { email }
+  ResetPasswordData, // { token, email, password, password_confirmation }
+  AuthResponse, // { user, token }
+  ApiError, // { message, errors? }
+  ModuleOptions, // إعداد nuxtAuthKit
+} from "nuxt-auth-kit";
+```
+
+<div dir="rtl">
+
+## البنية
+
+</div>
+
+```
+nuxt-auth-kit/
+├── build.config.ts
+├── package.json
+└── src/
+    ├── module.ts
+    └── runtime/
+        ├── types/index.ts
+        ├── stores/auth.ts
+        ├── composables/useAuth.ts
+        ├── plugins/auth.ts
+        ├── middleware/
+        │   ├── auth.ts
+        │   ├── guest.ts
+        │   └── role.ts
+        └── components/
+            ├── auth/
+            │   ├── AuthLayout.vue
+            │   ├── LoginForm.vue
+            │   ├── RegisterForm.vue
+            │   ├── ForgotPasswordForm.vue
+            │   └── ResetPasswordForm.vue
+            └── profile/
+                ├── UpdateProfileForm.vue
+                └── UpdatePasswordForm.vue
+```
 
 ---
 

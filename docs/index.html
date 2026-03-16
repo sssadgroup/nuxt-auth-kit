@@ -294,8 +294,6 @@
         background: var(--green);
       }
 
-
-
       /* ── Theme toggle icons ── */
       .sun-icon {
         display: none;
@@ -1234,16 +1232,51 @@
     <!-- FLOATING TOP BAR -->
     <div class="top-bar">
       <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-btn active" onclick="setLang('fr')" data-lang="fr"><span class="lang-flag">🇫🇷</span> FR</button>
-        <button class="lang-btn" onclick="setLang('en')" data-lang="en"><span class="lang-flag">🇬🇧</span> EN</button>
-        <button class="lang-btn" onclick="setLang('ar')" data-lang="ar"><span class="lang-flag">🇸🇦</span> AR</button>
-        <button class="lang-btn" onclick="setLang('es')" data-lang="es"><span class="lang-flag">🇪🇸</span> ES</button>
-        <button class="lang-btn" onclick="setLang('zh')" data-lang="zh"><span class="lang-flag">🇨🇳</span> ZH</button>
-        <button class="lang-btn" onclick="setLang('de')" data-lang="de"><span class="lang-flag">🇩🇪</span> DE</button>
+        <button class="lang-btn active" onclick="setLang('fr')" data-lang="fr">
+          <span class="lang-flag">🇫🇷</span> FR
+        </button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en">
+          <span class="lang-flag">🇬🇧</span> EN
+        </button>
+        <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">
+          <span class="lang-flag">🇸🇦</span> AR
+        </button>
+        <button class="lang-btn" onclick="setLang('es')" data-lang="es">
+          <span class="lang-flag">🇪🇸</span> ES
+        </button>
+        <button class="lang-btn" onclick="setLang('zh')" data-lang="zh">
+          <span class="lang-flag">🇨🇳</span> ZH
+        </button>
+        <button class="lang-btn" onclick="setLang('de')" data-lang="de">
+          <span class="lang-flag">🇩🇪</span> DE
+        </button>
       </div>
-      <button class="theme-toggle-float" onclick="toggleTheme()" title="Toggle theme">
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <button
+        class="theme-toggle-float"
+        onclick="toggleTheme()"
+        title="Toggle theme"
+      >
+        <svg
+          class="moon-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+        </svg>
+        <svg
+          class="sun-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
       </button>
     </div>
 
@@ -1253,8 +1286,16 @@
         <div class="sb-header">
           <div class="sb-logo">
             <div class="sb-logo-icon">
-              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8s2.91 6.5 6.5 6.5S14.5 11.59 14.5 8 11.59 1.5 8 1.5zm0 2a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0 9c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="currentColor" style="color: var(--green)"/>
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8s2.91 6.5 6.5 6.5S14.5 11.59 14.5 8 11.59 1.5 8 1.5zm0 2a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0 9c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                  fill="currentColor"
+                  style="color: var(--green)"
+                />
               </svg>
             </div>
             <div><div class="sb-pkg">nuxt-auth-kit</div></div>
@@ -1269,48 +1310,96 @@
         </div>
         <nav class="sb-nav">
           <div class="nav-group">
-            <span class="nav-group-label" data-i18n="nav.getting_started">Démarrage</span>
-            <a class="nav-link active" href="#intro"><span class="nav-dot"></span><span data-i18n="nav.introduction">Introduction</span></a>
-            <a class="nav-link" href="#install"><span class="nav-dot"></span><span data-i18n="nav.installation">Installation</span></a>
-            <a class="nav-link" href="#config"><span class="nav-dot"></span><span data-i18n="nav.configuration">Configuration</span></a>
-            <a class="nav-link" href="#changelog"><span class="nav-dot"></span>Changelog</a>
+            <span class="nav-group-label" data-i18n="nav.getting_started"
+              >Démarrage</span
+            >
+            <a class="nav-link active" href="#intro"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.introduction">Introduction</span></a
+            >
+            <a class="nav-link" href="#install"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.installation">Installation</span></a
+            >
+            <a class="nav-link" href="#config"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.configuration">Configuration</span></a
+            >
+            <a class="nav-link" href="#changelog"
+              ><span class="nav-dot"></span>Changelog</a
+            >
           </div>
           <div class="nav-group">
-            <span class="nav-group-label" data-i18n="nav.components">Composants</span>
-            <a class="nav-link" href="#auth-layout"><span class="nav-dot"></span>AuthLayout</a>
-            <a class="nav-link" href="#login-form"><span class="nav-dot"></span>AuthLoginForm</a>
-            <a class="nav-link" href="#register-form"><span class="nav-dot"></span>AuthRegisterForm</a>
-            <a class="nav-link" href="#forgot-form"><span class="nav-dot"></span>AuthForgotPasswordForm</a>
-            <a class="nav-link" href="#reset-form"><span class="nav-dot"></span>AuthResetPasswordForm</a>
-            <a class="nav-link" href="#profile-update"><span class="nav-dot"></span>ProfileUpdateForm</a>
-            <a class="nav-link" href="#profile-pwd"><span class="nav-dot"></span>ProfileUpdatePasswordForm</a>
+            <span class="nav-group-label" data-i18n="nav.components"
+              >Composants</span
+            >
+            <a class="nav-link" href="#auth-layout"
+              ><span class="nav-dot"></span>AuthLayout</a
+            >
+            <a class="nav-link" href="#login-form"
+              ><span class="nav-dot"></span>AuthLoginForm</a
+            >
+            <a class="nav-link" href="#register-form"
+              ><span class="nav-dot"></span>AuthRegisterForm</a
+            >
+            <a class="nav-link" href="#forgot-form"
+              ><span class="nav-dot"></span>AuthForgotPasswordForm</a
+            >
+            <a class="nav-link" href="#reset-form"
+              ><span class="nav-dot"></span>AuthResetPasswordForm</a
+            >
+            <a class="nav-link" href="#profile-update"
+              ><span class="nav-dot"></span>ProfileUpdateForm</a
+            >
+            <a class="nav-link" href="#profile-pwd"
+              ><span class="nav-dot"></span>ProfileUpdatePasswordForm</a
+            >
           </div>
           <div class="nav-group">
             <span class="nav-group-label">Composable</span>
-            <a class="nav-link" href="#useauth"><span class="nav-dot"></span>useAuth()</a>
-            <a class="nav-link" href="#rbac"><span class="nav-dot"></span><span data-i18n="nav.roles_perms">Rôles & Permissions</span></a>
+            <a class="nav-link" href="#useauth"
+              ><span class="nav-dot"></span>useAuth()</a
+            >
+            <a class="nav-link" href="#rbac"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.roles_perms">Rôles & Permissions</span></a
+            >
           </div>
           <div class="nav-group">
             <span class="nav-group-label">Middlewares</span>
-            <a class="nav-link" href="#middlewares"><span class="nav-dot"></span>auth · guest · role</a>
+            <a class="nav-link" href="#middlewares"
+              ><span class="nav-dot"></span>auth · guest · role</a
+            >
           </div>
           <div class="nav-group">
             <span class="nav-group-label">API Laravel</span>
-            <a class="nav-link" href="#api-routes"><span class="nav-dot"></span><span data-i18n="nav.routes">Routes attendues</span></a>
-            <a class="nav-link" href="#laravel-example"><span class="nav-dot"></span><span data-i18n="nav.example">Exemple Sanctum</span></a>
+            <a class="nav-link" href="#api-routes"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.routes">Routes attendues</span></a
+            >
+            <a class="nav-link" href="#laravel-example"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.example">Exemple Sanctum</span></a
+            >
           </div>
           <div class="nav-group">
-            <span class="nav-group-label" data-i18n="nav.reference">Référence</span>
-            <a class="nav-link" href="#types"><span class="nav-dot"></span><span data-i18n="nav.types">Types TypeScript</span></a>
-            <a class="nav-link" href="#architecture"><span class="nav-dot"></span><span data-i18n="nav.architecture">Architecture</span></a>
+            <span class="nav-group-label" data-i18n="nav.reference"
+              >Référence</span
+            >
+            <a class="nav-link" href="#types"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.types">Types TypeScript</span></a
+            >
+            <a class="nav-link" href="#architecture"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.architecture">Architecture</span></a
+            >
           </div>
         </nav>
-
       </aside>
 
       <!-- MAIN -->
       <main class="main">
-
         <!-- HERO -->
         <div class="hero" id="intro">
           <div class="hero-eyebrow">
@@ -1336,50 +1425,82 @@
         <!-- FONCTIONNALITÉS -->
         <div class="section">
           <div class="section-head">
-            <h2><span class="h2-icon hi-g">✦</span><span data-i18n="features.title">Fonctionnalités</span></h2>
-            <p class="section-sub" data-i18n="features.sub">Tout ce dont vous avez besoin, sans rien configurer manuellement.</p>
+            <h2>
+              <span class="h2-icon hi-g">✦</span
+              ><span data-i18n="features.title">Fonctionnalités</span>
+            </h2>
+            <p class="section-sub" data-i18n="features.sub">
+              Tout ce dont vous avez besoin, sans rien configurer manuellement.
+            </p>
           </div>
           <div class="feat-grid">
             <div class="feat-card">
               <span class="feat-em">🔐</span>
               <div>
-                <div class="feat-title" data-i18n="features.auth_title">Authentification complète</div>
-                <div class="feat-desc" data-i18n="features.auth_desc">Login, register, logout avec session persistée via cookie sécurisé.</div>
+                <div class="feat-title" data-i18n="features.auth_title">
+                  Authentification complète
+                </div>
+                <div class="feat-desc" data-i18n="features.auth_desc">
+                  Login, register, logout avec session persistée via cookie
+                  sécurisé.
+                </div>
               </div>
             </div>
             <div class="feat-card">
               <span class="feat-em">👤</span>
               <div>
-                <div class="feat-title" data-i18n="features.profile_title">Gestion du profil</div>
-                <div class="feat-desc" data-i18n="features.profile_desc">Mise à jour nom, email, avatar et changement de mot de passe.</div>
+                <div class="feat-title" data-i18n="features.profile_title">
+                  Gestion du profil
+                </div>
+                <div class="feat-desc" data-i18n="features.profile_desc">
+                  Mise à jour nom, email, avatar et changement de mot de passe.
+                </div>
               </div>
             </div>
             <div class="feat-card">
               <span class="feat-em">🔑</span>
               <div>
-                <div class="feat-title" data-i18n="features.reset_title">Reset de mot de passe</div>
-                <div class="feat-desc" data-i18n="features.reset_desc">Flux complet : mot de passe oublié → email → réinitialisation.</div>
+                <div class="feat-title" data-i18n="features.reset_title">
+                  Reset de mot de passe
+                </div>
+                <div class="feat-desc" data-i18n="features.reset_desc">
+                  Flux complet : mot de passe oublié → email → réinitialisation.
+                </div>
               </div>
             </div>
             <div class="feat-card">
               <span class="feat-em">🛡️</span>
               <div>
-                <div class="feat-title" data-i18n="features.rbac_title">RBAC — Rôles & Permissions</div>
-                <div class="feat-desc" data-i18n="features.rbac_desc"><code>hasRole()</code> et <code>hasPermission()</code> disponibles partout.</div>
+                <div class="feat-title" data-i18n="features.rbac_title">
+                  RBAC — Rôles & Permissions
+                </div>
+                <div class="feat-desc" data-i18n="features.rbac_desc">
+                  <code>hasRole()</code> et
+                  <code>hasPermission()</code> disponibles partout.
+                </div>
               </div>
             </div>
             <div class="feat-card">
               <span class="feat-em">⚡</span>
               <div>
-                <div class="feat-title" data-i18n="features.mw_title">Middlewares nommés</div>
-                <div class="feat-desc" data-i18n="features.mw_desc"><code>auth</code>, <code>guest</code>, <code>role</code> dans <code>definePageMeta</code> — aucun import.</div>
+                <div class="feat-title" data-i18n="features.mw_title">
+                  Middlewares nommés
+                </div>
+                <div class="feat-desc" data-i18n="features.mw_desc">
+                  <code>auth</code>, <code>guest</code>, <code>role</code> dans
+                  <code>definePageMeta</code> — aucun import.
+                </div>
               </div>
             </div>
             <div class="feat-card">
               <span class="feat-em">🎨</span>
               <div>
-                <div class="feat-title" data-i18n="features.comp_title">Composants prêts</div>
-                <div class="feat-desc" data-i18n="features.comp_desc">7 composants Vue split-screen, Tailwind CSS, auto-importés.</div>
+                <div class="feat-title" data-i18n="features.comp_title">
+                  Composants prêts
+                </div>
+                <div class="feat-desc" data-i18n="features.comp_desc">
+                  7 composants Vue split-screen, Tailwind CSS, auto-importés.
+                </div>
               </div>
             </div>
           </div>
@@ -1390,8 +1511,14 @@
         <!-- INSTALLATION -->
         <div class="section" id="install">
           <div class="section-head">
-            <h2><span class="h2-icon hi-b">↓</span><span data-i18n="nav.installation">Installation</span></h2>
-            <p class="section-sub" data-i18n="install.sub">Compatible Nuxt 3.x et Nuxt 4.x. Requiert <code>@nuxt/ui</code> pour les styles.</p>
+            <h2>
+              <span class="h2-icon hi-b">↓</span
+              ><span data-i18n="nav.installation">Installation</span>
+            </h2>
+            <p class="section-sub" data-i18n="install.sub">
+              Compatible Nuxt 3.x et Nuxt 4.x. Requiert
+              <code>@nuxt/ui</code> pour les styles.
+            </p>
           </div>
           <div class="install-box">
             <div class="tab-bar">
@@ -1400,13 +1527,19 @@
               <div class="tab" onclick="tab(this, 'yarn')">yarn</div>
             </div>
             <div id="tab-npm" class="tab-panel on">
-              <div class="codeblock"><pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre></div>
+              <div class="codeblock">
+                <pre><span class="f">npm</span> install <span class="s">nuxt-auth-kit</span></pre>
+              </div>
             </div>
             <div id="tab-pnpm" class="tab-panel">
-              <div class="codeblock"><pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre></div>
+              <div class="codeblock">
+                <pre><span class="f">pnpm</span> add <span class="s">nuxt-auth-kit</span></pre>
+              </div>
             </div>
             <div id="tab-yarn" class="tab-panel">
-              <div class="codeblock"><pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre></div>
+              <div class="codeblock">
+                <pre><span class="f">yarn</span> add <span class="s">nuxt-auth-kit</span></pre>
+              </div>
             </div>
           </div>
         </div>
@@ -1414,12 +1547,27 @@
         <!-- CONFIGURATION -->
         <div class="section" id="config">
           <div class="section-head">
-            <h2><span class="h2-icon hi-a">⚙</span><span data-i18n="nav.configuration">Configuration</span></h2>
-            <p class="section-sub" data-i18n="config.sub">Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur votre API Laravel.</p>
+            <h2>
+              <span class="h2-icon hi-a">⚙</span
+              ><span data-i18n="nav.configuration">Configuration</span>
+            </h2>
+            <p class="section-sub" data-i18n="config.sub">
+              Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur
+              votre API Laravel.
+            </p>
           </div>
-          <div class="file-header"><span class="file-dot"></span>nuxt.config.ts</div>
+          <div class="file-header">
+            <span class="file-dot"></span>nuxt.config.ts
+          </div>
           <div class="codeblock">
-            <span class="lang-label">ts</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">ts</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="k">export default</span> <span class="f">defineNuxtConfig</span>({
   modules: [
     <span class="s">'nuxt-auth-kit'</span>,
@@ -1462,7 +1610,12 @@
           </div>
           <div class="alert al-info">
             <span class="alert-icon">ℹ️</span>
-            <p data-i18n="config.autoimport"><strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, tous les composants et les middlewares sont auto-importés. Aucun <code>import</code> nécessaire dans vos fichiers.</p>
+            <p data-i18n="config.autoimport">
+              <strong>Auto-import</strong> — <code>useAuth</code>,
+              <code>useAuthStore</code>, tous les composants et les middlewares
+              sont auto-importés. Aucun <code>import</code> nécessaire dans vos
+              fichiers.
+            </p>
           </div>
         </div>
 
@@ -1473,75 +1626,332 @@
           <div class="section-head">
             <h2><span class="h2-icon hi-a">📋</span>Changelog</h2>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-g">v1.0.44</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">refactor: update profile endpoints and improve UpdateProfileForm and UpdatePasswordForm components</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >refactor: update profile endpoints and improve
+                UpdateProfileForm and UpdatePasswordForm components</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:var(--txt)" data-i18n="changelog.update">Mise à jour</p>
-              <ul style="margin:6px 0 0;padding-left:20px;font-size:12.5px;color:var(--txt-2);list-style:disc">
-                <li>Endpoints profil mis à jour : <code>updateProfile</code> → <code>/api/profile</code>, <code>updatePassword</code> → <code>/api/profile/password</code></li>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.update"
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  Endpoints profil mis à jour : <code>updateProfile</code> →
+                  <code>/api/profile</code>, <code>updatePassword</code> →
+                  <code>/api/profile/password</code>
+                </li>
                 <li>Améliorations sur <code>UpdateProfileForm.vue</code></li>
                 <li>Améliorations sur <code>UpdatePasswordForm.vue</code></li>
               </ul>
             </div>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-g">v1.0.44</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">refactor: update AuthLayout with image background and scoped CSS styles</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >refactor: update AuthLayout with image background and scoped
+                CSS styles</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:var(--txt)" data-i18n="changelog.update">Mise à jour</p>
-              <ul style="margin:6px 0 0;padding-left:20px;font-size:12.5px;color:var(--txt-2);list-style:disc">
-                <li>Panneau droit remplacé par une image de fond avec overlay sombre</li>
-                <li>Nouveau slot <code>#brand</code> pour personnaliser le nom et tagline de l'app</li>
-                <li>Props unifiées dans un objet <code>quote</code> : <code>appName</code>, <code>appTagline</code>, <code>image</code>, <code>text</code>, <code>author</code>, <code>location</code>, <code>avatar</code></li>
-                <li>Styles migrés en <code>scoped CSS</code> — suppression des classes Tailwind utilitaires</li>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.update"
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  Panneau droit remplacé par une image de fond avec overlay
+                  sombre
+                </li>
+                <li>
+                  Nouveau slot <code>#brand</code> pour personnaliser le nom et
+                  tagline de l'app
+                </li>
+                <li>
+                  Props unifiées dans un objet <code>quote</code> :
+                  <code>appName</code>, <code>appTagline</code>,
+                  <code>image</code>, <code>text</code>, <code>author</code>,
+                  <code>location</code>, <code>avatar</code>
+                </li>
+                <li>
+                  Styles migrés en <code>scoped CSS</code> — suppression des
+                  classes Tailwind utilitaires
+                </li>
                 <li>Image par défaut via Pexels si aucune image fournie</li>
               </ul>
             </div>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-b">v1.0.4</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">fix: import useToast from #imports in LoginForm to resolve runtime error</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >fix: import useToast from #imports in LoginForm to resolve
+                runtime error</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0;font-size:12.5px;color:var(--txt-2)" data-i18n="changelog.toast_fix">L'erreur <code>useToast is not defined</code> apparaissait au boot car les composables de <code>@nuxt/ui</code> ne sont pas auto-importés dans le runtime d'un module. Ajout de <code>import { useToast } from '#imports'</code> dans <code>LoginForm.vue</code>.</p>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="margin: 0; font-size: 12.5px; color: var(--txt-2)"
+                data-i18n="changelog.toast_fix"
+              >
+                L'erreur <code>useToast is not defined</code> apparaissait au
+                boot car les composables de <code>@nuxt/ui</code> ne sont pas
+                auto-importés dans le runtime d'un module. Ajout de
+                <code>import { useToast } from '#imports'</code> dans
+                <code>LoginForm.vue</code>.
+              </p>
             </div>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-g">v1.0.44</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">fix: pass nuxtApp.$pinia to useAuthStore to prevent getActivePinia error</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >fix: pass nuxtApp.$pinia to useAuthStore to prevent
+                getActivePinia error</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:var(--txt)" data-i18n="changelog.fixed">Problème corrigé</p>
-              <p style="margin:0;font-size:12.5px;color:var(--txt-2)" data-i18n="changelog.pinia_fix">L'erreur <code>getActivePinia() was called but there was no active Pinia</code> apparaissait lors du boot de l'app car le store Pinia était appelé avant que Pinia ne soit monté.</p>
-              <ul style="margin:6px 0 0;padding-left:20px;font-size:12.5px;color:var(--txt-2);list-style:disc">
-                <li><code>plugins/auth.ts</code> — passage en forme objet avec <code>dependsOn: ['pinia']</code> + <code>nuxtApp.$pinia</code> explicite</li>
-                <li><code>composables/useAuth.ts</code> — <code>useNuxtApp().$pinia</code> passé à <code>useAuthStore()</code></li>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.fixed"
+              >
+                Problème corrigé
+              </p>
+              <p
+                style="margin: 0; font-size: 12.5px; color: var(--txt-2)"
+                data-i18n="changelog.pinia_fix"
+              >
+                L'erreur
+                <code
+                  >getActivePinia() was called but there was no active
+                  Pinia</code
+                >
+                apparaissait lors du boot de l'app car le store Pinia était
+                appelé avant que Pinia ne soit monté.
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  <code>plugins/auth.ts</code> — passage en forme objet avec
+                  <code>dependsOn: ['pinia']</code> +
+                  <code>nuxtApp.$pinia</code> explicite
+                </li>
+                <li>
+                  <code>composables/useAuth.ts</code> —
+                  <code>useNuxtApp().$pinia</code> passé à
+                  <code>useAuthStore()</code>
+                </li>
               </ul>
             </div>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-b">v1.0.2</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">fix: register named middleware via app:resolve hook for Nuxt 4</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >fix: register named middleware via app:resolve hook for Nuxt
+                4</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0;font-size:12.5px;color:var(--txt-2)" data-i18n="changelog.mw_fix">Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.</p>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="margin: 0; font-size: 12.5px; color: var(--txt-2)"
+                data-i18n="changelog.mw_fix"
+              >
+                Les middlewares <code>auth</code>, <code>guest</code> et
+                <code>role</code> retournaient une erreur 500
+                <code>Unknown route middleware</code> dans Nuxt 4. Remplacé
+                <code>addRouteMiddleware()</code> par le hook
+                <code>app:resolve</code>.
+              </p>
             </div>
           </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;">
-            <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
               <span class="chip chip-p">v1.0.1</span>
-              <span style="font-size:12px;color:var(--txt-3);font-family:var(--ff-mono)">fix: add Nuxt 4 compatibility in peerDependencies</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >fix: add Nuxt 4 compatibility in peerDependencies</span
+              >
             </div>
-            <div style="padding:12px 18px 14px">
-              <p style="margin:0;font-size:12.5px;color:var(--txt-2)" data-i18n="changelog.peer_fix">La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.</p>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="margin: 0; font-size: 12.5px; color: var(--txt-2)"
+                data-i18n="changelog.peer_fix"
+              >
+                La dépendance <code>nuxt</code> était limitée à
+                <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.
+              </p>
             </div>
           </div>
         </div>
@@ -1552,19 +1962,52 @@
         <div class="section" id="auth-layout">
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthLayout</h2>
-            <p class="section-sub" data-i18n="authlayout.sub">Layout split-screen — formulaire à gauche, témoignage + illustration à droite.</p>
+            <p class="section-sub" data-i18n="authlayout.sub">
+              Layout split-screen — formulaire à gauche, témoignage +
+              illustration à droite.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.prop">Prop</th><th data-i18n="table.type">Type</th><th data-i18n="table.default">Défaut</th><th data-i18n="table.desc">Description</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>app-name</code></td><td><code>string</code></td><td><code>'App'</code></td><td data-i18n="authlayout.appname_desc">Nom du logo</td></tr>
-              <tr><td><code>quote</code></td><td><code>object</code></td><td>—</td><td><code>{ text, author, location, avatar? }</code></td></tr>
+              <tr>
+                <td><code>app-name</code></td>
+                <td><code>string</code></td>
+                <td><code>'App'</code></td>
+                <td data-i18n="authlayout.appname_desc">Nom du logo</td>
+              </tr>
+              <tr>
+                <td><code>quote</code></td>
+                <td><code>object</code></td>
+                <td>—</td>
+                <td><code>{ text, author, location, avatar? }</code></td>
+              </tr>
             </tbody>
           </table>
-          <p data-i18n="authlayout.slots">Slots : <code>#logo</code> (remplace le logo), <code>#illustration</code> (remplace le SVG de droite).</p>
-          <div class="file-header"><span class="file-dot"></span><span data-i18n="ui.usage_example">Exemple d'utilisation</span></div>
+          <p data-i18n="authlayout.slots">
+            Slots : <code>#logo</code> (remplace le logo),
+            <code>#illustration</code> (remplace le SVG de droite).
+          </p>
+          <div class="file-header">
+            <span class="file-dot"></span
+            ><span data-i18n="ui.usage_example">Exemple d'utilisation</span>
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="c">&lt;!-- formulaire ici --&gt;</span>
@@ -1587,30 +2030,93 @@
         <div class="section" id="login-form">
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthLoginForm</h2>
-            <p class="section-sub" data-i18n="loginform.sub">Formulaire de connexion avec email/mot de passe, social login optionnel et sélecteur de rôle.</p>
+            <p class="section-sub" data-i18n="loginform.sub">
+              Formulaire de connexion avec email/mot de passe, social login
+              optionnel et sélecteur de rôle.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.prop">Prop</th><th data-i18n="table.type">Type</th><th data-i18n="table.default">Défaut</th><th data-i18n="table.desc">Description</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>title</code></td><td><code>string</code></td><td><code>'Connexion'</code></td><td data-i18n="loginform.title_desc">Titre du formulaire</td></tr>
-              <tr><td><code>subtitle</code></td><td><code>string</code></td><td>—</td><td data-i18n="loginform.subtitle_desc">Sous-titre</td></tr>
-              <tr><td><code>show-social</code></td><td><code>boolean</code></td><td><code>true</code></td><td data-i18n="loginform.social_desc">Boutons Google / Apple</td></tr>
-              <tr><td><code>roles</code></td><td><code>Array&lt;{value,label}&gt;</code></td><td><code>[]</code></td><td data-i18n="loginform.roles_desc">Sélecteur de rôle</td></tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>'Connexion'</code></td>
+                <td data-i18n="loginform.title_desc">Titre du formulaire</td>
+              </tr>
+              <tr>
+                <td><code>subtitle</code></td>
+                <td><code>string</code></td>
+                <td>—</td>
+                <td data-i18n="loginform.subtitle_desc">Sous-titre</td>
+              </tr>
+              <tr>
+                <td><code>show-social</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td data-i18n="loginform.social_desc">
+                  Boutons Google / Apple
+                </td>
+              </tr>
+              <tr>
+                <td><code>roles</code></td>
+                <td><code>Array&lt;{value,label}&gt;</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="loginform.roles_desc">Sélecteur de rôle</td>
+              </tr>
             </tbody>
           </table>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.event">Événement</th><th data-i18n="table.desc">Description</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.event">Événement</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>@forgot-password</code></td><td data-i18n="loginform.ev_forgot">Clic "Mot de passe oublié ?"</td></tr>
-              <tr><td><code>@register</code></td><td data-i18n="loginform.ev_register">Clic "S'inscrire"</td></tr>
-              <tr><td><code>@google-login</code></td><td data-i18n="loginform.ev_google">Clic bouton Google</td></tr>
-              <tr><td><code>@apple-login</code></td><td data-i18n="loginform.ev_apple">Clic bouton Apple</td></tr>
-              <tr><td><code>@success</code></td><td data-i18n="loginform.ev_success">Connexion réussie</td></tr>
+              <tr>
+                <td><code>@forgot-password</code></td>
+                <td data-i18n="loginform.ev_forgot">
+                  Clic "Mot de passe oublié ?"
+                </td>
+              </tr>
+              <tr>
+                <td><code>@register</code></td>
+                <td data-i18n="loginform.ev_register">Clic "S'inscrire"</td>
+              </tr>
+              <tr>
+                <td><code>@google-login</code></td>
+                <td data-i18n="loginform.ev_google">Clic bouton Google</td>
+              </tr>
+              <tr>
+                <td><code>@apple-login</code></td>
+                <td data-i18n="loginform.ev_apple">Clic bouton Apple</td>
+              </tr>
+              <tr>
+                <td><code>@success</code></td>
+                <td data-i18n="loginform.ev_success">Connexion réussie</td>
+              </tr>
             </tbody>
           </table>
-          <div class="file-header"><span class="file-dot"></span>pages/auth/login.vue</div>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/auth/login.vue
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthLoginForm</span>
@@ -1642,18 +2148,43 @@
         <div class="section" id="register-form">
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthRegisterForm</h2>
-            <p class="section-sub" data-i18n="registerform.sub">Inscription avec nom, email, mot de passe et confirmation.</p>
+            <p class="section-sub" data-i18n="registerform.sub">
+              Inscription avec nom, email, mot de passe et confirmation.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.prop">Prop</th><th data-i18n="table.type">Type</th><th data-i18n="table.default">Défaut</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>title</code></td><td><code>string</code></td><td><code>'Créer un compte'</code></td></tr>
-              <tr><td><code>subtitle</code></td><td><code>string</code></td><td><code>'Rejoignez-nous dès aujourd\'hui.'</code></td></tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>'Créer un compte'</code></td>
+              </tr>
+              <tr>
+                <td><code>subtitle</code></td>
+                <td><code>string</code></td>
+                <td><code>'Rejoignez-nous dès aujourd\'hui.'</code></td>
+              </tr>
             </tbody>
           </table>
-          <div class="file-header"><span class="file-dot"></span>pages/auth/register.vue</div>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/auth/register.vue
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthRegisterForm</span> <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span> <span class="cm">/&gt;</span>
@@ -1670,11 +2201,23 @@
         <div class="section" id="forgot-form">
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthForgotPasswordForm</h2>
-            <p class="section-sub" data-i18n="forgotform.sub">Envoi de l'email de réinitialisation. Affiche un état de succès après envoi.</p>
+            <p class="section-sub" data-i18n="forgotform.sub">
+              Envoi de l'email de réinitialisation. Affiche un état de succès
+              après envoi.
+            </p>
           </div>
-          <div class="file-header"><span class="file-dot"></span>pages/auth/forgot-password.vue</div>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/auth/forgot-password.vue
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthForgotPasswordForm</span>
@@ -1693,11 +2236,23 @@
         <div class="section" id="reset-form">
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthResetPasswordForm</h2>
-            <p class="section-sub" data-i18n="resetform.sub">Lit automatiquement <code>?token=</code> et <code>?email=</code> depuis l'URL de réinitialisation.</p>
+            <p class="section-sub" data-i18n="resetform.sub">
+              Lit automatiquement <code>?token=</code> et
+              <code>?email=</code> depuis l'URL de réinitialisation.
+            </p>
           </div>
-          <div class="file-header"><span class="file-dot"></span>pages/auth/reset-password.vue</div>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/auth/reset-password.vue
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthResetPasswordForm</span>
@@ -1713,7 +2268,15 @@
           </div>
           <div class="alert al-info">
             <span class="alert-icon">ℹ️</span>
-            <p data-i18n="resetform.info">L'email Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez dans <code>config/auth.php</code> → <code>passwords.users</code>.</p>
+            <p data-i18n="resetform.info">
+              L'email Laravel doit rediriger vers
+              <strong
+                ><code
+                  >/auth/reset-password?token=TOKEN&email=EMAIL</code
+                ></strong
+              >. Configurez dans <code>config/auth.php</code> →
+              <code>passwords.users</code>.
+            </p>
           </div>
         </div>
 
@@ -1721,19 +2284,53 @@
         <div class="section" id="profile-update">
           <div class="section-head">
             <h2><span class="h2-icon hi-b">▣</span>ProfileUpdateForm</h2>
-            <p class="section-sub" data-i18n="profile.sub">Mise à jour du nom, email et avatar de l'utilisateur connecté.</p>
+            <p class="section-sub" data-i18n="profile.sub">
+              Mise à jour du nom, email et avatar de l'utilisateur connecté.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.prop">Prop</th><th data-i18n="table.type">Type</th><th data-i18n="table.default">Défaut</th><th data-i18n="table.desc">Description</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>title</code></td><td><code>string</code></td><td><code>'Informations du profil'</code></td><td data-i18n="profile.title_desc">Titre de la section</td></tr>
-              <tr><td><code>show-avatar</code></td><td><code>boolean</code></td><td><code>true</code></td><td data-i18n="profile.avatar_desc">Champ avatar avec prévisualisation</td></tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>'Informations du profil'</code></td>
+                <td data-i18n="profile.title_desc">Titre de la section</td>
+              </tr>
+              <tr>
+                <td><code>show-avatar</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td data-i18n="profile.avatar_desc">
+                  Champ avatar avec prévisualisation
+                </td>
+              </tr>
             </tbody>
           </table>
-          <p data-i18n="profile.slot">Slot <code>#extra-fields</code> pour ajouter des champs supplémentaires. Accès à l'objet <code>form</code> via la prop de slot.</p>
-          <div class="file-header"><span class="file-dot"></span>pages/profile/index.vue</div>
+          <p data-i18n="profile.slot">
+            Slot <code>#extra-fields</code> pour ajouter des champs
+            supplémentaires. Accès à l'objet <code>form</code> via la prop de
+            slot.
+          </p>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/profile/index.vue
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="tx">&lt;div</span> <span class="f">class</span>=<span class="s">"max-w-2xl mx-auto py-10 px-4 space-y-10"</span><span class="tx">&gt;</span>
     <span class="cm">&lt;ProfileUpdateForm</span>
@@ -1760,13 +2357,27 @@
         <!-- PROFILE PWD -->
         <div class="section" id="profile-pwd">
           <div class="section-head">
-            <h2><span class="h2-icon hi-b">▣</span>ProfileUpdatePasswordForm</h2>
-            <p class="section-sub" data-i18n="profilepwd.sub">Changement du mot de passe. Requiert l'ancien mot de passe.</p>
+            <h2>
+              <span class="h2-icon hi-b">▣</span>ProfileUpdatePasswordForm
+            </h2>
+            <p class="section-sub" data-i18n="profilepwd.sub">
+              Changement du mot de passe. Requiert l'ancien mot de passe.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.prop">Prop</th><th data-i18n="table.type">Type</th><th data-i18n="table.default">Défaut</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>title</code></td><td><code>string</code></td><td><code>'Changer le mot de passe'</code></td></tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>'Changer le mot de passe'</code></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -1777,77 +2388,171 @@
         <div class="section" id="useauth">
           <div class="section-head">
             <h2><span class="h2-icon hi-a">◎</span>useAuth()</h2>
-            <p class="section-sub" data-i18n="useauth.sub">Composable principal — <strong>auto-importé</strong>, aucun <code>import</code> nécessaire dans vos fichiers.</p>
+            <p class="section-sub" data-i18n="useauth.sub">
+              Composable principal — <strong>auto-importé</strong>, aucun
+              <code>import</code> nécessaire dans vos fichiers.
+            </p>
           </div>
           <h3 data-i18n="useauth.reactive_state">État réactif</h3>
           <div class="api-group">
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-ref">Ref</span><span class="api-name">user</span></div>
-              <div class="api-desc" data-i18n="useauth.user_desc">L'utilisateur connecté, ou <code>null</code> si déconnecté.</div>
+              <div class="api-row">
+                <span class="api-badge ab-ref">Ref</span
+                ><span class="api-name">user</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.user_desc">
+                L'utilisateur connecté, ou <code>null</code> si déconnecté.
+              </div>
               <div class="api-type">Ref&lt;AuthUser | null&gt;</div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-ref">Computed</span><span class="api-name">isAuthenticated</span></div>
-              <div class="api-desc" data-i18n="useauth.isauth_desc"><code>true</code> si un utilisateur est connecté avec un token valide.</div>
+              <div class="api-row">
+                <span class="api-badge ab-ref">Computed</span
+                ><span class="api-name">isAuthenticated</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.isauth_desc">
+                <code>true</code> si un utilisateur est connecté avec un token
+                valide.
+              </div>
               <div class="api-type">ComputedRef&lt;boolean&gt;</div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-ref">Computed</span><span class="api-name">isGuest</span></div>
-              <div class="api-desc" data-i18n="useauth.isguest_desc">Inverse de <code>isAuthenticated</code>.</div>
+              <div class="api-row">
+                <span class="api-badge ab-ref">Computed</span
+                ><span class="api-name">isGuest</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.isguest_desc">
+                Inverse de <code>isAuthenticated</code>.
+              </div>
               <div class="api-type">ComputedRef&lt;boolean&gt;</div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-ref">Ref</span><span class="api-name">loading</span></div>
-              <div class="api-desc" data-i18n="useauth.loading_desc"><code>true</code> pendant une requête en cours.</div>
+              <div class="api-row">
+                <span class="api-badge ab-ref">Ref</span
+                ><span class="api-name">loading</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.loading_desc">
+                <code>true</code> pendant une requête en cours.
+              </div>
               <div class="api-type">Ref&lt;boolean&gt;</div>
             </div>
           </div>
           <h3 data-i18n="useauth.actions">Actions</h3>
           <div class="api-group">
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">login(credentials)</span></div>
-              <div class="api-desc" data-i18n="useauth.login_desc">Connexion. Redirige vers <code>redirects.home</code> en cas de succès.</div>
-              <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">login(credentials)</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.login_desc">
+                Connexion. Redirige vers <code>redirects.home</code> en cas de
+                succès.
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, error?: ApiError }&gt;
+              </div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">register(data)</span></div>
-              <div class="api-desc" data-i18n="useauth.register_desc">Inscription et connexion automatique. Redirige vers home.</div>
-              <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">register(data)</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.register_desc">
+                Inscription et connexion automatique. Redirige vers home.
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, error?: ApiError }&gt;
+              </div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">logout()</span></div>
-              <div class="api-desc" data-i18n="useauth.logout_desc">Déconnexion, suppression du cookie et redirection vers <code>redirects.afterLogout</code>.</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">logout()</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.logout_desc">
+                Déconnexion, suppression du cookie et redirection vers
+                <code>redirects.afterLogout</code>.
+              </div>
               <div class="api-type">Promise&lt;void&gt;</div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">fetchUser()</span></div>
-              <div class="api-desc" data-i18n="useauth.fetchuser_desc">Récupère l'utilisateur depuis <code>/api/auth/me</code>. Appelé automatiquement au boot via le plugin.</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">fetchUser()</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.fetchuser_desc">
+                Récupère l'utilisateur depuis <code>/api/auth/me</code>. Appelé
+                automatiquement au boot via le plugin.
+              </div>
               <div class="api-type">Promise&lt;AuthUser | null&gt;</div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">updateProfile(data)</span></div>
-              <div class="api-desc" data-i18n="useauth.updateprofile_desc">Met à jour le profil. Supporte <code>File</code> pour l'avatar (envoi en <code>multipart/form-data</code> auto).</div>
-              <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">updateProfile(data)</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.updateprofile_desc">
+                Met à jour le profil. Supporte <code>File</code> pour l'avatar
+                (envoi en <code>multipart/form-data</code> auto).
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, error?: ApiError }&gt;
+              </div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">updatePassword(data)</span></div>
-              <div class="api-desc" data-i18n="useauth.updatepwd_desc">Requiert <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.</div>
-              <div class="api-type">Promise&lt;{ success: boolean, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">updatePassword(data)</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.updatepwd_desc">
+                Requiert <code>current_password</code>,
+                <code>new_password</code>, <code>password_confirmation</code>.
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, error?: ApiError }&gt;
+              </div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">forgotPassword({ email })</span></div>
-              <div class="api-desc" data-i18n="useauth.forgot_desc">Envoie l'email de réinitialisation.</div>
-              <div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">forgotPassword({ email })</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.forgot_desc">
+                Envoie l'email de réinitialisation.
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, message?: string, error?:
+                ApiError }&gt;
+              </div>
             </div>
             <div class="api-card">
-              <div class="api-row"><span class="api-badge ab-async">async</span><span class="api-name">resetPassword(data)</span></div>
-              <div class="api-desc" data-i18n="useauth.reset_desc">Requiert <code>{ token, email, password, password_confirmation }</code>.</div>
-              <div class="api-type">Promise&lt;{ success: boolean, message?: string, error?: ApiError }&gt;</div>
+              <div class="api-row">
+                <span class="api-badge ab-async">async</span
+                ><span class="api-name">resetPassword(data)</span>
+              </div>
+              <div class="api-desc" data-i18n="useauth.reset_desc">
+                Requiert
+                <code>{ token, email, password, password_confirmation }</code>.
+              </div>
+              <div class="api-type">
+                Promise&lt;{ success: boolean, message?: string, error?:
+                ApiError }&gt;
+              </div>
             </div>
           </div>
-          <div class="file-header"><span class="file-dot"></span><span data-i18n="ui.page_example">Exemple dans une page</span></div>
+          <div class="file-header">
+            <span class="file-dot"></span
+            ><span data-i18n="ui.page_example">Exemple dans une page</span>
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;script setup lang="ts"&gt;</span>
 <span class="c">// useAuth est auto-importé — aucun import nécessaire</span>
 <span class="k">const</span> { user, isAuthenticated, logout, loading } = <span class="f">useAuth</span>()
@@ -1869,11 +2574,24 @@
         <!-- RBAC -->
         <div class="section" id="rbac">
           <div class="section-head">
-            <h2><span class="h2-icon hi-p">◈</span><span data-i18n="nav.roles_perms">Rôles & Permissions</span></h2>
-            <p class="section-sub" data-i18n="rbac.sub"><code>hasRole()</code> et <code>hasPermission()</code> accessibles via <code>useAuth()</code> — auto-importé.</p>
+            <h2>
+              <span class="h2-icon hi-p">◈</span
+              ><span data-i18n="nav.roles_perms">Rôles & Permissions</span>
+            </h2>
+            <p class="section-sub" data-i18n="rbac.sub">
+              <code>hasRole()</code> et <code>hasPermission()</code> accessibles
+              via <code>useAuth()</code> — auto-importé.
+            </p>
           </div>
           <div class="codeblock">
-            <span class="lang-label">ts</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">ts</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="k">const</span> { hasRole, hasPermission } = <span class="f">useAuth</span>()
 
 <span class="c">// Rôle unique</span>
@@ -1885,9 +2603,19 @@
 <span class="c">// Permission unique</span>
 <span class="k">if</span> (<span class="f">hasPermission</span>(<span class="s">'edit-posts'</span>)) { <span class="c">/* ... */</span> }</pre>
           </div>
-          <div class="file-header"><span class="file-dot"></span><span data-i18n="ui.vue_template">Dans un template Vue</span></div>
+          <div class="file-header">
+            <span class="file-dot"></span
+            ><span data-i18n="ui.vue_template">Dans un template Vue</span>
+          </div>
           <div class="codeblock">
-            <span class="lang-label">vue</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AdminPanel</span> <span class="k">v-if</span>=<span class="s">"hasRole('admin')"</span> <span class="cm">/&gt;</span>
 
@@ -1902,7 +2630,11 @@
           </div>
           <div class="alert al-ok">
             <span class="alert-icon">✅</span>
-            <p data-i18n="rbac.super_admin_note">Le rôle <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasse toutes les vérifications dans le middleware <code>role</code>.</p>
+            <p data-i18n="rbac.super_admin_note">
+              Le rôle <code>super-admin</code> (configurable via
+              <code>rbac.superAdminRole</code>) bypasse toutes les vérifications
+              dans le middleware <code>role</code>.
+            </p>
           </div>
         </div>
 
@@ -1912,24 +2644,43 @@
         <div class="section" id="middlewares">
           <div class="section-head">
             <h2><span class="h2-icon hi-a">⟶</span>Middlewares</h2>
-            <p class="section-sub" data-i18n="mw.sub">Trois middlewares nommés, utilisables directement dans <code>definePageMeta</code>. Aucun import.</p>
+            <p class="section-sub" data-i18n="mw.sub">
+              Trois middlewares nommés, utilisables directement dans
+              <code>definePageMeta</code>. Aucun import.
+            </p>
           </div>
           <div class="mw-grid">
             <div class="mw-card">
               <div class="mw-name">auth</div>
-              <div class="mw-desc" data-i18n="mw.auth_desc">Redirige vers <code>/auth/login</code> si non connecté. Conserve l'URL dans <code>?redirect=</code>.</div>
+              <div class="mw-desc" data-i18n="mw.auth_desc">
+                Redirige vers <code>/auth/login</code> si non connecté. Conserve
+                l'URL dans <code>?redirect=</code>.
+              </div>
             </div>
             <div class="mw-card">
               <div class="mw-name">guest</div>
-              <div class="mw-desc" data-i18n="mw.guest_desc">Redirige vers <code>/</code> si déjà connecté. À utiliser sur login, register, etc.</div>
+              <div class="mw-desc" data-i18n="mw.guest_desc">
+                Redirige vers <code>/</code> si déjà connecté. À utiliser sur
+                login, register, etc.
+              </div>
             </div>
             <div class="mw-card">
               <div class="mw-name">role</div>
-              <div class="mw-desc" data-i18n="mw.role_desc">Vérifie que l'utilisateur a au moins un rôle de <code>meta.roles</code>.</div>
+              <div class="mw-desc" data-i18n="mw.role_desc">
+                Vérifie que l'utilisateur a au moins un rôle de
+                <code>meta.roles</code>.
+              </div>
             </div>
           </div>
           <div class="codeblock">
-            <span class="lang-label">ts</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">ts</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="c">// Page connectés uniquement</span>
 <span class="f">definePageMeta</span>({ middleware: <span class="s">'auth'</span> })
 
@@ -1955,36 +2706,117 @@
         <!-- API ROUTES -->
         <div class="section" id="api-routes">
           <div class="section-head">
-            <h2><span class="h2-icon hi-b">⬡</span><span data-i18n="api.title">API Laravel attendue</span></h2>
-            <p class="section-sub" data-i18n="api.sub">Tous les endpoints sont personnalisables via <code>nuxtAuthKit.endpoints</code>.</p>
+            <h2>
+              <span class="h2-icon hi-b">⬡</span
+              ><span data-i18n="api.title">API Laravel attendue</span>
+            </h2>
+            <p class="section-sub" data-i18n="api.sub">
+              Tous les endpoints sont personnalisables via
+              <code>nuxtAuthKit.endpoints</code>.
+            </p>
           </div>
           <table class="dtable">
-            <thead><tr><th data-i18n="table.method">Méthode</th><th data-i18n="table.route">Route</th><th>Auth</th><th data-i18n="table.response">Réponse</th><th data-i18n="table.desc">Description</th></tr></thead>
+            <thead>
+              <tr>
+                <th data-i18n="table.method">Méthode</th>
+                <th data-i18n="table.route">Route</th>
+                <th>Auth</th>
+                <th data-i18n="table.response">Réponse</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><span class="hb hb-post">POST</span></td><td class="route-path">/api/auth/login</td><td>—</td><td class="route-ret">{ user, token }</td><td data-i18n="api.login">Connexion</td></tr>
-              <tr><td><span class="hb hb-post">POST</span></td><td class="route-path">/api/auth/register</td><td>—</td><td class="route-ret">{ user, token }</td><td data-i18n="api.register">Inscription</td></tr>
-              <tr><td><span class="hb hb-post">POST</span></td><td class="route-path">/api/auth/logout</td><td>✅</td><td class="route-ret">{ message }</td><td data-i18n="api.logout">Déconnexion</td></tr>
-              <tr><td><span class="hb hb-get">GET</span></td><td class="route-path">/api/auth/me</td><td>✅</td><td class="route-ret">{ user }</td><td data-i18n="api.me">Utilisateur connecté</td></tr>
-              <tr><td><span class="hb hb-put">PUT</span></td><td class="route-path">/api/profile</td><td>✅</td><td class="route-ret">{ user }</td><td data-i18n="api.update_profile">Mise à jour profil</td></tr>
-              <tr><td><span class="hb hb-put">PUT</span></td><td class="route-path">/api/profile/password</td><td>✅</td><td class="route-ret">{ message }</td><td data-i18n="api.update_pwd">Changement mdp</td></tr>
-              <tr><td><span class="hb hb-post">POST</span></td><td class="route-path">/api/auth/forgot-password</td><td>—</td><td class="route-ret">{ message }</td><td data-i18n="api.forgot">Email reset</td></tr>
-              <tr><td><span class="hb hb-post">POST</span></td><td class="route-path">/api/auth/reset-password</td><td>—</td><td class="route-ret">{ message }</td><td data-i18n="api.reset">Reset avec token</td></tr>
+              <tr>
+                <td><span class="hb hb-post">POST</span></td>
+                <td class="route-path">/api/auth/login</td>
+                <td>—</td>
+                <td class="route-ret">{ user, token }</td>
+                <td data-i18n="api.login">Connexion</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-post">POST</span></td>
+                <td class="route-path">/api/auth/register</td>
+                <td>—</td>
+                <td class="route-ret">{ user, token }</td>
+                <td data-i18n="api.register">Inscription</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-post">POST</span></td>
+                <td class="route-path">/api/auth/logout</td>
+                <td>✅</td>
+                <td class="route-ret">{ message }</td>
+                <td data-i18n="api.logout">Déconnexion</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-get">GET</span></td>
+                <td class="route-path">/api/auth/me</td>
+                <td>✅</td>
+                <td class="route-ret">{ user }</td>
+                <td data-i18n="api.me">Utilisateur connecté</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-put">PUT</span></td>
+                <td class="route-path">/api/profile</td>
+                <td>✅</td>
+                <td class="route-ret">{ user }</td>
+                <td data-i18n="api.update_profile">Mise à jour profil</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-put">PUT</span></td>
+                <td class="route-path">/api/profile/password</td>
+                <td>✅</td>
+                <td class="route-ret">{ message }</td>
+                <td data-i18n="api.update_pwd">Changement mdp</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-post">POST</span></td>
+                <td class="route-path">/api/auth/forgot-password</td>
+                <td>—</td>
+                <td class="route-ret">{ message }</td>
+                <td data-i18n="api.forgot">Email reset</td>
+              </tr>
+              <tr>
+                <td><span class="hb hb-post">POST</span></td>
+                <td class="route-path">/api/auth/reset-password</td>
+                <td>—</td>
+                <td class="route-ret">{ message }</td>
+                <td data-i18n="api.reset">Reset avec token</td>
+              </tr>
             </tbody>
           </table>
           <div class="alert al-info">
             <span class="alert-icon">ℹ️</span>
-            <p data-i18n="api.user_fields">Le champ <code>user</code> doit contenir au minimum <code>id</code>, <code>name</code>, <code>email</code>. Les champs <code>roles</code> et <code>permissions</code> (tableaux de strings) sont optionnels pour activer le RBAC.</p>
+            <p data-i18n="api.user_fields">
+              Le champ <code>user</code> doit contenir au minimum
+              <code>id</code>, <code>name</code>, <code>email</code>. Les champs
+              <code>roles</code> et <code>permissions</code> (tableaux de
+              strings) sont optionnels pour activer le RBAC.
+            </p>
           </div>
         </div>
 
         <!-- LARAVEL EXAMPLE -->
         <div class="section" id="laravel-example">
           <div class="section-head">
-            <h2><span class="h2-icon hi-b">⬡</span><span data-i18n="laravel.title">Exemple avec Laravel Sanctum</span></h2>
+            <h2>
+              <span class="h2-icon hi-b">⬡</span
+              ><span data-i18n="laravel.title"
+                >Exemple avec Laravel Sanctum</span
+              >
+            </h2>
           </div>
-          <div class="file-header"><span class="file-dot"></span>routes/api.php</div>
+          <div class="file-header">
+            <span class="file-dot"></span>routes/api.php
+          </div>
           <div class="codeblock">
-            <span class="lang-label">php</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">php</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="k">use</span> App\Http\Controllers\AuthController;
 
 Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class="f">group</span>(<span class="k">function</span> () {
@@ -2001,9 +2833,18 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
     });
 });</pre>
           </div>
-          <div class="file-header"><span class="file-dot"></span>AuthController.php — me()</div>
+          <div class="file-header">
+            <span class="file-dot"></span>AuthController.php — me()
+          </div>
           <div class="codeblock">
-            <span class="lang-label">php</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">php</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="k">public function</span> <span class="f">me</span>(Request $request): JsonResponse
 {
     <span class="k">return</span> <span class="f">response</span>()-><span class="f">json</span>([
@@ -2018,17 +2859,30 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
         <!-- TYPES -->
         <div class="section" id="types">
           <div class="section-head">
-            <h2><span class="h2-icon hi-p">◇</span><span data-i18n="nav.types">Types TypeScript</span></h2>
-            <p class="section-sub" data-i18n="types.sub">Exportés depuis <code>nuxt-auth-kit</code>. À importer uniquement si vous en avez besoin explicitement.</p>
+            <h2>
+              <span class="h2-icon hi-p">◇</span
+              ><span data-i18n="nav.types">Types TypeScript</span>
+            </h2>
+            <p class="section-sub" data-i18n="types.sub">
+              Exportés depuis <code>nuxt-auth-kit</code>. À importer uniquement
+              si vous en avez besoin explicitement.
+            </p>
           </div>
           <div class="codeblock">
-            <span class="lang-label">ts</span><button class="copy-btn" onclick="copy(this)" data-i18n-attr="textContent:ui.copy">Copier</button>
+            <span class="lang-label">ts</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
             <pre><span class="k">import type</span> {
   <span class="t">AuthUser</span>,           <span class="c">// structure de l'utilisateur</span>
   <span class="t">LoginCredentials</span>,   <span class="c">// { email, password, remember? }</span>
   <span class="t">RegisterData</span>,       <span class="c">// { name, email, password, password_confirmation }</span>
   <span class="t">UpdateProfileData</span>,  <span class="c">// { name?, email?, avatar? }</span>
-  <span class="t">UpdatePasswordData</span>, <span class="c">// { current_password, password, password_confirmation }</span>
+  <span class="t">UpdatePasswordData</span>, <span class="c">// { current_password, new_password, new_password_confirmation }</span>
   <span class="t">ForgotPasswordData</span>, <span class="c">// { email }</span>
   <span class="t">ResetPasswordData</span>,  <span class="c">// { token, email, password, password_confirmation }</span>
   <span class="t">AuthResponse</span>,       <span class="c">// { user, token }</span>
@@ -2052,7 +2906,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
         <!-- ARCHITECTURE -->
         <div class="section" id="architecture">
           <div class="section-head">
-            <h2><span class="h2-icon hi-g">⊞</span><span data-i18n="nav.architecture">Architecture</span></h2>
+            <h2>
+              <span class="h2-icon hi-g">⊞</span
+              ><span data-i18n="nav.architecture">Architecture</span>
+            </h2>
           </div>
           <div class="tree">
             <pre><span class="tr-root">nuxt-auth-kit/</span>
@@ -2085,9 +2942,11 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
         <!-- FOOTER -->
         <div class="footer">
           <span>nuxt-auth-kit v1.0.44</span>
-          <span>MIT · <a href="https://github.com">GitHub</a> · <a href="https://npmjs.com">npm</a></span>
+          <span
+            >MIT · <a href="https://github.com">GitHub</a> ·
+            <a href="https://npmjs.com">npm</a></span
+          >
         </div>
-
       </main>
     </div>
 
@@ -2113,76 +2972,119 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "Exemple d'utilisation",
           "ui.page_example": "Exemple dans une page",
           "ui.vue_template": "Dans un template Vue",
-          "hero.lead": "Module Nuxt d'authentification clé-en-main pour API Laravel. Installez-le une fois — connexion, inscription, profil, mots de passe, rôles et permissions sont prêts à l'emploi.",
+          "hero.lead":
+            "Module Nuxt d'authentification clé-en-main pour API Laravel. Installez-le une fois — connexion, inscription, profil, mots de passe, rôles et permissions sont prêts à l'emploi.",
           "features.title": "Fonctionnalités",
-          "features.sub": "Tout ce dont vous avez besoin, sans rien configurer manuellement.",
+          "features.sub":
+            "Tout ce dont vous avez besoin, sans rien configurer manuellement.",
           "features.auth_title": "Authentification complète",
-          "features.auth_desc": "Login, register, logout avec session persistée via cookie sécurisé.",
+          "features.auth_desc":
+            "Login, register, logout avec session persistée via cookie sécurisé.",
           "features.profile_title": "Gestion du profil",
-          "features.profile_desc": "Mise à jour nom, email, avatar et changement de mot de passe.",
+          "features.profile_desc":
+            "Mise à jour nom, email, avatar et changement de mot de passe.",
           "features.reset_title": "Reset de mot de passe",
-          "features.reset_desc": "Flux complet : mot de passe oublié → email → réinitialisation.",
+          "features.reset_desc":
+            "Flux complet : mot de passe oublié → email → réinitialisation.",
           "features.rbac_title": "RBAC — Rôles & Permissions",
-          "features.rbac_desc": "<code>hasRole()</code> et <code>hasPermission()</code> disponibles partout.",
+          "features.rbac_desc":
+            "<code>hasRole()</code> et <code>hasPermission()</code> disponibles partout.",
           "features.mw_title": "Middlewares nommés",
-          "features.mw_desc": "<code>auth</code>, <code>guest</code>, <code>role</code> dans <code>definePageMeta</code> — aucun import.",
+          "features.mw_desc":
+            "<code>auth</code>, <code>guest</code>, <code>role</code> dans <code>definePageMeta</code> — aucun import.",
           "features.comp_title": "Composants prêts",
-          "features.comp_desc": "7 composants Vue split-screen, Tailwind CSS, auto-importés.",
-          "install.sub": "Compatible Nuxt 3.x et Nuxt 4.x. Requiert <code>@nuxt/ui</code> pour les styles.",
-          "config.sub": "Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur votre API Laravel.",
-          "config.autoimport": "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, tous les composants et les middlewares sont auto-importés. Aucun <code>import</code> nécessaire dans vos fichiers.",
+          "features.comp_desc":
+            "7 composants Vue split-screen, Tailwind CSS, auto-importés.",
+          "install.sub":
+            "Compatible Nuxt 3.x et Nuxt 4.x. Requiert <code>@nuxt/ui</code> pour les styles.",
+          "config.sub":
+            "Ajoutez le module dans <code>nuxt.config.ts</code> et pointez sur votre API Laravel.",
+          "config.autoimport":
+            "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, tous les composants et les middlewares sont auto-importés. Aucun <code>import</code> nécessaire dans vos fichiers.",
           "changelog.update": "Mise à jour",
           "changelog.fixed": "Problème corrigé",
-          "changelog.toast_fix": "L'erreur <code>useToast is not defined</code> apparaissait au boot car les composables de <code>@nuxt/ui</code> ne sont pas auto-importés dans le runtime d'un module. Ajout de <code>import { useToast } from '#imports'</code> dans <code>LoginForm.vue</code>.",
-          "changelog.pinia_fix": "L'erreur <code>getActivePinia() was called but there was no active Pinia</code> apparaissait lors du boot de l'app car le store Pinia était appelé avant que Pinia ne soit monté.",
-          "changelog.mw_fix": "Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.",
-          "changelog.peer_fix": "La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.",
-          "authlayout.sub": "Layout split-screen — formulaire à gauche, témoignage + illustration à droite.",
+          "changelog.toast_fix":
+            "L'erreur <code>useToast is not defined</code> apparaissait au boot car les composables de <code>@nuxt/ui</code> ne sont pas auto-importés dans le runtime d'un module. Ajout de <code>import { useToast } from '#imports'</code> dans <code>LoginForm.vue</code>.",
+          "changelog.pinia_fix":
+            "L'erreur <code>getActivePinia() was called but there was no active Pinia</code> apparaissait lors du boot de l'app car le store Pinia était appelé avant que Pinia ne soit monté.",
+          "changelog.mw_fix":
+            "Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.",
+          "changelog.peer_fix":
+            "La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.",
+          "authlayout.sub":
+            "Layout split-screen — formulaire à gauche, témoignage + illustration à droite.",
           "authlayout.appname_desc": "Nom du logo",
-          "authlayout.slots": "Slots : <code>#logo</code> (remplace le logo), <code>#illustration</code> (remplace le SVG de droite).",
-          "loginform.sub": "Formulaire de connexion avec email/mot de passe, social login optionnel et sélecteur de rôle.",
+          "authlayout.slots":
+            "Slots : <code>#logo</code> (remplace le logo), <code>#illustration</code> (remplace le SVG de droite).",
+          "loginform.sub":
+            "Formulaire de connexion avec email/mot de passe, social login optionnel et sélecteur de rôle.",
           "loginform.title_desc": "Titre du formulaire",
           "loginform.subtitle_desc": "Sous-titre",
           "loginform.social_desc": "Boutons Google / Apple",
           "loginform.roles_desc": "Sélecteur de rôle",
-          "loginform.ev_forgot": "Clic \"Mot de passe oublié ?\"",
-          "loginform.ev_register": "Clic \"S'inscrire\"",
+          "loginform.ev_forgot": 'Clic "Mot de passe oublié ?"',
+          "loginform.ev_register": 'Clic "S\'inscrire"',
           "loginform.ev_google": "Clic bouton Google",
           "loginform.ev_apple": "Clic bouton Apple",
           "loginform.ev_success": "Connexion réussie",
-          "registerform.sub": "Inscription avec nom, email, mot de passe et confirmation.",
-          "forgotform.sub": "Envoi de l'email de réinitialisation. Affiche un état de succès après envoi.",
-          "resetform.sub": "Lit automatiquement <code>?token=</code> et <code>?email=</code> depuis l'URL de réinitialisation.",
-          "resetform.info": "L'email Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez dans <code>config/auth.php</code> → <code>passwords.users</code>.",
-          "profile.sub": "Mise à jour du nom, email et avatar de l'utilisateur connecté.",
+          "registerform.sub":
+            "Inscription avec nom, email, mot de passe et confirmation.",
+          "forgotform.sub":
+            "Envoi de l'email de réinitialisation. Affiche un état de succès après envoi.",
+          "resetform.sub":
+            "Lit automatiquement <code>?token=</code> et <code>?email=</code> depuis l'URL de réinitialisation.",
+          "resetform.info":
+            "L'email Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez dans <code>config/auth.php</code> → <code>passwords.users</code>.",
+          "profile.sub":
+            "Mise à jour du nom, email et avatar de l'utilisateur connecté.",
           "profile.title_desc": "Titre de la section",
           "profile.avatar_desc": "Champ avatar avec prévisualisation",
-          "profile.slot": "Slot <code>#extra-fields</code> pour ajouter des champs supplémentaires. Accès à l'objet <code>form</code> via la prop de slot.",
-          "profilepwd.sub": "Changement du mot de passe. Requiert l'ancien mot de passe.",
-          "useauth.sub": "Composable principal — <strong>auto-importé</strong>, aucun <code>import</code> nécessaire dans vos fichiers.",
+          "profile.slot":
+            "Slot <code>#extra-fields</code> pour ajouter des champs supplémentaires. Accès à l'objet <code>form</code> via la prop de slot.",
+          "profilepwd.sub":
+            "Changement du mot de passe. Requiert l'ancien mot de passe.",
+          "useauth.sub":
+            "Composable principal — <strong>auto-importé</strong>, aucun <code>import</code> nécessaire dans vos fichiers.",
           "useauth.reactive_state": "État réactif",
           "useauth.actions": "Actions",
-          "useauth.user_desc": "L'utilisateur connecté, ou <code>null</code> si déconnecté.",
-          "useauth.isauth_desc": "<code>true</code> si un utilisateur est connecté avec un token valide.",
+          "useauth.user_desc":
+            "L'utilisateur connecté, ou <code>null</code> si déconnecté.",
+          "useauth.isauth_desc":
+            "<code>true</code> si un utilisateur est connecté avec un token valide.",
           "useauth.isguest_desc": "Inverse de <code>isAuthenticated</code>.",
-          "useauth.loading_desc": "<code>true</code> pendant une requête en cours.",
-          "useauth.login_desc": "Connexion. Redirige vers <code>redirects.home</code> en cas de succès.",
-          "useauth.register_desc": "Inscription et connexion automatique. Redirige vers home.",
-          "useauth.logout_desc": "Déconnexion, suppression du cookie et redirection vers <code>redirects.afterLogout</code>.",
-          "useauth.fetchuser_desc": "Récupère l'utilisateur depuis <code>/api/auth/me</code>. Appelé automatiquement au boot via le plugin.",
-          "useauth.updateprofile_desc": "Met à jour le profil. Supporte <code>File</code> pour l'avatar (envoi en <code>multipart/form-data</code> auto).",
-          "useauth.updatepwd_desc": "Requiert <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.",
+          "useauth.loading_desc":
+            "<code>true</code> pendant une requête en cours.",
+          "useauth.login_desc":
+            "Connexion. Redirige vers <code>redirects.home</code> en cas de succès.",
+          "useauth.register_desc":
+            "Inscription et connexion automatique. Redirige vers home.",
+          "useauth.logout_desc":
+            "Déconnexion, suppression du cookie et redirection vers <code>redirects.afterLogout</code>.",
+          "useauth.fetchuser_desc":
+            "Récupère l'utilisateur depuis <code>/api/auth/me</code>. Appelé automatiquement au boot via le plugin.",
+          "useauth.updateprofile_desc":
+            "Met à jour le profil. Supporte <code>File</code> pour l'avatar (envoi en <code>multipart/form-data</code> auto).",
+          "useauth.updatepwd_desc":
+            "Requiert <code>current_password</code>, <code>new_password</code>, <code>password_confirmation</code>.",
           "useauth.forgot_desc": "Envoie l'email de réinitialisation.",
-          "useauth.reset_desc": "Requiert <code>{ token, email, password, password_confirmation }</code>.",
-          "rbac.sub": "<code>hasRole()</code> et <code>hasPermission()</code> accessibles via <code>useAuth()</code> — auto-importé.",
+          "useauth.reset_desc":
+            "Requiert <code>{ token, email, password, password_confirmation }</code>.",
+          "rbac.sub":
+            "<code>hasRole()</code> et <code>hasPermission()</code> accessibles via <code>useAuth()</code> — auto-importé.",
           "rbac.create_article": "Créer un article",
-          "rbac.super_admin_note": "Le rôle <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasse toutes les vérifications dans le middleware <code>role</code>.",
-          "mw.sub": "Trois middlewares nommés, utilisables directement dans <code>definePageMeta</code>. Aucun import.",
-          "mw.auth_desc": "Redirige vers <code>/auth/login</code> si non connecté. Conserve l'URL dans <code>?redirect=</code>.",
-          "mw.guest_desc": "Redirige vers <code>/</code> si déjà connecté. À utiliser sur login, register, etc.",
-          "mw.role_desc": "Vérifie que l'utilisateur a au moins un rôle de <code>meta.roles</code>.",
+          "rbac.super_admin_note":
+            "Le rôle <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasse toutes les vérifications dans le middleware <code>role</code>.",
+          "mw.sub":
+            "Trois middlewares nommés, utilisables directement dans <code>definePageMeta</code>. Aucun import.",
+          "mw.auth_desc":
+            "Redirige vers <code>/auth/login</code> si non connecté. Conserve l'URL dans <code>?redirect=</code>.",
+          "mw.guest_desc":
+            "Redirige vers <code>/</code> si déjà connecté. À utiliser sur login, register, etc.",
+          "mw.role_desc":
+            "Vérifie que l'utilisateur a au moins un rôle de <code>meta.roles</code>.",
           "api.title": "API Laravel attendue",
-          "api.sub": "Tous les endpoints sont personnalisables via <code>nuxtAuthKit.endpoints</code>.",
+          "api.sub":
+            "Tous les endpoints sont personnalisables via <code>nuxtAuthKit.endpoints</code>.",
           "api.login": "Connexion",
           "api.register": "Inscription",
           "api.logout": "Déconnexion",
@@ -2191,11 +3093,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "Changement mdp",
           "api.forgot": "Email reset",
           "api.reset": "Reset avec token",
-          "api.user_fields": "Le champ <code>user</code> doit contenir au minimum <code>id</code>, <code>name</code>, <code>email</code>. Les champs <code>roles</code> et <code>permissions</code> (tableaux de strings) sont optionnels pour activer le RBAC.",
+          "api.user_fields":
+            "Le champ <code>user</code> doit contenir au minimum <code>id</code>, <code>name</code>, <code>email</code>. Les champs <code>roles</code> et <code>permissions</code> (tableaux de strings) sont optionnels pour activer le RBAC.",
           "laravel.title": "Exemple avec Laravel Sanctum",
-          "types.sub": "Exportés depuis <code>nuxt-auth-kit</code>. À importer uniquement si vous en avez besoin explicitement.",
-          "table.prop": "Prop", "table.type": "Type", "table.default": "Défaut", "table.desc": "Description",
-          "table.event": "Événement", "table.method": "Méthode", "table.route": "Route", "table.response": "Réponse",
+          "types.sub":
+            "Exportés depuis <code>nuxt-auth-kit</code>. À importer uniquement si vous en avez besoin explicitement.",
+          "table.prop": "Prop",
+          "table.type": "Type",
+          "table.default": "Défaut",
+          "table.desc": "Description",
+          "table.event": "Événement",
+          "table.method": "Méthode",
+          "table.route": "Route",
+          "table.response": "Réponse",
         },
         en: {
           "nav.getting_started": "Getting Started",
@@ -2214,76 +3124,117 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "Usage example",
           "ui.page_example": "Example in a page",
           "ui.vue_template": "In a Vue template",
-          "hero.lead": "A plug-and-play Nuxt authentication module for Laravel APIs. Install it once — login, registration, profile, passwords, roles and permissions are ready to use.",
+          "hero.lead":
+            "A plug-and-play Nuxt authentication module for Laravel APIs. Install it once — login, registration, profile, passwords, roles and permissions are ready to use.",
           "features.title": "Features",
-          "features.sub": "Everything you need, without any manual configuration.",
+          "features.sub":
+            "Everything you need, without any manual configuration.",
           "features.auth_title": "Full Authentication",
-          "features.auth_desc": "Login, register, logout with session persisted via secure cookie.",
+          "features.auth_desc":
+            "Login, register, logout with session persisted via secure cookie.",
           "features.profile_title": "Profile Management",
-          "features.profile_desc": "Update name, email, avatar and change password.",
+          "features.profile_desc":
+            "Update name, email, avatar and change password.",
           "features.reset_title": "Password Reset",
-          "features.reset_desc": "Complete flow: forgot password → email → reset.",
+          "features.reset_desc":
+            "Complete flow: forgot password → email → reset.",
           "features.rbac_title": "RBAC — Roles & Permissions",
-          "features.rbac_desc": "<code>hasRole()</code> and <code>hasPermission()</code> available everywhere.",
+          "features.rbac_desc":
+            "<code>hasRole()</code> and <code>hasPermission()</code> available everywhere.",
           "features.mw_title": "Named Middlewares",
-          "features.mw_desc": "<code>auth</code>, <code>guest</code>, <code>role</code> in <code>definePageMeta</code> — no import needed.",
+          "features.mw_desc":
+            "<code>auth</code>, <code>guest</code>, <code>role</code> in <code>definePageMeta</code> — no import needed.",
           "features.comp_title": "Ready Components",
-          "features.comp_desc": "7 split-screen Vue components, Tailwind CSS, auto-imported.",
-          "install.sub": "Compatible with Nuxt 3.x and Nuxt 4.x. Requires <code>@nuxt/ui</code> for styles.",
-          "config.sub": "Add the module in <code>nuxt.config.ts</code> and point it to your Laravel API.",
-          "config.autoimport": "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, all components and middlewares are auto-imported. No <code>import</code> needed in your files.",
+          "features.comp_desc":
+            "7 split-screen Vue components, Tailwind CSS, auto-imported.",
+          "install.sub":
+            "Compatible with Nuxt 3.x and Nuxt 4.x. Requires <code>@nuxt/ui</code> for styles.",
+          "config.sub":
+            "Add the module in <code>nuxt.config.ts</code> and point it to your Laravel API.",
+          "config.autoimport":
+            "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, all components and middlewares are auto-imported. No <code>import</code> needed in your files.",
           "changelog.update": "Update",
           "changelog.fixed": "Fixed",
-          "changelog.toast_fix": "The <code>useToast is not defined</code> error appeared at boot because <code>@nuxt/ui</code> composables are not auto-imported in a module's runtime. Added <code>import { useToast } from '#imports'</code> in <code>LoginForm.vue</code>.",
-          "changelog.pinia_fix": "The <code>getActivePinia() was called but there was no active Pinia</code> error appeared at app boot because the Pinia store was called before Pinia was mounted.",
-          "changelog.mw_fix": "The <code>auth</code>, <code>guest</code> and <code>role</code> middlewares returned a 500 <code>Unknown route middleware</code> error in Nuxt 4. Replaced <code>addRouteMiddleware()</code> with the <code>app:resolve</code> hook.",
-          "changelog.peer_fix": "The <code>nuxt</code> dependency was limited to <code>^3.0.0</code>. Extended to <code>^3.0.0 || ^4.0.0</code>.",
-          "authlayout.sub": "Split-screen layout — form on the left, testimonial + illustration on the right.",
+          "changelog.toast_fix":
+            "The <code>useToast is not defined</code> error appeared at boot because <code>@nuxt/ui</code> composables are not auto-imported in a module's runtime. Added <code>import { useToast } from '#imports'</code> in <code>LoginForm.vue</code>.",
+          "changelog.pinia_fix":
+            "The <code>getActivePinia() was called but there was no active Pinia</code> error appeared at app boot because the Pinia store was called before Pinia was mounted.",
+          "changelog.mw_fix":
+            "The <code>auth</code>, <code>guest</code> and <code>role</code> middlewares returned a 500 <code>Unknown route middleware</code> error in Nuxt 4. Replaced <code>addRouteMiddleware()</code> with the <code>app:resolve</code> hook.",
+          "changelog.peer_fix":
+            "The <code>nuxt</code> dependency was limited to <code>^3.0.0</code>. Extended to <code>^3.0.0 || ^4.0.0</code>.",
+          "authlayout.sub":
+            "Split-screen layout — form on the left, testimonial + illustration on the right.",
           "authlayout.appname_desc": "Logo name",
-          "authlayout.slots": "Slots: <code>#logo</code> (replaces the logo), <code>#illustration</code> (replaces the right SVG).",
-          "loginform.sub": "Login form with email/password, optional social login and role selector.",
+          "authlayout.slots":
+            "Slots: <code>#logo</code> (replaces the logo), <code>#illustration</code> (replaces the right SVG).",
+          "loginform.sub":
+            "Login form with email/password, optional social login and role selector.",
           "loginform.title_desc": "Form title",
           "loginform.subtitle_desc": "Subtitle",
           "loginform.social_desc": "Google / Apple buttons",
           "loginform.roles_desc": "Role selector",
-          "loginform.ev_forgot": "Click on \"Forgot password?\"",
-          "loginform.ev_register": "Click on \"Sign up\"",
+          "loginform.ev_forgot": 'Click on "Forgot password?"',
+          "loginform.ev_register": 'Click on "Sign up"',
           "loginform.ev_google": "Click on Google button",
           "loginform.ev_apple": "Click on Apple button",
           "loginform.ev_success": "Successful login",
-          "registerform.sub": "Registration with name, email, password and confirmation.",
-          "forgotform.sub": "Send the reset email. Shows a success state after sending.",
-          "resetform.sub": "Automatically reads <code>?token=</code> and <code>?email=</code> from the reset URL.",
-          "resetform.info": "The Laravel email must redirect to <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configure in <code>config/auth.php</code> → <code>passwords.users</code>.",
+          "registerform.sub":
+            "Registration with name, email, password and confirmation.",
+          "forgotform.sub":
+            "Send the reset email. Shows a success state after sending.",
+          "resetform.sub":
+            "Automatically reads <code>?token=</code> and <code>?email=</code> from the reset URL.",
+          "resetform.info":
+            "The Laravel email must redirect to <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configure in <code>config/auth.php</code> → <code>passwords.users</code>.",
           "profile.sub": "Update the connected user's name, email and avatar.",
           "profile.title_desc": "Section title",
           "profile.avatar_desc": "Avatar field with preview",
-          "profile.slot": "Slot <code>#extra-fields</code> to add extra fields. Access the <code>form</code> object via the slot prop.",
+          "profile.slot":
+            "Slot <code>#extra-fields</code> to add extra fields. Access the <code>form</code> object via the slot prop.",
           "profilepwd.sub": "Change password. Requires the current password.",
-          "useauth.sub": "Main composable — <strong>auto-imported</strong>, no <code>import</code> needed in your files.",
+          "useauth.sub":
+            "Main composable — <strong>auto-imported</strong>, no <code>import</code> needed in your files.",
           "useauth.reactive_state": "Reactive state",
           "useauth.actions": "Actions",
-          "useauth.user_desc": "The logged-in user, or <code>null</code> if logged out.",
-          "useauth.isauth_desc": "<code>true</code> if a user is logged in with a valid token.",
+          "useauth.user_desc":
+            "The logged-in user, or <code>null</code> if logged out.",
+          "useauth.isauth_desc":
+            "<code>true</code> if a user is logged in with a valid token.",
           "useauth.isguest_desc": "Inverse of <code>isAuthenticated</code>.",
-          "useauth.loading_desc": "<code>true</code> during an ongoing request.",
-          "useauth.login_desc": "Login. Redirects to <code>redirects.home</code> on success.",
-          "useauth.register_desc": "Register and automatically log in. Redirects to home.",
-          "useauth.logout_desc": "Logout, delete the cookie and redirect to <code>redirects.afterLogout</code>.",
-          "useauth.fetchuser_desc": "Fetches the user from <code>/api/auth/me</code>. Called automatically at boot via the plugin.",
-          "useauth.updateprofile_desc": "Updates the profile. Supports <code>File</code> for avatar (auto <code>multipart/form-data</code>).",
-          "useauth.updatepwd_desc": "Requires <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.",
+          "useauth.loading_desc":
+            "<code>true</code> during an ongoing request.",
+          "useauth.login_desc":
+            "Login. Redirects to <code>redirects.home</code> on success.",
+          "useauth.register_desc":
+            "Register and automatically log in. Redirects to home.",
+          "useauth.logout_desc":
+            "Logout, delete the cookie and redirect to <code>redirects.afterLogout</code>.",
+          "useauth.fetchuser_desc":
+            "Fetches the user from <code>/api/auth/me</code>. Called automatically at boot via the plugin.",
+          "useauth.updateprofile_desc":
+            "Updates the profile. Supports <code>File</code> for avatar (auto <code>multipart/form-data</code>).",
+          "useauth.updatepwd_desc":
+            "Requires <code>current_password</code>, <code>new_password</code>, <code>password_confirmation</code>.",
           "useauth.forgot_desc": "Sends the reset email.",
-          "useauth.reset_desc": "Requires <code>{ token, email, password, password_confirmation }</code>.",
-          "rbac.sub": "<code>hasRole()</code> and <code>hasPermission()</code> accessible via <code>useAuth()</code> — auto-imported.",
+          "useauth.reset_desc":
+            "Requires <code>{ token, email, password, password_confirmation }</code>.",
+          "rbac.sub":
+            "<code>hasRole()</code> and <code>hasPermission()</code> accessible via <code>useAuth()</code> — auto-imported.",
           "rbac.create_article": "Create a post",
-          "rbac.super_admin_note": "The <code>super-admin</code> role (configurable via <code>rbac.superAdminRole</code>) bypasses all checks in the <code>role</code> middleware.",
-          "mw.sub": "Three named middlewares, usable directly in <code>definePageMeta</code>. No import needed.",
-          "mw.auth_desc": "Redirects to <code>/auth/login</code> if not logged in. Preserves the URL in <code>?redirect=</code>.",
-          "mw.guest_desc": "Redirects to <code>/</code> if already logged in. Use on login, register, etc.",
-          "mw.role_desc": "Checks that the user has at least one role from <code>meta.roles</code>.",
+          "rbac.super_admin_note":
+            "The <code>super-admin</code> role (configurable via <code>rbac.superAdminRole</code>) bypasses all checks in the <code>role</code> middleware.",
+          "mw.sub":
+            "Three named middlewares, usable directly in <code>definePageMeta</code>. No import needed.",
+          "mw.auth_desc":
+            "Redirects to <code>/auth/login</code> if not logged in. Preserves the URL in <code>?redirect=</code>.",
+          "mw.guest_desc":
+            "Redirects to <code>/</code> if already logged in. Use on login, register, etc.",
+          "mw.role_desc":
+            "Checks that the user has at least one role from <code>meta.roles</code>.",
           "api.title": "Expected Laravel API",
-          "api.sub": "All endpoints are customizable via <code>nuxtAuthKit.endpoints</code>.",
+          "api.sub":
+            "All endpoints are customizable via <code>nuxtAuthKit.endpoints</code>.",
           "api.login": "Login",
           "api.register": "Register",
           "api.logout": "Logout",
@@ -2292,11 +3243,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "Change password",
           "api.forgot": "Reset email",
           "api.reset": "Reset with token",
-          "api.user_fields": "The <code>user</code> field must contain at minimum <code>id</code>, <code>name</code>, <code>email</code>. The <code>roles</code> and <code>permissions</code> fields (string arrays) are optional to enable RBAC.",
+          "api.user_fields":
+            "The <code>user</code> field must contain at minimum <code>id</code>, <code>name</code>, <code>email</code>. The <code>roles</code> and <code>permissions</code> fields (string arrays) are optional to enable RBAC.",
           "laravel.title": "Example with Laravel Sanctum",
-          "types.sub": "Exported from <code>nuxt-auth-kit</code>. Import only if you need them explicitly.",
-          "table.prop": "Prop", "table.type": "Type", "table.default": "Default", "table.desc": "Description",
-          "table.event": "Event", "table.method": "Method", "table.route": "Route", "table.response": "Response",
+          "types.sub":
+            "Exported from <code>nuxt-auth-kit</code>. Import only if you need them explicitly.",
+          "table.prop": "Prop",
+          "table.type": "Type",
+          "table.default": "Default",
+          "table.desc": "Description",
+          "table.event": "Event",
+          "table.method": "Method",
+          "table.route": "Route",
+          "table.response": "Response",
         },
         ar: {
           "nav.getting_started": "البداية",
@@ -2315,76 +3274,114 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "مثال الاستخدام",
           "ui.page_example": "مثال في صفحة",
           "ui.vue_template": "في قالب Vue",
-          "hero.lead": "وحدة Nuxt جاهزة للمصادقة مع واجهات Laravel. ثبّتها مرة واحدة — تسجيل الدخول، التسجيل، الملف الشخصي، كلمات المرور، الأدوار والصلاحيات جاهزة للاستخدام.",
+          "hero.lead":
+            "وحدة Nuxt جاهزة للمصادقة مع واجهات Laravel. ثبّتها مرة واحدة — تسجيل الدخول، التسجيل، الملف الشخصي، كلمات المرور، الأدوار والصلاحيات جاهزة للاستخدام.",
           "features.title": "المميزات",
           "features.sub": "كل ما تحتاجه دون أي إعداد يدوي.",
           "features.auth_title": "مصادقة كاملة",
-          "features.auth_desc": "تسجيل دخول، تسجيل، خروج مع جلسة محفوظة عبر كوكي آمنة.",
+          "features.auth_desc":
+            "تسجيل دخول، تسجيل، خروج مع جلسة محفوظة عبر كوكي آمنة.",
           "features.profile_title": "إدارة الملف الشخصي",
-          "features.profile_desc": "تحديث الاسم والبريد والصورة وتغيير كلمة المرور.",
+          "features.profile_desc":
+            "تحديث الاسم والبريد والصورة وتغيير كلمة المرور.",
           "features.reset_title": "إعادة تعيين كلمة المرور",
-          "features.reset_desc": "تدفق كامل: نسيت كلمة المرور ← بريد إلكتروني ← إعادة تعيين.",
+          "features.reset_desc":
+            "تدفق كامل: نسيت كلمة المرور ← بريد إلكتروني ← إعادة تعيين.",
           "features.rbac_title": "RBAC — الأدوار والصلاحيات",
-          "features.rbac_desc": "<code>hasRole()</code> و<code>hasPermission()</code> متاحان في كل مكان.",
+          "features.rbac_desc":
+            "<code>hasRole()</code> و<code>hasPermission()</code> متاحان في كل مكان.",
           "features.mw_title": "وسيط مسمى",
-          "features.mw_desc": "<code>auth</code> و<code>guest</code> و<code>role</code> في <code>definePageMeta</code> — بلا استيراد.",
+          "features.mw_desc":
+            "<code>auth</code> و<code>guest</code> و<code>role</code> في <code>definePageMeta</code> — بلا استيراد.",
           "features.comp_title": "مكونات جاهزة",
-          "features.comp_desc": "7 مكونات Vue بشاشة مقسمة، Tailwind CSS، مستوردة تلقائياً.",
-          "install.sub": "متوافق مع Nuxt 3.x و4.x. يتطلب <code>@nuxt/ui</code> للأنماط.",
-          "config.sub": "أضف الوحدة في <code>nuxt.config.ts</code> وأشر إلى واجهة Laravel الخاصة بك.",
-          "config.autoimport": "<strong>استيراد تلقائي</strong> — <code>useAuth</code> و<code>useAuthStore</code> وجميع المكونات والوسيطات مستوردة تلقائياً. لا حاجة لـ <code>import</code> في ملفاتك.",
+          "features.comp_desc":
+            "7 مكونات Vue بشاشة مقسمة، Tailwind CSS، مستوردة تلقائياً.",
+          "install.sub":
+            "متوافق مع Nuxt 3.x و4.x. يتطلب <code>@nuxt/ui</code> للأنماط.",
+          "config.sub":
+            "أضف الوحدة في <code>nuxt.config.ts</code> وأشر إلى واجهة Laravel الخاصة بك.",
+          "config.autoimport":
+            "<strong>استيراد تلقائي</strong> — <code>useAuth</code> و<code>useAuthStore</code> وجميع المكونات والوسيطات مستوردة تلقائياً. لا حاجة لـ <code>import</code> في ملفاتك.",
           "changelog.update": "تحديث",
           "changelog.fixed": "تم الإصلاح",
-          "changelog.toast_fix": "كان الخطأ <code>useToast is not defined</code> يظهر عند التشغيل لأن composables من <code>@nuxt/ui</code> غير مستوردة تلقائياً في runtime الوحدة. تمت إضافة <code>import { useToast } from '#imports'</code> في <code>LoginForm.vue</code>.",
-          "changelog.pinia_fix": "كان الخطأ <code>getActivePinia() was called but there was no active Pinia</code> يظهر عند تشغيل التطبيق لأن Pinia store كان يُستدعى قبل تحميل Pinia.",
-          "changelog.mw_fix": "الوسيطات <code>auth</code> و<code>guest</code> و<code>role</code> كانت تعيد خطأ 500 <code>Unknown route middleware</code> في Nuxt 4. تم استبدال <code>addRouteMiddleware()</code> بالخطاف <code>app:resolve</code>.",
-          "changelog.peer_fix": "كانت تبعية <code>nuxt</code> محدودة بـ <code>^3.0.0</code>. تم التوسيع إلى <code>^3.0.0 || ^4.0.0</code>.",
-          "authlayout.sub": "تخطيط بشاشة مقسمة — النموذج على اليسار، شهادة + رسم توضيحي على اليمين.",
+          "changelog.toast_fix":
+            "كان الخطأ <code>useToast is not defined</code> يظهر عند التشغيل لأن composables من <code>@nuxt/ui</code> غير مستوردة تلقائياً في runtime الوحدة. تمت إضافة <code>import { useToast } from '#imports'</code> في <code>LoginForm.vue</code>.",
+          "changelog.pinia_fix":
+            "كان الخطأ <code>getActivePinia() was called but there was no active Pinia</code> يظهر عند تشغيل التطبيق لأن Pinia store كان يُستدعى قبل تحميل Pinia.",
+          "changelog.mw_fix":
+            "الوسيطات <code>auth</code> و<code>guest</code> و<code>role</code> كانت تعيد خطأ 500 <code>Unknown route middleware</code> في Nuxt 4. تم استبدال <code>addRouteMiddleware()</code> بالخطاف <code>app:resolve</code>.",
+          "changelog.peer_fix":
+            "كانت تبعية <code>nuxt</code> محدودة بـ <code>^3.0.0</code>. تم التوسيع إلى <code>^3.0.0 || ^4.0.0</code>.",
+          "authlayout.sub":
+            "تخطيط بشاشة مقسمة — النموذج على اليسار، شهادة + رسم توضيحي على اليمين.",
           "authlayout.appname_desc": "اسم الشعار",
-          "authlayout.slots": "Slots: <code>#logo</code> (يستبدل الشعار)، <code>#illustration</code> (يستبدل SVG الجانب الأيمن).",
-          "loginform.sub": "نموذج تسجيل الدخول بالبريد/كلمة المرور، تسجيل دخول اجتماعي اختياري ومحدد الدور.",
+          "authlayout.slots":
+            "Slots: <code>#logo</code> (يستبدل الشعار)، <code>#illustration</code> (يستبدل SVG الجانب الأيمن).",
+          "loginform.sub":
+            "نموذج تسجيل الدخول بالبريد/كلمة المرور، تسجيل دخول اجتماعي اختياري ومحدد الدور.",
           "loginform.title_desc": "عنوان النموذج",
           "loginform.subtitle_desc": "العنوان الفرعي",
           "loginform.social_desc": "أزرار Google / Apple",
           "loginform.roles_desc": "محدد الدور",
-          "loginform.ev_forgot": "النقر على \"نسيت كلمة المرور؟\"",
-          "loginform.ev_register": "النقر على \"تسجيل\"",
+          "loginform.ev_forgot": 'النقر على "نسيت كلمة المرور؟"',
+          "loginform.ev_register": 'النقر على "تسجيل"',
           "loginform.ev_google": "النقر على زر Google",
           "loginform.ev_apple": "النقر على زر Apple",
           "loginform.ev_success": "تسجيل دخول ناجح",
           "registerform.sub": "التسجيل بالاسم والبريد وكلمة المرور والتأكيد.",
-          "forgotform.sub": "إرسال بريد إعادة التعيين. يعرض حالة نجاح بعد الإرسال.",
-          "resetform.sub": "يقرأ تلقائياً <code>?token=</code> و<code>?email=</code> من رابط إعادة التعيين.",
-          "resetform.info": "يجب أن يعيد التوجيه بريد Laravel إلى <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. اضبط في <code>config/auth.php</code> → <code>passwords.users</code>.",
+          "forgotform.sub":
+            "إرسال بريد إعادة التعيين. يعرض حالة نجاح بعد الإرسال.",
+          "resetform.sub":
+            "يقرأ تلقائياً <code>?token=</code> و<code>?email=</code> من رابط إعادة التعيين.",
+          "resetform.info":
+            "يجب أن يعيد التوجيه بريد Laravel إلى <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. اضبط في <code>config/auth.php</code> → <code>passwords.users</code>.",
           "profile.sub": "تحديث اسم المستخدم المتصل وبريده وصورته.",
           "profile.title_desc": "عنوان القسم",
           "profile.avatar_desc": "حقل الصورة مع معاينة",
-          "profile.slot": "Slot <code>#extra-fields</code> لإضافة حقول إضافية. الوصول لكائن <code>form</code> عبر خاصية الـ slot.",
+          "profile.slot":
+            "Slot <code>#extra-fields</code> لإضافة حقول إضافية. الوصول لكائن <code>form</code> عبر خاصية الـ slot.",
           "profilepwd.sub": "تغيير كلمة المرور. يتطلب كلمة المرور الحالية.",
-          "useauth.sub": "الـ composable الرئيسي — <strong>مستورد تلقائياً</strong>، لا حاجة لـ <code>import</code> في ملفاتك.",
+          "useauth.sub":
+            "الـ composable الرئيسي — <strong>مستورد تلقائياً</strong>، لا حاجة لـ <code>import</code> في ملفاتك.",
           "useauth.reactive_state": "الحالة التفاعلية",
           "useauth.actions": "الإجراءات",
-          "useauth.user_desc": "المستخدم المسجل، أو <code>null</code> إذا تم تسجيل الخروج.",
-          "useauth.isauth_desc": "<code>true</code> إذا كان هناك مستخدم مسجل بتوكن صالح.",
+          "useauth.user_desc":
+            "المستخدم المسجل، أو <code>null</code> إذا تم تسجيل الخروج.",
+          "useauth.isauth_desc":
+            "<code>true</code> إذا كان هناك مستخدم مسجل بتوكن صالح.",
           "useauth.isguest_desc": "عكس <code>isAuthenticated</code>.",
           "useauth.loading_desc": "<code>true</code> أثناء وجود طلب جارٍ.",
-          "useauth.login_desc": "تسجيل دخول. يعيد التوجيه إلى <code>redirects.home</code> عند النجاح.",
-          "useauth.register_desc": "تسجيل وتسجيل دخول تلقائي. يعيد التوجيه إلى الرئيسية.",
-          "useauth.logout_desc": "تسجيل خروج، حذف الكوكي وإعادة التوجيه إلى <code>redirects.afterLogout</code>.",
-          "useauth.fetchuser_desc": "جلب المستخدم من <code>/api/auth/me</code>. يُستدعى تلقائياً عند التشغيل عبر الإضافة.",
-          "useauth.updateprofile_desc": "تحديث الملف الشخصي. يدعم <code>File</code> للصورة (إرسال <code>multipart/form-data</code> تلقائي).",
-          "useauth.updatepwd_desc": "يتطلب <code>current_password</code> و<code>password</code> و<code>password_confirmation</code>.",
+          "useauth.login_desc":
+            "تسجيل دخول. يعيد التوجيه إلى <code>redirects.home</code> عند النجاح.",
+          "useauth.register_desc":
+            "تسجيل وتسجيل دخول تلقائي. يعيد التوجيه إلى الرئيسية.",
+          "useauth.logout_desc":
+            "تسجيل خروج، حذف الكوكي وإعادة التوجيه إلى <code>redirects.afterLogout</code>.",
+          "useauth.fetchuser_desc":
+            "جلب المستخدم من <code>/api/auth/me</code>. يُستدعى تلقائياً عند التشغيل عبر الإضافة.",
+          "useauth.updateprofile_desc":
+            "تحديث الملف الشخصي. يدعم <code>File</code> للصورة (إرسال <code>multipart/form-data</code> تلقائي).",
+          "useauth.updatepwd_desc":
+            "يتطلب <code>current_password</code> و<code>new_password</code> و<code>password_confirmation</code>.",
           "useauth.forgot_desc": "إرسال بريد إعادة التعيين.",
-          "useauth.reset_desc": "يتطلب <code>{ token, email, password, password_confirmation }</code>.",
-          "rbac.sub": "<code>hasRole()</code> و<code>hasPermission()</code> متاحان عبر <code>useAuth()</code> — مستورد تلقائياً.",
+          "useauth.reset_desc":
+            "يتطلب <code>{ token, email, password, password_confirmation }</code>.",
+          "rbac.sub":
+            "<code>hasRole()</code> و<code>hasPermission()</code> متاحان عبر <code>useAuth()</code> — مستورد تلقائياً.",
           "rbac.create_article": "إنشاء مقال",
-          "rbac.super_admin_note": "دور <code>super-admin</code> (قابل للتخصيص عبر <code>rbac.superAdminRole</code>) يتجاوز جميع الفحوصات في الوسيط <code>role</code>.",
-          "mw.sub": "ثلاثة وسيطات مسماة، قابلة للاستخدام مباشرة في <code>definePageMeta</code>. بلا استيراد.",
-          "mw.auth_desc": "يعيد التوجيه إلى <code>/auth/login</code> إذا لم تكن مسجلاً. يحفظ الرابط في <code>?redirect=</code>.",
-          "mw.guest_desc": "يعيد التوجيه إلى <code>/</code> إذا كنت مسجلاً. استخدمه في صفحات تسجيل الدخول والتسجيل.",
-          "mw.role_desc": "يتحقق من أن للمستخدم دوراً واحداً على الأقل من <code>meta.roles</code>.",
+          "rbac.super_admin_note":
+            "دور <code>super-admin</code> (قابل للتخصيص عبر <code>rbac.superAdminRole</code>) يتجاوز جميع الفحوصات في الوسيط <code>role</code>.",
+          "mw.sub":
+            "ثلاثة وسيطات مسماة، قابلة للاستخدام مباشرة في <code>definePageMeta</code>. بلا استيراد.",
+          "mw.auth_desc":
+            "يعيد التوجيه إلى <code>/auth/login</code> إذا لم تكن مسجلاً. يحفظ الرابط في <code>?redirect=</code>.",
+          "mw.guest_desc":
+            "يعيد التوجيه إلى <code>/</code> إذا كنت مسجلاً. استخدمه في صفحات تسجيل الدخول والتسجيل.",
+          "mw.role_desc":
+            "يتحقق من أن للمستخدم دوراً واحداً على الأقل من <code>meta.roles</code>.",
           "api.title": "واجهة Laravel المطلوبة",
-          "api.sub": "جميع نقاط النهاية قابلة للتخصيص عبر <code>nuxtAuthKit.endpoints</code>.",
+          "api.sub":
+            "جميع نقاط النهاية قابلة للتخصيص عبر <code>nuxtAuthKit.endpoints</code>.",
           "api.login": "تسجيل الدخول",
           "api.register": "التسجيل",
           "api.logout": "تسجيل الخروج",
@@ -2393,11 +3390,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "تغيير كلمة المرور",
           "api.forgot": "بريد الإعادة",
           "api.reset": "إعادة بتوكن",
-          "api.user_fields": "يجب أن يحتوي حقل <code>user</code> على الحد الأدنى: <code>id</code> و<code>name</code> و<code>email</code>. حقلا <code>roles</code> و<code>permissions</code> (مصفوفات نصية) اختياريان لتفعيل RBAC.",
+          "api.user_fields":
+            "يجب أن يحتوي حقل <code>user</code> على الحد الأدنى: <code>id</code> و<code>name</code> و<code>email</code>. حقلا <code>roles</code> و<code>permissions</code> (مصفوفات نصية) اختياريان لتفعيل RBAC.",
           "laravel.title": "مثال مع Laravel Sanctum",
-          "types.sub": "مُصدَّرة من <code>nuxt-auth-kit</code>. استوردها فقط إذا احتجتها صراحةً.",
-          "table.prop": "الخاصية", "table.type": "النوع", "table.default": "الافتراضي", "table.desc": "الوصف",
-          "table.event": "الحدث", "table.method": "الطريقة", "table.route": "المسار", "table.response": "الاستجابة",
+          "types.sub":
+            "مُصدَّرة من <code>nuxt-auth-kit</code>. استوردها فقط إذا احتجتها صراحةً.",
+          "table.prop": "الخاصية",
+          "table.type": "النوع",
+          "table.default": "الافتراضي",
+          "table.desc": "الوصف",
+          "table.event": "الحدث",
+          "table.method": "الطريقة",
+          "table.route": "المسار",
+          "table.response": "الاستجابة",
         },
         es: {
           "nav.getting_started": "Inicio",
@@ -2416,76 +3421,118 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "Ejemplo de uso",
           "ui.page_example": "Ejemplo en una página",
           "ui.vue_template": "En una plantilla Vue",
-          "hero.lead": "Módulo de autenticación llave en mano para APIs Laravel con Nuxt. Instálalo una vez — login, registro, perfil, contraseñas, roles y permisos listos para usar.",
+          "hero.lead":
+            "Módulo de autenticación llave en mano para APIs Laravel con Nuxt. Instálalo una vez — login, registro, perfil, contraseñas, roles y permisos listos para usar.",
           "features.title": "Funcionalidades",
           "features.sub": "Todo lo que necesitas, sin configuración manual.",
           "features.auth_title": "Autenticación completa",
-          "features.auth_desc": "Login, registro, logout con sesión persistida vía cookie segura.",
+          "features.auth_desc":
+            "Login, registro, logout con sesión persistida vía cookie segura.",
           "features.profile_title": "Gestión del perfil",
-          "features.profile_desc": "Actualizar nombre, email, avatar y cambio de contraseña.",
+          "features.profile_desc":
+            "Actualizar nombre, email, avatar y cambio de contraseña.",
           "features.reset_title": "Restablecimiento de contraseña",
-          "features.reset_desc": "Flujo completo: contraseña olvidada → email → restablecimiento.",
+          "features.reset_desc":
+            "Flujo completo: contraseña olvidada → email → restablecimiento.",
           "features.rbac_title": "RBAC — Roles y Permisos",
-          "features.rbac_desc": "<code>hasRole()</code> y <code>hasPermission()</code> disponibles en todas partes.",
+          "features.rbac_desc":
+            "<code>hasRole()</code> y <code>hasPermission()</code> disponibles en todas partes.",
           "features.mw_title": "Middlewares nombrados",
-          "features.mw_desc": "<code>auth</code>, <code>guest</code>, <code>role</code> en <code>definePageMeta</code> — sin imports.",
+          "features.mw_desc":
+            "<code>auth</code>, <code>guest</code>, <code>role</code> en <code>definePageMeta</code> — sin imports.",
           "features.comp_title": "Componentes listos",
-          "features.comp_desc": "7 componentes Vue en pantalla dividida, Tailwind CSS, auto-importados.",
-          "install.sub": "Compatible con Nuxt 3.x y Nuxt 4.x. Requiere <code>@nuxt/ui</code> para los estilos.",
-          "config.sub": "Agrega el módulo en <code>nuxt.config.ts</code> y apunta a tu API Laravel.",
-          "config.autoimport": "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, todos los componentes y middlewares son auto-importados. No se necesita <code>import</code> en tus archivos.",
+          "features.comp_desc":
+            "7 componentes Vue en pantalla dividida, Tailwind CSS, auto-importados.",
+          "install.sub":
+            "Compatible con Nuxt 3.x y Nuxt 4.x. Requiere <code>@nuxt/ui</code> para los estilos.",
+          "config.sub":
+            "Agrega el módulo en <code>nuxt.config.ts</code> y apunta a tu API Laravel.",
+          "config.autoimport":
+            "<strong>Auto-import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, todos los componentes y middlewares son auto-importados. No se necesita <code>import</code> en tus archivos.",
           "changelog.update": "Actualización",
           "changelog.fixed": "Corregido",
-          "changelog.toast_fix": "El error <code>useToast is not defined</code> aparecía al arrancar porque los composables de <code>@nuxt/ui</code> no se auto-importan en el runtime de un módulo. Se añadió <code>import { useToast } from '#imports'</code> en <code>LoginForm.vue</code>.",
-          "changelog.pinia_fix": "El error <code>getActivePinia() was called but there was no active Pinia</code> aparecía al iniciar la app porque el store de Pinia se llamaba antes de que Pinia estuviera montado.",
-          "changelog.mw_fix": "Los middlewares <code>auth</code>, <code>guest</code> y <code>role</code> devolvían un error 500 <code>Unknown route middleware</code> en Nuxt 4. Se reemplazó <code>addRouteMiddleware()</code> con el hook <code>app:resolve</code>.",
-          "changelog.peer_fix": "La dependencia <code>nuxt</code> estaba limitada a <code>^3.0.0</code>. Extendida a <code>^3.0.0 || ^4.0.0</code>.",
-          "authlayout.sub": "Layout de pantalla dividida — formulario a la izquierda, testimonial + ilustración a la derecha.",
+          "changelog.toast_fix":
+            "El error <code>useToast is not defined</code> aparecía al arrancar porque los composables de <code>@nuxt/ui</code> no se auto-importan en el runtime de un módulo. Se añadió <code>import { useToast } from '#imports'</code> en <code>LoginForm.vue</code>.",
+          "changelog.pinia_fix":
+            "El error <code>getActivePinia() was called but there was no active Pinia</code> aparecía al iniciar la app porque el store de Pinia se llamaba antes de que Pinia estuviera montado.",
+          "changelog.mw_fix":
+            "Los middlewares <code>auth</code>, <code>guest</code> y <code>role</code> devolvían un error 500 <code>Unknown route middleware</code> en Nuxt 4. Se reemplazó <code>addRouteMiddleware()</code> con el hook <code>app:resolve</code>.",
+          "changelog.peer_fix":
+            "La dependencia <code>nuxt</code> estaba limitada a <code>^3.0.0</code>. Extendida a <code>^3.0.0 || ^4.0.0</code>.",
+          "authlayout.sub":
+            "Layout de pantalla dividida — formulario a la izquierda, testimonial + ilustración a la derecha.",
           "authlayout.appname_desc": "Nombre del logo",
-          "authlayout.slots": "Slots: <code>#logo</code> (reemplaza el logo), <code>#illustration</code> (reemplaza el SVG derecho).",
-          "loginform.sub": "Formulario de login con email/contraseña, social login opcional y selector de rol.",
+          "authlayout.slots":
+            "Slots: <code>#logo</code> (reemplaza el logo), <code>#illustration</code> (reemplaza el SVG derecho).",
+          "loginform.sub":
+            "Formulario de login con email/contraseña, social login opcional y selector de rol.",
           "loginform.title_desc": "Título del formulario",
           "loginform.subtitle_desc": "Subtítulo",
           "loginform.social_desc": "Botones Google / Apple",
           "loginform.roles_desc": "Selector de rol",
-          "loginform.ev_forgot": "Clic en \"¿Olvidaste tu contraseña?\"",
-          "loginform.ev_register": "Clic en \"Registrarse\"",
+          "loginform.ev_forgot": 'Clic en "¿Olvidaste tu contraseña?"',
+          "loginform.ev_register": 'Clic en "Registrarse"',
           "loginform.ev_google": "Clic en botón Google",
           "loginform.ev_apple": "Clic en botón Apple",
           "loginform.ev_success": "Login exitoso",
-          "registerform.sub": "Registro con nombre, email, contraseña y confirmación.",
-          "forgotform.sub": "Envío del email de restablecimiento. Muestra un estado de éxito tras el envío.",
-          "resetform.sub": "Lee automáticamente <code>?token=</code> y <code>?email=</code> desde la URL de restablecimiento.",
-          "resetform.info": "El email de Laravel debe redirigir a <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configura en <code>config/auth.php</code> → <code>passwords.users</code>.",
-          "profile.sub": "Actualizar el nombre, email y avatar del usuario conectado.",
+          "registerform.sub":
+            "Registro con nombre, email, contraseña y confirmación.",
+          "forgotform.sub":
+            "Envío del email de restablecimiento. Muestra un estado de éxito tras el envío.",
+          "resetform.sub":
+            "Lee automáticamente <code>?token=</code> y <code>?email=</code> desde la URL de restablecimiento.",
+          "resetform.info":
+            "El email de Laravel debe redirigir a <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configura en <code>config/auth.php</code> → <code>passwords.users</code>.",
+          "profile.sub":
+            "Actualizar el nombre, email y avatar del usuario conectado.",
           "profile.title_desc": "Título de la sección",
           "profile.avatar_desc": "Campo avatar con previsualización",
-          "profile.slot": "Slot <code>#extra-fields</code> para agregar campos adicionales. Acceso al objeto <code>form</code> via la prop del slot.",
-          "profilepwd.sub": "Cambio de contraseña. Requiere la contraseña actual.",
-          "useauth.sub": "Composable principal — <strong>auto-importado</strong>, no se necesita <code>import</code> en tus archivos.",
+          "profile.slot":
+            "Slot <code>#extra-fields</code> para agregar campos adicionales. Acceso al objeto <code>form</code> via la prop del slot.",
+          "profilepwd.sub":
+            "Cambio de contraseña. Requiere la contraseña actual.",
+          "useauth.sub":
+            "Composable principal — <strong>auto-importado</strong>, no se necesita <code>import</code> en tus archivos.",
           "useauth.reactive_state": "Estado reactivo",
           "useauth.actions": "Acciones",
-          "useauth.user_desc": "El usuario conectado, o <code>null</code> si no está autenticado.",
-          "useauth.isauth_desc": "<code>true</code> si un usuario está conectado con token válido.",
+          "useauth.user_desc":
+            "El usuario conectado, o <code>null</code> si no está autenticado.",
+          "useauth.isauth_desc":
+            "<code>true</code> si un usuario está conectado con token válido.",
           "useauth.isguest_desc": "Inverso de <code>isAuthenticated</code>.",
-          "useauth.loading_desc": "<code>true</code> durante una petición en curso.",
-          "useauth.login_desc": "Login. Redirige a <code>redirects.home</code> en caso de éxito.",
-          "useauth.register_desc": "Registro y login automático. Redirige al inicio.",
-          "useauth.logout_desc": "Logout, eliminación de la cookie y redirección a <code>redirects.afterLogout</code>.",
-          "useauth.fetchuser_desc": "Obtiene el usuario desde <code>/api/auth/me</code>. Llamado automáticamente al arrancar via el plugin.",
-          "useauth.updateprofile_desc": "Actualiza el perfil. Soporta <code>File</code> para el avatar (envío en <code>multipart/form-data</code> auto).",
-          "useauth.updatepwd_desc": "Requiere <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.",
+          "useauth.loading_desc":
+            "<code>true</code> durante una petición en curso.",
+          "useauth.login_desc":
+            "Login. Redirige a <code>redirects.home</code> en caso de éxito.",
+          "useauth.register_desc":
+            "Registro y login automático. Redirige al inicio.",
+          "useauth.logout_desc":
+            "Logout, eliminación de la cookie y redirección a <code>redirects.afterLogout</code>.",
+          "useauth.fetchuser_desc":
+            "Obtiene el usuario desde <code>/api/auth/me</code>. Llamado automáticamente al arrancar via el plugin.",
+          "useauth.updateprofile_desc":
+            "Actualiza el perfil. Soporta <code>File</code> para el avatar (envío en <code>multipart/form-data</code> auto).",
+          "useauth.updatepwd_desc":
+            "Requiere <code>current_password</code>, <code>new_password</code>, <code>password_confirmation</code>.",
           "useauth.forgot_desc": "Envía el email de restablecimiento.",
-          "useauth.reset_desc": "Requiere <code>{ token, email, password, password_confirmation }</code>.",
-          "rbac.sub": "<code>hasRole()</code> y <code>hasPermission()</code> accesibles via <code>useAuth()</code> — auto-importado.",
+          "useauth.reset_desc":
+            "Requiere <code>{ token, email, password, password_confirmation }</code>.",
+          "rbac.sub":
+            "<code>hasRole()</code> y <code>hasPermission()</code> accesibles via <code>useAuth()</code> — auto-importado.",
           "rbac.create_article": "Crear un artículo",
-          "rbac.super_admin_note": "El rol <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasea todas las verificaciones en el middleware <code>role</code>.",
-          "mw.sub": "Tres middlewares nombrados, utilizables directamente en <code>definePageMeta</code>. Sin imports.",
-          "mw.auth_desc": "Redirige a <code>/auth/login</code> si no está conectado. Guarda la URL en <code>?redirect=</code>.",
-          "mw.guest_desc": "Redirige a <code>/</code> si ya está conectado. Usar en login, registro, etc.",
-          "mw.role_desc": "Verifica que el usuario tenga al menos un rol de <code>meta.roles</code>.",
+          "rbac.super_admin_note":
+            "El rol <code>super-admin</code> (configurable via <code>rbac.superAdminRole</code>) bypasea todas las verificaciones en el middleware <code>role</code>.",
+          "mw.sub":
+            "Tres middlewares nombrados, utilizables directamente en <code>definePageMeta</code>. Sin imports.",
+          "mw.auth_desc":
+            "Redirige a <code>/auth/login</code> si no está conectado. Guarda la URL en <code>?redirect=</code>.",
+          "mw.guest_desc":
+            "Redirige a <code>/</code> si ya está conectado. Usar en login, registro, etc.",
+          "mw.role_desc":
+            "Verifica que el usuario tenga al menos un rol de <code>meta.roles</code>.",
           "api.title": "API Laravel esperada",
-          "api.sub": "Todos los endpoints son personalizables via <code>nuxtAuthKit.endpoints</code>.",
+          "api.sub":
+            "Todos los endpoints son personalizables via <code>nuxtAuthKit.endpoints</code>.",
           "api.login": "Inicio de sesión",
           "api.register": "Registro",
           "api.logout": "Cierre de sesión",
@@ -2494,11 +3541,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "Cambiar contraseña",
           "api.forgot": "Email de restablecimiento",
           "api.reset": "Restablecimiento con token",
-          "api.user_fields": "El campo <code>user</code> debe contener como mínimo <code>id</code>, <code>name</code>, <code>email</code>. Los campos <code>roles</code> y <code>permissions</code> (arrays de strings) son opcionales para activar el RBAC.",
+          "api.user_fields":
+            "El campo <code>user</code> debe contener como mínimo <code>id</code>, <code>name</code>, <code>email</code>. Los campos <code>roles</code> y <code>permissions</code> (arrays de strings) son opcionales para activar el RBAC.",
           "laravel.title": "Ejemplo con Laravel Sanctum",
-          "types.sub": "Exportados desde <code>nuxt-auth-kit</code>. Importar solo si los necesitas explícitamente.",
-          "table.prop": "Prop", "table.type": "Tipo", "table.default": "Por defecto", "table.desc": "Descripción",
-          "table.event": "Evento", "table.method": "Método", "table.route": "Ruta", "table.response": "Respuesta",
+          "types.sub":
+            "Exportados desde <code>nuxt-auth-kit</code>. Importar solo si los necesitas explícitamente.",
+          "table.prop": "Prop",
+          "table.type": "Tipo",
+          "table.default": "Por defecto",
+          "table.desc": "Descripción",
+          "table.event": "Evento",
+          "table.method": "Método",
+          "table.route": "Ruta",
+          "table.response": "Respuesta",
         },
         zh: {
           "nav.getting_started": "快速开始",
@@ -2517,33 +3572,45 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "使用示例",
           "ui.page_example": "页面示例",
           "ui.vue_template": "Vue 模板中",
-          "hero.lead": "专为 Laravel API 设计的开箱即用 Nuxt 认证模块。安装一次即可 — 登录、注册、个人资料、密码、角色和权限均已就绪。",
+          "hero.lead":
+            "专为 Laravel API 设计的开箱即用 Nuxt 认证模块。安装一次即可 — 登录、注册、个人资料、密码、角色和权限均已就绪。",
           "features.title": "功能特性",
           "features.sub": "您所需的一切，无需手动配置。",
           "features.auth_title": "完整认证",
-          "features.auth_desc": "登录、注册、退出，通过安全 Cookie 持久化会话。",
+          "features.auth_desc":
+            "登录、注册、退出，通过安全 Cookie 持久化会话。",
           "features.profile_title": "个人资料管理",
           "features.profile_desc": "更新姓名、邮箱、头像及修改密码。",
           "features.reset_title": "密码重置",
           "features.reset_desc": "完整流程：忘记密码 → 邮件 → 重置。",
           "features.rbac_title": "RBAC — 角色与权限",
-          "features.rbac_desc": "<code>hasRole()</code> 和 <code>hasPermission()</code> 随处可用。",
+          "features.rbac_desc":
+            "<code>hasRole()</code> 和 <code>hasPermission()</code> 随处可用。",
           "features.mw_title": "命名中间件",
-          "features.mw_desc": "<code>auth</code>、<code>guest</code>、<code>role</code> 在 <code>definePageMeta</code> 中使用 — 无需导入。",
+          "features.mw_desc":
+            "<code>auth</code>、<code>guest</code>、<code>role</code> 在 <code>definePageMeta</code> 中使用 — 无需导入。",
           "features.comp_title": "即用组件",
           "features.comp_desc": "7 个 Vue 分屏组件，Tailwind CSS，自动导入。",
-          "install.sub": "兼容 Nuxt 3.x 和 Nuxt 4.x。需要 <code>@nuxt/ui</code> 提供样式。",
-          "config.sub": "在 <code>nuxt.config.ts</code> 中添加模块并指向您的 Laravel API。",
-          "config.autoimport": "<strong>自动导入</strong> — <code>useAuth</code>、<code>useAuthStore</code>、所有组件和中间件均已自动导入。无需在文件中手动 <code>import</code>。",
+          "install.sub":
+            "兼容 Nuxt 3.x 和 Nuxt 4.x。需要 <code>@nuxt/ui</code> 提供样式。",
+          "config.sub":
+            "在 <code>nuxt.config.ts</code> 中添加模块并指向您的 Laravel API。",
+          "config.autoimport":
+            "<strong>自动导入</strong> — <code>useAuth</code>、<code>useAuthStore</code>、所有组件和中间件均已自动导入。无需在文件中手动 <code>import</code>。",
           "changelog.update": "更新",
           "changelog.fixed": "修复",
-          "changelog.toast_fix": "启动时出现 <code>useToast is not defined</code> 错误，因为 <code>@nuxt/ui</code> 的 composables 在模块运行时不会自动导入。已在 <code>LoginForm.vue</code> 中添加 <code>import { useToast } from '#imports'</code>。",
-          "changelog.pinia_fix": "应用启动时出现 <code>getActivePinia() was called but there was no active Pinia</code> 错误，因为 Pinia store 在 Pinia 挂载前被调用。",
-          "changelog.mw_fix": "<code>auth</code>、<code>guest</code> 和 <code>role</code> 中间件在 Nuxt 4 中返回 500 <code>Unknown route middleware</code> 错误。已将 <code>addRouteMiddleware()</code> 替换为 <code>app:resolve</code> 钩子。",
-          "changelog.peer_fix": "<code>nuxt</code> 依赖被限制为 <code>^3.0.0</code>。已扩展至 <code>^3.0.0 || ^4.0.0</code>。",
+          "changelog.toast_fix":
+            "启动时出现 <code>useToast is not defined</code> 错误，因为 <code>@nuxt/ui</code> 的 composables 在模块运行时不会自动导入。已在 <code>LoginForm.vue</code> 中添加 <code>import { useToast } from '#imports'</code>。",
+          "changelog.pinia_fix":
+            "应用启动时出现 <code>getActivePinia() was called but there was no active Pinia</code> 错误，因为 Pinia store 在 Pinia 挂载前被调用。",
+          "changelog.mw_fix":
+            "<code>auth</code>、<code>guest</code> 和 <code>role</code> 中间件在 Nuxt 4 中返回 500 <code>Unknown route middleware</code> 错误。已将 <code>addRouteMiddleware()</code> 替换为 <code>app:resolve</code> 钩子。",
+          "changelog.peer_fix":
+            "<code>nuxt</code> 依赖被限制为 <code>^3.0.0</code>。已扩展至 <code>^3.0.0 || ^4.0.0</code>。",
           "authlayout.sub": "分屏布局 — 左侧表单，右侧引用语 + 插图。",
           "authlayout.appname_desc": "Logo 名称",
-          "authlayout.slots": "插槽：<code>#logo</code>（替换 logo），<code>#illustration</code>（替换右侧 SVG）。",
+          "authlayout.slots":
+            "插槽：<code>#logo</code>（替换 logo），<code>#illustration</code>（替换右侧 SVG）。",
           "loginform.sub": "带邮箱/密码的登录表单，可选社交登录及角色选择器。",
           "loginform.title_desc": "表单标题",
           "loginform.subtitle_desc": "副标题",
@@ -2556,37 +3623,55 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.ev_success": "登录成功",
           "registerform.sub": "使用姓名、邮箱、密码和确认密码进行注册。",
           "forgotform.sub": "发送重置邮件。发送后显示成功状态。",
-          "resetform.sub": "自动从重置 URL 中读取 <code>?token=</code> 和 <code>?email=</code>。",
-          "resetform.info": "Laravel 邮件必须重定向至 <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>。在 <code>config/auth.php</code> → <code>passwords.users</code> 中配置。",
+          "resetform.sub":
+            "自动从重置 URL 中读取 <code>?token=</code> 和 <code>?email=</code>。",
+          "resetform.info":
+            "Laravel 邮件必须重定向至 <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>。在 <code>config/auth.php</code> → <code>passwords.users</code> 中配置。",
           "profile.sub": "更新已登录用户的姓名、邮箱和头像。",
           "profile.title_desc": "区块标题",
           "profile.avatar_desc": "带预览的头像字段",
-          "profile.slot": "插槽 <code>#extra-fields</code> 用于添加额外字段。通过插槽 prop 访问 <code>form</code> 对象。",
+          "profile.slot":
+            "插槽 <code>#extra-fields</code> 用于添加额外字段。通过插槽 prop 访问 <code>form</code> 对象。",
           "profilepwd.sub": "修改密码。需要当前密码。",
-          "useauth.sub": "主 composable — <strong>自动导入</strong>，文件中无需 <code>import</code>。",
+          "useauth.sub":
+            "主 composable — <strong>自动导入</strong>，文件中无需 <code>import</code>。",
           "useauth.reactive_state": "响应式状态",
           "useauth.actions": "操作",
           "useauth.user_desc": "已登录用户，若未登录则为 <code>null</code>。",
-          "useauth.isauth_desc": "若用户已以有效 token 登录则为 <code>true</code>。",
+          "useauth.isauth_desc":
+            "若用户已以有效 token 登录则为 <code>true</code>。",
           "useauth.isguest_desc": "<code>isAuthenticated</code> 的反值。",
           "useauth.loading_desc": "请求进行中时为 <code>true</code>。",
-          "useauth.login_desc": "登录。成功后重定向至 <code>redirects.home</code>。",
+          "useauth.login_desc":
+            "登录。成功后重定向至 <code>redirects.home</code>。",
           "useauth.register_desc": "注册并自动登录。重定向至主页。",
-          "useauth.logout_desc": "退出登录，删除 cookie 并重定向至 <code>redirects.afterLogout</code>。",
-          "useauth.fetchuser_desc": "从 <code>/api/auth/me</code> 获取用户。通过插件在启动时自动调用。",
-          "useauth.updateprofile_desc": "更新个人资料。头像支持 <code>File</code>（自动以 <code>multipart/form-data</code> 发送）。",
-          "useauth.updatepwd_desc": "需要 <code>current_password</code>、<code>password</code>、<code>password_confirmation</code>。",
+          "useauth.logout_desc":
+            "退出登录，删除 cookie 并重定向至 <code>redirects.afterLogout</code>。",
+          "useauth.fetchuser_desc":
+            "从 <code>/api/auth/me</code> 获取用户。通过插件在启动时自动调用。",
+          "useauth.updateprofile_desc":
+            "更新个人资料。头像支持 <code>File</code>（自动以 <code>multipart/form-data</code> 发送）。",
+          "useauth.updatepwd_desc":
+            "需要 <code>current_password</code>、<code>new_password</code>、<code>password_confirmation</code>。",
           "useauth.forgot_desc": "发送重置邮件。",
-          "useauth.reset_desc": "需要 <code>{ token, email, password, password_confirmation }</code>。",
-          "rbac.sub": "<code>hasRole()</code> 和 <code>hasPermission()</code> 可通过 <code>useAuth()</code> 访问 — 自动导入。",
+          "useauth.reset_desc":
+            "需要 <code>{ token, email, password, password_confirmation }</code>。",
+          "rbac.sub":
+            "<code>hasRole()</code> 和 <code>hasPermission()</code> 可通过 <code>useAuth()</code> 访问 — 自动导入。",
           "rbac.create_article": "创建文章",
-          "rbac.super_admin_note": "<code>super-admin</code> 角色（可通过 <code>rbac.superAdminRole</code> 配置）会绕过 <code>role</code> 中间件中的所有检查。",
-          "mw.sub": "三个命名中间件，可直接在 <code>definePageMeta</code> 中使用。无需导入。",
-          "mw.auth_desc": "未登录时重定向至 <code>/auth/login</code>。将 URL 保存在 <code>?redirect=</code> 中。",
-          "mw.guest_desc": "已登录时重定向至 <code>/</code>。用于登录、注册等页面。",
-          "mw.role_desc": "验证用户是否拥有 <code>meta.roles</code> 中至少一个角色。",
+          "rbac.super_admin_note":
+            "<code>super-admin</code> 角色（可通过 <code>rbac.superAdminRole</code> 配置）会绕过 <code>role</code> 中间件中的所有检查。",
+          "mw.sub":
+            "三个命名中间件，可直接在 <code>definePageMeta</code> 中使用。无需导入。",
+          "mw.auth_desc":
+            "未登录时重定向至 <code>/auth/login</code>。将 URL 保存在 <code>?redirect=</code> 中。",
+          "mw.guest_desc":
+            "已登录时重定向至 <code>/</code>。用于登录、注册等页面。",
+          "mw.role_desc":
+            "验证用户是否拥有 <code>meta.roles</code> 中至少一个角色。",
           "api.title": "预期 Laravel API",
-          "api.sub": "所有端点可通过 <code>nuxtAuthKit.endpoints</code> 自定义。",
+          "api.sub":
+            "所有端点可通过 <code>nuxtAuthKit.endpoints</code> 自定义。",
           "api.login": "登录",
           "api.register": "注册",
           "api.logout": "退出登录",
@@ -2595,11 +3680,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "修改密码",
           "api.forgot": "重置邮件",
           "api.reset": "用 token 重置",
-          "api.user_fields": "<code>user</code> 字段必须至少包含 <code>id</code>、<code>name</code>、<code>email</code>。<code>roles</code> 和 <code>permissions</code> 字段（字符串数组）为启用 RBAC 的可选字段。",
+          "api.user_fields":
+            "<code>user</code> 字段必须至少包含 <code>id</code>、<code>name</code>、<code>email</code>。<code>roles</code> 和 <code>permissions</code> 字段（字符串数组）为启用 RBAC 的可选字段。",
           "laravel.title": "Laravel Sanctum 示例",
-          "types.sub": "从 <code>nuxt-auth-kit</code> 导出。仅在需要时显式导入。",
-          "table.prop": "属性", "table.type": "类型", "table.default": "默认值", "table.desc": "描述",
-          "table.event": "事件", "table.method": "方法", "table.route": "路由", "table.response": "响应",
+          "types.sub":
+            "从 <code>nuxt-auth-kit</code> 导出。仅在需要时显式导入。",
+          "table.prop": "属性",
+          "table.type": "类型",
+          "table.default": "默认值",
+          "table.desc": "描述",
+          "table.event": "事件",
+          "table.method": "方法",
+          "table.route": "路由",
+          "table.response": "响应",
         },
         de: {
           "nav.getting_started": "Einstieg",
@@ -2618,76 +3711,118 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "ui.usage_example": "Verwendungsbeispiel",
           "ui.page_example": "Beispiel in einer Seite",
           "ui.vue_template": "In einem Vue-Template",
-          "hero.lead": "Ein schlüsselfertiges Nuxt-Authentifizierungsmodul für Laravel-APIs. Einmal installiert — Login, Registrierung, Profil, Passwörter, Rollen und Berechtigungen sind einsatzbereit.",
+          "hero.lead":
+            "Ein schlüsselfertiges Nuxt-Authentifizierungsmodul für Laravel-APIs. Einmal installiert — Login, Registrierung, Profil, Passwörter, Rollen und Berechtigungen sind einsatzbereit.",
           "features.title": "Funktionen",
-          "features.sub": "Alles was Sie brauchen, ohne manuelle Konfiguration.",
+          "features.sub":
+            "Alles was Sie brauchen, ohne manuelle Konfiguration.",
           "features.auth_title": "Vollständige Authentifizierung",
-          "features.auth_desc": "Login, Registrierung, Logout mit persistierter Sitzung über sicheres Cookie.",
+          "features.auth_desc":
+            "Login, Registrierung, Logout mit persistierter Sitzung über sicheres Cookie.",
           "features.profile_title": "Profilverwaltung",
-          "features.profile_desc": "Name, E-Mail, Avatar aktualisieren und Passwort ändern.",
+          "features.profile_desc":
+            "Name, E-Mail, Avatar aktualisieren und Passwort ändern.",
           "features.reset_title": "Passwort zurücksetzen",
-          "features.reset_desc": "Vollständiger Ablauf: Passwort vergessen → E-Mail → Zurücksetzen.",
+          "features.reset_desc":
+            "Vollständiger Ablauf: Passwort vergessen → E-Mail → Zurücksetzen.",
           "features.rbac_title": "RBAC — Rollen & Berechtigungen",
-          "features.rbac_desc": "<code>hasRole()</code> und <code>hasPermission()</code> überall verfügbar.",
+          "features.rbac_desc":
+            "<code>hasRole()</code> und <code>hasPermission()</code> überall verfügbar.",
           "features.mw_title": "Benannte Middleware",
-          "features.mw_desc": "<code>auth</code>, <code>guest</code>, <code>role</code> in <code>definePageMeta</code> — kein Import nötig.",
+          "features.mw_desc":
+            "<code>auth</code>, <code>guest</code>, <code>role</code> in <code>definePageMeta</code> — kein Import nötig.",
           "features.comp_title": "Fertige Komponenten",
-          "features.comp_desc": "7 Vue-Split-Screen-Komponenten, Tailwind CSS, automatisch importiert.",
-          "install.sub": "Kompatibel mit Nuxt 3.x und Nuxt 4.x. Erfordert <code>@nuxt/ui</code> für Styles.",
-          "config.sub": "Fügen Sie das Modul in <code>nuxt.config.ts</code> hinzu und verweisen Sie auf Ihre Laravel-API.",
-          "config.autoimport": "<strong>Auto-Import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, alle Komponenten und Middleware werden automatisch importiert. Kein <code>import</code> in Ihren Dateien nötig.",
+          "features.comp_desc":
+            "7 Vue-Split-Screen-Komponenten, Tailwind CSS, automatisch importiert.",
+          "install.sub":
+            "Kompatibel mit Nuxt 3.x und Nuxt 4.x. Erfordert <code>@nuxt/ui</code> für Styles.",
+          "config.sub":
+            "Fügen Sie das Modul in <code>nuxt.config.ts</code> hinzu und verweisen Sie auf Ihre Laravel-API.",
+          "config.autoimport":
+            "<strong>Auto-Import</strong> — <code>useAuth</code>, <code>useAuthStore</code>, alle Komponenten und Middleware werden automatisch importiert. Kein <code>import</code> in Ihren Dateien nötig.",
           "changelog.update": "Aktualisierung",
           "changelog.fixed": "Behoben",
-          "changelog.toast_fix": "Der Fehler <code>useToast is not defined</code> trat beim Start auf, da die Composables von <code>@nuxt/ui</code> im Runtime eines Moduls nicht automatisch importiert werden. <code>import { useToast } from '#imports'</code> in <code>LoginForm.vue</code> hinzugefügt.",
-          "changelog.pinia_fix": "Der Fehler <code>getActivePinia() was called but there was no active Pinia</code> trat beim App-Start auf, weil der Pinia-Store aufgerufen wurde, bevor Pinia gemountet war.",
-          "changelog.mw_fix": "Die Middlewares <code>auth</code>, <code>guest</code> und <code>role</code> gaben in Nuxt 4 einen 500-Fehler <code>Unknown route middleware</code> zurück. <code>addRouteMiddleware()</code> durch den Hook <code>app:resolve</code> ersetzt.",
-          "changelog.peer_fix": "Die <code>nuxt</code>-Abhängigkeit war auf <code>^3.0.0</code> beschränkt. Auf <code>^3.0.0 || ^4.0.0</code> erweitert.",
-          "authlayout.sub": "Split-Screen-Layout — Formular links, Testimonial + Illustration rechts.",
+          "changelog.toast_fix":
+            "Der Fehler <code>useToast is not defined</code> trat beim Start auf, da die Composables von <code>@nuxt/ui</code> im Runtime eines Moduls nicht automatisch importiert werden. <code>import { useToast } from '#imports'</code> in <code>LoginForm.vue</code> hinzugefügt.",
+          "changelog.pinia_fix":
+            "Der Fehler <code>getActivePinia() was called but there was no active Pinia</code> trat beim App-Start auf, weil der Pinia-Store aufgerufen wurde, bevor Pinia gemountet war.",
+          "changelog.mw_fix":
+            "Die Middlewares <code>auth</code>, <code>guest</code> und <code>role</code> gaben in Nuxt 4 einen 500-Fehler <code>Unknown route middleware</code> zurück. <code>addRouteMiddleware()</code> durch den Hook <code>app:resolve</code> ersetzt.",
+          "changelog.peer_fix":
+            "Die <code>nuxt</code>-Abhängigkeit war auf <code>^3.0.0</code> beschränkt. Auf <code>^3.0.0 || ^4.0.0</code> erweitert.",
+          "authlayout.sub":
+            "Split-Screen-Layout — Formular links, Testimonial + Illustration rechts.",
           "authlayout.appname_desc": "Logo-Name",
-          "authlayout.slots": "Slots: <code>#logo</code> (ersetzt das Logo), <code>#illustration</code> (ersetzt das rechte SVG).",
-          "loginform.sub": "Login-Formular mit E-Mail/Passwort, optionalem Social-Login und Rollen-Selektor.",
+          "authlayout.slots":
+            "Slots: <code>#logo</code> (ersetzt das Logo), <code>#illustration</code> (ersetzt das rechte SVG).",
+          "loginform.sub":
+            "Login-Formular mit E-Mail/Passwort, optionalem Social-Login und Rollen-Selektor.",
           "loginform.title_desc": "Formulartitel",
           "loginform.subtitle_desc": "Untertitel",
           "loginform.social_desc": "Google / Apple Buttons",
           "loginform.roles_desc": "Rollen-Selektor",
-          "loginform.ev_forgot": "Klick auf \"Passwort vergessen?\"",
-          "loginform.ev_register": "Klick auf \"Registrieren\"",
+          "loginform.ev_forgot": 'Klick auf "Passwort vergessen?"',
+          "loginform.ev_register": 'Klick auf "Registrieren"',
           "loginform.ev_google": "Klick auf Google-Button",
           "loginform.ev_apple": "Klick auf Apple-Button",
           "loginform.ev_success": "Erfolgreiches Login",
-          "registerform.sub": "Registrierung mit Name, E-Mail, Passwort und Bestätigung.",
-          "forgotform.sub": "Sendet die Reset-E-Mail. Zeigt nach dem Senden einen Erfolgsstatus an.",
-          "resetform.sub": "Liest automatisch <code>?token=</code> und <code>?email=</code> aus der Reset-URL.",
-          "resetform.info": "Die Laravel-E-Mail muss zu <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong> weiterleiten. In <code>config/auth.php</code> → <code>passwords.users</code> konfigurieren.",
-          "profile.sub": "Name, E-Mail und Avatar des eingeloggten Benutzers aktualisieren.",
+          "registerform.sub":
+            "Registrierung mit Name, E-Mail, Passwort und Bestätigung.",
+          "forgotform.sub":
+            "Sendet die Reset-E-Mail. Zeigt nach dem Senden einen Erfolgsstatus an.",
+          "resetform.sub":
+            "Liest automatisch <code>?token=</code> und <code>?email=</code> aus der Reset-URL.",
+          "resetform.info":
+            "Die Laravel-E-Mail muss zu <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong> weiterleiten. In <code>config/auth.php</code> → <code>passwords.users</code> konfigurieren.",
+          "profile.sub":
+            "Name, E-Mail und Avatar des eingeloggten Benutzers aktualisieren.",
           "profile.title_desc": "Abschnittstitel",
           "profile.avatar_desc": "Avatar-Feld mit Vorschau",
-          "profile.slot": "Slot <code>#extra-fields</code> zum Hinzufügen von Zusatzfeldern. Zugriff auf das <code>form</code>-Objekt über die Slot-Prop.",
+          "profile.slot":
+            "Slot <code>#extra-fields</code> zum Hinzufügen von Zusatzfeldern. Zugriff auf das <code>form</code>-Objekt über die Slot-Prop.",
           "profilepwd.sub": "Passwort ändern. Erfordert das aktuelle Passwort.",
-          "useauth.sub": "Haupt-Composable — <strong>automatisch importiert</strong>, kein <code>import</code> in Ihren Dateien nötig.",
+          "useauth.sub":
+            "Haupt-Composable — <strong>automatisch importiert</strong>, kein <code>import</code> in Ihren Dateien nötig.",
           "useauth.reactive_state": "Reaktiver Zustand",
           "useauth.actions": "Aktionen",
-          "useauth.user_desc": "Der eingeloggte Benutzer oder <code>null</code> falls ausgeloggt.",
-          "useauth.isauth_desc": "<code>true</code> wenn ein Benutzer mit gültigem Token eingeloggt ist.",
+          "useauth.user_desc":
+            "Der eingeloggte Benutzer oder <code>null</code> falls ausgeloggt.",
+          "useauth.isauth_desc":
+            "<code>true</code> wenn ein Benutzer mit gültigem Token eingeloggt ist.",
           "useauth.isguest_desc": "Gegenteil von <code>isAuthenticated</code>.",
-          "useauth.loading_desc": "<code>true</code> während einer laufenden Anfrage.",
-          "useauth.login_desc": "Login. Leitet bei Erfolg zu <code>redirects.home</code> weiter.",
-          "useauth.register_desc": "Registrierung und automatischer Login. Weiterleitung zur Startseite.",
-          "useauth.logout_desc": "Logout, Cookie-Löschung und Weiterleitung zu <code>redirects.afterLogout</code>.",
-          "useauth.fetchuser_desc": "Ruft den Benutzer von <code>/api/auth/me</code> ab. Wird beim Start automatisch via Plugin aufgerufen.",
-          "useauth.updateprofile_desc": "Aktualisiert das Profil. Unterstützt <code>File</code> für den Avatar (automatisch als <code>multipart/form-data</code>).",
-          "useauth.updatepwd_desc": "Erfordert <code>current_password</code>, <code>password</code>, <code>password_confirmation</code>.",
+          "useauth.loading_desc":
+            "<code>true</code> während einer laufenden Anfrage.",
+          "useauth.login_desc":
+            "Login. Leitet bei Erfolg zu <code>redirects.home</code> weiter.",
+          "useauth.register_desc":
+            "Registrierung und automatischer Login. Weiterleitung zur Startseite.",
+          "useauth.logout_desc":
+            "Logout, Cookie-Löschung und Weiterleitung zu <code>redirects.afterLogout</code>.",
+          "useauth.fetchuser_desc":
+            "Ruft den Benutzer von <code>/api/auth/me</code> ab. Wird beim Start automatisch via Plugin aufgerufen.",
+          "useauth.updateprofile_desc":
+            "Aktualisiert das Profil. Unterstützt <code>File</code> für den Avatar (automatisch als <code>multipart/form-data</code>).",
+          "useauth.updatepwd_desc":
+            "Erfordert <code>current_password</code>, <code>new_password</code>, <code>password_confirmation</code>.",
           "useauth.forgot_desc": "Sendet die Reset-E-Mail.",
-          "useauth.reset_desc": "Erfordert <code>{ token, email, password, password_confirmation }</code>.",
-          "rbac.sub": "<code>hasRole()</code> und <code>hasPermission()</code> über <code>useAuth()</code> zugänglich — automatisch importiert.",
+          "useauth.reset_desc":
+            "Erfordert <code>{ token, email, password, password_confirmation }</code>.",
+          "rbac.sub":
+            "<code>hasRole()</code> und <code>hasPermission()</code> über <code>useAuth()</code> zugänglich — automatisch importiert.",
           "rbac.create_article": "Artikel erstellen",
-          "rbac.super_admin_note": "Die Rolle <code>super-admin</code> (konfigurierbar über <code>rbac.superAdminRole</code>) umgeht alle Prüfungen in der <code>role</code>-Middleware.",
-          "mw.sub": "Drei benannte Middlewares, direkt in <code>definePageMeta</code> verwendbar. Kein Import nötig.",
-          "mw.auth_desc": "Leitet zu <code>/auth/login</code> weiter, falls nicht eingeloggt. Speichert die URL in <code>?redirect=</code>.",
-          "mw.guest_desc": "Leitet zu <code>/</code> weiter, falls bereits eingeloggt. Für Login, Registrierung etc. verwenden.",
-          "mw.role_desc": "Prüft, ob der Benutzer mindestens eine Rolle aus <code>meta.roles</code> hat.",
+          "rbac.super_admin_note":
+            "Die Rolle <code>super-admin</code> (konfigurierbar über <code>rbac.superAdminRole</code>) umgeht alle Prüfungen in der <code>role</code>-Middleware.",
+          "mw.sub":
+            "Drei benannte Middlewares, direkt in <code>definePageMeta</code> verwendbar. Kein Import nötig.",
+          "mw.auth_desc":
+            "Leitet zu <code>/auth/login</code> weiter, falls nicht eingeloggt. Speichert die URL in <code>?redirect=</code>.",
+          "mw.guest_desc":
+            "Leitet zu <code>/</code> weiter, falls bereits eingeloggt. Für Login, Registrierung etc. verwenden.",
+          "mw.role_desc":
+            "Prüft, ob der Benutzer mindestens eine Rolle aus <code>meta.roles</code> hat.",
           "api.title": "Erwartete Laravel-API",
-          "api.sub": "Alle Endpunkte sind über <code>nuxtAuthKit.endpoints</code> anpassbar.",
+          "api.sub":
+            "Alle Endpunkte sind über <code>nuxtAuthKit.endpoints</code> anpassbar.",
           "api.login": "Login",
           "api.register": "Registrierung",
           "api.logout": "Logout",
@@ -2696,76 +3831,101 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "api.update_pwd": "Passwort ändern",
           "api.forgot": "Reset-E-Mail",
           "api.reset": "Reset mit Token",
-          "api.user_fields": "Das <code>user</code>-Feld muss mindestens <code>id</code>, <code>name</code>, <code>email</code> enthalten. Die Felder <code>roles</code> und <code>permissions</code> (String-Arrays) sind optional für RBAC.",
+          "api.user_fields":
+            "Das <code>user</code>-Feld muss mindestens <code>id</code>, <code>name</code>, <code>email</code> enthalten. Die Felder <code>roles</code> und <code>permissions</code> (String-Arrays) sind optional für RBAC.",
           "laravel.title": "Beispiel mit Laravel Sanctum",
-          "types.sub": "Exportiert aus <code>nuxt-auth-kit</code>. Nur bei explizitem Bedarf importieren.",
-          "table.prop": "Prop", "table.type": "Typ", "table.default": "Standard", "table.desc": "Beschreibung",
-          "table.event": "Ereignis", "table.method": "Methode", "table.route": "Route", "table.response": "Antwort",
-        }
+          "types.sub":
+            "Exportiert aus <code>nuxt-auth-kit</code>. Nur bei explizitem Bedarf importieren.",
+          "table.prop": "Prop",
+          "table.type": "Typ",
+          "table.default": "Standard",
+          "table.desc": "Beschreibung",
+          "table.event": "Ereignis",
+          "table.method": "Methode",
+          "table.route": "Route",
+          "table.response": "Antwort",
+        },
       };
 
       // ═══════════════════════════════════════
       // I18N ENGINE
       // ═══════════════════════════════════════
-      let currentLang = 'fr';
+      let currentLang = "fr";
 
       function t(key) {
-        return (translations[currentLang] && translations[currentLang][key]) || translations['fr'][key] || key;
+        return (
+          (translations[currentLang] && translations[currentLang][key]) ||
+          translations["fr"][key] ||
+          key
+        );
       }
 
       function applyTranslations() {
         // data-i18n: set innerHTML
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
           el.innerHTML = t(key);
         });
 
         // data-i18n-attr: "attr:key"
-        document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-          const parts = el.getAttribute('data-i18n-attr').split(':');
+        document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+          const parts = el.getAttribute("data-i18n-attr").split(":");
           if (parts.length === 2) {
             el[parts[0]] = t(parts[1]);
           }
         });
 
         // Update copy button text for visible copy buttons (already shown)
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-          if (btn.textContent !== '✓ ' + (currentLang === 'ar' ? 'تم النسخ' : 'Copied')) {
-            btn.textContent = t('ui.copy');
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          if (
+            btn.textContent !==
+            "✓ " + (currentLang === "ar" ? "تم النسخ" : "Copied")
+          ) {
+            btn.textContent = t("ui.copy");
           }
         });
 
         // RTL
-        const isRTL = currentLang === 'ar';
-        document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-        document.documentElement.setAttribute('lang', currentLang);
+        const isRTL = currentLang === "ar";
+        document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+        document.documentElement.setAttribute("lang", currentLang);
 
         // Update lang buttons
-        document.querySelectorAll('[data-lang]').forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang") === currentLang,
+          );
         });
       }
 
       function setLang(lang) {
         currentLang = lang;
-        try { localStorage.setItem('nak-lang', lang); } catch(e) {}
+        try {
+          localStorage.setItem("nak-lang", lang);
+        } catch (e) {}
         applyTranslations();
       }
 
       // Init lang from storage
       try {
-        const savedLang = localStorage.getItem('nak-lang');
+        const savedLang = localStorage.getItem("nak-lang");
         if (savedLang && translations[savedLang]) currentLang = savedLang;
-      } catch(e) {}
+      } catch (e) {}
       applyTranslations();
 
       // ═══════════════════════════════════════
       // EXISTING SCRIPTS
       // ═══════════════════════════════════════
       function toggleTheme() {
-        const t = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+        const t =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "dark"
+            : "light";
         document.documentElement.setAttribute("data-theme", t);
-        try { localStorage.setItem("nak-theme", t); } catch (e) {}
+        try {
+          localStorage.setItem("nak-theme", t);
+        } catch (e) {}
       }
       try {
         const saved = localStorage.getItem("nak-theme");
@@ -2775,7 +3935,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
       function tab(el, id) {
         const box = el.closest(".install-box");
         box.querySelectorAll(".tab").forEach((t) => t.classList.remove("on"));
-        box.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("on"));
+        box
+          .querySelectorAll(".tab-panel")
+          .forEach((p) => p.classList.remove("on"));
         el.classList.add("on");
         box.querySelector("#tab-" + id).classList.add("on");
       }
@@ -2784,10 +3946,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
         const code = btn.closest(".codeblock").querySelector("pre").innerText;
         navigator.clipboard.writeText(code).then(() => {
           const orig = btn.textContent;
-          btn.textContent = "✓ " + t('ui.copy');
+          btn.textContent = "✓ " + t("ui.copy");
           btn.style.color = "var(--green)";
           setTimeout(() => {
-            btn.textContent = t('ui.copy');
+            btn.textContent = t("ui.copy");
             btn.style.color = "";
           }, 1800);
         });
@@ -2799,12 +3961,15 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             if (e.isIntersecting) {
               const id = e.target.id;
               document.querySelectorAll(".nav-link").forEach((l) => {
-                l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+                l.classList.toggle(
+                  "active",
+                  l.getAttribute("href") === "#" + id,
+                );
               });
             }
           });
         },
-        { rootMargin: "-15% 0px -75% 0px" }
+        { rootMargin: "-15% 0px -75% 0px" },
       );
       document.querySelectorAll("[id]").forEach((el) => obs.observe(el));
     </script>

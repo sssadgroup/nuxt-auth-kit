@@ -2,7 +2,12 @@
   <div class="profile-update-password">
     <h2 class="text-2xl font-bold text-[#1a2e1a] mb-6">{{ title }}</h2>
 
-    <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-5">
+    <UForm
+      :schema="schema"
+      :state="form"
+      @submit="handleSubmit"
+      class="space-y-5"
+    >
       <UFormField
         label="Mot de passe actuel"
         name="current_password"
@@ -31,9 +36,14 @@
         </UInput>
       </UFormField>
 
-      <UFormField label="Nouveau mot de passe" name="password" required class="mt-4">
+      <UFormField
+        label="Nouveau mot de passe"
+        name="password"
+        required
+        class="mt-4"
+      >
         <UInput
-          v-model="form.password"
+          v-model="form.new_password"
           size="lg"
           :type="show.new ? 'text' : 'password'"
           placeholder="Minimum 8 caractères"
@@ -56,12 +66,12 @@
 
       <UFormField
         label="Confirmer le nouveau mot de passe"
-        name="password_confirmation"
+        name="new_password_confirmation"
         required
         class="mt-4"
       >
         <UInput
-          v-model="form.password_confirmation"
+          v-model="form.new_password_confirmation"
           size="lg"
           :type="show.new ? 'text' : 'password'"
           placeholder="Confirmez votre nouveau mot de passe"
@@ -93,7 +103,6 @@ import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
 
-
 withDefaults(defineProps<{ title?: string }>(), {
   title: "Changer le mot de passe",
 });
@@ -101,12 +110,14 @@ withDefaults(defineProps<{ title?: string }>(), {
 const schema = z
   .object({
     current_password: z.string().min(1, "Le mot de passe actuel est requis"),
-    password: z.string().min(8, "Minimum 8 caractères"),
-    password_confirmation: z.string().min(1, "Veuillez confirmer le mot de passe"),
+    new_password: z.string().min(8, "Minimum 8 caractères"),
+    new_password_confirmation: z
+      .string()
+      .min(1, "Veuillez confirmer le mot de passe"),
   })
-  .refine((data) => data.password === data.password_confirmation, {
+  .refine((data) => data.new_password === data.new_password_confirmation, {
     message: "Les mots de passe ne correspondent pas",
-    path: ["password_confirmation"],
+    path: ["new_password_confirmation"],
   });
 
 const { updatePassword, loading } = useAuth();
@@ -114,8 +125,8 @@ const toast = useToast();
 
 const form = reactive({
   current_password: "",
-  password: "",
-  password_confirmation: "",
+  new_password: "",
+  new_password_confirmation: "",
 });
 const show = reactive({ current: false, new: false });
 
@@ -130,8 +141,8 @@ async function handleSubmit() {
       color: "success",
     });
     form.current_password = "";
-    form.password = "";
-    form.password_confirmation = "";
+    form.new_password = "";
+    form.new_password_confirmation = "";
   } else {
     toast.add({
       title: "Erreur",

@@ -21,7 +21,7 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
-  password_confirmation: string;
+  // password_confirmation: string;
   role?: string;
   [key: string]: unknown;
 }
@@ -35,8 +35,8 @@ export interface UpdateProfileData {
 
 export interface UpdatePasswordData {
   current_password: string;
-  password: string;
-  password_confirmation: string;
+  new_password: string;
+  new_password_confirmation: string;
 }
 
 export interface ForgotPasswordData {

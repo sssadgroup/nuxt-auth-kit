@@ -12,7 +12,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-b45309?style=flat-square)](https://www.typescriptlang.org)
 
 **阅读其他语言版本：**
-🇬🇧 [English](./README.md) · 🇫🇷 [Français](./README.fr.md) · 🇸🇦 [العربية](./README.ar.md) · 🇪🇸 [Español](./README.es.md) · 🇩🇪 [Deutsch](./README.de.md)
+🇬🇧 [English](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.md) · 🇫🇷 [Français](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.fr.md) · 🇸🇦 [العربية](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.ar.md) · 🇪🇸 [Español](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.es.md) · 🇩🇪 [Deutsch](https://github.com/sssadgroup/nuxt-auth-kit/blob/main/README.de.md)
 
 </div>
 
@@ -49,36 +49,36 @@ pnpm add nuxt-auth-kit
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['nuxt-auth-kit', '@nuxt/ui'],
+  modules: ["nuxt-auth-kit", "@nuxt/ui"],
 
   nuxtAuthKit: {
-    apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000',
+    apiBase: process.env.NUXT_PUBLIC_API_BASE || "http://localhost:8000",
 
     endpoints: {
-      login:          '/api/auth/login',
-      register:       '/api/auth/register',
-      logout:         '/api/auth/logout',
-      me:             '/api/auth/me',
-      updateProfile:  '/api/profile',
-      updatePassword: '/api/profile/password',
-      forgotPassword: '/api/auth/forgot-password',
-      resetPassword:  '/api/auth/reset-password',
+      login: "/api/auth/login",
+      register: "/api/auth/register",
+      logout: "/api/auth/logout",
+      me: "/api/auth/me",
+      updateProfile: "/api/profile",
+      updatePassword: "/api/profile/password",
+      forgotPassword: "/api/auth/forgot-password",
+      resetPassword: "/api/auth/reset-password",
     },
 
     redirects: {
-      login:       '/auth/login',
-      home:        '/',
-      afterLogout: '/auth/login',
+      login: "/auth/login",
+      home: "/",
+      afterLogout: "/auth/login",
     },
 
-    tokenCookieName: 'auth_token',
+    tokenCookieName: "auth_token",
 
     rbac: {
-      superAdminRole:  'super-admin',
-      defaultUserRole: 'user',
+      superAdminRole: "super-admin",
+      defaultUserRole: "user",
     },
   },
-})
+});
 ```
 
 ```env
@@ -88,56 +88,257 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
 
 ## 使用方法
 
+### 认证页面
+
+```vue
+<!-- pages/auth/login.vue -->
+<template>
+  <AuthLayout :quote="quote">
+    <AuthLoginForm
+      :roles="[
+        { value: 'user', label: '普通用户' },
+        { value: 'owner', label: '所有者' },
+      ]"
+      :show-social="true"
+      @forgot-password="navigateTo('/auth/forgot-password')"
+      @register="navigateTo('/auth/register')"
+    />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+const quote = {
+  text: "流畅愉快的体验。",
+  author: "3S Tech Group",
+  location: "达喀尔",
+};
+</script>
+```
+
+```vue
+<!-- pages/auth/register.vue -->
+<template>
+  <AuthLayout>
+    <AuthRegisterForm @login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+```vue
+<!-- pages/auth/forgot-password.vue -->
+<template>
+  <AuthLayout>
+    <AuthForgotPasswordForm @back-to-login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+```vue
+<!-- pages/auth/reset-password.vue -->
+<template>
+  <AuthLayout>
+    <!-- 自动从 URL 中读取 ?token= 和 ?email= -->
+    <AuthResetPasswordForm @back-to-login="navigateTo('/auth/login')" />
+  </AuthLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "guest" });
+</script>
+```
+
+### 个人资料页面
+
+```vue
+<!-- pages/profile/index.vue -->
+<template>
+  <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
+    <ProfileUpdateForm
+      title="我的资料"
+      :show-avatar="true"
+      @success="onSaved"
+    />
+    <hr />
+    <ProfileUpdatePasswordForm title="修改密码" />
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ middleware: "auth" });
+function onSaved() {
+  /* 显示提示 */
+}
+</script>
+```
+
 ### `useAuth` 组合式函数
 
 所有内容均**自动导入** — 无需在文件中手动 `import`。
 
 ```ts
 const {
-  user,            // Ref<AuthUser | null>
+  user, // Ref<AuthUser | null>
   isAuthenticated, // ComputedRef<boolean>
-  isGuest,         // ComputedRef<boolean>
-  loading,         // Ref<boolean>
+  isGuest, // ComputedRef<boolean>
+  loading, // Ref<boolean>
 
-  login, register, logout, fetchUser,
-  updateProfile, updatePassword,
-  forgotPassword, resetPassword,
+  // 操作
+  login,
+  register,
+  logout,
+  fetchUser,
+  updateProfile,
+  updatePassword,
+  forgotPassword,
+  resetPassword,
 
-  hasRole,         // (role: string | string[]) => boolean
-  hasPermission,   // (perm: string | string[]) => boolean
-} = useAuth()
+  // RBAC
+  hasRole, // (role: string | string[]) => boolean
+  hasPermission, // (perm: string | string[]) => boolean
+} = useAuth();
 ```
+
+#### RBAC 示例
+
+```ts
+const { hasRole, hasPermission } = useAuth();
+
+if (hasRole("admin")) {
+  /* ... */
+}
+if (hasRole(["admin", "manager"])) {
+  /* ... */
+}
+if (hasPermission("edit-posts")) {
+  /* ... */
+}
+```
+
+```vue
+<template>
+  <AdminPanel v-if="hasRole('admin')" />
+  <button v-if="hasPermission('create-post')">创建文章</button>
+</template>
+```
+
+> `super-admin` 角色（可通过 `rbac.superAdminRole` 配置）会绕过 `role` 中间件中的所有检查。
 
 ### 中间件
 
 ```ts
 // 仅限已登录用户
-definePageMeta({ middleware: 'auth' })
+definePageMeta({ middleware: "auth" });
 
 // 仅限访客 — 已登录则重定向至 /
-definePageMeta({ middleware: 'guest' })
+definePageMeta({ middleware: "guest" });
 
 // 基于角色的访问
-definePageMeta({ middleware: 'role', roles: ['admin', 'manager'] })
+definePageMeta({ middleware: "role", roles: ["admin", "manager"] });
 
 // 认证 + 角色组合
-definePageMeta({ middleware: ['auth', 'role'], roles: ['admin'] })
+definePageMeta({ middleware: ["auth", "role"], roles: ["admin"] });
 ```
 
 ## 预期的 Laravel API
 
 所有端点可通过 `nuxtAuthKit.endpoints` 自定义。
 
-| 方法 | 路由 | Auth | 响应 | 说明 |
-|------|------|------|------|------|
-| `POST` | `/api/auth/login` | — | `{ user, token }` | 登录 |
-| `POST` | `/api/auth/register` | — | `{ user, token }` | 注册 |
-| `POST` | `/api/auth/logout` | ✅ | `{ message }` | 退出登录 |
-| `GET` | `/api/auth/me` | ✅ | `{ user }` | 当前用户 |
-| `PUT` | `/api/profile` | ✅ | `{ user }` | 更新资料 |
-| `PUT` | `/api/profile/password` | ✅ | `{ message }` | 修改密码 |
-| `POST` | `/api/auth/forgot-password` | — | `{ message }` | 发送重置邮件 |
-| `POST` | `/api/auth/reset-password` | — | `{ message }` | 用 token 重置 |
+| 方法   | 路由                        | Auth | 响应              | 说明          |
+| ------ | --------------------------- | ---- | ----------------- | ------------- |
+| `POST` | `/api/auth/login`           | —    | `{ user, token }` | 登录          |
+| `POST` | `/api/auth/register`        | —    | `{ user, token }` | 注册          |
+| `POST` | `/api/auth/logout`          | ✅   | `{ message }`     | 退出登录      |
+| `GET`  | `/api/auth/me`              | ✅   | `{ user }`        | 当前用户      |
+| `PUT`  | `/api/profile`              | ✅   | `{ user }`        | 更新资料      |
+| `PUT`  | `/api/profile/password`     | ✅   | `{ message }`     | 修改密码      |
+| `POST` | `/api/auth/forgot-password` | —    | `{ message }`     | 发送重置邮件  |
+| `POST` | `/api/auth/reset-password`  | —    | `{ message }`     | 用 token 重置 |
+
+> `user` 字段必须至少包含 `id`、`name`、`email`。`roles` 和 `permissions` 字段（字符串数组）为启用 RBAC 的可选字段。
+
+### Laravel Sanctum 示例
+
+```php
+// routes/api.php
+Route::prefix('auth')->group(function () {
+    Route::post('login',           [AuthController::class, 'login']);
+    Route::post('register',        [AuthController::class, 'register']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password',  [AuthController::class, 'resetPassword']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout',  [AuthController::class, 'logout']);
+        Route::get('me',       [AuthController::class, 'me']);
+        Route::put('profile',  [AuthController::class, 'updateProfile']);
+        Route::put('password', [AuthController::class, 'updatePassword']);
+    });
+});
+```
+
+```php
+// AuthController.php
+public function me(Request $request): JsonResponse
+{
+    return response()->json([
+        'user' => $request->user()->load('roles', 'permissions'),
+    ]);
+}
+```
+
+## TypeScript 类型
+
+```ts
+import type {
+  AuthUser, // 用户结构
+  LoginCredentials, // { email, password, remember? }
+  RegisterData, // { name, email, password, password_confirmation }
+  UpdateProfileData, // { name?, email?, avatar? }
+  UpdatePasswordData, // { current_password, new_password, new_password_confirmation }
+  ForgotPasswordData, // { email }
+  ResetPasswordData, // { token, email, password, password_confirmation }
+  AuthResponse, // { user, token }
+  ApiError, // { message, errors? }
+  ModuleOptions, // nuxtAuthKit 配置
+} from "nuxt-auth-kit";
+```
+
+## 架构
+
+```
+nuxt-auth-kit/
+├── build.config.ts
+├── package.json
+└── src/
+    ├── module.ts
+    └── runtime/
+        ├── types/index.ts
+        ├── stores/auth.ts
+        ├── composables/useAuth.ts
+        ├── plugins/auth.ts
+        ├── middleware/
+        │   ├── auth.ts
+        │   ├── guest.ts
+        │   └── role.ts
+        └── components/
+            ├── auth/
+            │   ├── AuthLayout.vue
+            │   ├── LoginForm.vue
+            │   ├── RegisterForm.vue
+            │   ├── ForgotPasswordForm.vue
+            │   └── ResetPasswordForm.vue
+            └── profile/
+                ├── UpdateProfileForm.vue
+                └── UpdatePasswordForm.vue
+```
 
 ---
 
