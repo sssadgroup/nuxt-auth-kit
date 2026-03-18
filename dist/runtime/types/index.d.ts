@@ -1,6 +1,7 @@
 export interface AuthUser {
     id: number | string;
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
     avatar?: string;
     roles?: string[];
@@ -16,14 +17,17 @@ export interface LoginCredentials {
     remember?: boolean;
 }
 export interface RegisterData {
-    name: string;
+    first_name: string;
+    latst_name: string;
     email: string;
     password: string;
-    password_confirmation: string;
+    password_confirmation?: string;
     role?: string;
     [key: string]: unknown;
 }
 export interface UpdateProfileData {
+    first_name?: string;
+    last_name?: string;
     name?: string;
     email?: string;
     avatar?: File | string | null;
@@ -31,8 +35,8 @@ export interface UpdateProfileData {
 }
 export interface UpdatePasswordData {
     current_password: string;
-    password: string;
-    password_confirmation: string;
+    new_password: string;
+    new_password_confirmation: string;
 }
 export interface ForgotPasswordData {
     email: string;

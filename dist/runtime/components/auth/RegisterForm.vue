@@ -9,12 +9,24 @@
       @submit="handleSubmit"
       class="space-y-4"
     >
-      <UFormField label="Nom complet" name="name" required class="mt-6">
+      <UFormField label="Prénom" name="first_name" required class="mt-6">
         <UInput
-          v-model="form.name"
+          v-model="form.first_name"
           class="w-full"
           size="xl"
-          placeholder="Jean Dupont"
+          placeholder="Oscar"
+          icon="i-lucide-user"
+          color="neutral"
+          :ui="{ base: 'rounded-full py-3 text-base' }"
+        />
+      </UFormField>
+
+      <UFormField label="Nom" name="last_name" required class="mt-6">
+        <UInput
+          v-model="form.last_name"
+          class="w-full"
+          size="xl"
+          placeholder="Sierra"
           icon="i-lucide-user"
           color="neutral"
           :ui="{ base: 'rounded-full py-3 text-base' }"
@@ -122,7 +134,10 @@ const emit = defineEmits<{
 
 const schema = z
   .object({
-    name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
+    first_name: z
+      .string()
+      .min(2, "Le prénom doit contenir au moins 2 caractères"),
+    last_name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
     email: z.string().email("Email invalide"),
     password: z.string().min(8, "Minimum 8 caractères"),
     password_confirmation: z
@@ -138,7 +153,8 @@ const { register, loading } = useAuth();
 const toast = useToast();
 
 const form = reactive({
-  name: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
   password_confirmation: "",
