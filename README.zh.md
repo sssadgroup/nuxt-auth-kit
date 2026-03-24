@@ -95,13 +95,11 @@ NUXT_PUBLIC_API_BASE=https://api.myproject.com
 <template>
   <AuthLayout :quote="quote">
     <AuthLoginForm
-      :roles="[
-        { value: 'user', label: '普通用户' },
-        { value: 'owner', label: '所有者' },
-      ]"
       :show-social="true"
       @forgot-password="navigateTo('/auth/forgot-password')"
       @register="navigateTo('/auth/register')"
+      @google-login="handleGoogleLogin"
+      @apple-login="handleAppleLogin"
     />
   </AuthLayout>
 </template>
@@ -113,6 +111,18 @@ const quote = {
   author: "3S Tech Group",
   location: "达喀尔",
 };
+
+async function handleGoogleLogin() {
+  // 重定向到你的 Google OAuth 提供商（例如：Supabase、Laravel Socialite 等）
+  // await navigateTo('/auth/google', { external: true })
+  console.log("已触发 Google 登录");
+}
+
+async function handleAppleLogin() {
+  // 重定向到你的 Apple OAuth 提供商
+  // await navigateTo('/auth/apple', { external: true })
+  console.log("已触发 Apple 登录");
+}
 </script>
 ```
 
@@ -120,7 +130,20 @@ const quote = {
 <!-- pages/auth/register.vue -->
 <template>
   <AuthLayout>
-    <AuthRegisterForm @login="navigateTo('/auth/login')" />
+    <!-- 默认：密码必填，不显示手机号 -->
+    <AuthRegisterForm />
+
+    <!-- 不需要密码 -->
+    <AuthRegisterForm :except="['password']" />
+
+    <!-- 不显示手机号 -->
+    <AuthRegisterForm :except="['phone']" @login="navigateTo('/auth/login')" />
+
+    <!-- 不显示手机号且不需要密码 -->
+    <AuthRegisterForm
+      :except="['password', 'phone']"
+      @login="navigateTo('/auth/login')"
+    />
   </AuthLayout>
 </template>
 
@@ -162,20 +185,26 @@ definePageMeta({ middleware: "guest" });
 <!-- pages/profile/index.vue -->
 <template>
   <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
+    <!-- 默认：名字、姓氏、邮箱可见 -->
     <ProfileUpdateForm
       title="我的资料"
       :show-avatar="true"
-      @success="onSaved"
+      @success="onProfileSaved"
     />
-    <hr />
-    <ProfileUpdatePasswordForm title="修改密码" />
+
+    <!-- 显示手机号，不显示邮箱 -->
+    <ProfileUpdateForm :except="['email']" @success="onProfileSaved" />
+
+    <!-- 仅显示姓名 -->
+    <ProfileUpdateForm :except="['email', 'phone']" @success="onProfileSaved" />
   </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({ middleware: "auth" });
-function onSaved() {
-  /* 显示提示 */
+
+function onProfileSaved() {
+  // 例如：显示一个 toast 通知
 }
 </script>
 ```

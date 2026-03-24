@@ -95,13 +95,11 @@ NUXT_PUBLIC_API_BASE=https://api.meinprojekt.de
 <template>
   <AuthLayout :quote="quote">
     <AuthLoginForm
-      :roles="[
-        { value: 'user', label: 'Als Benutzer' },
-        { value: 'owner', label: 'Als Eigentümer' },
-      ]"
       :show-social="true"
       @forgot-password="navigateTo('/auth/forgot-password')"
       @register="navigateTo('/auth/register')"
+      @google-login="handleGoogleLogin"
+      @apple-login="handleAppleLogin"
     />
   </AuthLayout>
 </template>
@@ -113,6 +111,18 @@ const quote = {
   author: "3S Tech Group",
   location: "Dakar",
 };
+
+async function handleGoogleLogin() {
+  // Leitet zu deinem Google-OAuth-Anbieter weiter (z. B. Supabase, Laravel Socialite usw.)
+  // await navigateTo('/auth/google', { external: true })
+  console.log("Google-Anmeldung ausgelöst");
+}
+
+async function handleAppleLogin() {
+  // Leitet zu deinem Apple-OAuth-Anbieter weiter
+  // await navigateTo('/auth/apple', { external: true })
+  console.log("Apple-Anmeldung ausgelöst");
+}
 </script>
 ```
 
@@ -120,7 +130,20 @@ const quote = {
 <!-- pages/auth/register.vue -->
 <template>
   <AuthLayout>
-    <AuthRegisterForm @login="navigateTo('/auth/login')" />
+    <!-- Standard — Passwort erforderlich, ohne Telefon -->
+    <AuthRegisterForm />
+
+    <!-- Ohne Passwort -->
+    <AuthRegisterForm :except="['password']" />
+
+    <!-- Ohne Telefon -->
+    <AuthRegisterForm :except="['phone']" @login="navigateTo('/auth/login')" />
+
+    <!-- Ohne Telefon und ohne Passwort -->
+    <AuthRegisterForm
+      :except="['password', 'phone']"
+      @login="navigateTo('/auth/login')"
+    />
   </AuthLayout>
 </template>
 
@@ -162,20 +185,26 @@ definePageMeta({ middleware: "guest" });
 <!-- pages/profile/index.vue -->
 <template>
   <div class="max-w-2xl mx-auto py-10 px-4 space-y-10">
+    <!-- Standard — Vorname, Nachname und E-Mail sichtbar -->
     <ProfileUpdateForm
       title="Mein Profil"
       :show-avatar="true"
-      @success="onSaved"
+      @success="onProfileSaved"
     />
-    <hr />
-    <ProfileUpdatePasswordForm title="Passwort ändern" />
+
+    <!-- Mit Telefon, ohne E-Mail -->
+    <ProfileUpdateForm :except="['email']" @success="onProfileSaved" />
+
+    <!-- Nur Name -->
+    <ProfileUpdateForm :except="['email', 'phone']" @success="onProfileSaved" />
   </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({ middleware: "auth" });
-function onSaved() {
-  /* Toast anzeigen */
+
+function onProfileSaved() {
+  // z. B. eine Toast-Benachrichtigung anzeigen
 }
 </script>
 ```

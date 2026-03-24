@@ -9,82 +9,103 @@
       @submit="handleSubmit"
       class="space-y-4"
     >
-      <UFormField label="Prénom" name="first_name" required class="mt-6">
-        <UInput
-          v-model="form.first_name"
-          class="w-full"
-          size="xl"
-          placeholder="Oscar"
-          icon="i-lucide-user"
-          color="neutral"
-          :ui="{ base: 'rounded-full py-3 text-base' }"
-        />
-      </UFormField>
+      <div class="" :class="[except?.length === 2 ? '' : 'flex gap-2']">
+        <UFormField label="Prénom" name="first_name" required class="mt-6">
+          <UInput
+            v-model="form.first_name"
+            class="w-full"
+            size="xl"
+            placeholder="Prénom"
+            icon="i-lucide-user"
+            color="neutral"
+            :ui="{ base: 'rounded-full py-3 text-base' }"
+          />
+        </UFormField>
 
-      <UFormField label="Nom" name="last_name" required class="mt-6">
-        <UInput
-          v-model="form.last_name"
-          class="w-full"
-          size="xl"
-          placeholder="Sierra"
-          icon="i-lucide-user"
-          color="neutral"
-          :ui="{ base: 'rounded-full py-3 text-base' }"
-        />
-      </UFormField>
+        <UFormField label="Nom" name="last_name" required class="mt-6">
+          <UInput
+            v-model="form.last_name"
+            class="w-full"
+            size="xl"
+            placeholder="Nom"
+            icon="i-lucide-user"
+            color="neutral"
+            :ui="{ base: 'rounded-full py-3 text-base' }"
+          />
+        </UFormField>
+      </div>
 
       <UFormField label="Email" name="email" required class="mt-6">
         <UInput
           v-model="form.email"
           class="w-full"
           size="xl"
-          placeholder="hello@example.com"
+          placeholder="votre@email.com"
           icon="i-hugeicons-mail-account-02"
           color="neutral"
           :ui="{ base: 'rounded-full py-3 text-base' }"
         />
       </UFormField>
 
-      <UFormField label="Mot de passe" name="password" required class="mt-6">
-        <UInput
-          v-model="form.password"
-          size="xl"
-          :type="showPassword ? 'text' : 'password'"
-          placeholder="Minimum 8 caractères"
-          icon="i-hugeicons-square-lock-02"
-          color="neutral"
-          class="w-full"
-          :ui="{ base: 'rounded-full py-3 text-base' }"
-        >
-          <template #trailing>
-            <UButton
-              color="neutral"
-              variant="link"
-              size="sm"
-              :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-              @click="showPassword = !showPassword"
-            />
-          </template>
-        </UInput>
-      </UFormField>
-
       <UFormField
-        label="Confirmer le mot de passe"
-        name="password_confirmation"
-        required
+        v-if="show('phone')"
+        label="Téléphone"
+        name="phone"
         class="mt-6"
       >
         <UInput
-          v-model="form.password_confirmation"
-          size="xl"
-          :type="showPassword ? 'text' : 'password'"
-          placeholder="Confirmez votre mot de passe"
-          icon="i-hugeicons-square-lock-02"
-          color="neutral"
+          v-model="form.phone"
           class="w-full"
+          size="xl"
+          placeholder="+221 77 000 00 00"
+          icon="i-lucide-phone"
+          color="neutral"
           :ui="{ base: 'rounded-full py-3 text-base' }"
         />
       </UFormField>
+
+      <template v-if="show('password')">
+        <UFormField label="Mot de passe" name="password" required class="mt-6">
+          <UInput
+            v-model="form.password"
+            size="xl"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Minimum 8 caractères"
+            icon="i-hugeicons-square-lock-02"
+            color="neutral"
+            class="w-full"
+            :ui="{ base: 'rounded-full py-3 text-base' }"
+          >
+            <template #trailing>
+              <UButton
+                color="neutral"
+                variant="link"
+                size="sm"
+                :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+                @click="showPassword = !showPassword"
+              />
+            </template>
+          </UInput>
+        </UFormField>
+
+        <UFormField
+          label="Confirmer le mot de passe"
+          name="password_confirmation"
+          required
+          class="mt-6"
+        >
+          <UInput
+            v-model="form.password_confirmation"
+            size="xl"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Confirmez votre mot de passe"
+            icon="i-hugeicons-square-lock-02"
+            color="neutral"
+            class="w-full"
+            :ui="{ base: 'rounded-full py-3 text-base' }"
+          />
+        </UFormField>
+      </template>
 
       <UButton
         type="submit"
@@ -99,7 +120,7 @@
       </UButton>
     </UForm>
 
-    <div class="text-center mt-6">
+    <div v-if="show('password')" class="text-center mt-6">
       <div class="mb-2 text-sm">Déjà un compte ?</div>
       <UButton
         type="button"
@@ -117,37 +138,63 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
 
-withDefaults(defineProps<{ title?: string; subtitle?: string }>(), {
-  title: "Créer un compte",
-  subtitle: "Rejoignez-nous dès aujourd'hui.",
-});
+type Field = "password" | "phone";
+
+const props = withDefaults(
+  defineProps<{
+    title?: string;
+    subtitle?: string;
+    except?: Field[];
+  }>(),
+  {
+    title: "Créer un compte",
+    subtitle: "Rejoignez-nous dès aujourd'hui.",
+    except: () => [],
+  },
+);
+
+const show = (field: Field) => !props.except.includes(field);
 
 const emit = defineEmits<{
   login: [];
   success: [user: any];
 }>();
 
-const schema = z
-  .object({
+const schema = computed(() => {
+  const base = z.object({
     first_name: z
       .string()
       .min(2, "Le prénom doit contenir au moins 2 caractères"),
     last_name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
     email: z.string().email("Email invalide"),
-    password: z.string().min(8, "Minimum 8 caractères"),
-    password_confirmation: z
-      .string()
-      .min(1, "Veuillez confirmer le mot de passe"),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Les mots de passe ne correspondent pas",
-    path: ["password_confirmation"],
+
+    phone: show("phone")
+      ? z.string().min(8, "Numéro de téléphone invalide")
+      : z.string().optional(),
+
+    password: show("password")
+      ? z.string().min(8, "Minimum 8 caractères")
+      : z.string().optional(),
+
+    password_confirmation: show("password")
+      ? z.string().min(1, "Veuillez confirmer le mot de passe")
+      : z.string().optional(),
   });
+
+  if (show("password")) {
+    return base.refine((data) => data.password === data.password_confirmation, {
+      message: "Les mots de passe ne correspondent pas",
+      path: ["password_confirmation"],
+    });
+  }
+
+  return base;
+});
 
 const { register, loading } = useAuth();
 const toast = useToast();
@@ -156,13 +203,28 @@ const form = reactive({
   first_name: "",
   last_name: "",
   email: "",
+  phone: "",
   password: "",
   password_confirmation: "",
 });
+
 const showPassword = ref(false);
 
 async function handleSubmit() {
-  const result = await register(form);
+  const payload: Record<string, any> = {
+    first_name: form.first_name,
+    last_name: form.last_name,
+    email: form.email,
+  };
+
+  if (show("phone") && form.phone) payload.phone = form.phone;
+
+  if (show("password")) {
+    payload.password = form.password;
+    payload.password_confirmation = form.password_confirmation;
+  }
+
+  const result = await register(payload as any);
 
   if (!result.success && result.error) {
     toast.add({

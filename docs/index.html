@@ -1301,7 +1301,7 @@
             <div><div class="sb-pkg">nuxt-auth-kit</div></div>
           </div>
           <div class="sb-version">
-            <span>v1.0.44</span>
+            <span>v1.0.460</span>
             <span class="sb-ver-dot">·</span>
             <span>Nuxt 3&4</span>
             <span class="sb-ver-dot">·</span>
@@ -1644,7 +1644,84 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.44</span>
+              <span class="chip chip-g">v1.0.460</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >feat: add <code>except</code> prop to ProfileUpdateForm and
+                RegisterForm — hide fields dynamically</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.update"
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li>
+                  <code>ProfileUpdateForm</code> — nouvelle prop
+                  <code>except</code> de type
+                  <code
+                    >('first_name' | 'last_name' | 'email' | 'phone')[]</code
+                  >
+                  pour masquer des champs et les exclure de la validation Zod
+                  dynamiquement
+                </li>
+                <li>
+                  <code>ProfileUpdateForm</code> — ajout du champ
+                  <code>phone</code> (masqué par défaut, visible dès qu'il n'est
+                  pas dans <code>except</code>)
+                </li>
+                <li>
+                  <code>ProfileUpdateForm</code> — grille prénom/nom passe
+                  automatiquement en <code>grid-cols-1</code> si l'un des deux
+                  champs est masqué
+                </li>
+                <li>
+                  <code>RegisterForm</code> — même logique
+                  <code>except</code> sur les champs <code>password</code> et
+                  <code>phone</code>, schéma Zod computed
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-g">v1.0.45</span>
               <span
                 style="
                   font-size: 12px;
@@ -2060,16 +2137,16 @@
               <tr>
                 <td><code>show-social</code></td>
                 <td><code>boolean</code></td>
-                <td><code>true</code></td>
+                <td><code>false</code></td>
                 <td data-i18n="loginform.social_desc">
                   Boutons Google / Apple
                 </td>
               </tr>
               <tr>
-                <td><code>roles</code></td>
-                <td><code>Array&lt;{value,label}&gt;</code></td>
-                <td><code>[]</code></td>
-                <td data-i18n="loginform.roles_desc">Sélecteur de rôle</td>
+                <td><code>show-register-btn</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td data-i18n="loginform.roles_desc">Bouton d'inscription</td>
               </tr>
             </tbody>
           </table>
@@ -2120,13 +2197,12 @@
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthLoginForm</span>
-      <span class="f">:roles</span>=<span class="s">"[
-        { value: 'user',  label: 'En tant qu\'utilisateur' },
-        { value: 'owner', label: 'En tant que propriétaire' }
-      ]"</span>
-      <span class="f">:show-social</span>=<span class="s">"true"</span>
+      <span class="f">:show-social</span>=<span class="s">"true"</span>  <span class="c">// Activer le Social-Login</span>
+      <span class="f">:show-register-btn</span>=<span class="s">"true"</span> <span class="c">// Activer le bouton 'Register'</span>
       <span class="f">@forgot-password</span>=<span class="s">"navigateTo('/auth/forgot-password')"</span>
-      <span class="f">@register</span>=<span class="s">"navigateTo('/auth/register')"</span>
+      <span class="f">@register</span>=<span class="s">"navigateTo('/auth/register')"</span> <span class="c">// En cas d'activation du bouton 'Register'</span>
+      <span class="f">@google-login</span>=<span class="s">"handleGoogleLogin"</span> <span class="c">// En cas d'activation du Social-Login</span>
+      <span class="f">@apple-login</span>=<span class="s">"handleAppleLogin"</span> <span class="c">// En cas d'activation du Social-Login</span>
     <span class="cm">/&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
@@ -2139,6 +2215,18 @@
   text: <span class="s">'Une expérience fluide et agréable.'</span>,
   author: <span class="s">'3S Tech Group'</span>,
   location: <span class="s">'Dakar'</span>
+}
+
+<span class="k">async function</span> <span class="f">handleGoogleLogin</span>() {
+  <span class="c">// Redirige vers ton fournisseur OAuth Google (ex : Supabase, Laravel Socialite, etc.)</span>
+  <span class="c">// await navigateTo('/auth/google', { external: true })</span>
+  <span class="k">console</span>.<span class="f">log</span>('Connexion Google déclenchée')
+}
+
+<span class="k">async function</span> <span class="f">handleAppleLogin</span>() {
+  <span class="c">// Redirige vers ton fournisseur OAuth Apple</span>
+  <span class="c">// await navigateTo('/auth/apple', { external: true })</span>
+  <span class="k">console</span>.<span class="f">log</span>('Connexion Apple déclenchée')
 }
 <span class="tg">&lt;/script&gt;</span></pre>
           </div>
@@ -2158,6 +2246,7 @@
                 <th data-i18n="table.prop">Prop</th>
                 <th data-i18n="table.type">Type</th>
                 <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -2165,14 +2254,37 @@
                 <td><code>title</code></td>
                 <td><code>string</code></td>
                 <td><code>'Créer un compte'</code></td>
+                <td data-i18n="registerform.title_desc">Titre du formulaire</td>
               </tr>
               <tr>
                 <td><code>subtitle</code></td>
                 <td><code>string</code></td>
-                <td><code>'Rejoignez-nous dès aujourd\'hui.'</code></td>
+                <td><code>'Rejoignez-nous dès aujourd'hui.'</code></td>
+                <td data-i18n="registerform.subtitle_desc">Sous-titre</td>
+              </tr>
+              <tr>
+                <td><code>except</code></td>
+                <td><code>('password' | 'phone')[]</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="registerform.except_desc">
+                  Champs à masquer et exclure de la validation
+                </td>
               </tr>
             </tbody>
           </table>
+
+          <div class="alert al-info" style="margin-top: 12px">
+            <span class="alert-icon">ℹ️</span>
+            <p data-i18n="registerform.except_note">
+              Le champ <code>phone</code> est
+              <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est
+              pas dans <code>except</code>. Le champ <code>password</code> est
+              visible par défaut — passez
+              <code>:except="['password']"</code> pour le masquer (ex :
+              inscription via magic link).
+            </p>
+          </div>
+
           <div class="file-header">
             <span class="file-dot"></span>pages/auth/register.vue
           </div>
@@ -2187,7 +2299,25 @@
             </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
-    <span class="cm">&lt;AuthRegisterForm</span> <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span> <span class="cm">/&gt;</span>
+    <span class="c">&lt;!-- Défaut — mot de passe requis, sans téléphone --&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span><span class="cm">/&gt;</span>
+
+    <span class="c">&lt;!-- Sans mot de passe --&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span>
+      <span class="f">:except</span>=<span class="s">"['password']"</span>
+    <span class="cm">/&gt;</span>
+
+    <span class="c">&lt;!-- Sans téléphone --&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span>
+      <span class="f">:except</span>=<span class="s">"['phone']"</span>
+      <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span>
+    <span class="cm">/&gt;</span>
+
+    <span class="c">&lt;!-- Sans téléphone ni mot de passe --&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span>
+      <span class="f">:except</span>=<span class="s">"['password', 'phone']"</span>
+      <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span>
+    <span class="cm">/&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
 
@@ -2307,9 +2437,21 @@
               <tr>
                 <td><code>show-avatar</code></td>
                 <td><code>boolean</code></td>
-                <td><code>true</code></td>
+                <td><code>false</code></td>
                 <td data-i18n="profile.avatar_desc">
                   Champ avatar avec prévisualisation
+                </td>
+              </tr>
+              <tr>
+                <td><code>except</code></td>
+                <td>
+                  <code
+                    >('first_name' | 'last_name' | 'email' | 'phone')[]</code
+                  >
+                </td>
+                <td><code>[]</code></td>
+                <td data-i18n="profile.except_desc">
+                  Champs à masquer et exclure de la validation
                 </td>
               </tr>
             </tbody>
@@ -2333,14 +2475,23 @@
             </button>
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="tx">&lt;div</span> <span class="f">class</span>=<span class="s">"max-w-2xl mx-auto py-10 px-4 space-y-10"</span><span class="tx">&gt;</span>
+    <span class="c">&lt;!-- Défaut — prénom, nom, email visibles --&gt;</span>
     <span class="cm">&lt;ProfileUpdateForm</span>
       <span class="f">title</span>=<span class="s">"Mon profil"</span>
       <span class="f">:show-avatar</span>=<span class="s">"true"</span>
       <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
     <span class="cm">/&gt;</span>
-    <span class="tx">&lt;hr /&gt;</span>
-    <span class="cm">&lt;ProfileUpdatePasswordForm</span>
-      <span class="f">title</span>=<span class="s">"Changer le mot de passe"</span>
+
+    <span class="c">&lt;!-- Avec téléphone, sans email --&gt;</span>
+    <span class="cm">&lt;ProfileUpdateForm</span>
+      <span class="f">:except</span>=<span class="s">"['email']"</span>
+      <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
+    <span class="cm">/&gt;</span>
+
+    <span class="c">&lt;!-- Nom uniquement --&gt;</span>
+    <span class="cm">&lt;ProfileUpdateForm</span>
+      <span class="f">:except</span>=<span class="s">"['email', 'phone']"</span>
+      <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
     <span class="cm">/&gt;</span>
   <span class="tx">&lt;/div&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
@@ -2914,7 +3065,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           <div class="tree">
             <pre><span class="tr-root">nuxt-auth-kit/</span>
 ├── <span class="tr-ts">build.config.ts</span>          <span class="tr-cmt"># config unbuild</span>
-├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.44</span>
+├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.460</span>
 └── <span class="tr-dir">src/</span>
     ├── <span class="tr-ts">module.ts</span>                <span class="tr-cmt"># point d'entrée du module Nuxt</span>
     └── <span class="tr-dir">runtime/</span>
@@ -2941,7 +3092,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 
         <!-- FOOTER -->
         <div class="footer">
-          <span>nuxt-auth-kit v1.0.44</span>
+          <span>nuxt-auth-kit v1.0.460</span>
           <span
             >MIT · <a href="https://github.com">GitHub</a> ·
             <a href="https://npmjs.com">npm</a></span
@@ -3021,14 +3172,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Titre du formulaire",
           "loginform.subtitle_desc": "Sous-titre",
           "loginform.social_desc": "Boutons Google / Apple",
-          "loginform.roles_desc": "Sélecteur de rôle",
+          "loginform.roles_desc": "Bouton d'inscription",
           "loginform.ev_forgot": 'Clic "Mot de passe oublié ?"',
           "loginform.ev_register": 'Clic "S\'inscrire"',
           "loginform.ev_google": "Clic bouton Google",
           "loginform.ev_apple": "Clic bouton Apple",
           "loginform.ev_success": "Connexion réussie",
           "registerform.sub":
-            "Inscription avec nom, email, mot de passe et confirmation.",
+            "Inscription avec prénom, nom, email, téléphone (optionnel), mot de passe et confirmation.",
+          "registerform.title_desc": "Titre du formulaire",
+          "registerform.subtitle_desc": "Sous-titre",
+          "registerform.except_desc":
+            "Champs à masquer et exclure de la validation",
+          "registerform.except_note":
+            "Le champ <code>phone</code> est <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est pas dans <code>except</code>. Le champ <code>password</code> est visible par défaut — passez <code>:except=\\\"['password']\\\"</code> pour le masquer.",
           "forgotform.sub":
             "Envoi de l'email de réinitialisation. Affiche un état de succès après envoi.",
           "resetform.sub":
@@ -3039,6 +3196,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Mise à jour du nom, email et avatar de l'utilisateur connecté.",
           "profile.title_desc": "Titre de la section",
           "profile.avatar_desc": "Champ avatar avec prévisualisation",
+          "profile.except_desc": "Champs à masquer et exclure de la validation",
+          "profile.except_note":
+            "Le champ <code>phone</code> est <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est pas dans <code>except</code>. Les champs <code>first_name</code>, <code>last_name</code> et <code>email</code> sont visibles par défaut.",
           "profile.slot":
             "Slot <code>#extra-fields</code> pour ajouter des champs supplémentaires. Accès à l'objet <code>form</code> via la prop de slot.",
           "profilepwd.sub":
@@ -3173,14 +3333,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Form title",
           "loginform.subtitle_desc": "Subtitle",
           "loginform.social_desc": "Google / Apple buttons",
-          "loginform.roles_desc": "Role selector",
+          "loginform.roles_desc": "Sign up button",
           "loginform.ev_forgot": 'Click on "Forgot password?"',
           "loginform.ev_register": 'Click on "Sign up"',
           "loginform.ev_google": "Click on Google button",
           "loginform.ev_apple": "Click on Apple button",
           "loginform.ev_success": "Successful login",
           "registerform.sub":
-            "Registration with name, email, password and confirmation.",
+            "Registration with first name, last name, email, phone (optional), password and confirmation.",
+          "registerform.title_desc": "Form title",
+          "registerform.subtitle_desc": "Subtitle",
+          "registerform.except_desc":
+            "Fields to hide and exclude from validation",
+          "registerform.except_note":
+            "The <code>phone</code> field is <strong>hidden by default</strong>. It shows as soon as it is not in <code>except</code>. The <code>password</code> field is visible by default — pass <code>:except=\\\"['password']\\\"</code> to hide it.",
           "forgotform.sub":
             "Send the reset email. Shows a success state after sending.",
           "resetform.sub":
@@ -3190,6 +3356,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "profile.sub": "Update the connected user's name, email and avatar.",
           "profile.title_desc": "Section title",
           "profile.avatar_desc": "Avatar field with preview",
+          "profile.except_desc": "Fields to hide and exclude from validation",
+          "profile.except_note":
+            "The <code>phone</code> field is <strong>hidden by default</strong>. It shows as soon as it is not in <code>except</code>. The <code>first_name</code>, <code>last_name</code> and <code>email</code> fields are visible by default.",
           "profile.slot":
             "Slot <code>#extra-fields</code> to add extra fields. Access the <code>form</code> object via the slot prop.",
           "profilepwd.sub": "Change password. Requires the current password.",
@@ -3322,13 +3491,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "عنوان النموذج",
           "loginform.subtitle_desc": "العنوان الفرعي",
           "loginform.social_desc": "أزرار Google / Apple",
-          "loginform.roles_desc": "محدد الدور",
+          "loginform.roles_desc": "زر التسجيل",
           "loginform.ev_forgot": 'النقر على "نسيت كلمة المرور؟"',
           "loginform.ev_register": 'النقر على "تسجيل"',
           "loginform.ev_google": "النقر على زر Google",
           "loginform.ev_apple": "النقر على زر Apple",
           "loginform.ev_success": "تسجيل دخول ناجح",
-          "registerform.sub": "التسجيل بالاسم والبريد وكلمة المرور والتأكيد.",
+          "registerform.sub":
+            "التسجيل بالاسم والبريد والهاتف (اختياري) وكلمة المرور والتأكيد.",
+          "registerform.title_desc": "عنوان النموذج",
+          "registerform.subtitle_desc": "العنوان الفرعي",
+          "registerform.except_desc":
+            "الحقول المراد إخفاؤها وإقصاؤها من التحقق",
+          "registerform.except_note":
+            "حقل <code>phone</code> <strong>مخفي افتراضياً</strong>. يظهر عند عدم إدراجه في <code>except</code>. حقل <code>password</code> مرئي افتراضياً — مرّر <code>:except=\\\"['password']\\\"</code> لإخفائه.",
           "forgotform.sub":
             "إرسال بريد إعادة التعيين. يعرض حالة نجاح بعد الإرسال.",
           "resetform.sub":
@@ -3338,6 +3514,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "profile.sub": "تحديث اسم المستخدم المتصل وبريده وصورته.",
           "profile.title_desc": "عنوان القسم",
           "profile.avatar_desc": "حقل الصورة مع معاينة",
+          "profile.except_desc": "الحقول المراد إخفاؤها وإقصاؤها من التحقق",
+          "profile.except_note":
+            "حقل <code>phone</code> <strong>مخفي افتراضياً</strong>. يظهر عند عدم إدراجه في <code>except</code>. حقول <code>first_name</code> و<code>last_name</code> و<code>email</code> مرئية افتراضياً.",
           "profile.slot":
             "Slot <code>#extra-fields</code> لإضافة حقول إضافية. الوصول لكائن <code>form</code> عبر خاصية الـ slot.",
           "profilepwd.sub": "تغيير كلمة المرور. يتطلب كلمة المرور الحالية.",
@@ -3469,14 +3648,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Título del formulario",
           "loginform.subtitle_desc": "Subtítulo",
           "loginform.social_desc": "Botones Google / Apple",
-          "loginform.roles_desc": "Selector de rol",
+          "loginform.roles_desc": "Botón de registro",
           "loginform.ev_forgot": 'Clic en "¿Olvidaste tu contraseña?"',
           "loginform.ev_register": 'Clic en "Registrarse"',
           "loginform.ev_google": "Clic en botón Google",
           "loginform.ev_apple": "Clic en botón Apple",
           "loginform.ev_success": "Login exitoso",
           "registerform.sub":
-            "Registro con nombre, email, contraseña y confirmación.",
+            "Registro con nombre, email, teléfono (opcional), contraseña y confirmación.",
+          "registerform.title_desc": "Título del formulario",
+          "registerform.subtitle_desc": "Subtítulo",
+          "registerform.except_desc":
+            "Campos a ocultar y excluir de la validación",
+          "registerform.except_note":
+            "El campo <code>phone</code> está <strong>oculto por defecto</strong>. Aparece cuando no está en <code>except</code>. El campo <code>password</code> es visible por defecto — pasa <code>:except=\\\"['password']\\\"</code> para ocultarlo.",
           "forgotform.sub":
             "Envío del email de restablecimiento. Muestra un estado de éxito tras el envío.",
           "resetform.sub":
@@ -3487,6 +3672,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Actualizar el nombre, email y avatar del usuario conectado.",
           "profile.title_desc": "Título de la sección",
           "profile.avatar_desc": "Campo avatar con previsualización",
+          "profile.except_desc": "Campos a ocultar y excluir de la validación",
+          "profile.except_note":
+            "El campo <code>phone</code> está <strong>oculto por defecto</strong>. Aparece cuando no está en <code>except</code>. Los campos <code>first_name</code>, <code>last_name</code> y <code>email</code> son visibles por defecto.",
           "profile.slot":
             "Slot <code>#extra-fields</code> para agregar campos adicionales. Acceso al objeto <code>form</code> via la prop del slot.",
           "profilepwd.sub":
@@ -3615,13 +3803,19 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "表单标题",
           "loginform.subtitle_desc": "副标题",
           "loginform.social_desc": "Google / Apple 按钮",
-          "loginform.roles_desc": "角色选择器",
+          "loginform.roles_desc": "注册按钮",
           "loginform.ev_forgot": "点击「忘记密码？」",
           "loginform.ev_register": "点击「注册」",
           "loginform.ev_google": "点击 Google 按钮",
           "loginform.ev_apple": "点击 Apple 按钮",
           "loginform.ev_success": "登录成功",
-          "registerform.sub": "使用姓名、邮箱、密码和确认密码进行注册。",
+          "registerform.sub":
+            "使用姓名、邮箱、手机号（可选）、密码和确认密码进行注册。",
+          "registerform.title_desc": "表单标题",
+          "registerform.subtitle_desc": "副标题",
+          "registerform.except_desc": "要隐藏并从验证中排除的字段",
+          "registerform.except_note":
+            "<code>phone</code> 字段<strong>默认隐藏</strong>。只要不在 <code>except</code> 中即可显示。<code>password</code> 字段默认可见 — 传入 <code>:except=\\\"['password']\\\"</code> 可隐藏它。",
           "forgotform.sub": "发送重置邮件。发送后显示成功状态。",
           "resetform.sub":
             "自动从重置 URL 中读取 <code>?token=</code> 和 <code>?email=</code>。",
@@ -3630,6 +3824,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "profile.sub": "更新已登录用户的姓名、邮箱和头像。",
           "profile.title_desc": "区块标题",
           "profile.avatar_desc": "带预览的头像字段",
+          "profile.except_desc": "要隐藏并从验证中排除的字段",
+          "profile.except_note":
+            "<code>phone</code> 字段<strong>默认隐藏</strong>。只要不在 <code>except</code> 中即可显示。<code>first_name</code>、<code>last_name</code> 和 <code>email</code> 字段默认可见。",
           "profile.slot":
             "插槽 <code>#extra-fields</code> 用于添加额外字段。通过插槽 prop 访问 <code>form</code> 对象。",
           "profilepwd.sub": "修改密码。需要当前密码。",
@@ -3760,14 +3957,20 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Formulartitel",
           "loginform.subtitle_desc": "Untertitel",
           "loginform.social_desc": "Google / Apple Buttons",
-          "loginform.roles_desc": "Rollen-Selektor",
+          "loginform.roles_desc": "Registrierungsbutton",
           "loginform.ev_forgot": 'Klick auf "Passwort vergessen?"',
           "loginform.ev_register": 'Klick auf "Registrieren"',
           "loginform.ev_google": "Klick auf Google-Button",
           "loginform.ev_apple": "Klick auf Apple-Button",
           "loginform.ev_success": "Erfolgreiches Login",
           "registerform.sub":
-            "Registrierung mit Name, E-Mail, Passwort und Bestätigung.",
+            "Registrierung mit Name, E-Mail, Telefon (optional), Passwort und Bestätigung.",
+          "registerform.title_desc": "Formulartitel",
+          "registerform.subtitle_desc": "Untertitel",
+          "registerform.except_desc":
+            "Felder ausblenden und von der Validierung ausschließen",
+          "registerform.except_note":
+            "Das Feld <code>phone</code> ist <strong>standardmäßig ausgeblendet</strong>. Es erscheint, sobald es nicht in <code>except</code> enthalten ist. Das Feld <code>password</code> ist standardmäßig sichtbar — übergeben Sie <code>:except=\\\"['password']\\\"</code> zum Ausblenden.",
           "forgotform.sub":
             "Sendet die Reset-E-Mail. Zeigt nach dem Senden einen Erfolgsstatus an.",
           "resetform.sub":
@@ -3778,6 +3981,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Name, E-Mail und Avatar des eingeloggten Benutzers aktualisieren.",
           "profile.title_desc": "Abschnittstitel",
           "profile.avatar_desc": "Avatar-Feld mit Vorschau",
+          "profile.except_desc":
+            "Felder ausblenden und von der Validierung ausschließen",
+          "profile.except_note":
+            "Das Feld <code>phone</code> ist <strong>standardmäßig ausgeblendet</strong>. Es erscheint, sobald es nicht in <code>except</code> enthalten ist. Die Felder <code>first_name</code>, <code>last_name</code> und <code>email</code> sind standardmäßig sichtbar.",
           "profile.slot":
             "Slot <code>#extra-fields</code> zum Hinzufügen von Zusatzfeldern. Zugriff auf das <code>form</code>-Objekt über die Slot-Prop.",
           "profilepwd.sub": "Passwort ändern. Erfordert das aktuelle Passwort.",

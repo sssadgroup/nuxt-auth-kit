@@ -14,7 +14,7 @@
           v-model="form.email"
           class="w-full"
           size="xl"
-          placeholder="hello@example.com"
+          placeholder="oscar@sierra.com"
           icon="i-hugeicons-mail-account-02"
           color="neutral"
           :ui="{ base: 'rounded-full py-3 text-base' }"
@@ -69,6 +69,55 @@
         {{ loading ? "Connexion en cours..." : "Se connecter" }}
       </UButton>
     </UForm>
+
+    <!-- Social login -->
+    <template v-if="showSocial">
+      <div class="mt-16">
+        <div class="flex items-center gap-3 my-6">
+          <div class="flex-1 h-px bg-[#e5ebe5]" />
+          <span class="text-sm text-[#6b7c6b]">ou continuer avec</span>
+          <div class="flex-1 h-px bg-[#e5ebe5]" />
+        </div>
+
+        <div class="flex gap-3">
+          <UButton
+            variant="outline"
+            color="neutral"
+            size="lg"
+            class="flex-1 font-semibold py-3.5 rounded-full mt-2 justify-center"
+            @click="$emit('google-login')"
+          >
+            <template #leading>
+              <UIcon name="i-logos-google-icon" class="w-5 h-5" />
+            </template>
+            Google
+          </UButton>
+
+          <UButton
+            variant="outline"
+            color="neutral"
+            size="lg"
+            class="flex-1 font-semibold py-3.5 rounded-full mt-2 justify-center"
+            @click="$emit('apple-login')"
+          >
+            <template #leading>
+              <UIcon name="i-logos-apple" class="w-5 h-5" />
+            </template>
+            Apple
+          </UButton>
+        </div>
+      </div>
+    </template>
+
+    <p v-if="showRegisterBtn" class="text-center text-sm text-[#6b7c6b] mt-6">
+      Pas encore de compte ?
+      <span
+        @click="$emit('register')"
+        class="text-sm text-[#1B4332] font-semibold hover:underline cursor-pointer"
+      >
+        S'inscrire
+      </span>
+    </p>
   </div>
 </template>
 
@@ -82,22 +131,28 @@ const props = withDefaults(
   defineProps<{
     title?: string;
     subtitle?: string;
+    showSocial?: boolean;
+    showRegisterBtn?: boolean;
   }>(),
   {
     title: "Connexion",
     subtitle: "Bienvenue ! Entrez vos informations pour continuer.",
+    showSocial: false,
+    showRegisterBtn: false,
   },
 );
 
 const emit = defineEmits<{
   "forgot-password": [];
   register: [];
+  "google-login": [];
+  "apple-login": [];
   success: [user: any];
 }>();
 
 const schema = z.object({
   email: z.string().email("Email invalide"),
-  password: z.string().min(1, "Le mot de passe est requis"),
+  password: z.string().min(6, "Le mot de passe est requis"),
 });
 
 const { login, loading } = useAuth();

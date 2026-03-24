@@ -33,9 +33,21 @@
       </div>
     </div>
 
-    <UForm :schema="schema" :state="form" @submit="handleSubmit" class="space-y-5">
-      <div class="grid grid-cols-2 gap-4 mt-4">
-        <UFormField label="Prénom" name="first_name">
+    <UForm
+      :schema="schema"
+      :state="form"
+      @submit="handleSubmit"
+      class="space-y-5"
+    >
+      <div
+        class="grid gap-4 mt-4"
+        :class="[
+          show('first_name') && show('last_name')
+            ? 'grid-cols-2'
+            : 'grid-cols-1',
+        ]"
+      >
+        <UFormField v-if="show('first_name')" label="Prénom" name="first_name">
           <UInput
             v-model="form.first_name"
             size="lg"
@@ -47,7 +59,7 @@
           />
         </UFormField>
 
-        <UFormField label="Nom" name="last_name">
+        <UFormField v-if="show('last_name')" label="Nom" name="last_name">
           <UInput
             v-model="form.last_name"
             size="lg"
@@ -60,13 +72,30 @@
         </UFormField>
       </div>
 
-      <UFormField label="Email" name="email" class="mt-4">
+      <UFormField v-if="show('email')" label="Email" name="email" class="mt-4">
         <UInput
           v-model="form.email"
           size="lg"
           type="email"
           :placeholder="user?.email || 'votre@email.com'"
           icon="i-hugeicons-mail-account-02"
+          color="neutral"
+          class="w-full"
+          :ui="{ base: 'rounded-xl py-3 text-base' }"
+        />
+      </UFormField>
+
+      <UFormField
+        v-if="show('phone')"
+        label="Téléphone"
+        name="phone"
+        class="mt-4"
+      >
+        <UInput
+          v-model="form.phone"
+          size="lg"
+          :placeholder="user?.email || '+221 77 000 00 00'"
+          icon="i-lucide-phone"
           color="neutral"
           class="w-full"
           :ui="{ base: 'rounded-xl py-3 text-base' }"
@@ -96,16 +125,22 @@ import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
 
-withDefaults(
+type Field = "first_name" | "last_name" | "email" | "phone";
+
+const props = withDefaults(
   defineProps<{
     title?: string;
     showAvatar?: boolean;
+    except?: Field[];
   }>(),
   {
     title: "Informations du profil",
-    showAvatar: true,
-  }
+    showAvatar: false,
+    except: () => [],
+  },
 );
+
+const show = (field: Field) => !props.except.includes(field);
 
 const emit = defineEmits<{ success: [user: any] }>();
 
@@ -113,15 +148,28 @@ const { user, updateProfile, loading } = useAuth();
 const toast = useToast();
 
 const schema = z.object({
-  first_name: z.string().min(2, "Minimum 2 caractères").optional().or(z.literal("")),
-  last_name: z.string().min(2, "Minimum 2 caractères").optional().or(z.literal("")),
-  email: z.string().email("Email invalide").optional().or(z.literal("")),
+  first_name: show("last_name")
+    ? z.string().min(2, "Minimum 2 caractères")
+    : z.string().optional(),
+
+  last_name: show("last_name")
+    ? z.string().min(2, "Minimum 2 caractères")
+    : z.string().optional(),
+
+  email: show("email")
+    ? z.string().email("Email invalide")
+    : z.string().optional(),
+
+  phone: show("phone")
+    ? z.string().min(8, "Numéro de téléphone invalide")
+    : z.string().optional(),
 });
 
 const form = reactive({
   first_name: user?.first_name || "",
   last_name: user?.last_name || "",
   email: user?.email || "",
+  phone: user?.phone || "",
   avatar: null as File | null,
 });
 
@@ -157,9 +205,10 @@ function handleAvatarChange(e: Event) {
 
 async function handleSubmit() {
   const data: any = {};
-  if (form.first_name) data.first_name = form.first_name;
-  if (form.last_name) data.last_name = form.last_name;
-  if (form.email) data.email = form.email;
+  if (show("first_name") && form.first_name) data.first_name = form.first_name;
+  if (show("last_name") && form.last_name) data.last_name = form.last_name;
+  if (show("email") && form.email) data.email = form.email;
+  if (show("phone") && form.phone) data.phone = form.phone;
   if (form.avatar) data.avatar = form.avatar;
 
   const result = await updateProfile(data);
