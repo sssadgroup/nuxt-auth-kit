@@ -1,8 +1,10 @@
 <template>
   <div class="auth-forgot-password">
     <div v-if="!sent">
-      <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
-      <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
+      <h1 class="text-3xl font-bold mb-2" :class="theme.titleColor">
+        {{ title }}
+      </h1>
+      <p class="mb-8" :class="theme.subtitleColor">{{ subtitle }}</p>
 
       <UForm
         :schema="schema"
@@ -17,8 +19,8 @@
             size="xl"
             placeholder="hello@example.com"
             icon="i-hugeicons-mail-account-02"
-            color="neutral"
-            :ui="{ base: 'rounded-full py-3 text-base' }"
+            :color="theme.color"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           />
         </UFormField>
 
@@ -26,10 +28,12 @@
           type="submit"
           :loading="loading"
           :disabled="loading"
-          color="neutral"
+          :color="theme.btnColor"
+          :variant="theme.btnVariant"
           size="lg"
           trailing-icon="i-lucide-send"
-          class="w-full font-semibold py-3.5 rounded-full mt-2 justify-center"
+          class="w-full font-semibold py-3.5 mt-2 justify-center"
+          :class="theme.btnRounded"
         >
           {{
             loading
@@ -46,11 +50,14 @@
       >
         <UIcon
           name="i-hugeicons-mail-account-02"
-          class="w-8 h-8 text-[#1B4332]"
+          class="w-8 h-8"
+          :class="theme.accentColor"
         />
       </div>
-      <h2 class="text-2xl font-bold text-[#1a2e1a] mb-3">Email envoyé !</h2>
-      <p class="text-[#6b7c6b] mb-8">
+      <h2 class="text-2xl font-bold mb-3" :class="theme.titleColor">
+        Email envoyé !
+      </h2>
+      <p class="mb-8" :class="theme.subtitleColor">
         Si un compte existe pour <strong>{{ form.email }}</strong
         >, vous recevrez un lien de réinitialisation sous peu.
       </p>
@@ -60,7 +67,8 @@
           sent = false;
           form.email = '';
         "
-        class="text-[#1B4332] font-semibold hover:underline text-sm"
+        class="font-semibold hover:underline text-sm"
+        :class="theme.accentColor"
       >
         Utiliser un autre email
       </button>
@@ -70,11 +78,12 @@
       <UButton
         type="button"
         @click="$emit('back-to-login')"
-        color="secondary"
-        variant="subtle"
+        :color="theme.btnSecondaryColor"
+        :variant="theme.btnSecondaryVariant"
         size="md"
         leading-icon="i-lucide-arrow-left"
-        class="font-semibold py-3.5 rounded-full w-full justify-center"
+        class="font-semibold py-3.5 w-full justify-center"
+        :class="theme.btnSecondaryRounded"
       >
         Retour à la connexion
       </UButton>
@@ -83,38 +92,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title?: string;
     subtitle?: string;
+    ui?: Partial<FormTheme>;
   }>(),
   {
     title: "Mot de passe oublié ?",
     subtitle:
       "Saisissez votre email pour recevoir un lien de réinitialisation.",
+    ui: () => ({}),
   },
 );
 
+const theme = computed(() => useFormTheme(props.ui));
+
 defineEmits<{ "back-to-login": [] }>();
 
-const schema = z.object({
-  email: z.string().email("Email invalide"),
-});
-
+const schema = z.object({ email: z.string().email("Email invalide") });
 const { forgotPassword, loading } = useAuth();
 const toast = useToast();
-
 const form = reactive({ email: "" });
 const sent = ref(false);
 
 async function handleSubmit() {
   const result = await forgotPassword({ email: form.email });
-
   if (result.success) {
     sent.value = true;
   } else {

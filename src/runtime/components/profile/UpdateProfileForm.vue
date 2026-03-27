@@ -1,7 +1,10 @@
 <template>
   <div class="profile-update">
-    <h2 class="text-2xl font-bold text-[#1a2e1a] mb-6">{{ title }}</h2>
+    <h2 class="text-2xl font-bold mb-6" :class="theme.titleColor">
+      {{ title }}
+    </h2>
 
+    <!-- Avatar -->
     <div v-if="showAvatar" class="flex items-center gap-4 mb-8">
       <div class="relative group">
         <div
@@ -9,7 +12,6 @@
         >
           {{ getInitials(user?.first_name, user?.last_name) }}
         </div>
-
         <label
           class="absolute bottom-0 right-0 flex items-center justify-center w-7 h-7 rounded-full bg-white border border-gray-200 shadow cursor-pointer transition hover:bg-gray-50 group-hover:scale-105"
         >
@@ -22,14 +24,9 @@
           />
         </label>
       </div>
-
       <div class="flex flex-col leading-tight">
-        <p class="text-sm font-semibold text-gray-900">
-          {{ fullName }}
-        </p>
-        <p class="text-xs text-gray-500">
-          {{ user?.email }}
-        </p>
+        <p class="text-sm font-semibold text-gray-900">{{ fullName }}</p>
+        <p class="text-xs text-gray-500">{{ user?.email }}</p>
       </div>
     </div>
 
@@ -39,13 +36,14 @@
       @submit="handleSubmit"
       class="space-y-5"
     >
+      <!-- Grille prénom/nom — grid-cols-2 si les deux visibles, grid-cols-1 sinon -->
       <div
         class="grid gap-4 mt-4"
-        :class="[
+        :class="
           show('first_name') && show('last_name')
             ? 'grid-cols-2'
-            : 'grid-cols-1',
-        ]"
+            : 'grid-cols-1'
+        "
       >
         <UFormField v-if="show('first_name')" label="Prénom" name="first_name">
           <UInput
@@ -53,9 +51,9 @@
             size="lg"
             :placeholder="user?.first_name || 'Prénom'"
             icon="i-lucide-user"
-            color="neutral"
+            :color="theme.color"
             class="w-full"
-            :ui="{ base: 'rounded-xl py-3 text-base' }"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           />
         </UFormField>
 
@@ -65,9 +63,9 @@
             size="lg"
             :placeholder="user?.last_name || 'Nom'"
             icon="i-lucide-user"
-            color="neutral"
+            :color="theme.color"
             class="w-full"
-            :ui="{ base: 'rounded-xl py-3 text-base' }"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           />
         </UFormField>
       </div>
@@ -79,9 +77,9 @@
           type="email"
           :placeholder="user?.email || 'votre@email.com'"
           icon="i-hugeicons-mail-account-02"
-          color="neutral"
+          :color="theme.color"
           class="w-full"
-          :ui="{ base: 'rounded-xl py-3 text-base' }"
+          :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
         />
       </UFormField>
 
@@ -91,14 +89,13 @@
         name="phone"
         class="mt-4"
       >
-        <UInput
+        <PhoneInput
           v-model="form.phone"
-          size="lg"
-          :placeholder="user?.email || '+221 77 000 00 00'"
-          icon="i-lucide-phone"
-          color="neutral"
-          class="w-full"
-          :ui="{ base: 'rounded-xl py-3 text-base' }"
+          v-model:country-code="form.phoneCountry"
+          :preferred-countries="['SN']"
+          :use-browser-locale="true"
+          :ui="ui"
+          @data="onPhoneData"
         />
       </UFormField>
 
@@ -108,10 +105,12 @@
         type="submit"
         :loading="loading"
         :disabled="loading"
-        color="neutral"
+        :color="theme.btnColor"
+        :variant="theme.btnVariant"
         size="lg"
         trailing-icon="i-lucide-save"
-        class="font-semiboldpy-3.5 rounded-xl mt-2 justify-center"
+        class="py-3.5 mt-2 justify-center"
+        :class="theme.btnRounded"
       >
         {{ loading ? "Enregistrement..." : "Enregistrer les modifications" }}
       </UButton>
@@ -124,6 +123,8 @@ import { ref, reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
+import PhoneInput from "../../ui/PhoneInput.vue";
 
 type Field = "first_name" | "last_name" | "email" | "phone";
 
@@ -132,14 +133,17 @@ const props = withDefaults(
     title?: string;
     showAvatar?: boolean;
     except?: Field[];
+    ui?: Partial<FormTheme>;
   }>(),
   {
     title: "Informations du profil",
     showAvatar: false,
     except: () => [],
+    ui: () => ({}),
   },
 );
 
+const theme = computed(() => useFormTheme(props.ui));
 const show = (field: Field) => !props.except.includes(field);
 
 const emit = defineEmits<{ success: [user: any] }>();
@@ -148,20 +152,21 @@ const { user, updateProfile, loading } = useAuth();
 const toast = useToast();
 
 const schema = z.object({
-  first_name: show("last_name")
+  first_name: show("first_name")
     ? z.string().min(2, "Minimum 2 caractères")
     : z.string().optional(),
-
   last_name: show("last_name")
     ? z.string().min(2, "Minimum 2 caractères")
     : z.string().optional(),
-
   email: show("email")
     ? z.string().email("Email invalide")
     : z.string().optional(),
-
   phone: show("phone")
-    ? z.string().min(8, "Numéro de téléphone invalide")
+    ? z
+        .string()
+        .min(8, "Numéro de téléphone invalide")
+        .optional()
+        .or(z.literal(""))
     : z.string().optional(),
 });
 
@@ -170,8 +175,13 @@ const form = reactive({
   last_name: user?.last_name || "",
   email: user?.email || "",
   phone: user?.phone || "",
+  phoneCountry: "SN" as any,
   avatar: null as File | null,
 });
+
+function onPhoneData(data: any) {
+  if (data.e164) form.phone = data.e164;
+}
 
 const avatarPreview = ref<string | null>((user?.avatar as string) || null);
 
@@ -182,14 +192,14 @@ const fullName = computed(() => {
 });
 
 const getInitials = (firstName?: string, lastName?: string) => {
-  const firstInitials =
+  const f =
     firstName
       ?.trim()
       .split(" ")
       .map((p) => p[0]?.toUpperCase())
       .join("") ?? "";
-  const lastInitial = lastName?.[0]?.toUpperCase() ?? "";
-  return `${firstInitials}${lastInitial}`;
+  const l = lastName?.[0]?.toUpperCase() ?? "";
+  return `${f}${l}`;
 };
 
 function handleAvatarChange(e: Event) {
@@ -212,7 +222,6 @@ async function handleSubmit() {
   if (form.avatar) data.avatar = form.avatar;
 
   const result = await updateProfile(data);
-
   if (result.success) {
     toast.add({
       title: "Profil mis à jour",

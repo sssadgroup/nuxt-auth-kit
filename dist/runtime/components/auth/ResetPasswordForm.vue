@@ -1,8 +1,10 @@
 <template>
   <div class="auth-reset-password">
     <div v-if="!done">
-      <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
-      <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
+      <h1 class="text-3xl font-bold mb-2" :class="theme.titleColor">
+        {{ title }}
+      </h1>
+      <p class="mb-8" :class="theme.subtitleColor">{{ subtitle }}</p>
 
       <UForm
         :schema="schema"
@@ -10,18 +12,6 @@
         @submit="handleSubmit"
         class="space-y-4"
       >
-        <UFormField label="Email" name="email" required class="mt-6">
-          <UInput
-            v-model="form.email"
-            class="w-full"
-            size="xl"
-            placeholder="hello@example.com"
-            icon="i-hugeicons-mail-account-02"
-            color="neutral"
-            :ui="{ base: 'rounded-full py-3 text-base' }"
-          />
-        </UFormField>
-
         <UFormField
           label="Nouveau mot de passe"
           name="password"
@@ -34,13 +24,13 @@
             :type="showPassword ? 'text' : 'password'"
             placeholder="Minimum 8 caractères"
             icon="i-hugeicons-square-lock-02"
-            color="neutral"
+            :color="theme.color"
             class="w-full"
-            :ui="{ base: 'rounded-full py-3 text-base' }"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           >
             <template #trailing>
               <UButton
-                color="neutral"
+                :color="theme.color"
                 variant="link"
                 size="sm"
                 :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -62,9 +52,9 @@
             :type="showPassword ? 'text' : 'password'"
             placeholder="Confirmez votre mot de passe"
             icon="i-hugeicons-square-lock-02"
-            color="neutral"
+            :color="theme.color"
             class="w-full"
-            :ui="{ base: 'rounded-full py-3 text-base' }"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           />
         </UFormField>
 
@@ -72,10 +62,12 @@
           type="submit"
           :loading="loading"
           :disabled="loading"
-          color="neutral"
+          :color="theme.btnColor"
+          :variant="theme.btnVariant"
           size="lg"
           trailing-icon="i-lucide-key-round"
-          class="w-full font-semibold py-3.5 rounded-full mt-2 justify-center"
+          class="w-full font-semibold py-3.5 mt-2 justify-center"
+          :class="theme.btnRounded"
         >
           {{
             loading ? "Réinitialisation..." : "Réinitialiser le mot de passe"
@@ -88,20 +80,25 @@
       <div
         class="w-16 h-16 bg-[#1B4332]/10 rounded-full flex items-center justify-center mx-auto mb-6"
       >
-        <UIcon name="i-heroicons-check-circle" class="w-8 h-8 text-[#1B4332]" />
+        <UIcon
+          name="i-heroicons-check-circle"
+          class="w-8 h-8"
+          :class="theme.accentColor"
+        />
       </div>
-      <h2 class="text-2xl font-bold text-[#1a2e1a] mb-3">
+      <h2 class="text-2xl font-bold mb-3" :class="theme.titleColor">
         Mot de passe réinitialisé !
       </h2>
-      <p class="text-[#6b7c6b] mb-8">
+      <p class="mb-8" :class="theme.subtitleColor">
         Votre mot de passe a été mis à jour avec succès.
       </p>
       <UButton
-        color="secondary"
-        variant="subtle"
+        :color="theme.btnSecondaryColor"
+        :variant="theme.btnSecondaryVariant"
         size="md"
         trailing-icon="i-lucide-log-in"
-        class="font-semibold py-3.5 rounded-full w-full justify-center"
+        class="font-semibold py-3.5 w-full justify-center"
+        :class="theme.btnSecondaryRounded"
         @click="$emit('back-to-login')"
       >
         Se connecter
@@ -111,28 +108,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useRoute } from "#app";
 import { useToast } from "#imports";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
 
-withDefaults(defineProps<{ title?: string; subtitle?: string }>(), {
-  title: "Nouveau mot de passe",
-  subtitle: "Choisissez un nouveau mot de passe sécurisé.",
-});
+const props = withDefaults(
+  defineProps<{
+    title?: string;
+    subtitle?: string;
+    ui?: Partial<FormTheme>;
+  }>(),
+  {
+    title: "Nouveau mot de passe",
+    subtitle: "Choisissez un nouveau mot de passe sécurisé.",
+    ui: () => ({}),
+  },
+);
 
+const theme = computed(() => useFormTheme(props.ui));
 defineEmits<{ "back-to-login": [] }>();
 
 const schema = z
   .object({
-    email: z.string().email("Email invalide"),
     password: z.string().min(8, "Minimum 8 caractères"),
     password_confirmation: z
       .string()
       .min(1, "Veuillez confirmer le mot de passe"),
   })
-  .refine((data) => data.password === data.password_confirmation, {
+  .refine((d) => d.password === d.password_confirmation, {
     message: "Les mots de passe ne correspondent pas",
     path: ["password_confirmation"],
   });
@@ -151,8 +157,17 @@ const showPassword = ref(false);
 const done = ref(false);
 
 async function handleSubmit() {
-  const result = await resetPassword(form);
+  if (!form.email || !form.token) {
+    toast.add({
+      title: "Champs manquants",
+      description: "Email ou token invalide.",
+      icon: "i-heroicons-exclamation-triangle",
+      color: "error",
+    });
+    return;
+  }
 
+  const result = await resetPassword(form);
   if (result.success) {
     done.value = true;
   } else {

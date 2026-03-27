@@ -1675,31 +1675,12 @@
                   color: var(--txt-2);
                   list-style: disc;
                 "
+                data-i18n-list="changelog.v145_items"
               >
-                <li>
-                  <code>ProfileUpdateForm</code> — nouvelle prop
-                  <code>except</code> de type
-                  <code
-                    >('first_name' | 'last_name' | 'email' | 'phone')[]</code
-                  >
-                  pour masquer des champs et les exclure de la validation Zod
-                  dynamiquement
-                </li>
-                <li>
-                  <code>ProfileUpdateForm</code> — ajout du champ
-                  <code>phone</code> (masqué par défaut, visible dès qu'il n'est
-                  pas dans <code>except</code>)
-                </li>
-                <li>
-                  <code>ProfileUpdateForm</code> — grille prénom/nom passe
-                  automatiquement en <code>grid-cols-1</code> si l'un des deux
-                  champs est masqué
-                </li>
-                <li>
-                  <code>RegisterForm</code> — même logique
-                  <code>except</code> sur les champs <code>password</code> et
-                  <code>phone</code>, schéma Zod computed
-                </li>
+                <li data-i18n="changelog.v145_item1"></li>
+                <li data-i18n="changelog.v145_item2"></li>
+                <li data-i18n="changelog.v145_item3"></li>
+                <li data-i18n="changelog.v145_item4"></li>
               </ul>
             </div>
           </div>
@@ -1721,7 +1702,7 @@
                 gap: 10px;
               "
             >
-              <span class="chip chip-g">v1.0.45</span>
+              <span class="chip chip-g">v1.0.450</span>
               <span
                 style="
                   font-size: 12px;
@@ -1753,13 +1734,9 @@
                   list-style: disc;
                 "
               >
-                <li>
-                  Endpoints profil mis à jour : <code>updateProfile</code> →
-                  <code>/api/profile</code>, <code>updatePassword</code> →
-                  <code>/api/profile/password</code>
-                </li>
-                <li>Améliorations sur <code>UpdateProfileForm.vue</code></li>
-                <li>Améliorations sur <code>UpdatePasswordForm.vue</code></li>
+                <li data-i18n="changelog.v144a_item1"></li>
+                <li data-i18n="changelog.v144a_item2"></li>
+                <li data-i18n="changelog.v144a_item3"></li>
               </ul>
             </div>
           </div>
@@ -1813,25 +1790,11 @@
                   list-style: disc;
                 "
               >
-                <li>
-                  Panneau droit remplacé par une image de fond avec overlay
-                  sombre
-                </li>
-                <li>
-                  Nouveau slot <code>#brand</code> pour personnaliser le nom et
-                  tagline de l'app
-                </li>
-                <li>
-                  Props unifiées dans un objet <code>quote</code> :
-                  <code>appName</code>, <code>appTagline</code>,
-                  <code>image</code>, <code>text</code>, <code>author</code>,
-                  <code>location</code>, <code>avatar</code>
-                </li>
-                <li>
-                  Styles migrés en <code>scoped CSS</code> — suppression des
-                  classes Tailwind utilitaires
-                </li>
-                <li>Image par défaut via Pexels si aucune image fournie</li>
+                <li data-i18n="changelog.v144b_item1"></li>
+                <li data-i18n="changelog.v144b_item2"></li>
+                <li data-i18n="changelog.v144b_item3"></li>
+                <li data-i18n="changelog.v144b_item4"></li>
+                <li data-i18n="changelog.v144b_item5"></li>
               </ul>
             </div>
           </div>
@@ -2143,10 +2106,10 @@
                 </td>
               </tr>
               <tr>
-                <td><code>show-register-btn</code></td>
-                <td><code>boolean</code></td>
-                <td><code>false</code></td>
-                <td data-i18n="loginform.roles_desc">Bouton d'inscription</td>
+                <td><code>roles</code></td>
+                <td><code>Array&lt;{value,label}&gt;</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="loginform.roles_desc">Sélecteur de rôle</td>
               </tr>
             </tbody>
           </table>
@@ -2197,12 +2160,9 @@
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span> <span class="f">:quote</span>=<span class="s">"quote"</span><span class="cm">&gt;</span>
     <span class="cm">&lt;AuthLoginForm</span>
-      <span class="f">:show-social</span>=<span class="s">"true"</span>  <span class="c">// Activer le Social-Login</span>
-      <span class="f">:show-register-btn</span>=<span class="s">"true"</span> <span class="c">// Activer le bouton 'Register'</span>
+      <span class="f">:show-social</span>=<span class="s">"true"</span>
       <span class="f">@forgot-password</span>=<span class="s">"navigateTo('/auth/forgot-password')"</span>
-      <span class="f">@register</span>=<span class="s">"navigateTo('/auth/register')"</span> <span class="c">// En cas d'activation du bouton 'Register'</span>
-      <span class="f">@google-login</span>=<span class="s">"handleGoogleLogin"</span> <span class="c">// En cas d'activation du Social-Login</span>
-      <span class="f">@apple-login</span>=<span class="s">"handleAppleLogin"</span> <span class="c">// En cas d'activation du Social-Login</span>
+      <span class="f">@register</span>=<span class="s">"navigateTo('/auth/register')"</span>
     <span class="cm">/&gt;</span>
   <span class="cm">&lt;/AuthLayout&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
@@ -2216,18 +2176,6 @@
   author: <span class="s">'3S Tech Group'</span>,
   location: <span class="s">'Dakar'</span>
 }
-
-<span class="k">async function</span> <span class="f">handleGoogleLogin</span>() {
-  <span class="c">// Redirige vers ton fournisseur OAuth Google (ex : Supabase, Laravel Socialite, etc.)</span>
-  <span class="c">// await navigateTo('/auth/google', { external: true })</span>
-  <span class="k">console</span>.<span class="f">log</span>('Connexion Google déclenchée')
-}
-
-<span class="k">async function</span> <span class="f">handleAppleLogin</span>() {
-  <span class="c">// Redirige vers ton fournisseur OAuth Apple</span>
-  <span class="c">// await navigateTo('/auth/apple', { external: true })</span>
-  <span class="k">console</span>.<span class="f">log</span>('Connexion Apple déclenchée')
-}
 <span class="tg">&lt;/script&gt;</span></pre>
           </div>
         </div>
@@ -2237,7 +2185,9 @@
           <div class="section-head">
             <h2><span class="h2-icon hi-g">▣</span>AuthRegisterForm</h2>
             <p class="section-sub" data-i18n="registerform.sub">
-              Inscription avec nom, email, mot de passe et confirmation.
+              Inscription avec prénom, nom, email, téléphone (optionnel), mot de
+              passe et confirmation. Les champs peuvent être masqués via la prop
+              <code>except</code>.
             </p>
           </div>
           <table class="dtable">
@@ -2300,16 +2250,17 @@
             <pre><span class="tg">&lt;template&gt;</span>
   <span class="cm">&lt;AuthLayout</span><span class="cm">&gt;</span>
     <span class="c">&lt;!-- Défaut — mot de passe requis, sans téléphone --&gt;</span>
-    <span class="cm">&lt;AuthRegisterForm</span><span class="cm">/&gt;</span>
+    <span class="cm">&lt;AuthRegisterForm</span> <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span> <span class="cm">/&gt;</span>
 
-    <span class="c">&lt;!-- Sans mot de passe --&gt;</span>
+    <span class="c">&lt;!-- Sans mot de passe (ex: magic link) --&gt;</span>
     <span class="cm">&lt;AuthRegisterForm</span>
       <span class="f">:except</span>=<span class="s">"['password']"</span>
+      <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span>
     <span class="cm">/&gt;</span>
 
-    <span class="c">&lt;!-- Sans téléphone --&gt;</span>
+    <span class="c">&lt;!-- Avec téléphone, sans mot de passe --&gt;</span>
     <span class="cm">&lt;AuthRegisterForm</span>
-      <span class="f">:except</span>=<span class="s">"['phone']"</span>
+      <span class="f">:except</span>=<span class="s">"['password']"</span>
       <span class="f">@login</span>=<span class="s">"navigateTo('/auth/login')"</span>
     <span class="cm">/&gt;</span>
 
@@ -2415,7 +2366,9 @@
           <div class="section-head">
             <h2><span class="h2-icon hi-b">▣</span>ProfileUpdateForm</h2>
             <p class="section-sub" data-i18n="profile.sub">
-              Mise à jour du nom, email et avatar de l'utilisateur connecté.
+              Mise à jour du profil connecté : prénom, nom, email, téléphone et
+              avatar. Les champs peuvent être masqués via la prop
+              <code>except</code>.
             </p>
           </div>
           <table class="dtable">
@@ -2439,7 +2392,7 @@
                 <td><code>boolean</code></td>
                 <td><code>false</code></td>
                 <td data-i18n="profile.avatar_desc">
-                  Champ avatar avec prévisualisation
+                  Affiche la section avatar avec prévisualisation et initiales
                 </td>
               </tr>
               <tr>
@@ -2456,7 +2409,18 @@
               </tr>
             </tbody>
           </table>
-          <p data-i18n="profile.slot">
+          <div class="alert al-info" style="margin-top: 12px">
+            <span class="alert-icon">ℹ️</span>
+            <p data-i18n="profile.except_note">
+              Le champ <code>phone</code> est
+              <strong>masqué par défaut</strong> (absent du formulaire
+              original). Il s'affiche dès qu'il n'est pas dans
+              <code>except</code>. Les champs <code>first_name</code>,
+              <code>last_name</code> et <code>email</code> sont visibles par
+              défaut.
+            </p>
+          </div>
+          <p data-i18n="profile.slot" style="margin-top: 14px">
             Slot <code>#extra-fields</code> pour ajouter des champs
             supplémentaires. Accès à l'objet <code>form</code> via la prop de
             slot.
@@ -2484,20 +2448,20 @@
 
     <span class="c">&lt;!-- Avec téléphone, sans email --&gt;</span>
     <span class="cm">&lt;ProfileUpdateForm</span>
-      <span class="f">:except</span>=<span class="s">"['email']"</span>
+      <span class="f">:except</span>=<span class="s">"[&#39;email&#39;]"</span>
       <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
     <span class="cm">/&gt;</span>
 
     <span class="c">&lt;!-- Nom uniquement --&gt;</span>
     <span class="cm">&lt;ProfileUpdateForm</span>
-      <span class="f">:except</span>=<span class="s">"['email', 'phone']"</span>
+      <span class="f">:except</span>=<span class="s">"[&#39;email&#39;, &#39;phone&#39;]"</span>
       <span class="f">@success</span>=<span class="s">"onProfileSaved"</span>
     <span class="cm">/&gt;</span>
   <span class="tx">&lt;/div&gt;</span>
 <span class="tg">&lt;/template&gt;</span>
 
 <span class="tg">&lt;script setup lang="ts"&gt;</span>
-<span class="f">definePageMeta</span>({ middleware: <span class="s">'auth'</span> })
+<span class="f">definePageMeta</span>({ middleware: <span class="s">&#39;auth&#39;</span> })
 <span class="k">function</span> <span class="f">onProfileSaved</span>() {
   <span class="c">// ex: afficher une notification toast</span>
 }
@@ -2527,10 +2491,34 @@
               <tr>
                 <td><code>title</code></td>
                 <td><code>string</code></td>
-                <td><code>'Changer le mot de passe'</code></td>
+                <td><code>&#39;Changer le mot de passe&#39;</code></td>
               </tr>
             </tbody>
           </table>
+          <div class="file-header">
+            <span class="file-dot"></span>pages/profile/index.vue
+          </div>
+          <div class="codeblock">
+            <span class="lang-label">vue</span
+            ><button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
+            <pre><span class="tg">&lt;template&gt;</span>
+  <span class="tx">&lt;div</span> <span class="f">class</span>=<span class="s">"max-w-2xl mx-auto py-10 px-4 space-y-10"</span><span class="tx">&gt;</span>
+    <span class="cm">&lt;ProfileUpdatePasswordForm</span>
+      <span class="f">title</span>=<span class="s">"Changer le mot de passe"</span>
+    <span class="cm">/&gt;</span>
+  <span class="tx">&lt;/div&gt;</span>
+<span class="tg">&lt;/template&gt;</span>
+
+<span class="tg">&lt;script setup lang="ts"&gt;</span>
+<span class="f">definePageMeta</span>({ middleware: <span class="s">&#39;auth&#39;</span> })
+<span class="tg">&lt;/script&gt;</span></pre>
+          </div>
         </div>
 
         <hr class="div" />
@@ -3162,6 +3150,30 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — nouvelle prop <code>except</code> de type <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> pour masquer des champs et les exclure de la validation Zod dynamiquement",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — ajout du champ <code>phone</code> (masqué par défaut, visible dès qu'il n'est pas dans <code>except</code>)",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — grille prénom/nom passe automatiquement en <code>grid-cols-1</code> si l'un des deux champs est masqué",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — même logique <code>except</code> sur les champs <code>password</code> et <code>phone</code>, schéma Zod computed",
+          "changelog.v144a_item1":
+            "Endpoints profil mis à jour : <code>updateProfile</code> → <code>/api/profile</code>, <code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2":
+            "Améliorations sur <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3":
+            "Améliorations sur <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1":
+            "Panneau droit remplacé par une image de fond avec overlay sombre",
+          "changelog.v144b_item2":
+            "Nouveau slot <code>#brand</code> pour personnaliser le nom et tagline de l'app",
+          "changelog.v144b_item3":
+            "Props unifiées dans un objet <code>quote</code> : <code>appName</code>, <code>appTagline</code>, <code>image</code>, <code>text</code>, <code>author</code>, <code>location</code>, <code>avatar</code>",
+          "changelog.v144b_item4":
+            "Styles migrés en <code>scoped CSS</code> — suppression des classes Tailwind utilitaires",
+          "changelog.v144b_item5":
+            "Image par défaut via Pexels si aucune image fournie",
           "authlayout.sub":
             "Layout split-screen — formulaire à gauche, témoignage + illustration à droite.",
           "authlayout.appname_desc": "Nom du logo",
@@ -3172,9 +3184,9 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Titre du formulaire",
           "loginform.subtitle_desc": "Sous-titre",
           "loginform.social_desc": "Boutons Google / Apple",
-          "loginform.roles_desc": "Bouton d'inscription",
+          "loginform.roles_desc": "Sélecteur de rôle",
           "loginform.ev_forgot": 'Clic "Mot de passe oublié ?"',
-          "loginform.ev_register": 'Clic "S\'inscrire"',
+          "loginform.ev_register": 'Clic "S&#39;inscrire"',
           "loginform.ev_google": "Clic bouton Google",
           "loginform.ev_apple": "Clic bouton Apple",
           "loginform.ev_success": "Connexion réussie",
@@ -3185,7 +3197,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.except_desc":
             "Champs à masquer et exclure de la validation",
           "registerform.except_note":
-            "Le champ <code>phone</code> est <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est pas dans <code>except</code>. Le champ <code>password</code> est visible par défaut — passez <code>:except=\\\"['password']\\\"</code> pour le masquer.",
+            "Le champ <code>phone</code> est <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est pas dans <code>except</code>. Le champ <code>password</code> est visible par défaut — passez <code>:except=&quot;['password']&quot;</code> pour le masquer (ex : inscription via magic link).",
           "forgotform.sub":
             "Envoi de l'email de réinitialisation. Affiche un état de succès après envoi.",
           "resetform.sub":
@@ -3193,9 +3205,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "resetform.info":
             "L'email Laravel doit rediriger vers <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configurez dans <code>config/auth.php</code> → <code>passwords.users</code>.",
           "profile.sub":
-            "Mise à jour du nom, email et avatar de l'utilisateur connecté.",
+            "Mise à jour du profil connecté : prénom, nom, email, téléphone et avatar.",
           "profile.title_desc": "Titre de la section",
-          "profile.avatar_desc": "Champ avatar avec prévisualisation",
+          "profile.avatar_desc":
+            "Affiche la section avatar avec prévisualisation et initiales",
           "profile.except_desc": "Champs à masquer et exclure de la validation",
           "profile.except_note":
             "Le champ <code>phone</code> est <strong>masqué par défaut</strong>. Il s'affiche dès qu'il n'est pas dans <code>except</code>. Les champs <code>first_name</code>, <code>last_name</code> et <code>email</code> sont visibles par défaut.",
@@ -3323,6 +3336,50 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "The <code>auth</code>, <code>guest</code> and <code>role</code> middlewares returned a 500 <code>Unknown route middleware</code> error in Nuxt 4. Replaced <code>addRouteMiddleware()</code> with the <code>app:resolve</code> hook.",
           "changelog.peer_fix":
             "The <code>nuxt</code> dependency was limited to <code>^3.0.0</code>. Extended to <code>^3.0.0 || ^4.0.0</code>.",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — 新增 <code>except</code> prop，类型为 <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code>，可动态隐藏字段并将其从 Zod 验证中排除",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — 新增 <code>phone</code> 字段（默认隐藏，不在 <code>except</code> 中即显示）",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — 当姓/名其中一个字段被隐藏时，网格自动切换为 <code>grid-cols-1</code>",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — <code>password</code> 和 <code>phone</code> 字段应用相同的 <code>except</code> 逻辑，Zod schema 改为 computed",
+          "changelog.v144a_item1":
+            "更新个人资料端点：<code>updateProfile</code> → <code>/api/profile</code>，<code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2": "改进 <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3": "改进 <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1": "右侧面板替换为带深色遮罩的背景图",
+          "changelog.v144b_item2":
+            "新增 <code>#brand</code> 插槽，可自定义应用名称和标语",
+          "changelog.v144b_item3":
+            "Props 统一合并到 <code>quote</code> 对象：<code>appName</code>、<code>appTagline</code>、<code>image</code>、<code>text</code>、<code>author</code>、<code>location</code>、<code>avatar</code>",
+          "changelog.v144b_item4":
+            "样式迁移至 <code>scoped CSS</code> — 移除 Tailwind 工具类",
+          "changelog.v144b_item5": "未提供图片时自动使用 Pexels 默认图片",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — new <code>except</code> prop of type <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> to hide fields and exclude them from Zod validation dynamically",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — added <code>phone</code> field (hidden by default, visible as soon as it is not in <code>except</code>)",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — first/last name grid automatically switches to <code>grid-cols-1</code> when one of the two fields is hidden",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — same <code>except</code> logic for <code>password</code> and <code>phone</code> fields, computed Zod schema",
+          "changelog.v144a_item1":
+            "Profile endpoints updated: <code>updateProfile</code> → <code>/api/profile</code>, <code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2":
+            "Improvements to <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3":
+            "Improvements to <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1":
+            "Right panel replaced with a background image and dark overlay",
+          "changelog.v144b_item2":
+            "New <code>#brand</code> slot to customize the app name and tagline",
+          "changelog.v144b_item3":
+            "Props unified into a <code>quote</code> object: <code>appName</code>, <code>appTagline</code>, <code>image</code>, <code>text</code>, <code>author</code>, <code>location</code>, <code>avatar</code>",
+          "changelog.v144b_item4":
+            "Styles migrated to <code>scoped CSS</code> — removal of Tailwind utility classes",
+          "changelog.v144b_item5":
+            "Default image via Pexels if no image provided",
           "authlayout.sub":
             "Split-screen layout — form on the left, testimonial + illustration on the right.",
           "authlayout.appname_desc": "Logo name",
@@ -3333,7 +3390,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Form title",
           "loginform.subtitle_desc": "Subtitle",
           "loginform.social_desc": "Google / Apple buttons",
-          "loginform.roles_desc": "Sign up button",
+          "loginform.roles_desc": "Role selector",
           "loginform.ev_forgot": 'Click on "Forgot password?"',
           "loginform.ev_register": 'Click on "Sign up"',
           "loginform.ev_google": "Click on Google button",
@@ -3346,16 +3403,18 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.except_desc":
             "Fields to hide and exclude from validation",
           "registerform.except_note":
-            "The <code>phone</code> field is <strong>hidden by default</strong>. It shows as soon as it is not in <code>except</code>. The <code>password</code> field is visible by default — pass <code>:except=\\\"['password']\\\"</code> to hide it.",
+            "The <code>phone</code> field is <strong>hidden by default</strong>. It shows as soon as it is not in <code>except</code>. The <code>password</code> field is visible by default — pass <code>:except=&quot;['password']&quot;</code> to hide it (e.g. magic link registration).",
           "forgotform.sub":
             "Send the reset email. Shows a success state after sending.",
           "resetform.sub":
             "Automatically reads <code>?token=</code> and <code>?email=</code> from the reset URL.",
           "resetform.info":
             "The Laravel email must redirect to <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configure in <code>config/auth.php</code> → <code>passwords.users</code>.",
-          "profile.sub": "Update the connected user's name, email and avatar.",
+          "profile.sub":
+            "Update the connected user's profile: first name, last name, email, phone and avatar.",
           "profile.title_desc": "Section title",
-          "profile.avatar_desc": "Avatar field with preview",
+          "profile.avatar_desc":
+            "Show avatar section with preview and initials",
           "profile.except_desc": "Fields to hide and exclude from validation",
           "profile.except_note":
             "The <code>phone</code> field is <strong>hidden by default</strong>. It shows as soon as it is not in <code>except</code>. The <code>first_name</code>, <code>last_name</code> and <code>email</code> fields are visible by default.",
@@ -3481,6 +3540,30 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "الوسيطات <code>auth</code> و<code>guest</code> و<code>role</code> كانت تعيد خطأ 500 <code>Unknown route middleware</code> في Nuxt 4. تم استبدال <code>addRouteMiddleware()</code> بالخطاف <code>app:resolve</code>.",
           "changelog.peer_fix":
             "كانت تبعية <code>nuxt</code> محدودة بـ <code>^3.0.0</code>. تم التوسيع إلى <code>^3.0.0 || ^4.0.0</code>.",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — خاصية <code>except</code> جديدة من نوع <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> لإخفاء الحقول وإقصائها من التحقق Zod ديناميكياً",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — إضافة حقل <code>phone</code> (مخفي افتراضياً، يظهر عند عدم إدراجه في <code>except</code>)",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — شبكة الاسم الأول/الأخير تنتقل تلقائياً إلى <code>grid-cols-1</code> عند إخفاء أحد الحقلين",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — نفس منطق <code>except</code> على حقلي <code>password</code> و<code>phone</code>، مخطط Zod محسوب",
+          "changelog.v144a_item1":
+            "تحديث نقاط نهاية الملف الشخصي: <code>updateProfile</code> → <code>/api/profile</code>، <code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2":
+            "تحسينات على <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3":
+            "تحسينات على <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1":
+            "استبدال اللوحة اليمنى بصورة خلفية مع طبقة تعتيم داكنة",
+          "changelog.v144b_item2":
+            "slot جديد <code>#brand</code> لتخصيص اسم التطبيق والشعار",
+          "changelog.v144b_item3":
+            "توحيد الخصائص في كائن <code>quote</code>: <code>appName</code>، <code>appTagline</code>، <code>image</code>، <code>text</code>، <code>author</code>، <code>location</code>، <code>avatar</code>",
+          "changelog.v144b_item4":
+            "ترحيل الأنماط إلى <code>scoped CSS</code> — إزالة فئات Tailwind المساعدة",
+          "changelog.v144b_item5":
+            "صورة افتراضية عبر Pexels إذا لم تُوفَّر صورة",
           "authlayout.sub":
             "تخطيط بشاشة مقسمة — النموذج على اليسار، شهادة + رسم توضيحي على اليمين.",
           "authlayout.appname_desc": "اسم الشعار",
@@ -3491,7 +3574,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "عنوان النموذج",
           "loginform.subtitle_desc": "العنوان الفرعي",
           "loginform.social_desc": "أزرار Google / Apple",
-          "loginform.roles_desc": "زر التسجيل",
+          "loginform.roles_desc": "محدد الدور",
           "loginform.ev_forgot": 'النقر على "نسيت كلمة المرور؟"',
           "loginform.ev_register": 'النقر على "تسجيل"',
           "loginform.ev_google": "النقر على زر Google",
@@ -3504,16 +3587,17 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.except_desc":
             "الحقول المراد إخفاؤها وإقصاؤها من التحقق",
           "registerform.except_note":
-            "حقل <code>phone</code> <strong>مخفي افتراضياً</strong>. يظهر عند عدم إدراجه في <code>except</code>. حقل <code>password</code> مرئي افتراضياً — مرّر <code>:except=\\\"['password']\\\"</code> لإخفائه.",
+            "حقل <code>phone</code> <strong>مخفي افتراضياً</strong>. يظهر عند عدم إدراجه في <code>except</code>. حقل <code>password</code> مرئي افتراضياً — مرّر <code>:except=&quot;['password']&quot;</code> لإخفائه.",
           "forgotform.sub":
             "إرسال بريد إعادة التعيين. يعرض حالة نجاح بعد الإرسال.",
           "resetform.sub":
             "يقرأ تلقائياً <code>?token=</code> و<code>?email=</code> من رابط إعادة التعيين.",
           "resetform.info":
             "يجب أن يعيد التوجيه بريد Laravel إلى <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. اضبط في <code>config/auth.php</code> → <code>passwords.users</code>.",
-          "profile.sub": "تحديث اسم المستخدم المتصل وبريده وصورته.",
+          "profile.sub":
+            "تحديث ملف المستخدم المتصل: الاسم والبريد والهاتف والصورة.",
           "profile.title_desc": "عنوان القسم",
-          "profile.avatar_desc": "حقل الصورة مع معاينة",
+          "profile.avatar_desc": "عرض قسم الصورة مع معاينة والأحرف الأولى",
           "profile.except_desc": "الحقول المراد إخفاؤها وإقصاؤها من التحقق",
           "profile.except_note":
             "حقل <code>phone</code> <strong>مخفي افتراضياً</strong>. يظهر عند عدم إدراجه في <code>except</code>. حقول <code>first_name</code> و<code>last_name</code> و<code>email</code> مرئية افتراضياً.",
@@ -3638,6 +3722,30 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Los middlewares <code>auth</code>, <code>guest</code> y <code>role</code> devolvían un error 500 <code>Unknown route middleware</code> en Nuxt 4. Se reemplazó <code>addRouteMiddleware()</code> con el hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dependencia <code>nuxt</code> estaba limitada a <code>^3.0.0</code>. Extendida a <code>^3.0.0 || ^4.0.0</code>.",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — nueva prop <code>except</code> de tipo <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> para ocultar campos y excluirlos de la validación Zod dinámicamente",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — añadido campo <code>phone</code> (oculto por defecto, visible cuando no está en <code>except</code>)",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — la cuadrícula nombre/apellido cambia automáticamente a <code>grid-cols-1</code> si uno de los dos campos está oculto",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — misma lógica <code>except</code> para los campos <code>password</code> y <code>phone</code>, esquema Zod computed",
+          "changelog.v144a_item1":
+            "Endpoints de perfil actualizados: <code>updateProfile</code> → <code>/api/profile</code>, <code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2":
+            "Mejoras en <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3":
+            "Mejoras en <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1":
+            "Panel derecho reemplazado por imagen de fondo con overlay oscuro",
+          "changelog.v144b_item2":
+            "Nuevo slot <code>#brand</code> para personalizar el nombre y tagline de la app",
+          "changelog.v144b_item3":
+            "Props unificadas en un objeto <code>quote</code>: <code>appName</code>, <code>appTagline</code>, <code>image</code>, <code>text</code>, <code>author</code>, <code>location</code>, <code>avatar</code>",
+          "changelog.v144b_item4":
+            "Estilos migrados a <code>scoped CSS</code> — eliminación de clases utilitarias Tailwind",
+          "changelog.v144b_item5":
+            "Imagen por defecto via Pexels si no se proporciona imagen",
           "authlayout.sub":
             "Layout de pantalla dividida — formulario a la izquierda, testimonial + ilustración a la derecha.",
           "authlayout.appname_desc": "Nombre del logo",
@@ -3648,7 +3756,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Título del formulario",
           "loginform.subtitle_desc": "Subtítulo",
           "loginform.social_desc": "Botones Google / Apple",
-          "loginform.roles_desc": "Botón de registro",
+          "loginform.roles_desc": "Selector de rol",
           "loginform.ev_forgot": 'Clic en "¿Olvidaste tu contraseña?"',
           "loginform.ev_register": 'Clic en "Registrarse"',
           "loginform.ev_google": "Clic en botón Google",
@@ -3661,7 +3769,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.except_desc":
             "Campos a ocultar y excluir de la validación",
           "registerform.except_note":
-            "El campo <code>phone</code> está <strong>oculto por defecto</strong>. Aparece cuando no está en <code>except</code>. El campo <code>password</code> es visible por defecto — pasa <code>:except=\\\"['password']\\\"</code> para ocultarlo.",
+            "El campo <code>phone</code> está <strong>oculto por defecto</strong>. Aparece cuando no está en <code>except</code>. El campo <code>password</code> es visible por defecto — pasa <code>:except=&quot;['password']&quot;</code> para ocultarlo (ej: registro vía magic link).",
           "forgotform.sub":
             "Envío del email de restablecimiento. Muestra un estado de éxito tras el envío.",
           "resetform.sub":
@@ -3669,9 +3777,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "resetform.info":
             "El email de Laravel debe redirigir a <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>. Configura en <code>config/auth.php</code> → <code>passwords.users</code>.",
           "profile.sub":
-            "Actualizar el nombre, email y avatar del usuario conectado.",
+            "Actualizar el perfil del usuario conectado: nombre, email, teléfono y avatar.",
           "profile.title_desc": "Título de la sección",
-          "profile.avatar_desc": "Campo avatar con previsualización",
+          "profile.avatar_desc":
+            "Mostrar sección avatar con previsualización e iniciales",
           "profile.except_desc": "Campos a ocultar y excluir de la validación",
           "profile.except_note":
             "El campo <code>phone</code> está <strong>oculto por defecto</strong>. Aparece cuando no está en <code>except</code>. Los campos <code>first_name</code>, <code>last_name</code> y <code>email</code> son visibles por defecto.",
@@ -3803,7 +3912,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "表单标题",
           "loginform.subtitle_desc": "副标题",
           "loginform.social_desc": "Google / Apple 按钮",
-          "loginform.roles_desc": "注册按钮",
+          "loginform.roles_desc": "角色选择器",
           "loginform.ev_forgot": "点击「忘记密码？」",
           "loginform.ev_register": "点击「注册」",
           "loginform.ev_google": "点击 Google 按钮",
@@ -3815,15 +3924,15 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.subtitle_desc": "副标题",
           "registerform.except_desc": "要隐藏并从验证中排除的字段",
           "registerform.except_note":
-            "<code>phone</code> 字段<strong>默认隐藏</strong>。只要不在 <code>except</code> 中即可显示。<code>password</code> 字段默认可见 — 传入 <code>:except=\\\"['password']\\\"</code> 可隐藏它。",
+            "<code>phone</code> 字段<strong>默认隐藏</strong>。只要不在 <code>except</code> 中即可显示。<code>password</code> 字段默认可见 — 传入 <code>:except=&quot;['password']&quot;</code> 可隐藏它（如魔法链接注册）。",
           "forgotform.sub": "发送重置邮件。发送后显示成功状态。",
           "resetform.sub":
             "自动从重置 URL 中读取 <code>?token=</code> 和 <code>?email=</code>。",
           "resetform.info":
             "Laravel 邮件必须重定向至 <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong>。在 <code>config/auth.php</code> → <code>passwords.users</code> 中配置。",
-          "profile.sub": "更新已登录用户的姓名、邮箱和头像。",
+          "profile.sub": "更新已登录用户的姓名、邮箱、手机号和头像。",
           "profile.title_desc": "区块标题",
-          "profile.avatar_desc": "带预览的头像字段",
+          "profile.avatar_desc": "显示带预览和首字母的头像区域",
           "profile.except_desc": "要隐藏并从验证中排除的字段",
           "profile.except_note":
             "<code>phone</code> 字段<strong>默认隐藏</strong>。只要不在 <code>except</code> 中即可显示。<code>first_name</code>、<code>last_name</code> 和 <code>email</code> 字段默认可见。",
@@ -3947,6 +4056,30 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Die Middlewares <code>auth</code>, <code>guest</code> und <code>role</code> gaben in Nuxt 4 einen 500-Fehler <code>Unknown route middleware</code> zurück. <code>addRouteMiddleware()</code> durch den Hook <code>app:resolve</code> ersetzt.",
           "changelog.peer_fix":
             "Die <code>nuxt</code>-Abhängigkeit war auf <code>^3.0.0</code> beschränkt. Auf <code>^3.0.0 || ^4.0.0</code> erweitert.",
+          "changelog.v145_item1":
+            "<code>ProfileUpdateForm</code> — neue Prop <code>except</code> vom Typ <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> zum dynamischen Ausblenden von Feldern und Ausschluss aus der Zod-Validierung",
+          "changelog.v145_item2":
+            "<code>ProfileUpdateForm</code> — Feld <code>phone</code> hinzugefügt (standardmäßig ausgeblendet, sichtbar sobald es nicht in <code>except</code> enthalten ist)",
+          "changelog.v145_item3":
+            "<code>ProfileUpdateForm</code> — Vorname/Nachname-Grid wechselt automatisch zu <code>grid-cols-1</code> wenn eines der beiden Felder ausgeblendet ist",
+          "changelog.v145_item4":
+            "<code>RegisterForm</code> — gleiche <code>except</code>-Logik für die Felder <code>password</code> und <code>phone</code>, berechnetes Zod-Schema",
+          "changelog.v144a_item1":
+            "Profil-Endpunkte aktualisiert: <code>updateProfile</code> → <code>/api/profile</code>, <code>updatePassword</code> → <code>/api/profile/password</code>",
+          "changelog.v144a_item2":
+            "Verbesserungen an <code>UpdateProfileForm.vue</code>",
+          "changelog.v144a_item3":
+            "Verbesserungen an <code>UpdatePasswordForm.vue</code>",
+          "changelog.v144b_item1":
+            "Rechtes Panel durch Hintergrundbild mit dunklem Overlay ersetzt",
+          "changelog.v144b_item2":
+            "Neuer Slot <code>#brand</code> zur Anpassung von App-Name und Tagline",
+          "changelog.v144b_item3":
+            "Props in einem <code>quote</code>-Objekt vereint: <code>appName</code>, <code>appTagline</code>, <code>image</code>, <code>text</code>, <code>author</code>, <code>location</code>, <code>avatar</code>",
+          "changelog.v144b_item4":
+            "Styles zu <code>scoped CSS</code> migriert — Entfernung der Tailwind-Utility-Klassen",
+          "changelog.v144b_item5":
+            "Standardbild via Pexels wenn kein Bild angegeben",
           "authlayout.sub":
             "Split-Screen-Layout — Formular links, Testimonial + Illustration rechts.",
           "authlayout.appname_desc": "Logo-Name",
@@ -3957,7 +4090,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "loginform.title_desc": "Formulartitel",
           "loginform.subtitle_desc": "Untertitel",
           "loginform.social_desc": "Google / Apple Buttons",
-          "loginform.roles_desc": "Registrierungsbutton",
+          "loginform.roles_desc": "Rollen-Selektor",
           "loginform.ev_forgot": 'Klick auf "Passwort vergessen?"',
           "loginform.ev_register": 'Klick auf "Registrieren"',
           "loginform.ev_google": "Klick auf Google-Button",
@@ -3970,7 +4103,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "registerform.except_desc":
             "Felder ausblenden und von der Validierung ausschließen",
           "registerform.except_note":
-            "Das Feld <code>phone</code> ist <strong>standardmäßig ausgeblendet</strong>. Es erscheint, sobald es nicht in <code>except</code> enthalten ist. Das Feld <code>password</code> ist standardmäßig sichtbar — übergeben Sie <code>:except=\\\"['password']\\\"</code> zum Ausblenden.",
+            "Das Feld <code>phone</code> ist <strong>standardmäßig ausgeblendet</strong>. Es erscheint, sobald es nicht in <code>except</code> enthalten ist. Das Feld <code>password</code> ist standardmäßig sichtbar — übergeben Sie <code>:except=&quot;['password']&quot;</code> zum Ausblenden (z.B. Magic-Link-Registrierung).",
           "forgotform.sub":
             "Sendet die Reset-E-Mail. Zeigt nach dem Senden einen Erfolgsstatus an.",
           "resetform.sub":
@@ -3978,9 +4111,10 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           "resetform.info":
             "Die Laravel-E-Mail muss zu <strong><code>/auth/reset-password?token=TOKEN&email=EMAIL</code></strong> weiterleiten. In <code>config/auth.php</code> → <code>passwords.users</code> konfigurieren.",
           "profile.sub":
-            "Name, E-Mail und Avatar des eingeloggten Benutzers aktualisieren.",
+            "Profil des eingeloggten Benutzers aktualisieren: Name, E-Mail, Telefon und Avatar.",
           "profile.title_desc": "Abschnittstitel",
-          "profile.avatar_desc": "Avatar-Feld mit Vorschau",
+          "profile.avatar_desc":
+            "Avatar-Bereich mit Vorschau und Initialen anzeigen",
           "profile.except_desc":
             "Felder ausblenden und von der Validierung ausschließen",
           "profile.except_note":

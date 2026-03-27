@@ -1,6 +1,8 @@
 <template>
   <div class="profile-update-password">
-    <h2 class="text-2xl font-bold text-[#1a2e1a] mb-6">{{ title }}</h2>
+    <h2 class="text-2xl font-bold mb-6" :class="theme.titleColor">
+      {{ title }}
+    </h2>
 
     <UForm
       :schema="schema"
@@ -20,13 +22,13 @@
           :type="show.current ? 'text' : 'password'"
           placeholder="Votre mot de passe actuel"
           icon="i-hugeicons-square-lock-02"
-          color="neutral"
+          :color="theme.color"
           class="w-full"
-          :ui="{ base: 'rounded-xl py-3 text-base' }"
+          :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
         >
           <template #trailing>
             <UButton
-              color="neutral"
+              :color="theme.color"
               variant="link"
               size="sm"
               :icon="show.current ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -38,7 +40,7 @@
 
       <UFormField
         label="Nouveau mot de passe"
-        name="password"
+        name="new_password"
         required
         class="mt-4"
       >
@@ -48,13 +50,13 @@
           :type="show.new ? 'text' : 'password'"
           placeholder="Minimum 8 caractères"
           icon="i-hugeicons-square-lock-02"
-          color="neutral"
+          :color="theme.color"
           class="w-full"
-          :ui="{ base: 'rounded-xl py-3 text-base' }"
+          :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
         >
           <template #trailing>
             <UButton
-              color="neutral"
+              :color="theme.color"
               variant="link"
               size="sm"
               :icon="show.new ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -76,9 +78,9 @@
           :type="show.new ? 'text' : 'password'"
           placeholder="Confirmez votre nouveau mot de passe"
           icon="i-hugeicons-square-lock-02"
-          color="neutral"
+          :color="theme.color"
           class="w-full"
-          :ui="{ base: 'rounded-xl py-3 text-base' }"
+          :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
         />
       </UFormField>
 
@@ -86,10 +88,12 @@
         type="submit"
         :loading="loading"
         :disabled="loading"
-        color="neutral"
+        :color="theme.btnColor"
+        :variant="theme.btnVariant"
         size="lg"
         trailing-icon="i-lucide-key-round"
-        class="font-semiboldpy-3.5 rounded-xl mt-2 justify-center"
+        class="py-3.5 mt-2 justify-center"
+        :class="theme.btnRounded"
       >
         {{ loading ? "Modification..." : "Changer le mot de passe" }}
       </UButton>
@@ -98,14 +102,24 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
 
-withDefaults(defineProps<{ title?: string }>(), {
-  title: "Changer le mot de passe",
-});
+const props = withDefaults(
+  defineProps<{
+    title?: string;
+    ui?: Partial<FormTheme>;
+  }>(),
+  {
+    title: "Changer le mot de passe",
+    ui: () => ({}),
+  },
+);
+
+const theme = computed(() => useFormTheme(props.ui));
 
 const schema = z
   .object({
@@ -115,14 +129,13 @@ const schema = z
       .string()
       .min(1, "Veuillez confirmer le mot de passe"),
   })
-  .refine((data) => data.new_password === data.new_password_confirmation, {
+  .refine((d) => d.new_password === d.new_password_confirmation, {
     message: "Les mots de passe ne correspondent pas",
     path: ["new_password_confirmation"],
   });
 
 const { updatePassword, loading } = useAuth();
 const toast = useToast();
-
 const form = reactive({
   current_password: "",
   new_password: "",
@@ -132,7 +145,6 @@ const show = reactive({ current: false, new: false });
 
 async function handleSubmit() {
   const result = await updatePassword(form);
-
   if (result.success) {
     toast.add({
       title: "Mot de passe modifié",

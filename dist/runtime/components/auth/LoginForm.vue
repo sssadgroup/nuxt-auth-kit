@@ -1,7 +1,9 @@
 <template>
   <div class="auth-login">
-    <h1 class="text-3xl font-bold text-[#1a2e1a] mb-2">{{ title }}</h1>
-    <p class="text-[#6b7c6b] mb-8">{{ subtitle }}</p>
+    <h1 class="text-3xl font-bold mb-2" :class="theme.titleColor">
+      {{ title }}
+    </h1>
+    <p class="mb-8" :class="theme.subtitleColor">{{ subtitle }}</p>
 
     <UForm
       :schema="schema"
@@ -16,8 +18,8 @@
           size="xl"
           placeholder="oscar@sierra.com"
           icon="i-hugeicons-mail-account-02"
-          color="neutral"
-          :ui="{ base: 'rounded-full py-3 text-base' }"
+          :color="theme.color"
+          :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
         />
       </UFormField>
 
@@ -25,7 +27,8 @@
         <template #hint>
           <div
             @click="$emit('forgot-password')"
-            class="text-sm text-[#1B4332] font-semibold hover:underline cursor-pointer"
+            class="text-sm font-semibold hover:underline cursor-pointer"
+            :class="theme.accentColor"
           >
             Mot de passe oublié ?
           </div>
@@ -37,13 +40,13 @@
             :type="showPassword ? 'text' : 'password'"
             placeholder="mot de passe"
             icon="i-hugeicons-square-lock-02"
-            color="neutral"
+            :color="theme.color"
             class="w-full"
-            :ui="{ base: 'rounded-full py-3 text-base' }"
+            :ui="{ base: `${theme.inputRounded} py-3 text-base` }"
           >
             <template #trailing>
               <UButton
-                color="neutral"
+                :color="theme.color"
                 variant="link"
                 size="sm"
                 :icon="showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -61,10 +64,12 @@
         type="submit"
         :loading="loading"
         :disabled="loading"
-        color="neutral"
+        :color="theme.btnColor"
+        :variant="theme.btnVariant"
         size="lg"
         trailing-icon="i-lucide-log-in"
-        class="w-full font-semibold py-3.5 rounded-full mt-2 justify-center"
+        class="w-full font-semibold py-3.5 mt-2 justify-center"
+        :class="theme.btnRounded"
       >
         {{ loading ? "Connexion en cours..." : "Se connecter" }}
       </UButton>
@@ -75,16 +80,18 @@
       <div class="mt-16">
         <div class="flex items-center gap-3 my-6">
           <div class="flex-1 h-px bg-[#e5ebe5]" />
-          <span class="text-sm text-[#6b7c6b]">ou continuer avec</span>
+          <span class="text-sm" :class="theme.subtitleColor"
+            >ou continuer avec</span
+          >
           <div class="flex-1 h-px bg-[#e5ebe5]" />
         </div>
-
         <div class="flex gap-3">
           <UButton
             variant="outline"
-            color="neutral"
+            :color="theme.color"
             size="lg"
-            class="flex-1 font-semibold py-3.5 rounded-full mt-2 justify-center"
+            class="flex-1 font-semibold py-3.5 mt-2 justify-center"
+            :class="theme.btnRounded"
             @click="$emit('google-login')"
           >
             <template #leading>
@@ -92,12 +99,12 @@
             </template>
             Google
           </UButton>
-
           <UButton
             variant="outline"
-            color="neutral"
+            :color="theme.color"
             size="lg"
-            class="flex-1 font-semibold py-3.5 rounded-full mt-2 justify-center"
+            class="flex-1 font-semibold py-3.5 mt-2 justify-center"
+            :class="theme.btnRounded"
             @click="$emit('apple-login')"
           >
             <template #leading>
@@ -109,11 +116,17 @@
       </div>
     </template>
 
-    <p v-if="showRegisterBtn" class="text-center text-sm text-[#6b7c6b] mt-6">
+    <!-- Lien inscription -->
+    <p
+      v-if="showRegisterBtn"
+      class="text-center text-sm mt-6"
+      :class="theme.subtitleColor"
+    >
       Pas encore de compte ?
       <span
         @click="$emit('register')"
-        class="text-sm text-[#1B4332] font-semibold hover:underline cursor-pointer"
+        class="text-sm font-semibold hover:underline cursor-pointer"
+        :class="theme.accentColor"
       >
         S'inscrire
       </span>
@@ -122,10 +135,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
 
 const props = withDefaults(
   defineProps<{
@@ -133,14 +147,18 @@ const props = withDefaults(
     subtitle?: string;
     showSocial?: boolean;
     showRegisterBtn?: boolean;
+    ui?: Partial<FormTheme>;
   }>(),
   {
     title: "Connexion",
     subtitle: "Bienvenue ! Entrez vos informations pour continuer.",
     showSocial: false,
     showRegisterBtn: false,
+    ui: () => ({}),
   },
 );
+
+const theme = computed(() => useFormTheme(props.ui));
 
 const emit = defineEmits<{
   "forgot-password": [];
@@ -157,13 +175,11 @@ const schema = z.object({
 
 const { login, loading } = useAuth();
 const toast = useToast();
-
 const form = reactive({ email: "", password: "" });
 const showPassword = ref(false);
 
 async function handleSubmit() {
   const result = await login({ email: form.email, password: form.password });
-
   if (!result.success && result.error) {
     toast.add({
       title: "Erreur de connexion",

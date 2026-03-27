@@ -131,6 +131,10 @@ export default defineNuxtModule<ModuleOptions>({
           "./runtime/components/profile/UpdatePasswordForm.vue",
         ),
       },
+      {
+        name: "PhoneInput",
+        filePath: resolver.resolve("./runtime/components/ui/PhoneInput.vue"),
+      },
     ];
 
     for (const component of components) {
