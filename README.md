@@ -31,6 +31,9 @@ Install once — login, registration, profile, passwords, roles & permissions ar
 - ✅ **Named middlewares**: `auth`, `guest`, `role`
 - ✅ **7 split-screen Vue components** — auto-imported, Tailwind CSS
 - ✅ **Full TypeScript** support
+- ✅ **Configurable theme** (`ui` prop on every component) — colors, rounded, buttons, layout
+- ✅ **Phone number input** — `PhoneInput` component with country selector, flags, auto-formatting (E.164)
+- ✅ **`except` prop** on `RegisterForm` & `UpdateProfileForm` — hide/exclude fields dynamically
 
 ## Installation
 
@@ -43,6 +46,8 @@ pnpm add nuxt-auth-kit
 ```
 
 > Requires `@nuxt/ui` for styles. Compatible with **Nuxt 3.x** and **Nuxt 4.x**.
+
+> Also install `libphonenumber-js` for the PhoneInput component: `npm install libphonenumber-js`
 
 ## Configuration
 
@@ -340,6 +345,73 @@ import type {
 } from "nuxt-auth-kit";
 ```
 
+## Theming
+
+Every component accepts a `ui` prop for partial style overrides. See `useFormTheme.ts` for all available tokens.
+
+```vue
+<AuthLoginForm
+  :ui="{
+    inputRounded: 'rounded-lg',
+    btnColor: 'primary',
+    titleColor: 'text-slate-900',
+    accentColor: 'text-blue-600',
+  }"
+/>
+
+<AuthLayout
+  :ui="{
+    layoutPageColor: '#1e293b',
+    layoutTextColor: '#f8fafc',
+    layoutTaglineColor: 'rgba(248,250,252,0.7)',
+  }"
+/>
+```
+
+### `FormTheme` tokens
+
+| Token                 | Default                  | Description                        |
+| --------------------- | ------------------------ | ---------------------------------- |
+| `inputRounded`        | `rounded-full`           | Border-radius of all inputs        |
+| `color`               | `neutral`                | Nuxt UI color for inputs           |
+| `btnRounded`          | `rounded-full`           | Border-radius of submit button     |
+| `btnColor`            | `neutral`                | Nuxt UI color of submit button     |
+| `btnVariant`          | `solid`                  | Nuxt UI variant of submit button   |
+| `btnSecondaryColor`   | `secondary`              | Color of secondary buttons         |
+| `btnSecondaryVariant` | `subtle`                 | Variant of secondary buttons       |
+| `btnSecondaryRounded` | `rounded-full`           | Border-radius of secondary buttons |
+| `titleColor`          | `text-[#1a2e1a]`         | Title color class                  |
+| `subtitleColor`       | `text-[#6b7c6b]`         | Subtitle / secondary text color    |
+| `accentColor`         | `text-[#1B4332]`         | Links & accent color               |
+| `roleRingColor`       | `ring-[#1B4332]`         | Active role selector ring          |
+| `layoutPageColor`     | `#eeeee6`                | Left panel background (CSS value)  |
+| `layoutTextColor`     | `#ffffff`                | App name color on right panel      |
+| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | Tagline color on right panel       |
+
+## PhoneInput
+
+```vue
+<PhoneInput
+  v-model="form.phone"
+  v-model:country-code="form.phoneCountry"
+  :preferred-countries="['SN', 'FR', 'CI', 'MA']"
+  :use-browser-locale="true"
+  :ui="{ inputRounded: 'rounded-xl' }"
+  @data="onPhoneData"
+/>
+```
+
+**`@data` event payload:**
+
+```ts
+{
+  e164:        '+221771234567',  // E.164 format → store in DB
+  countryCode: 'SN',
+  formatted:   '77 123 45 67',  // national format
+  isValid:     true,
+}
+```
+
 ## Architecture
 
 ```
@@ -357,6 +429,7 @@ nuxt-auth-kit/
         │   ├── auth.ts                  # Protected routes
         │   ├── guest.ts                 # Guest-only routes
         │   └── role.ts                  # Role-based access
+        ├── composables/useFormTheme.ts  # 🆕 v1.2.0 — theme token system
         └── components/
             ├── auth/
             │   ├── AuthLayout.vue
@@ -364,9 +437,11 @@ nuxt-auth-kit/
             │   ├── RegisterForm.vue
             │   ├── ForgotPasswordForm.vue
             │   └── ResetPasswordForm.vue
-            └── profile/
-                ├── UpdateProfileForm.vue
-                └── UpdatePasswordForm.vue
+            ├── profile/
+            │   ├── UpdateProfileForm.vue
+            │   └── UpdatePasswordForm.vue
+            └── ui/
+                └── PhoneInput.vue       # 🆕 v1.2.0 — phone number input
 ```
 
 ---

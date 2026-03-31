@@ -52,8 +52,8 @@
     "vue-tsc": "^2.1.0"
   },
   "dependencies": {
-    "libphonenumber-js": "^1.12.40",
     "@pinia/nuxt": "^0.7.0",
+    "libphonenumber-js": "^1.12.41",
     "pinia": "^2.2.0"
   }
 }

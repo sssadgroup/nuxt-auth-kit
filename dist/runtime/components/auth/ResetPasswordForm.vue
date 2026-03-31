@@ -160,7 +160,7 @@ async function handleSubmit() {
   if (!form.email || !form.token) {
     toast.add({
       title: "Champs manquants",
-      description: "Email ou token invalide.",
+      description: "Email & token sont requis.",
       icon: "i-heroicons-exclamation-triangle",
       color: "error",
     });

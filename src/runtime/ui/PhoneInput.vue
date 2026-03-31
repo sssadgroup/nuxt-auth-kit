@@ -221,10 +221,9 @@ import {
   getCountries,
   getCountryCallingCode,
   AsYouType,
-  isValidPhoneNumber,
-  parsePhoneNumberFromString,
   type CountryCode,
 } from "libphonenumber-js";
+import { parsePhoneNumberFromString } from "libphonenumber-js/max";
 import { useFormTheme, type FormTheme } from "../composables/useFormTheme";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
@@ -407,25 +406,42 @@ function selectCountry(country: Country) {
 function onInput() {
   if (!selectedCountry.value) return;
 
-  // Auto-detect si collage numéro international
+  // Auto-detect si collage d'un numéro international complet (ex: +33612345678)
   if (displayValue.value.startsWith("+")) {
     const parsed = parsePhoneNumberFromString(displayValue.value);
-    if (parsed?.country) {
+    if (parsed?.country && parsed.isValid()) {
       const found = allCountries.value.find((c) => c.code === parsed.country);
       if (found) selectedCountry.value = found;
       displayValue.value = parsed.formatNational();
-      isValid.value = parsed.isValid();
+      isValid.value = true;
       emitData();
       return;
     }
+    // Numéro international incomplet : retirer le + et continuer
+    displayValue.value = displayValue.value.replace(/^\+/, "");
   }
 
-  const raw = displayValue.value.replace(/[^\d]/g, "");
+  // Extraire les chiffres bruts
+  let raw = displayValue.value.replace(/[^\d]/g, "");
+
+  // Si raw commence par l'indicatif du pays (ex: autocomplete a injecté +2217)
+  // → retirer l'indicatif pour ne garder que le numéro national
+  const dial = selectedCountry.value.dial;
+  if (raw.startsWith(dial) && raw.length > dial.length) {
+    raw = raw.slice(dial.length);
+  }
+
+  // Formater en temps réel
   const formatter = new AsYouType(selectedCountry.value.code as CountryCode);
   displayValue.value = formatter.input(raw) || raw;
 
+  // Validation avec métadonnées complètes (/max)
   try {
-    isValid.value = isValidPhoneNumber(`+${selectedCountry.value.dial}${raw}`);
+    const parsed = parsePhoneNumberFromString(
+      `+${dial}${raw}`,
+      selectedCountry.value.code as CountryCode,
+    );
+    isValid.value = parsed?.isValid() ?? false;
   } catch {
     isValid.value = false;
   }
@@ -452,6 +468,18 @@ function emitData() {
         formatted = p.formatNational();
         valid = p.isValid();
       }
+    } catch {
+      /* */
+    }
+  }
+  // Re-validate with max metadata to be sure
+  if (e164) {
+    try {
+      const recheck = parsePhoneNumberFromString(
+        e164,
+        selectedCountry.value?.code as CountryCode,
+      );
+      valid = recheck?.isValid() ?? false;
     } catch {
       /* */
     }

@@ -50,10 +50,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
+
 const DEFAULT_IMAGE =
   "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     quote?: {
       text: string;
@@ -64,6 +67,7 @@ withDefaults(
       appTagline?: string;
       image?: string;
     };
+    ui?: Partial<FormTheme>;
   }>(),
   {
     quote: () => ({
@@ -74,8 +78,15 @@ withDefaults(
       appTagline: "La solution simple pour gérer votre activité.",
       image: undefined,
     }),
+    ui: () => ({}),
   },
 );
+
+const theme = computed(() => useFormTheme(props.ui));
+
+const layoutPageColor = computed(() => theme.value.layoutPageColor);
+const layoutTextColor = computed(() => theme.value.layoutTextColor);
+const layoutTaglineColor = computed(() => theme.value.layoutTaglineColor);
 </script>
 
 <style scoped>
@@ -86,7 +97,7 @@ withDefaults(
 }
 .auth-layout__left {
   align-items: center;
-  background-color: #eeeee6;
+  background-color: v-bind(layoutPageColor);
   box-sizing: border-box;
   display: flex;
   flex: 0 0 55%;
@@ -138,14 +149,14 @@ withDefaults(
   z-index: 10;
 }
 .auth-layout__app-name {
-  color: #fff;
+  color: v-bind(layoutTextColor);
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 0.5rem;
 }
 .auth-layout__app-tagline {
-  color: hsla(0, 0%, 100%, 0.75);
+  color: v-bind(layoutTaglineColor);
   font-size: 1rem;
   line-height: 1.6;
   margin: 0;
@@ -169,7 +180,7 @@ withDefaults(
   text-align: right;
 }
 .auth-layout__quote-text {
-  color: #fff;
+  color: v-bind(layoutTextColor);
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1.65;

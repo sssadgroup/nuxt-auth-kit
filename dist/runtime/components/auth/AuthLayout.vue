@@ -50,10 +50,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useFormTheme, type FormTheme } from "../../composables/useFormTheme";
+
 const DEFAULT_IMAGE =
   "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     quote?: {
       text: string;
@@ -64,6 +67,7 @@ withDefaults(
       appTagline?: string;
       image?: string;
     };
+    ui?: Partial<FormTheme>;
   }>(),
   {
     quote: () => ({
@@ -74,10 +78,17 @@ withDefaults(
       appTagline: "La solution simple pour gérer votre activité.",
       image: undefined,
     }),
+    ui: () => ({}),
   },
 );
+
+const theme = computed(() => useFormTheme(props.ui));
+
+const layoutPageColor = computed(() => theme.value.layoutPageColor);
+const layoutTextColor = computed(() => theme.value.layoutTextColor);
+const layoutTaglineColor = computed(() => theme.value.layoutTaglineColor);
 </script>
 
 <style scoped>
-.auth-layout{display:flex;min-height:100vh;width:100%}.auth-layout__left{align-items:center;background-color:#eeeee6;box-sizing:border-box;display:flex;flex:0 0 55%;justify-content:center;padding:3rem 2rem;width:55%}.auth-layout__form-inner{max-width:420px;width:100%}.auth-layout__right{flex:0 0 45%;overflow:hidden;position:relative;width:45%}@media (max-width:1023px){.auth-layout__right{display:none}.auth-layout__left{flex:0 0 100%;width:100%}}.auth-layout__bg-image{height:100%;inset:0;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;position:absolute;width:100%}.auth-layout__overlay{background:rgba(0,0,0,.52);inset:0;position:absolute}.auth-layout__content{display:flex;flex-direction:column;height:100%;justify-content:space-between;padding:3.5rem;position:relative;z-index:10}.auth-layout__app-name{color:#fff;font-size:2rem;font-weight:700;line-height:1.2;margin:0 0 .5rem}.auth-layout__app-tagline{color:hsla(0,0%,100%,.75);font-size:1rem;line-height:1.6;margin:0}.auth-layout__quote-card{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:hsla(0,0%,100%,.1);border:1px solid hsla(0,0%,100%,.2);border-radius:1.5rem;padding:2rem}.auth-layout__quote-mark{color:#f59e0b;font-family:Georgia,serif;font-size:3rem;line-height:1}.auth-layout__quote-mark--close{margin-bottom:1.25rem;text-align:right}.auth-layout__quote-text{color:#fff;font-size:1.05rem;font-weight:500;line-height:1.65;margin:.25rem 0}.auth-layout__quote-author{align-items:center;display:flex;gap:.75rem;margin-top:1rem}.auth-layout__avatar{border-radius:50%;flex-shrink:0;height:2.75rem;overflow:hidden;width:2.75rem}.auth-layout__avatar img{height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.auth-layout__avatar--initial{align-items:center;background:hsla(0,0%,100%,.2);display:flex;justify-content:center}.auth-layout__avatar--initial span{color:#fff;font-size:1.1rem;font-weight:600}.auth-layout__author-name{color:#fff;font-size:.9rem;font-weight:600;margin:0}.auth-layout__author-location{color:hsla(0,0%,100%,.55);font-size:.8rem;margin:0}
+.auth-layout{display:flex;min-height:100vh;width:100%}.auth-layout__left{align-items:center;background-color:v-bind(layoutPageColor);box-sizing:border-box;display:flex;flex:0 0 55%;justify-content:center;padding:3rem 2rem;width:55%}.auth-layout__form-inner{max-width:420px;width:100%}.auth-layout__right{flex:0 0 45%;overflow:hidden;position:relative;width:45%}@media (max-width:1023px){.auth-layout__right{display:none}.auth-layout__left{flex:0 0 100%;width:100%}}.auth-layout__bg-image{height:100%;inset:0;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;position:absolute;width:100%}.auth-layout__overlay{background:rgba(0,0,0,.52);inset:0;position:absolute}.auth-layout__content{display:flex;flex-direction:column;height:100%;justify-content:space-between;padding:3.5rem;position:relative;z-index:10}.auth-layout__app-name{color:v-bind(layoutTextColor);font-size:2rem;font-weight:700;line-height:1.2;margin:0 0 .5rem}.auth-layout__app-tagline{color:v-bind(layoutTaglineColor);font-size:1rem;line-height:1.6;margin:0}.auth-layout__quote-card{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:hsla(0,0%,100%,.1);border:1px solid hsla(0,0%,100%,.2);border-radius:1.5rem;padding:2rem}.auth-layout__quote-mark{color:#f59e0b;font-family:Georgia,serif;font-size:3rem;line-height:1}.auth-layout__quote-mark--close{margin-bottom:1.25rem;text-align:right}.auth-layout__quote-text{color:v-bind(layoutTextColor);font-size:1.05rem;font-weight:500;line-height:1.65;margin:.25rem 0}.auth-layout__quote-author{align-items:center;display:flex;gap:.75rem;margin-top:1rem}.auth-layout__avatar{border-radius:50%;flex-shrink:0;height:2.75rem;overflow:hidden;width:2.75rem}.auth-layout__avatar img{height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.auth-layout__avatar--initial{align-items:center;background:hsla(0,0%,100%,.2);display:flex;justify-content:center}.auth-layout__avatar--initial span{color:#fff;font-size:1.1rem;font-weight:600}.auth-layout__author-name{color:#fff;font-size:.9rem;font-weight:600;margin:0}.auth-layout__author-location{color:hsla(0,0%,100%,.55);font-size:.8rem;margin:0}
 </style>

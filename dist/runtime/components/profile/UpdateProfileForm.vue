@@ -90,9 +90,10 @@
         class="mt-4"
       >
         <PhoneInput
+          ref="phoneInputRef"
           v-model="form.phone"
           v-model:country-code="form.phoneCountry"
-          :preferred-countries="['SN', 'FR', 'CI']"
+          :preferred-countries="['SN']"
           :use-browser-locale="true"
           :ui="ui"
           @data="onPhoneData"
@@ -119,7 +120,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted, nextTick } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
@@ -162,11 +163,7 @@ const schema = z.object({
     ? z.string().email("Email invalide")
     : z.string().optional(),
   phone: show("phone")
-    ? z
-        .string()
-        .min(8, "Numéro de téléphone invalide")
-        .optional()
-        .or(z.literal(""))
+    ? z.string().min(8, "Numéro de téléphone invalide")
     : z.string().optional(),
 });
 
@@ -174,7 +171,7 @@ const form = reactive({
   first_name: user?.first_name || "",
   last_name: user?.last_name || "",
   email: user?.email || "",
-  phone: user?.phone || ("" as any),
+  phone: user?.phone || "",
   phoneCountry: "SN" as any,
   avatar: null as File | null,
 });
@@ -239,4 +236,18 @@ async function handleSubmit() {
     });
   }
 }
+
+const phoneInputRef = ref<any>(null);
+onMounted(async () => {
+  await nextTick();
+  const input = phoneInputRef.value?.$el?.querySelector("input");
+
+  if (input) {
+    input.focus();
+
+    setTimeout(() => {
+      input.blur();
+    }, 50);
+  }
+});
 </script>

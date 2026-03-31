@@ -90,6 +90,7 @@
         class="mt-4"
       >
         <PhoneInput
+          ref="phoneInputRef"
           v-model="form.phone"
           v-model:country-code="form.phoneCountry"
           :preferred-countries="['SN']"
@@ -119,7 +120,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted, nextTick } from "vue";
 import { z } from "zod";
 import { useAuth } from "../../composables/useAuth";
 import { useToast } from "#imports";
@@ -162,11 +163,7 @@ const schema = z.object({
     ? z.string().email("Email invalide")
     : z.string().optional(),
   phone: show("phone")
-    ? z
-        .string()
-        .min(8, "Numéro de téléphone invalide")
-        .optional()
-        .or(z.literal(""))
+    ? z.string().min(8, "Numéro de téléphone invalide")
     : z.string().optional(),
 });
 
@@ -239,4 +236,18 @@ async function handleSubmit() {
     });
   }
 }
+
+const phoneInputRef = ref<any>(null);
+onMounted(async () => {
+  await nextTick();
+  const input = phoneInputRef.value?.$el?.querySelector("input");
+
+  if (input) {
+    input.focus();
+
+    setTimeout(() => {
+      input.blur();
+    }, 50);
+  }
+});
 </script>

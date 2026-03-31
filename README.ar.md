@@ -33,6 +33,9 @@
 - ✅ **وسيطات مسماة**: `auth`، `guest`، `role`
 - ✅ **7 مكونات Vue بشاشة مقسمة** — مستوردة تلقائياً، Tailwind CSS
 - ✅ دعم **TypeScript** كامل
+- ✅ **سمة قابلة للتخصيص** (prop `ui` على كل مكوّن) — الألوان، الحواف، الأزرار، التخطيط
+- ✅ **إدخال رقم الهاتف** — مكوّن `PhoneInput` مع اختيار الدولة والأعلام والتنسيق التلقائي (E.164)
+- ✅ **prop `except`** على `RegisterForm` و`UpdateProfileForm` — إخفاء/إقصاء الحقول ديناميكياً
 
 ## التثبيت
 
@@ -49,6 +52,8 @@ pnpm add nuxt-auth-kit
 <div dir="rtl">
 
 > يتطلب `@nuxt/ui` للأنماط. متوافق مع **Nuxt 3.x** و **Nuxt 4.x**.
+
+> ثبّت أيضاً `libphonenumber-js` لمكوّن PhoneInput: `npm install libphonenumber-js`
 
 ## الإعداد
 
@@ -378,6 +383,71 @@ import type {
 
 <div dir="rtl">
 
+## السمة والأنماط
+
+كل مكوّن يقبل prop `ui` لتجاوز الأنماط جزئياً.
+
+```vue
+<AuthLoginForm
+  :ui="{
+    inputRounded: 'rounded-lg',
+    btnColor: 'primary',
+    titleColor: 'text-slate-900',
+    accentColor: 'text-blue-600',
+  }"
+/>
+
+<AuthLayout
+  :ui="{
+    layoutPageColor: '#1e293b',
+    layoutTextColor: '#f8fafc',
+    layoutTaglineColor: 'rgba(248,250,252,0.7)',
+  }"
+/>
+```
+
+### `FormTheme` tokens
+
+| الخاصية               | القيمة الافتراضية        | الوصف             |
+| --------------------- | ------------------------ | ----------------- |
+| `inputRounded`        | `rounded-full`           | حواف الحقول       |
+| `color`               | `neutral`                | لون الحقول        |
+| `btnRounded`          | `rounded-full`           | حواف الزر         |
+| `btnColor`            | `neutral`                | لون الزر          |
+| `btnVariant`          | `solid`                  | نوع الزر          |
+| `btnSecondaryColor`   | `secondary`              | لون الزر الثانوي  |
+| `btnSecondaryVariant` | `subtle`                 | نوع الزر الثانوي  |
+| `btnSecondaryRounded` | `rounded-full`           | حواف الزر الثانوي |
+| `titleColor`          | `text-[#1a2e1a]`         | لون العنوان       |
+| `subtitleColor`       | `text-[#6b7c6b]`         | لون الوصف         |
+| `accentColor`         | `text-[#1B4332]`         | لون التمييز       |
+| `roleRingColor`       | `ring-[#1B4332]`         | لون الإطار النشط  |
+| `layoutPageColor`     | `#eeeee6`                | خلفية الصفحة      |
+| `layoutTextColor`     | `#ffffff`                | لون النص          |
+| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | لون الشعار        |
+
+## PhoneInput
+
+```vue
+<PhoneInput
+  v-model="form.phone"
+  v-model:country-code="form.phoneCountry"
+  :preferred-countries="['SN', 'FR', 'CI', 'MA']"
+  @data="onPhoneData"
+/>
+```
+
+**بيانات الحدث `@data`**
+
+```ts
+{
+  e164:        '+221771234567',  // تنسيق E.164 → يُخزن في قاعدة البيانات
+  countryCode: 'SN',             // رمز الدولة
+  formatted:   '77 123 45 67',   // التنسيق المحلي
+  isValid:     true,             // هل الرقم صالح
+}
+```
+
 ## البنية
 
 </div>
@@ -404,9 +474,12 @@ nuxt-auth-kit/
             │   ├── RegisterForm.vue
             │   ├── ForgotPasswordForm.vue
             │   └── ResetPasswordForm.vue
-            └── profile/
-                ├── UpdateProfileForm.vue
-                └── UpdatePasswordForm.vue
+            ├── profile/
+            │   ├── UpdateProfileForm.vue
+            │   └── UpdatePasswordForm.vue
+            └── ui/
+                └── PhoneInput.vue          # 🆕 v1.2.0
+        # composables/useFormTheme.ts        🆕 v1.2.0
 ```
 
 ---

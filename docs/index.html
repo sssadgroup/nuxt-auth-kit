@@ -1419,6 +1419,8 @@
             <span class="chip chip-p">Pinia</span>
             <span class="chip chip-g">RBAC</span>
             <span class="chip chip-b">Auto-import</span>
+            <span class="chip chip-p">Thème UI</span>
+            <span class="chip chip-a">PhoneInput</span>
           </div>
         </div>
 
@@ -1500,6 +1502,30 @@
                 </div>
                 <div class="feat-desc" data-i18n="features.comp_desc">
                   7 composants Vue split-screen, Tailwind CSS, auto-importés.
+                </div>
+              </div>
+            </div>
+            <div class="feat-card">
+              <span class="feat-em">🖌️</span>
+              <div>
+                <div class="feat-title" data-i18n="features.theme_title">
+                  Thème & styles paramétrables
+                </div>
+                <div class="feat-desc" data-i18n="features.theme_desc">
+                  Prop <code>ui</code> sur chaque composant — couleurs, rounded,
+                  boutons, layout.
+                </div>
+              </div>
+            </div>
+            <div class="feat-card">
+              <span class="feat-em">📞</span>
+              <div>
+                <div class="feat-title" data-i18n="features.phone_title">
+                  Saisie numéro de téléphone
+                </div>
+                <div class="feat-desc" data-i18n="features.phone_desc">
+                  Composant <code>PhoneInput</code> avec sélecteur de pays,
+                  drapeaux, formatage auto.
                 </div>
               </div>
             </div>
@@ -1625,6 +1651,123 @@
         <div class="section" id="changelog">
           <div class="section-head">
             <h2><span class="h2-icon hi-a">📋</span>Changelog</h2>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-g">v1.2.0</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >feat: theming system, PhoneInput component, except prop on
+                forms</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.update"
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+              >
+                <li data-i18n="changelog.v120_item1"></li>
+                <li data-i18n="changelog.v120_item2"></li>
+                <li data-i18n="changelog.v120_item3"></li>
+                <li data-i18n="changelog.v120_item4"></li>
+                <li data-i18n="changelog.v120_item5"></li>
+                <li data-i18n="changelog.v120_item6"></li>
+              </ul>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--surface);
+              border: 1px solid var(--border);
+              border-radius: var(--radius-md);
+              overflow: hidden;
+              margin-bottom: 16px;
+            "
+          >
+            <div
+              style="
+                padding: 14px 18px;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <span class="chip chip-g">v1.2.0</span>
+              <span
+                style="
+                  font-size: 12px;
+                  color: var(--txt-3);
+                  font-family: var(--ff-mono);
+                "
+                >feat: add <code>except</code> prop to ProfileUpdateForm and
+                RegisterForm — hide fields dynamically</span
+              >
+            </div>
+            <div style="padding: 12px 18px 14px">
+              <p
+                style="
+                  margin: 0 0 6px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--txt);
+                "
+                data-i18n="changelog.update"
+              >
+                Mise à jour
+              </p>
+              <ul
+                style="
+                  margin: 6px 0 0;
+                  padding-left: 20px;
+                  font-size: 12.5px;
+                  color: var(--txt-2);
+                  list-style: disc;
+                "
+                data-i18n-list="changelog.v145_items"
+              >
+                <li data-i18n="changelog.v145_item1"></li>
+                <li data-i18n="changelog.v145_item2"></li>
+                <li data-i18n="changelog.v145_item3"></li>
+                <li data-i18n="changelog.v145_item4"></li>
+              </ul>
+            </div>
           </div>
           <div
             style="
@@ -3053,7 +3196,7 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
           <div class="tree">
             <pre><span class="tr-root">nuxt-auth-kit/</span>
 ├── <span class="tr-ts">build.config.ts</span>          <span class="tr-cmt"># config unbuild</span>
-├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.0.460</span>
+├── <span class="tr-ts">package.json</span>             <span class="tr-cmt"># v1.2.0</span>
 └── <span class="tr-dir">src/</span>
     ├── <span class="tr-ts">module.ts</span>                <span class="tr-cmt"># point d'entrée du module Nuxt</span>
     └── <span class="tr-dir">runtime/</span>
@@ -3072,9 +3215,12 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             │   ├── <span class="tr-vue">RegisterForm.vue</span>
             │   ├── <span class="tr-vue">ForgotPasswordForm.vue</span>
             │   └── <span class="tr-vue">ResetPasswordForm.vue</span>
-            └── <span class="tr-dir">profile/</span>
-                ├── <span class="tr-vue">UpdateProfileForm.vue</span>
-                └── <span class="tr-vue">UpdatePasswordForm.vue</span></pre>
+            ├── <span class="tr-dir">profile/</span>
+            │   ├── <span class="tr-vue">UpdateProfileForm.vue</span>
+            │   └── <span class="tr-vue">UpdatePasswordForm.vue</span>
+            └── <span class="tr-dir">ui/</span>
+                └── <span class="tr-vue">PhoneInput.vue</span>           <span class="tr-cmt"># 🆕 v1.2.0</span>
+        <span class="tr-cmt"># composables/useFormTheme.ts         🆕 v1.2.0</span></pre>
           </div>
         </div>
 
@@ -3150,6 +3296,26 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.",
+          "features.theme_title": "Thème &amp; styles paramétrables",
+          "features.theme_desc":
+            "Prop <code>ui</code> sur chaque composant — couleurs, rounded, boutons, layout.",
+          "features.phone_title": "Saisie numéro de téléphone",
+          "features.phone_desc":
+            "Composant <code>PhoneInput</code> avec sélecteur de pays, drapeaux, formatage auto.",
+          "nav.theming": "Thème",
+          "nav.ui_prop": "Prop <code>ui</code>",
+          "changelog.v120_item1":
+            "Nouveau composable <code>useFormTheme</code> — système de tokens de style partagés entre tous les composants",
+          "changelog.v120_item2":
+            "Prop <code>ui?: Partial&lt;FormTheme&gt;</code> ajoutée sur tous les composants auth et profil — surcharge partielle des couleurs, rounded, variantes de boutons",
+          "changelog.v120_item3":
+            "Tokens <code>layoutPageColor</code>, <code>layoutTextColor</code>, <code>layoutTaglineColor</code> sur <code>AuthLayout</code>",
+          "changelog.v120_item4":
+            "Nouveau composant <code>PhoneInput</code> — sélecteur de pays avec drapeaux, indicatifs, formatage AsYouType, validation E.164, auto-détection locale",
+          "changelog.v120_item5":
+            "Champ téléphone dans <code>RegisterForm</code> et <code>UpdateProfileForm</code> utilise désormais <code>PhoneInput</code>",
+          "changelog.v120_item6":
+            "Dépendance <code>libphonenumber-js</code> ajoutée",
           "changelog.v145_item1":
             "<code>ProfileUpdateForm</code> — nouvelle prop <code>except</code> de type <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> pour masquer des champs et les exclure de la validation Zod dynamiquement",
           "changelog.v145_item2":
@@ -3336,6 +3502,26 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "The <code>auth</code>, <code>guest</code> and <code>role</code> middlewares returned a 500 <code>Unknown route middleware</code> error in Nuxt 4. Replaced <code>addRouteMiddleware()</code> with the <code>app:resolve</code> hook.",
           "changelog.peer_fix":
             "The <code>nuxt</code> dependency was limited to <code>^3.0.0</code>. Extended to <code>^3.0.0 || ^4.0.0</code>.",
+          "features.theme_title": "Configurable theme &amp; styles",
+          "features.theme_desc":
+            "<code>ui</code> prop on every component — colors, rounded, buttons, layout.",
+          "features.phone_title": "Phone number input",
+          "features.phone_desc":
+            "<code>PhoneInput</code> component with country selector, flags, auto-formatting.",
+          "nav.theming": "Theming",
+          "nav.ui_prop": "<code>ui</code> prop",
+          "changelog.v120_item1":
+            "New <code>useFormTheme</code> composable — shared style token system across all components",
+          "changelog.v120_item2":
+            "<code>ui?: Partial&lt;FormTheme&gt;</code> prop added to all auth and profile components — partially override colors, rounded, button variants",
+          "changelog.v120_item3":
+            "Tokens <code>layoutPageColor</code>, <code>layoutTextColor</code>, <code>layoutTaglineColor</code> on <code>AuthLayout</code>",
+          "changelog.v120_item4":
+            "New <code>PhoneInput</code> component — country selector with flags, dial codes, AsYouType formatting, E.164 validation, locale auto-detection",
+          "changelog.v120_item5":
+            "Phone field in <code>RegisterForm</code> and <code>UpdateProfileForm</code> now uses <code>PhoneInput</code>",
+          "changelog.v120_item6":
+            "<code>libphonenumber-js</code> dependency added",
           "changelog.v145_item1":
             "<code>ProfileUpdateForm</code> — 新增 <code>except</code> prop，类型为 <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code>，可动态隐藏字段并将其从 Zod 验证中排除",
           "changelog.v145_item2":
@@ -3540,6 +3726,25 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "الوسيطات <code>auth</code> و<code>guest</code> و<code>role</code> كانت تعيد خطأ 500 <code>Unknown route middleware</code> في Nuxt 4. تم استبدال <code>addRouteMiddleware()</code> بالخطاف <code>app:resolve</code>.",
           "changelog.peer_fix":
             "كانت تبعية <code>nuxt</code> محدودة بـ <code>^3.0.0</code>. تم التوسيع إلى <code>^3.0.0 || ^4.0.0</code>.",
+          "features.theme_title": "سمات وأنماط قابلة للتخصيص",
+          "features.theme_desc":
+            "خاصية <code>ui</code> على كل مكوّن — الألوان، الحواف، الأزرار، التخطيط.",
+          "features.phone_title": "إدخال رقم الهاتف",
+          "features.phone_desc":
+            "مكوّن <code>PhoneInput</code> مع اختيار الدولة والأعلام والتنسيق التلقائي.",
+          "nav.theming": "السمة",
+          "nav.ui_prop": "خاصية <code>ui</code>",
+          "changelog.v120_item1":
+            "composable جديد <code>useFormTheme</code> — نظام tokens للأنماط مشترك بين جميع المكوّنات",
+          "changelog.v120_item2":
+            "إضافة prop <code>ui?: Partial&lt;FormTheme&gt;</code> على جميع مكوّنات المصادقة والملف الشخصي",
+          "changelog.v120_item3":
+            "tokens <code>layoutPageColor</code> و<code>layoutTextColor</code> و<code>layoutTaglineColor</code> على <code>AuthLayout</code>",
+          "changelog.v120_item4":
+            "مكوّن <code>PhoneInput</code> جديد — اختيار الدولة مع الأعلام والأكواد، تنسيق AsYouType، التحقق E.164",
+          "changelog.v120_item5":
+            "حقل الهاتف في <code>RegisterForm</code> و<code>UpdateProfileForm</code> يستخدم الآن <code>PhoneInput</code>",
+          "changelog.v120_item6": "إضافة تبعية <code>libphonenumber-js</code>",
           "changelog.v145_item1":
             "<code>ProfileUpdateForm</code> — خاصية <code>except</code> جديدة من نوع <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> لإخفاء الحقول وإقصائها من التحقق Zod ديناميكياً",
           "changelog.v145_item2":
@@ -3722,6 +3927,26 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Los middlewares <code>auth</code>, <code>guest</code> y <code>role</code> devolvían un error 500 <code>Unknown route middleware</code> en Nuxt 4. Se reemplazó <code>addRouteMiddleware()</code> con el hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dependencia <code>nuxt</code> estaba limitada a <code>^3.0.0</code>. Extendida a <code>^3.0.0 || ^4.0.0</code>.",
+          "features.theme_title": "Tema y estilos configurables",
+          "features.theme_desc":
+            "Prop <code>ui</code> en cada componente — colores, rounded, botones, layout.",
+          "features.phone_title": "Input de número de teléfono",
+          "features.phone_desc":
+            "Componente <code>PhoneInput</code> con selector de país, banderas, formato automático.",
+          "nav.theming": "Tema",
+          "nav.ui_prop": "Prop <code>ui</code>",
+          "changelog.v120_item1":
+            "Nuevo composable <code>useFormTheme</code> — sistema de tokens de estilo compartido entre todos los componentes",
+          "changelog.v120_item2":
+            "Prop <code>ui?: Partial&lt;FormTheme&gt;</code> añadida a todos los componentes de auth y perfil",
+          "changelog.v120_item3":
+            "Tokens <code>layoutPageColor</code>, <code>layoutTextColor</code>, <code>layoutTaglineColor</code> en <code>AuthLayout</code>",
+          "changelog.v120_item4":
+            "Nuevo componente <code>PhoneInput</code> — selector de país con banderas, indicativos, formato AsYouType, validación E.164",
+          "changelog.v120_item5":
+            "Campo teléfono en <code>RegisterForm</code> y <code>UpdateProfileForm</code> usa ahora <code>PhoneInput</code>",
+          "changelog.v120_item6":
+            "Dependencia <code>libphonenumber-js</code> añadida",
           "changelog.v145_item1":
             "<code>ProfileUpdateForm</code> — nueva prop <code>except</code> de tipo <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> para ocultar campos y excluirlos de la validación Zod dinámicamente",
           "changelog.v145_item2":
@@ -3904,6 +4129,25 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "<code>auth</code>、<code>guest</code> 和 <code>role</code> 中间件在 Nuxt 4 中返回 500 <code>Unknown route middleware</code> 错误。已将 <code>addRouteMiddleware()</code> 替换为 <code>app:resolve</code> 钩子。",
           "changelog.peer_fix":
             "<code>nuxt</code> 依赖被限制为 <code>^3.0.0</code>。已扩展至 <code>^3.0.0 || ^4.0.0</code>。",
+          "features.theme_title": "可配置主题与样式",
+          "features.theme_desc":
+            "每个组件都有 <code>ui</code> prop — 颜色、圆角、按钮、布局。",
+          "features.phone_title": "电话号码输入",
+          "features.phone_desc":
+            "<code>PhoneInput</code> 组件，支持国家选择器、国旗、自动格式化。",
+          "nav.theming": "主题",
+          "nav.ui_prop": "<code>ui</code> prop",
+          "changelog.v120_item1":
+            "新增 composable <code>useFormTheme</code> — 所有组件共享的样式 token 系统",
+          "changelog.v120_item2":
+            "所有认证和个人资料组件新增 <code>ui?: Partial&lt;FormTheme&gt;</code> prop",
+          "changelog.v120_item3":
+            "<code>AuthLayout</code> 新增 tokens：<code>layoutPageColor</code>、<code>layoutTextColor</code>、<code>layoutTaglineColor</code>",
+          "changelog.v120_item4":
+            "新增 <code>PhoneInput</code> 组件 — 国家选择器带国旗、区号、AsYouType 格式化、E.164 验证",
+          "changelog.v120_item5":
+            "<code>RegisterForm</code> 和 <code>UpdateProfileForm</code> 的手机号字段现在使用 <code>PhoneInput</code>",
+          "changelog.v120_item6": "新增依赖 <code>libphonenumber-js</code>",
           "authlayout.sub": "分屏布局 — 左侧表单，右侧引用语 + 插图。",
           "authlayout.appname_desc": "Logo 名称",
           "authlayout.slots":
@@ -4056,6 +4300,26 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Die Middlewares <code>auth</code>, <code>guest</code> und <code>role</code> gaben in Nuxt 4 einen 500-Fehler <code>Unknown route middleware</code> zurück. <code>addRouteMiddleware()</code> durch den Hook <code>app:resolve</code> ersetzt.",
           "changelog.peer_fix":
             "Die <code>nuxt</code>-Abhängigkeit war auf <code>^3.0.0</code> beschränkt. Auf <code>^3.0.0 || ^4.0.0</code> erweitert.",
+          "features.theme_title": "Konfigurierbares Theme &amp; Styles",
+          "features.theme_desc":
+            "<code>ui</code>-Prop auf jedem Komponenten — Farben, Rounded, Buttons, Layout.",
+          "features.phone_title": "Telefonnummer-Eingabe",
+          "features.phone_desc":
+            "<code>PhoneInput</code>-Komponente mit Länderauswahl, Flaggen, Auto-Formatierung.",
+          "nav.theming": "Theme",
+          "nav.ui_prop": "<code>ui</code>-Prop",
+          "changelog.v120_item1":
+            "Neues Composable <code>useFormTheme</code> — gemeinsames Style-Token-System für alle Komponenten",
+          "changelog.v120_item2":
+            "<code>ui?: Partial&lt;FormTheme&gt;</code>-Prop zu allen Auth- und Profil-Komponenten hinzugefügt",
+          "changelog.v120_item3":
+            "Tokens <code>layoutPageColor</code>, <code>layoutTextColor</code>, <code>layoutTaglineColor</code> auf <code>AuthLayout</code>",
+          "changelog.v120_item4":
+            "Neue <code>PhoneInput</code>-Komponente — Länderauswahl mit Flaggen, Vorwahlen, AsYouType-Formatierung, E.164-Validierung",
+          "changelog.v120_item5":
+            "Telefonfeld in <code>RegisterForm</code> und <code>UpdateProfileForm</code> verwendet jetzt <code>PhoneInput</code>",
+          "changelog.v120_item6":
+            "Abhängigkeit <code>libphonenumber-js</code> hinzugefügt",
           "changelog.v145_item1":
             "<code>ProfileUpdateForm</code> — neue Prop <code>except</code> vom Typ <code>('first_name' | 'last_name' | 'email' | 'phone')[]</code> zum dynamischen Ausblenden von Feldern und Ausschluss aus der Zod-Validierung",
           "changelog.v145_item2":

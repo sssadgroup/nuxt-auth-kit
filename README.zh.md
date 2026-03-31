@@ -31,6 +31,9 @@
 - ✅ **命名中间件**：`auth`、`guest`、`role`
 - ✅ **7 个分屏 Vue 组件** — 自动导入，Tailwind CSS
 - ✅ 完整 **TypeScript** 支持
+- ✅ **可配置主题** (每个组件的 `ui` prop) — 颜色、圆角、按钮、布局
+- ✅ **电话号码输入** — `PhoneInput` 组件，支持国家选择器、国旗、自动格式化 (E.164)
+- ✅ **`except` prop** 用于 `RegisterForm` & `UpdateProfileForm` — 动态隐藏/排除字段
 
 ## 安装
 
@@ -43,6 +46,8 @@ pnpm add nuxt-auth-kit
 ```
 
 > 需要 `@nuxt/ui` 提供样式。兼容 **Nuxt 3.x** 和 **Nuxt 4.x**。
+
+> PhoneInput 组件还需安装 `libphonenumber-js`：`npm install libphonenumber-js`
 
 ## 配置
 
@@ -340,6 +345,71 @@ import type {
 } from "nuxt-auth-kit";
 ```
 
+## 主题与样式
+
+每个组件都接受 `ui` prop 来部分覆盖样式。
+
+```vue
+<AuthLoginForm
+  :ui="{
+    inputRounded: 'rounded-lg',
+    btnColor: 'primary',
+    titleColor: 'text-slate-900',
+    accentColor: 'text-blue-600',
+  }"
+/>
+
+<AuthLayout
+  :ui="{
+    layoutPageColor: '#1e293b',
+    layoutTextColor: '#f8fafc',
+    layoutTaglineColor: 'rgba(248,250,252,0.7)',
+  }"
+/>
+```
+
+### `FormTheme` tokens
+
+| 参数                  | 默认值                   | 说明       |
+| --------------------- | ------------------------ | ---------- |
+| `inputRounded`        | `rounded-full`           | 输入框圆角 |
+| `color`               | `neutral`                | 输入框颜色 |
+| `btnRounded`          | `rounded-full`           | 按钮圆角   |
+| `btnColor`            | `neutral`                | 按钮颜色   |
+| `btnVariant`          | `solid`                  | 按钮样式   |
+| `btnSecondaryColor`   | `secondary`              | 次按钮颜色 |
+| `btnSecondaryVariant` | `subtle`                 | 次按钮样式 |
+| `btnSecondaryRounded` | `rounded-full`           | 次按钮圆角 |
+| `titleColor`          | `text-[#1a2e1a]`         | 标题颜色   |
+| `subtitleColor`       | `text-[#6b7c6b]`         | 副标题颜色 |
+| `accentColor`         | `text-[#1B4332]`         | 强调色     |
+| `roleRingColor`       | `ring-[#1B4332]`         | 激活边框   |
+| `layoutPageColor`     | `#eeeee6`                | 页面背景   |
+| `layoutTextColor`     | `#ffffff`                | 文本颜色   |
+| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | 标语颜色   |
+
+## PhoneInput
+
+```vue
+<PhoneInput
+  v-model="form.phone"
+  v-model:country-code="form.phoneCountry"
+  :preferred-countries="['SN', 'FR', 'CI', 'MA']"
+  @data="onPhoneData"
+/>
+```
+
+**`@data` 事件的数据结构**
+
+```ts
+{
+  e164:        '+221771234567',  // E.164 格式 → 存储到数据库
+  countryCode: 'SN',             // 国家代码
+  formatted:   '77 123 45 67',   // 本地格式
+  isValid:     true,             // 是否为有效号码
+}
+```
+
 ## 架构
 
 ```
@@ -364,9 +434,12 @@ nuxt-auth-kit/
             │   ├── RegisterForm.vue
             │   ├── ForgotPasswordForm.vue
             │   └── ResetPasswordForm.vue
-            └── profile/
-                ├── UpdateProfileForm.vue
-                └── UpdatePasswordForm.vue
+            ├── profile/
+            │   ├── UpdateProfileForm.vue
+            │   └── UpdatePasswordForm.vue
+            └── ui/
+                └── PhoneInput.vue          # 🆕 v1.2.0
+        # composables/useFormTheme.ts        🆕 v1.2.0
 ```
 
 ---

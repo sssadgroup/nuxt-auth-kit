@@ -53,12 +53,13 @@
         v-if="show('phone')"
         label="Téléphone"
         name="phone"
+        required
         class="mt-6"
       >
         <PhoneInput
           v-model="form.phone"
           v-model:country-code="form.phoneCountry"
-          :preferred-countries="['SN', 'FR', 'CI']"
+          :preferred-countries="['SN']"
           :use-browser-locale="true"
           :ui="ui"
           @data="onPhoneData"

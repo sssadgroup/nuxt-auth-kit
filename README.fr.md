@@ -31,6 +31,9 @@ Installez-le une fois — connexion, inscription, profil, mots de passe, rôles 
 - ✅ **Middlewares nommés** : `auth`, `guest`, `role`
 - ✅ **7 composants Vue split-screen** — auto-importés, Tailwind CSS
 - ✅ **TypeScript** complet
+- ✅ **Thème paramétrable** (prop `ui` sur chaque composant) — couleurs, rounded, boutons, layout
+- ✅ **Saisie numéro de téléphone** — composant `PhoneInput` avec sélecteur de pays, drapeaux, formatage automatique (E.164)
+- ✅ **Prop `except`** sur `RegisterForm` & `UpdateProfileForm` — masquer/exclure des champs dynamiquement
 
 ## Installation
 
@@ -43,6 +46,8 @@ pnpm add nuxt-auth-kit
 ```
 
 > Requiert `@nuxt/ui` pour les styles. Compatible **Nuxt 3.x** et **Nuxt 4.x**.
+
+> Installez aussi `libphonenumber-js` pour le composant PhoneInput : `npm install libphonenumber-js`
 
 ## Configuration
 
@@ -330,6 +335,71 @@ import type {
 } from "nuxt-auth-kit";
 ```
 
+## Thème & styles
+
+Chaque composant accepte une prop `ui` pour surcharger partiellement les styles.
+
+```vue
+<AuthLoginForm
+  :ui="{
+    inputRounded: 'rounded-lg',
+    btnColor: 'primary',
+    titleColor: 'text-slate-900',
+    accentColor: 'text-blue-600',
+  }"
+/>
+
+<AuthLayout
+  :ui="{
+    layoutPageColor: '#1e293b',
+    layoutTextColor: '#f8fafc',
+    layoutTaglineColor: 'rgba(248,250,252,0.7)',
+  }"
+/>
+```
+
+### `FormTheme` tokens
+
+| Token                 | Défaut                   | Description                  |
+| --------------------- | ------------------------ | ---------------------------- |
+| `inputRounded`        | `rounded-full`           | Rayon de bordure des champs  |
+| `color`               | `neutral`                | Couleur des inputs (Nuxt UI) |
+| `btnRounded`          | `rounded-full`           | Rayon du bouton principal    |
+| `btnColor`            | `neutral`                | Couleur du bouton principal  |
+| `btnVariant`          | `solid`                  | Variante du bouton           |
+| `btnSecondaryColor`   | `secondary`              | Couleur bouton secondaire    |
+| `btnSecondaryVariant` | `subtle`                 | Variante bouton secondaire   |
+| `btnSecondaryRounded` | `rounded-full`           | Rayon bouton secondaire      |
+| `titleColor`          | `text-[#1a2e1a]`         | Couleur du titre             |
+| `subtitleColor`       | `text-[#6b7c6b]`         | Couleur du sous-titre        |
+| `accentColor`         | `text-[#1B4332]`         | Couleur d’accent             |
+| `roleRingColor`       | `ring-[#1B4332]`         | Bordure active des rôles     |
+| `layoutPageColor`     | `#eeeee6`                | Fond panneau gauche          |
+| `layoutTextColor`     | `#ffffff`                | Couleur du texte             |
+| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | Couleur slogan               |
+
+## PhoneInput
+
+```vue
+<PhoneInput
+  v-model="form.phone"
+  v-model:country-code="form.phoneCountry"
+  :preferred-countries="['SN', 'FR', 'CI', 'MA']"
+  @data="onPhoneData"
+/>
+```
+
+**`@data` event payload:**
+
+```ts
+{
+  e164:        '+221771234567',  // Format E.164 → à stocker en base de données
+  countryCode: 'SN',             // Code pays (ISO)
+  formatted:   '77 123 45 67',   // Format national lisible
+  isValid:     true,             // Indique si le numéro est valide
+}
+```
+
 ## Architecture
 
 ```
@@ -354,9 +424,12 @@ nuxt-auth-kit/
             │   ├── RegisterForm.vue
             │   ├── ForgotPasswordForm.vue
             │   └── ResetPasswordForm.vue
-            └── profile/
-                ├── UpdateProfileForm.vue
-                └── UpdatePasswordForm.vue
+            ├── profile/
+            │   ├── UpdateProfileForm.vue
+            │   └── UpdatePasswordForm.vue
+            └── ui/
+                └── PhoneInput.vue          # 🆕 v1.2.0
+        # composables/useFormTheme.ts        🆕 v1.2.0
 ```
 
 ---
