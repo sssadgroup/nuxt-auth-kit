@@ -1383,6 +1383,16 @@
             >
           </div>
           <div class="nav-group">
+            <span class="nav-group-label" data-i18n="nav.theming">Thème</span>
+            <a class="nav-link" href="#theming"
+              ><span class="nav-dot"></span
+              ><span data-i18n="nav.ui_prop">Prop <code>ui</code></span></a
+            >
+            <a class="nav-link" href="#phone-input"
+              ><span class="nav-dot"></span>PhoneInput</a
+            >
+          </div>
+          <div class="nav-group">
             <span class="nav-group-label" data-i18n="nav.reference"
               >Référence</span
             >
@@ -3138,6 +3148,318 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
 
         <hr class="div" />
 
+        <!-- THEMING -->
+        <div class="section" id="theming">
+          <div class="section-head">
+            <h2>
+              <span class="h2-icon hi-p">🖌</span
+              ><span data-i18n="nav.ui_prop">Prop <code>ui</code></span>
+            </h2>
+            <p class="section-sub" data-i18n="theming.sub">
+              Chaque composant accepte une prop
+              <code>ui?: Partial&lt;FormTheme&gt;</code> pour surcharger
+              partiellement les styles — couleurs, arrondis, variantes de
+              boutons, couleurs du layout.
+            </p>
+          </div>
+
+          <h3 data-i18n="theming.forms_title">Formulaires auth & profil</h3>
+          <div class="codeblock">
+            <span class="lang-label">vue</span>
+            <button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
+            <pre><span class="cm">&lt;AuthLoginForm</span>
+  <span class="f">:ui</span>=<span class="s">"{
+    inputRounded:   'rounded-lg',
+    btnColor:       'primary',
+    btnRounded:     'rounded-lg',
+    titleColor:     'text-slate-900',
+    accentColor:    'text-blue-600',
+  }"</span>
+<span class="cm">/&gt;</span></pre>
+          </div>
+
+          <h3 data-i18n="theming.layout_title">AuthLayout</h3>
+          <div class="codeblock">
+            <span class="lang-label">vue</span>
+            <button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
+            <pre><span class="cm">&lt;AuthLayout</span>
+  <span class="f">:quote</span>=<span class="s">"quote"</span>
+  <span class="f">:ui</span>=<span class="s">"{
+    layoutPageColor:    '#1e293b',
+    layoutTextColor:    '#f8fafc',
+    layoutTaglineColor: 'rgba(248,250,252,0.7)',
+  }"</span>
+<span class="cm">/&gt;</span></pre>
+          </div>
+
+          <h3 data-i18n="theming.tokens_title">Tokens disponibles</h3>
+          <table class="dtable">
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>inputRounded</code></td>
+                <td><code>'rounded-full'</code></td>
+                <td data-i18n="theming.t_inputRounded">
+                  Border-radius des inputs
+                </td>
+              </tr>
+              <tr>
+                <td><code>color</code></td>
+                <td><code>'neutral'</code></td>
+                <td data-i18n="theming.t_color">Couleur Nuxt UI des inputs</td>
+              </tr>
+              <tr>
+                <td><code>btnRounded</code></td>
+                <td><code>'rounded-full'</code></td>
+                <td data-i18n="theming.t_btnRounded">
+                  Border-radius du bouton principal
+                </td>
+              </tr>
+              <tr>
+                <td><code>btnColor</code></td>
+                <td><code>'neutral'</code></td>
+                <td data-i18n="theming.t_btnColor">
+                  Couleur Nuxt UI du bouton principal
+                </td>
+              </tr>
+              <tr>
+                <td><code>btnVariant</code></td>
+                <td><code>'solid'</code></td>
+                <td data-i18n="theming.t_btnVariant">
+                  Variante du bouton principal
+                </td>
+              </tr>
+              <tr>
+                <td><code>btnSecondaryColor</code></td>
+                <td><code>'secondary'</code></td>
+                <td data-i18n="theming.t_btnSecondaryColor">
+                  Couleur des boutons secondaires
+                </td>
+              </tr>
+              <tr>
+                <td><code>btnSecondaryVariant</code></td>
+                <td><code>'subtle'</code></td>
+                <td data-i18n="theming.t_btnSecondaryVariant">
+                  Variante des boutons secondaires
+                </td>
+              </tr>
+              <tr>
+                <td><code>btnSecondaryRounded</code></td>
+                <td><code>'rounded-full'</code></td>
+                <td data-i18n="theming.t_btnSecondaryRounded">
+                  Border-radius des boutons secondaires
+                </td>
+              </tr>
+              <tr>
+                <td><code>titleColor</code></td>
+                <td><code>'text-[#1a2e1a]'</code></td>
+                <td data-i18n="theming.t_titleColor">
+                  Couleur du titre (classe Tailwind)
+                </td>
+              </tr>
+              <tr>
+                <td><code>subtitleColor</code></td>
+                <td><code>'text-[#6b7c6b]'</code></td>
+                <td data-i18n="theming.t_subtitleColor">
+                  Couleur du sous-titre
+                </td>
+              </tr>
+              <tr>
+                <td><code>accentColor</code></td>
+                <td><code>'text-[#1B4332]'</code></td>
+                <td data-i18n="theming.t_accentColor">
+                  Liens &amp; couleur d'accent
+                </td>
+              </tr>
+              <tr>
+                <td><code>roleRingColor</code></td>
+                <td><code>'ring-[#1B4332]'</code></td>
+                <td data-i18n="theming.t_roleRingColor">
+                  Ring du sélecteur de rôle actif
+                </td>
+              </tr>
+              <tr>
+                <td><code>layoutPageColor</code></td>
+                <td><code>'#eeeee6'</code></td>
+                <td data-i18n="theming.t_layoutPageColor">
+                  Fond du panneau gauche (valeur CSS)
+                </td>
+              </tr>
+              <tr>
+                <td><code>layoutTextColor</code></td>
+                <td><code>'#ffffff'</code></td>
+                <td data-i18n="theming.t_layoutTextColor">
+                  Couleur appName panneau droit
+                </td>
+              </tr>
+              <tr>
+                <td><code>layoutTaglineColor</code></td>
+                <td><code>'rgba(255,255,255,0.75)'</code></td>
+                <td data-i18n="theming.t_layoutTaglineColor">
+                  Couleur tagline panneau droit
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- PhoneInput section -->
+          <div style="margin-top: 40px" id="phone-input">
+            <h2><span class="h2-icon hi-a">📞</span>PhoneInput</h2>
+            <p class="section-sub" data-i18n="phone.sub">
+              Composant de saisie de numéro de téléphone — sélecteur de pays
+              avec drapeaux, indicatifs, formatage <code>AsYouType</code>,
+              validation E.164, détection locale automatique.
+            </p>
+          </div>
+
+          <div class="file-header">
+            <span class="file-dot"></span>Exemple d'utilisation
+          </div>
+          <div class="codeblock">
+            <span class="lang-label">vue</span>
+            <button
+              class="copy-btn"
+              onclick="copy(this)"
+              data-i18n-attr="textContent:ui.copy"
+            >
+              Copier
+            </button>
+            <pre><span class="cm">&lt;PhoneInput</span>
+  <span class="f">v-model</span>=<span class="s">"form.phone"</span>
+  <span class="f">v-model:country-code</span>=<span class="s">"form.phoneCountry"</span>
+  <span class="f">:preferred-countries</span>=<span class="s">"['SN', 'FR', 'CI', 'MA', 'CM']"</span>
+  <span class="f">:use-browser-locale</span>=<span class="s">"true"</span>
+  <span class="f">:ui</span>=<span class="s">"{ inputRounded: 'rounded-xl' }"</span>
+  <span class="f">@data</span>=<span class="s">"onPhoneData"</span>
+<span class="cm">/&gt;</span></pre>
+          </div>
+
+          <h3 data-i18n="phone.data_title">
+            Payload de l'événement <code>@data</code>
+          </h3>
+          <div class="codeblock">
+            <span class="lang-label">ts</span>
+            <pre><span class="k">interface</span> <span class="t">PhoneInputData</span> {
+  e164:        <span class="t">string</span> | <span class="k">null</span>  <span class="c">// ex: '+221771234567' — à stocker en BDD</span>
+  countryCode: <span class="t">string</span> | <span class="k">null</span>  <span class="c">// ex: 'SN'</span>
+  formatted:   <span class="t">string</span>         <span class="c">// ex: '77 123 45 67' — format national</span>
+  isValid:     <span class="t">boolean</span>
+}</pre>
+          </div>
+
+          <h3 data-i18n="phone.props_title">Props</h3>
+          <table class="dtable">
+            <thead>
+              <tr>
+                <th data-i18n="table.prop">Prop</th>
+                <th data-i18n="table.type">Type</th>
+                <th data-i18n="table.default">Défaut</th>
+                <th data-i18n="table.desc">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>modelValue</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td data-i18n="phone.p_modelValue">
+                  v-model (E.164 ou national)
+                </td>
+              </tr>
+              <tr>
+                <td><code>countryCode</code></td>
+                <td><code>string</code></td>
+                <td>—</td>
+                <td data-i18n="phone.p_countryCode">v-model:countryCode</td>
+              </tr>
+              <tr>
+                <td><code>defaultCountry</code></td>
+                <td><code>string</code></td>
+                <td>—</td>
+                <td data-i18n="phone.p_defaultCountry">
+                  Pays initial (ISO 3166)
+                </td>
+              </tr>
+              <tr>
+                <td><code>preferredCountries</code></td>
+                <td><code>string[]</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="phone.p_preferredCountries">
+                  Pays épinglés en haut
+                </td>
+              </tr>
+              <tr>
+                <td><code>onlyCountries</code></td>
+                <td><code>string[]</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="phone.p_onlyCountries">
+                  Restreindre à ces pays
+                </td>
+              </tr>
+              <tr>
+                <td><code>ignoredCountries</code></td>
+                <td><code>string[]</code></td>
+                <td><code>[]</code></td>
+                <td data-i18n="phone.p_ignoredCountries">Exclure ces pays</td>
+              </tr>
+              <tr>
+                <td><code>useBrowserLocale</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td data-i18n="phone.p_useBrowserLocale">
+                  Détecter depuis le navigateur
+                </td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td><code>string</code></td>
+                <td>—</td>
+                <td data-i18n="phone.p_placeholder">
+                  Placeholder personnalisé
+                </td>
+              </tr>
+              <tr>
+                <td><code>disabled</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td data-i18n="phone.p_disabled">Désactiver le champ</td>
+              </tr>
+              <tr>
+                <td><code>error</code></td>
+                <td><code>string | boolean</code></td>
+                <td>—</td>
+                <td data-i18n="phone.p_error">Message d'erreur externe</td>
+              </tr>
+              <tr>
+                <td><code>ui</code></td>
+                <td><code>Partial&lt;FormTheme&gt;</code></td>
+                <td><code>{}</code></td>
+                <td data-i18n="phone.p_ui">Surcharge de style</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="div" />
+
         <!-- TYPES -->
         <div class="section" id="types">
           <div class="section-head">
@@ -3296,6 +3618,42 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Les middlewares <code>auth</code>, <code>guest</code> et <code>role</code> retournaient une erreur 500 <code>Unknown route middleware</code> dans Nuxt 4. Remplacé <code>addRouteMiddleware()</code> par le hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dépendance <code>nuxt</code> était limitée à <code>^3.0.0</code>. Étendu à <code>^3.0.0 || ^4.0.0</code>.",
+          "theming.sub":
+            "Chaque composant accepte une prop <code>ui?: Partial&lt;FormTheme&gt;</code> pour surcharger partiellement les styles — couleurs, arrondis, variantes de boutons, couleurs du layout.",
+          "theming.forms_title": "Formulaires auth &amp; profil",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "Tokens disponibles",
+          "theming.t_inputRounded": "Border-radius des inputs",
+          "theming.t_color": "Couleur Nuxt UI des inputs",
+          "theming.t_btnRounded": "Border-radius du bouton principal",
+          "theming.t_btnColor": "Couleur Nuxt UI du bouton principal",
+          "theming.t_btnVariant": "Variante du bouton principal",
+          "theming.t_btnSecondaryColor": "Couleur des boutons secondaires",
+          "theming.t_btnSecondaryVariant": "Variante des boutons secondaires",
+          "theming.t_btnSecondaryRounded":
+            "Border-radius des boutons secondaires",
+          "theming.t_titleColor": "Couleur du titre (classe Tailwind)",
+          "theming.t_subtitleColor": "Couleur du sous-titre",
+          "theming.t_accentColor": "Liens &amp; couleur d'accent",
+          "theming.t_roleRingColor": "Ring du sélecteur de rôle actif",
+          "theming.t_layoutPageColor": "Fond du panneau gauche (valeur CSS)",
+          "theming.t_layoutTextColor": "Couleur appName panneau droit",
+          "theming.t_layoutTaglineColor": "Couleur tagline panneau droit",
+          "phone.sub":
+            "Composant de saisie de numéro de téléphone — sélecteur de pays avec drapeaux, indicatifs, formatage <code>AsYouType</code>, validation E.164, détection locale automatique.",
+          "phone.data_title": "Payload de l'événement <code>@data</code>",
+          "phone.props_title": "Props",
+          "phone.p_modelValue": "v-model (E.164 ou national)",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "Pays initial (ISO 3166)",
+          "phone.p_preferredCountries": "Pays épinglés en haut",
+          "phone.p_onlyCountries": "Restreindre à ces pays",
+          "phone.p_ignoredCountries": "Exclure ces pays",
+          "phone.p_useBrowserLocale": "Détecter depuis le navigateur",
+          "phone.p_placeholder": "Placeholder personnalisé",
+          "phone.p_disabled": "Désactiver le champ",
+          "phone.p_error": "Message d'erreur externe",
+          "phone.p_ui": "Surcharge de style",
           "features.theme_title": "Thème &amp; styles paramétrables",
           "features.theme_desc":
             "Prop <code>ui</code> sur chaque composant — couleurs, rounded, boutons, layout.",
@@ -3502,6 +3860,41 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "The <code>auth</code>, <code>guest</code> and <code>role</code> middlewares returned a 500 <code>Unknown route middleware</code> error in Nuxt 4. Replaced <code>addRouteMiddleware()</code> with the <code>app:resolve</code> hook.",
           "changelog.peer_fix":
             "The <code>nuxt</code> dependency was limited to <code>^3.0.0</code>. Extended to <code>^3.0.0 || ^4.0.0</code>.",
+          "theming.sub":
+            "Every component accepts a <code>ui?: Partial&lt;FormTheme&gt;</code> prop to partially override styles — colors, rounded, button variants, layout colors.",
+          "theming.forms_title": "Auth &amp; profile forms",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "Available tokens",
+          "theming.t_inputRounded": "Input border-radius",
+          "theming.t_color": "Nuxt UI color for inputs",
+          "theming.t_btnRounded": "Submit button border-radius",
+          "theming.t_btnColor": "Submit button Nuxt UI color",
+          "theming.t_btnVariant": "Submit button variant",
+          "theming.t_btnSecondaryColor": "Secondary buttons color",
+          "theming.t_btnSecondaryVariant": "Secondary buttons variant",
+          "theming.t_btnSecondaryRounded": "Secondary buttons border-radius",
+          "theming.t_titleColor": "Title color (Tailwind class)",
+          "theming.t_subtitleColor": "Subtitle color",
+          "theming.t_accentColor": "Links &amp; accent color",
+          "theming.t_roleRingColor": "Active role selector ring",
+          "theming.t_layoutPageColor": "Left panel background (CSS value)",
+          "theming.t_layoutTextColor": "App name color on right panel",
+          "theming.t_layoutTaglineColor": "Tagline color on right panel",
+          "phone.sub":
+            "Phone number input component — country selector with flags, dial codes, <code>AsYouType</code> formatting, E.164 validation, locale auto-detection.",
+          "phone.data_title": "<code>@data</code> event payload",
+          "phone.props_title": "Props",
+          "phone.p_modelValue": "v-model (E.164 or national)",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "Initial country (ISO 3166)",
+          "phone.p_preferredCountries": "Countries pinned at top",
+          "phone.p_onlyCountries": "Restrict to these countries",
+          "phone.p_ignoredCountries": "Exclude these countries",
+          "phone.p_useBrowserLocale": "Auto-detect from browser",
+          "phone.p_placeholder": "Custom placeholder",
+          "phone.p_disabled": "Disable the input",
+          "phone.p_error": "External error message",
+          "phone.p_ui": "Style overrides",
           "features.theme_title": "Configurable theme &amp; styles",
           "features.theme_desc":
             "<code>ui</code> prop on every component — colors, rounded, buttons, layout.",
@@ -3726,6 +4119,41 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "الوسيطات <code>auth</code> و<code>guest</code> و<code>role</code> كانت تعيد خطأ 500 <code>Unknown route middleware</code> في Nuxt 4. تم استبدال <code>addRouteMiddleware()</code> بالخطاف <code>app:resolve</code>.",
           "changelog.peer_fix":
             "كانت تبعية <code>nuxt</code> محدودة بـ <code>^3.0.0</code>. تم التوسيع إلى <code>^3.0.0 || ^4.0.0</code>.",
+          "theming.sub":
+            "كل مكوّن يقبل prop <code>ui?: Partial&lt;FormTheme&gt;</code> لتجاوز الأنماط جزئياً — الألوان، الحواف، متغيرات الأزرار، ألوان التخطيط.",
+          "theming.forms_title": "نماذج المصادقة والملف الشخصي",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "الـ Tokens المتاحة",
+          "theming.t_inputRounded": "حواف حقول الإدخال",
+          "theming.t_color": "لون Nuxt UI للـ inputs",
+          "theming.t_btnRounded": "حواف زر الإرسال",
+          "theming.t_btnColor": "لون Nuxt UI لزر الإرسال",
+          "theming.t_btnVariant": "متغير زر الإرسال",
+          "theming.t_btnSecondaryColor": "لون الأزرار الثانوية",
+          "theming.t_btnSecondaryVariant": "متغير الأزرار الثانوية",
+          "theming.t_btnSecondaryRounded": "حواف الأزرار الثانوية",
+          "theming.t_titleColor": "لون العنوان (فئة Tailwind)",
+          "theming.t_subtitleColor": "لون العنوان الفرعي",
+          "theming.t_accentColor": "الروابط ولون التمييز",
+          "theming.t_roleRingColor": "حلقة محدد الدور النشط",
+          "theming.t_layoutPageColor": "خلفية اللوحة اليسرى (قيمة CSS)",
+          "theming.t_layoutTextColor": "لون اسم التطبيق في اللوحة اليمنى",
+          "theming.t_layoutTaglineColor": "لون الشعار في اللوحة اليمنى",
+          "phone.sub":
+            "مكوّن إدخال رقم الهاتف — اختيار الدولة مع الأعلام، التنسيق AsYouType، التحقق E.164، الكشف التلقائي.",
+          "phone.data_title": "بيانات حدث <code>@data</code>",
+          "phone.props_title": "الخصائص",
+          "phone.p_modelValue": "v-model (E.164 أو وطني)",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "الدولة الافتراضية (ISO 3166)",
+          "phone.p_preferredCountries": "الدول المثبتة في الأعلى",
+          "phone.p_onlyCountries": "تقييد هذه الدول فقط",
+          "phone.p_ignoredCountries": "استثناء هذه الدول",
+          "phone.p_useBrowserLocale": "الكشف من المتصفح",
+          "phone.p_placeholder": "placeholder مخصص",
+          "phone.p_disabled": "تعطيل الحقل",
+          "phone.p_error": "رسالة خطأ خارجية",
+          "phone.p_ui": "تجاوز الأنماط",
           "features.theme_title": "سمات وأنماط قابلة للتخصيص",
           "features.theme_desc":
             "خاصية <code>ui</code> على كل مكوّن — الألوان، الحواف، الأزرار، التخطيط.",
@@ -3927,6 +4355,42 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Los middlewares <code>auth</code>, <code>guest</code> y <code>role</code> devolvían un error 500 <code>Unknown route middleware</code> en Nuxt 4. Se reemplazó <code>addRouteMiddleware()</code> con el hook <code>app:resolve</code>.",
           "changelog.peer_fix":
             "La dependencia <code>nuxt</code> estaba limitada a <code>^3.0.0</code>. Extendida a <code>^3.0.0 || ^4.0.0</code>.",
+          "theming.sub":
+            "Cada componente acepta una prop <code>ui?: Partial&lt;FormTheme&gt;</code> para sobreescribir estilos parcialmente — colores, rounded, variantes de botones, colores del layout.",
+          "theming.forms_title": "Formularios auth &amp; perfil",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "Tokens disponibles",
+          "theming.t_inputRounded": "Border-radius de los inputs",
+          "theming.t_color": "Color Nuxt UI de los inputs",
+          "theming.t_btnRounded": "Border-radius del botón principal",
+          "theming.t_btnColor": "Color Nuxt UI del botón principal",
+          "theming.t_btnVariant": "Variante del botón principal",
+          "theming.t_btnSecondaryColor": "Color de botones secundarios",
+          "theming.t_btnSecondaryVariant": "Variante de botones secundarios",
+          "theming.t_btnSecondaryRounded":
+            "Border-radius de botones secundarios",
+          "theming.t_titleColor": "Color del título (clase Tailwind)",
+          "theming.t_subtitleColor": "Color del subtítulo",
+          "theming.t_accentColor": "Color de enlaces &amp; acento",
+          "theming.t_roleRingColor": "Ring del selector de rol activo",
+          "theming.t_layoutPageColor": "Fondo del panel izquierdo (valor CSS)",
+          "theming.t_layoutTextColor": "Color appName en panel derecho",
+          "theming.t_layoutTaglineColor": "Color tagline en panel derecho",
+          "phone.sub":
+            "Componente de entrada de número de teléfono — selector de país con banderas, indicativos, formateo <code>AsYouType</code>, validación E.164, detección de locale.",
+          "phone.data_title": "Payload del evento <code>@data</code>",
+          "phone.props_title": "Props",
+          "phone.p_modelValue": "v-model (E.164 o nacional)",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "País inicial (ISO 3166)",
+          "phone.p_preferredCountries": "Países fijados arriba",
+          "phone.p_onlyCountries": "Restringir a estos países",
+          "phone.p_ignoredCountries": "Excluir estos países",
+          "phone.p_useBrowserLocale": "Auto-detectar desde el navegador",
+          "phone.p_placeholder": "Placeholder personalizado",
+          "phone.p_disabled": "Deshabilitar el campo",
+          "phone.p_error": "Mensaje de error externo",
+          "phone.p_ui": "Sobreescritura de estilo",
           "features.theme_title": "Tema y estilos configurables",
           "features.theme_desc":
             "Prop <code>ui</code> en cada componente — colores, rounded, botones, layout.",
@@ -4129,6 +4593,41 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "<code>auth</code>、<code>guest</code> 和 <code>role</code> 中间件在 Nuxt 4 中返回 500 <code>Unknown route middleware</code> 错误。已将 <code>addRouteMiddleware()</code> 替换为 <code>app:resolve</code> 钩子。",
           "changelog.peer_fix":
             "<code>nuxt</code> 依赖被限制为 <code>^3.0.0</code>。已扩展至 <code>^3.0.0 || ^4.0.0</code>。",
+          "theming.sub":
+            "每个组件都接受 <code>ui?: Partial&lt;FormTheme&gt;</code> prop 来部分覆盖样式 — 颜色、圆角、按钮变体、布局颜色。",
+          "theming.forms_title": "认证和个人资料表单",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "可用 Tokens",
+          "theming.t_inputRounded": "输入框圆角",
+          "theming.t_color": "输入框 Nuxt UI 颜色",
+          "theming.t_btnRounded": "提交按钮圆角",
+          "theming.t_btnColor": "提交按钮 Nuxt UI 颜色",
+          "theming.t_btnVariant": "提交按钮变体",
+          "theming.t_btnSecondaryColor": "次要按钮颜色",
+          "theming.t_btnSecondaryVariant": "次要按钮变体",
+          "theming.t_btnSecondaryRounded": "次要按钮圆角",
+          "theming.t_titleColor": "标题颜色（Tailwind 类）",
+          "theming.t_subtitleColor": "副标题颜色",
+          "theming.t_accentColor": "链接和强调色",
+          "theming.t_roleRingColor": "激活角色选择器环",
+          "theming.t_layoutPageColor": "左侧面板背景（CSS 值）",
+          "theming.t_layoutTextColor": "右侧面板应用名颜色",
+          "theming.t_layoutTaglineColor": "右侧面板标语颜色",
+          "phone.sub":
+            "电话号码输入组件 — 带国旗的国家选择器、区号、AsYouType 格式化、E.164 验证、本地自动检测。",
+          "phone.data_title": "<code>@data</code> 事件载荷",
+          "phone.props_title": "Props",
+          "phone.p_modelValue": "v-model（E.164 或国内格式）",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "初始国家（ISO 3166）",
+          "phone.p_preferredCountries": "置顶的国家",
+          "phone.p_onlyCountries": "仅限这些国家",
+          "phone.p_ignoredCountries": "排除这些国家",
+          "phone.p_useBrowserLocale": "从浏览器自动检测",
+          "phone.p_placeholder": "自定义占位符",
+          "phone.p_disabled": "禁用输入框",
+          "phone.p_error": "外部错误消息",
+          "phone.p_ui": "样式覆盖",
           "features.theme_title": "可配置主题与样式",
           "features.theme_desc":
             "每个组件都有 <code>ui</code> prop — 颜色、圆角、按钮、布局。",
@@ -4300,6 +4799,41 @@ Route::<span class="f">prefix</span>(<span class="s">'auth'</span>)-><span class
             "Die Middlewares <code>auth</code>, <code>guest</code> und <code>role</code> gaben in Nuxt 4 einen 500-Fehler <code>Unknown route middleware</code> zurück. <code>addRouteMiddleware()</code> durch den Hook <code>app:resolve</code> ersetzt.",
           "changelog.peer_fix":
             "Die <code>nuxt</code>-Abhängigkeit war auf <code>^3.0.0</code> beschränkt. Auf <code>^3.0.0 || ^4.0.0</code> erweitert.",
+          "theming.sub":
+            "Jede Komponente akzeptiert eine <code>ui?: Partial&lt;FormTheme&gt;</code>-Prop zur partiellen Stilüberschreibung — Farben, Rounded, Button-Varianten, Layout-Farben.",
+          "theming.forms_title": "Auth- &amp; Profilformulare",
+          "theming.layout_title": "AuthLayout",
+          "theming.tokens_title": "Verfügbare Tokens",
+          "theming.t_inputRounded": "Input-Border-Radius",
+          "theming.t_color": "Nuxt UI-Farbe für Inputs",
+          "theming.t_btnRounded": "Haupt-Button-Border-Radius",
+          "theming.t_btnColor": "Nuxt UI-Farbe des Haupt-Buttons",
+          "theming.t_btnVariant": "Haupt-Button-Variante",
+          "theming.t_btnSecondaryColor": "Farbe der Sekundär-Buttons",
+          "theming.t_btnSecondaryVariant": "Variante der Sekundär-Buttons",
+          "theming.t_btnSecondaryRounded": "Border-Radius der Sekundär-Buttons",
+          "theming.t_titleColor": "Titelfarbe (Tailwind-Klasse)",
+          "theming.t_subtitleColor": "Untertitelfarbe",
+          "theming.t_accentColor": "Links &amp; Akzentfarbe",
+          "theming.t_roleRingColor": "Ring des aktiven Rollen-Selektors",
+          "theming.t_layoutPageColor": "Hintergrund linkes Panel (CSS-Wert)",
+          "theming.t_layoutTextColor": "App-Name-Farbe rechtes Panel",
+          "theming.t_layoutTaglineColor": "Tagline-Farbe rechtes Panel",
+          "phone.sub":
+            "Telefonnummer-Eingabekomponente — Länderauswahl mit Flaggen, Vorwahlen, AsYouType-Formatierung, E.164-Validierung, automatische Locale-Erkennung.",
+          "phone.data_title": "<code>@data</code>-Event-Payload",
+          "phone.props_title": "Props",
+          "phone.p_modelValue": "v-model (E.164 oder national)",
+          "phone.p_countryCode": "v-model:countryCode",
+          "phone.p_defaultCountry": "Anfangsland (ISO 3166)",
+          "phone.p_preferredCountries": "Oben angeheftete Länder",
+          "phone.p_onlyCountries": "Auf diese Länder beschränken",
+          "phone.p_ignoredCountries": "Diese Länder ausschließen",
+          "phone.p_useBrowserLocale": "Automatisch aus Browser erkennen",
+          "phone.p_placeholder": "Benutzerdefinierter Platzhalter",
+          "phone.p_disabled": "Eingabe deaktivieren",
+          "phone.p_error": "Externe Fehlermeldung",
+          "phone.p_ui": "Stil-Überschreibung",
           "features.theme_title": "Konfigurierbares Theme &amp; Styles",
           "features.theme_desc":
             "<code>ui</code>-Prop auf jedem Komponenten — Farben, Rounded, Buttons, Layout.",

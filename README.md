@@ -1,9 +1,9 @@
-<div align="center">
-
 # nuxt-auth-kit
 
 **Plug-and-play Nuxt authentication module for Laravel APIs.**
 Install once — login, registration, profile, passwords, roles & permissions are ready.
+
+<div align="center">
 
 [![npm version](https://img.shields.io/npm/v/nuxt-auth-kit?color=18794e&style=flat-square)](https://www.npmjs.com/package/nuxt-auth-kit)
 [![npm downloads](https://img.shields.io/npm/dm/nuxt-auth-kit?color=1d5fc4&style=flat-square)](https://www.npmjs.com/package/nuxt-auth-kit)
@@ -31,9 +31,9 @@ Install once — login, registration, profile, passwords, roles & permissions ar
 - ✅ **Named middlewares**: `auth`, `guest`, `role`
 - ✅ **7 split-screen Vue components** — auto-imported, Tailwind CSS
 - ✅ **Full TypeScript** support
-- ✅ **Configurable theme** (`ui` prop on every component) — colors, rounded, buttons, layout
-- ✅ **Phone number input** — `PhoneInput` component with country selector, flags, auto-formatting (E.164)
-- ✅ **`except` prop** on `RegisterForm` & `UpdateProfileForm` — hide/exclude fields dynamically
+- ✅ **Configurable theme** — `ui` prop on every component (colors, rounded, buttons, layout)
+- ✅ **PhoneInput** — country selector, flags, auto-format (E.164), locale detection
+- ✅ **`except` prop** on forms — hide/exclude fields dynamically
 
 ## Installation
 
@@ -47,7 +47,11 @@ pnpm add nuxt-auth-kit
 
 > Requires `@nuxt/ui` for styles. Compatible with **Nuxt 3.x** and **Nuxt 4.x**.
 
-> Also install `libphonenumber-js` for the PhoneInput component: `npm install libphonenumber-js`
+For the `PhoneInput` component, also install:
+
+```bash
+npm install libphonenumber-js
+```
 
 ## Configuration
 
@@ -345,21 +349,25 @@ import type {
 } from "nuxt-auth-kit";
 ```
 
-## Theming
+## Theming (`ui` prop)
 
-Every component accepts a `ui` prop for partial style overrides. See `useFormTheme.ts` for all available tokens.
+Every component accepts a `ui?: Partial<FormTheme>` prop to partially override styles without touching the source.
 
 ```vue
+<!-- Custom rounded + colors on a login form -->
 <AuthLoginForm
   :ui="{
     inputRounded: 'rounded-lg',
     btnColor: 'primary',
+    btnRounded: 'rounded-lg',
     titleColor: 'text-slate-900',
     accentColor: 'text-blue-600',
   }"
 />
 
+<!-- Custom layout background & text colors -->
 <AuthLayout
+  :quote="quote"
   :ui="{
     layoutPageColor: '#1e293b',
     layoutTextColor: '#f8fafc',
@@ -368,33 +376,35 @@ Every component accepts a `ui` prop for partial style overrides. See `useFormThe
 />
 ```
 
-### `FormTheme` tokens
+### Available tokens (`FormTheme`)
 
-| Token                 | Default                  | Description                        |
-| --------------------- | ------------------------ | ---------------------------------- |
-| `inputRounded`        | `rounded-full`           | Border-radius of all inputs        |
-| `color`               | `neutral`                | Nuxt UI color for inputs           |
-| `btnRounded`          | `rounded-full`           | Border-radius of submit button     |
-| `btnColor`            | `neutral`                | Nuxt UI color of submit button     |
-| `btnVariant`          | `solid`                  | Nuxt UI variant of submit button   |
-| `btnSecondaryColor`   | `secondary`              | Color of secondary buttons         |
-| `btnSecondaryVariant` | `subtle`                 | Variant of secondary buttons       |
-| `btnSecondaryRounded` | `rounded-full`           | Border-radius of secondary buttons |
-| `titleColor`          | `text-[#1a2e1a]`         | Title color class                  |
-| `subtitleColor`       | `text-[#6b7c6b]`         | Subtitle / secondary text color    |
-| `accentColor`         | `text-[#1B4332]`         | Links & accent color               |
-| `roleRingColor`       | `ring-[#1B4332]`         | Active role selector ring          |
-| `layoutPageColor`     | `#eeeee6`                | Left panel background (CSS value)  |
-| `layoutTextColor`     | `#ffffff`                | App name color on right panel      |
-| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | Tagline color on right panel       |
+| Token                 | Default                  | Description                       |
+| --------------------- | ------------------------ | --------------------------------- |
+| `inputRounded`        | `rounded-full`           | Border-radius of all inputs       |
+| `color`               | `neutral`                | Nuxt UI color for inputs          |
+| `btnRounded`          | `rounded-full`           | Submit button border-radius       |
+| `btnColor`            | `neutral`                | Submit button Nuxt UI color       |
+| `btnVariant`          | `solid`                  | Submit button variant             |
+| `btnSecondaryColor`   | `secondary`              | Secondary buttons color           |
+| `btnSecondaryVariant` | `subtle`                 | Secondary buttons variant         |
+| `btnSecondaryRounded` | `rounded-full`           | Secondary buttons border-radius   |
+| `titleColor`          | `text-[#1a2e1a]`         | Title color (Tailwind class)      |
+| `subtitleColor`       | `text-[#6b7c6b]`         | Subtitle/secondary text color     |
+| `accentColor`         | `text-[#1B4332]`         | Links & accent color              |
+| `roleRingColor`       | `ring-[#1B4332]`         | Active role selector ring         |
+| `layoutPageColor`     | `#eeeee6`                | Left panel background (CSS value) |
+| `layoutTextColor`     | `#ffffff`                | App name color on right panel     |
+| `layoutTaglineColor`  | `rgba(255,255,255,0.75)` | Tagline color on right panel      |
 
 ## PhoneInput
+
+A fully-featured phone number input built on `libphonenumber-js` — matching the exact design of the other form inputs.
 
 ```vue
 <PhoneInput
   v-model="form.phone"
   v-model:country-code="form.phoneCountry"
-  :preferred-countries="['SN', 'FR', 'CI', 'MA']"
+  :preferred-countries="['SN', 'FR', 'CI', 'MA', 'CM']"
   :use-browser-locale="true"
   :ui="{ inputRounded: 'rounded-xl' }"
   @data="onPhoneData"
@@ -405,12 +415,28 @@ Every component accepts a `ui` prop for partial style overrides. See `useFormThe
 
 ```ts
 {
-  e164:        '+221771234567',  // E.164 format → store in DB
+  e164:        '+221771234567', // E.164 format → store in DB
   countryCode: 'SN',
-  formatted:   '77 123 45 67',  // national format
+  formatted:   '77 123 45 67', // national display format
   isValid:     true,
 }
 ```
+
+**Props:**
+
+| Prop                 | Type                 | Default | Description                 |
+| -------------------- | -------------------- | ------- | --------------------------- |
+| `modelValue`         | `string`             | `''`    | v-model (E.164 or national) |
+| `countryCode`        | `string`             | —       | v-model:countryCode         |
+| `defaultCountry`     | `string`             | —       | Initial country (ISO)       |
+| `preferredCountries` | `string[]`           | `[]`    | Countries pinned at top     |
+| `onlyCountries`      | `string[]`           | `[]`    | Restrict to these countries |
+| `ignoredCountries`   | `string[]`           | `[]`    | Exclude these countries     |
+| `useBrowserLocale`   | `boolean`            | `true`  | Auto-detect from browser    |
+| `placeholder`        | `string`             | —       | Custom placeholder          |
+| `disabled`           | `boolean`            | `false` | Disable the input           |
+| `error`              | `string \| boolean`  | —       | External error message      |
+| `ui`                 | `Partial<FormTheme>` | `{}`    | Style overrides             |
 
 ## Architecture
 
@@ -429,7 +455,9 @@ nuxt-auth-kit/
         │   ├── auth.ts                  # Protected routes
         │   ├── guest.ts                 # Guest-only routes
         │   └── role.ts                  # Role-based access
-        ├── composables/useFormTheme.ts  # 🆕 v1.2.0 — theme token system
+        ├── composables/
+        │   ├── useAuth.ts               # Main composable
+        │   └── useFormTheme.ts          # 🆕 v1.2.0 — theme token system
         └── components/
             ├── auth/
             │   ├── AuthLayout.vue
