@@ -1,6 +1,6 @@
 {
   "name": "nuxt-auth-kit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Nuxt module for authentication with Laravel API — login, register, profile, password management, roles & permissions",
   "keywords": [
     "nuxt",
